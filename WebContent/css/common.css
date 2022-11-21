@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-#banner {
-/* 	background-color: yellow; */
-	height: 100px;
-}
-
 .shoesmain {
 	width: 1400px;
 }
@@ -14,4 +9,20 @@
 	margin: 0 auto;
 	height: 50px;
 	background-color: #FFFF99;
+}
+
+
+.banner{
+	width: 1400px;
+	margin:0 auto;
+	background-color: #ffffcc;
+}
+.search{
+	width: 800px;
+	margin:30px auto;
+}
+.search_button{
+	margin-top: 30px;
+	width:30px;
+	height: 30px;
 }

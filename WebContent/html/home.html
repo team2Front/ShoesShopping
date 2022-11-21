@@ -17,7 +17,22 @@
 		<link rel="stylesheet" href="../css/common.css">
 		
 	</head>
-	<div id="banner"> 로고 배너</div>
+	
+	<div>
+	  <div class="banner d-flex justify-content-between">  
+	    <div class="p-2"><img src="../images/Logo.png" style="width:150px; height:100px;"/></div>
+	    
+	    <div class="p-2">
+		    <div class="row">
+		    	<input class="search col-10 search-txt" type="text" placeholder="검색어를 입력해 주세요">
+				<button class="search_button col-2 btn-primary" type="submit">찾기</button>
+		    </div>
+		</div>
+		
+	    <div class="p-2">로그인</div>
+	  </div>
+	 </div>
+	  
 	<div>
 		<div id="navbar">
 			<div class="btn-group">
@@ -56,9 +71,128 @@
 		
 		<div id="wrapper"  class="row row-cols-2">
 			<div id="sidebar" class="col-md-2"> 사이드 바</div>
-			<div id="products" class="col-md-10"> 상품</div>
+			
+			<!-- 상품리스트 -->
+			<div id="products" class="col-md-10"> 
+				<div class="mycards">
+				    <div class="cards-box row row-cols-md-4">
+				        <div class="col">
+				           <div class="card h-100">
+							  <img class="card-img-top" src="../images/반스_월버_노랑.jpg">
+							  <div class="card-body">
+							    <h4 class="card-title">반스 윌버</h4>
+							    <p class="card-text">
+							    <span class="sale" style="color:red">50000원</span>
+							    </p>
+							    <a href="#" class="btn btn-primary">자세히보기</a>
+							  </div>
+							</div>
+				        </div>
+				        <div class="col">
+				           <div class="card h-100">
+							  <img class="card-img-top" src="../images/아디다스_가젤.jpg">
+							  <div class="card-body">
+							    <h4 class="card-title">아디다스 가젤</h4>
+							    <p class="card-text">
+							    <span class="sale" style="color:red">70000원</span>
+							    </p>
+							    <a href="#" class="btn btn-primary">자세히보기</a>
+							  </div>
+							</div>
+				        </div>
+				      
+				        <div class="col">
+				           <div class="card h-100">
+							  <img class="card-img-top" src="../images/아디다스_그랜드코트베이스_검정.jpg">
+							  <div class="card-body">
+							    <h4 class="card-title">아디다스 그랜드코트베이스 검정</h4>
+							    <p class="card-text">
+							    <span class="sale" style="color:red">64000원</span>
+							    </p>
+							    <a href="#" class="btn btn-primary">자세히보기</a>
+							  </div>
+							</div>
+				        </div>
+				        <div class="col">
+				           <div class="card h-100">
+							  <img class="card-img-top" src="../images/아디다스_스탠스미스_하양.jpg">
+							  <div class="card-body">
+							    <h4 class="card-title">아디다스 스탠스미스 하양</h4>
+							    <p class="card-text">
+							    <span class="sale" style="color:red">45000원</span>
+							    </p>
+							    <a href="#" class="btn btn-primary">자세히보기</a>
+							  </div>
+							</div>
+				        </div>
+				        <div class="col">
+				           <div class="card h-100">
+							  <img class="card-img-top" src="../images/아디다스_퍼피렛_검정.jpg">
+							  <div class="card-body">
+							    <h4 class="card-title">아디다스 퍼피렛 검정</h4>
+							    <p class="card-text">
+							    <span class="sale" style="color:red">36400원</span>
+							    </p>
+							    <a href="#" class="btn btn-primary">자세히보기</a>
+							  </div>
+							</div>
+				        </div>
+				        <div class="col">
+				           <div class="card h-100">
+							  <img class="card-img-top" src="../images/아디다스_퍼피렛_하양.jpg">
+							  <div class="card-body">
+							    <h4 class="card-title">아디다스 퍼피렛 하얀색</h4>
+							    <p class="card-text">
+							    <span class="sale" style="color:red">37400원</span>
+							    </p>
+							    <a href="#" class="btn btn-primary">자세히보기</a>
+							  </div>
+							</div>
+				        </div>
+				        <div class="col">
+				           <div class="card h-100">
+							  <img class="card-img-top" src="../images/컨버스_척테일러올스타70.jpg">
+							  <div class="card-body">
+							    <h4 class="card-title">컨버스 척테일러올스타70</h4>
+							    <p class="card-text">
+							    <span class="sale" style="color:red">74400원</span>
+							    </p>
+							    <a href="#" class="btn btn-primary">자세히보기</a>
+							  </div>
+							</div>
+				        </div>
+				        <div class="col">
+				           <div class="card h-100">
+							  <img class="card-img-top" src="../images/컨버스_척테일러올스타코어_검정.jpg">
+							  <div class="card-body">
+							    <h4 class="card-title">컨버스 척테일러올스타코어 검정</h4>
+							    <p class="card-text">
+							    <span class="sale" style="color:red">74700원</span>
+							    </p>
+							    <a href="#" class="btn btn-primary">자세히보기</a>
+							  </div>
+							</div>
+				        </div>
+				          <div class="col">
+				           <div class="card h-100">
+							  <img class="card-img-top" src="../images/아디다스_슈퍼스타_82.jpg">
+							  <div class="card-body">
+							    <h4 class="card-title">아디다스 슈퍼스타</h4>
+							    <p class="card-text">
+							    <span class="sale" style="color:red">65000원</span>
+							    </p>
+							    <a href="#" class="btn btn-primary">자세히보기</a>
+							  </div>
+							</div>
+				        </div>
+				    </div>
+				</div>
+			</div>
 		</div>
 		
+		
+		
+	</div>
 	</div>
 </body>
 </html>
