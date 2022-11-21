@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+
+#banner {
+/* 	background-color: yellow; */
+	height: 100px;
+}
+
+.shoesmain {
+	width: 2000px;
+}
+
+#navbar {
+	height: 50px;
+}
