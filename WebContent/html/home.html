@@ -64,14 +64,122 @@
 					<a class="dropdown-item" href="#">아이 스니커즈</a>
 					<a class="dropdown-item" href="#">아이 샌들</a>
 				</div>
-			</div>
+			</div>	
 		</div>
 	</div>
 	<div class="shoesmain container-fluid">
 		
 		<div id="wrapper"  class="row row-cols-2">
-			<div id="sidebar" class="col-md-2"> 사이드 바</div>
-			
+		<!-- 사이드 바  -->
+			<div class="col-md-2"> 
+				<div id="sidebar" >
+					 <button class="btn sidebar-button" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+					   Color
+					 </button>
+					<div class="collapse mb-2" id="collapseExample">
+					  <div class="card card-body">
+						  <div class = "row">
+						  	<div class="col-2 m-1 color-box" style="background-color:red"></div>
+						  	<div class="col-2 m-1" style="background-color:orange"></div>
+						  	<div class="col-2 m-1" style="background-color:yellow"></div>
+						  	<div class="col-2 m-1" style="background-color:green"></div>
+				  		</div>
+				  		
+				  		<div class = "row">
+						  	<div class="col-2 m-1 color-box" style="background-color:blue"></div>
+						  	<div class="col-2 m-1" style="background-color:navy"></div>
+						  	<div class="col-2 m-1" style="background-color:purple"></div>
+						  	<div class="col-2 m-1" style="background-color:black"></div>
+				  		</div>
+				  		
+				  		<div class = "row">
+						  	<div class="col-2 m-1 color-box" style="background-color:pink"></div>
+						  	<div class="col-2 m-1" style="background-color:yellow"></div>
+						  	<div class="col-2 m-1" style="background-color:orange"></div>
+						  	<div class="col-2 m-1" style="background-color:gray"></div>
+				  		</div>
+				  
+					  </div>
+					</div>
+					
+					<button class="btn sidebar-button" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+					   Size
+					 </button>
+					<div class="collapse mb-2" id="collapseExample2">
+					  <div class="card card-body">
+						  <div class = "row">
+							  	<div class="col m-1 border border-6">215</div>
+							  	<div class="col m-1 border border-6">220</div>
+							  	<div class="col m-1 border border-6">225</div>
+					  		</div>
+					  		
+					  		<div class = "row">
+							  	<div class="col m-1 border border-6">230</div>
+							  	<div class="col m-1 border border-6">235</div>
+							  	<div class="col m-1 border border-6">240</div>
+					  		</div>
+					  		
+					  		<div class = "row">
+							  	<div class="col m-1 border border-6">245</div>
+							  	<div class="col m-1 border border-6">250</div>
+							  	<div class="col m-1 border border-6">255</div>
+					  		</div>
+					  		
+					  		<div class = "row">
+							  	<div class="col m-1 border border-6">260</div>
+							  	<div class="col m-1 border border-6">270</div>
+							  	<div class="col m-1 border border-6">280</div>
+					  		</div>
+					  </div>
+					</div>
+					
+					<button class="btn sidebar-button" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+					   Price
+					 </button>
+					<div class="collapse mb-2" id="collapseExample3">
+					  <div class="card card-body">
+					  	<div class = "container-fluid">
+					  		<div class="row pl-4">
+					  			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+								  <label class="form-check-label" for="flexRadioDefault1">
+								    0 ~ 50,000 원
+								  </label>
+					  		</div>
+					  		
+					  		<div class="row pl-4">
+					  			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+								  <label class="form-check-label" for="flexRadioDefault1">
+								    50,000 ~ 80,000 원
+								  </label>
+					  		</div>
+					  		
+					  		<div class="row pl-4">
+					  			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+								  <label class="form-check-label" for="flexRadioDefault1">
+								    80,000 ~ 100,000 원
+								  </label>
+					  		</div>
+					  		
+					  		<div class="row pl-4">
+					  			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+								  <label class="form-check-label" for="flexRadioDefault1">
+								    100,000 ~ 150,000 원
+								  </label>
+					  		</div>
+					  		
+					  		<div class="row pl-4">
+					  			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+								  <label class="form-check-label" for="flexRadioDefault1">
+								    150,000 ~ 300,000 원
+								  </label>
+					  		</div>
+					  	</div>					
+					  </div>
+					</div>
+					
+				</div>
+			</div>
+				
 			<!-- 상품리스트 -->
 			<div id="products" class="col-md-10"> 
 				<div class="mycards">
@@ -84,6 +192,7 @@
 							    <p class="card-text">
 							    <span class="sale" style="color:red">50000원</span>
 							    </p>
+							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
 							    <a href="#" class="btn btn-primary">자세히보기</a>
 							  </div>
 							</div>
@@ -96,6 +205,7 @@
 							    <p class="card-text">
 							    <span class="sale" style="color:red">70000원</span>
 							    </p>
+   							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 							    <a href="#" class="btn btn-primary">자세히보기</a>
 							  </div>
 							</div>
@@ -109,6 +219,7 @@
 							    <p class="card-text">
 							    <span class="sale" style="color:red">64000원</span>
 							    </p>
+							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 							    <a href="#" class="btn btn-primary">자세히보기</a>
 							  </div>
 							</div>
@@ -121,6 +232,7 @@
 							    <p class="card-text">
 							    <span class="sale" style="color:red">45000원</span>
 							    </p>
+							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 							    <a href="#" class="btn btn-primary">자세히보기</a>
 							  </div>
 							</div>
@@ -133,6 +245,7 @@
 							    <p class="card-text">
 							    <span class="sale" style="color:red">36400원</span>
 							    </p>
+							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 							    <a href="#" class="btn btn-primary">자세히보기</a>
 							  </div>
 							</div>
@@ -145,6 +258,7 @@
 							    <p class="card-text">
 							    <span class="sale" style="color:red">37400원</span>
 							    </p>
+							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 							    <a href="#" class="btn btn-primary">자세히보기</a>
 							  </div>
 							</div>
@@ -157,6 +271,7 @@
 							    <p class="card-text">
 							    <span class="sale" style="color:red">74400원</span>
 							    </p>
+							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 							    <a href="#" class="btn btn-primary">자세히보기</a>
 							  </div>
 							</div>
@@ -169,6 +284,7 @@
 							    <p class="card-text">
 							    <span class="sale" style="color:red">74700원</span>
 							    </p>
+							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 							    <a href="#" class="btn btn-primary">자세히보기</a>
 							  </div>
 							</div>
@@ -181,6 +297,7 @@
 							    <p class="card-text">
 							    <span class="sale" style="color:red">65000원</span>
 							    </p>
+							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 							    <a href="#" class="btn btn-primary">자세히보기</a>
 							  </div>
 							</div>

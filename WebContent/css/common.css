@@ -9,6 +9,7 @@
 	margin: 0 auto;
 	height: 50px;
 	background-color: #FFFF99;
+	margin-bottom: 10px;
 }
 
 
@@ -17,12 +18,43 @@
 	margin:0 auto;
 	background-color: #ffffcc;
 }
+
 .search{
 	width: 800px;
 	margin:30px auto;
 }
+
 .search_button{
 	margin-top: 30px;
 	width:30px;
 	height: 30px;
+}
+
+
+#sidebar {
+	background-color : #ffffcc; 
+	position: sticky; 
+/* 	top: 250px;  */
+/* 	bottom: 150px; */
+	right: 10px; 
+	width: 200px; 
+	padding-top:30px; 
+	padding-bottom:30px;
+	font-size:13px;
+	
+    align-self: flex-start;
+    top: 0;
+
+}
+
+.sidebar-button {
+	display: block !important;
+	border: 1px solid black;
+	width : 100%;
+	margin-bottom:10px;
+}
+
+.color-box {
+	width:20px;
+	height:30px;
 }
