@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-.shoesmain {
-	width: 1400px;
-}
-
 #navbar {
 	width: 1400px;
 	margin: 0 auto;
@@ -20,7 +16,7 @@
 }
 .shoesmain{
 	width: 1400px;
-	margin:0 auto;
+	margin:0 auto !important;
 }
 
 .search{
@@ -35,8 +31,9 @@
 }
 
 
+/* ***********************************    사이드 바    ************************************** */
 #sidebar {
-	background-color : #ffffcc; 
+	border : 1px solid #d5d5d5;
 	position: sticky; 
 /* 	top: 250px;  */
 /* 	bottom: 150px; */
@@ -53,12 +50,50 @@
 
 .sidebar-button {
 	display: block !important;
-	border: 1px solid black;
-	width : 100%;
 	margin-bottom:10px;
+    background-color: black;
+    color: white;
+    width: 100%;
+    font-weight: bold;
+}
+
+/* 부트스트랩에서 설정된 속성 제거하기 위함 */
+.btn:active, .btn:focus {
+	outline:none !important;
+	box-shadow:none !important;
 }
 
 .color-box {
 	width:20px;
 	height:30px;
+}
+
+.shoesColors input[type="checkbox"] {
+
+/*    margin-right: 7px; */
+   width: 30px;
+   height: 30px;
+   background: $white no-repeat center center;
+   border: 1px solid $mainColor;
+   cursor: pointer;
+   outline: none;
+   appearance: none;
+   border-radius: 10%;
+
+}
+
+.shoesColors input[type="checkbox"]:hover {
+	border: 2px solid;
+	border-color: rgba(255, 255, 255, 0.3);
+}
+
+.shoesColors input[type="checkbox"]:checked  {
+	border: 3px solid ;
+	border-color: rgba(255, 255, 255, 0.7);
+} 
+
+.size-btn:focus {
+	outline: 1px !important;
+	outline-color: red !important;
+
 }
