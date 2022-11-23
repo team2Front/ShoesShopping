@@ -1,18 +1,20 @@
 @charset "UTF-8";
 
 #navbar {
-	width: 1400px;
 	margin: 0 auto;
 	height: 50px;
-	background-color: #FFFF99;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
 	margin-bottom: 10px;
+	padding-left:100px;
 }
 
 
 .banner{
-	width: 1400px;
 	margin:0 auto;
 	background-color: #ffffcc;
+	padding-left:100px;
+	padding-right:100px;
 }
 .shoesmain{
 	width: 1400px;
