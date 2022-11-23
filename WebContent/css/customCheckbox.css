@@ -33,11 +33,11 @@
 	border-radius: 10px;
 }
 
-cbtn > input[type="checkbox"],  cbtn > .fa-check {
+.cbtn > input[type="checkbox"],  .cbtn > .fa-check {
 	display: none;
 }
 
-cbtn > input[type="checkbox"]:checked +  cbtn > .fa-check{
+.cbtn > input[type="checkbox"]:checked + .fa-check{
 	display: inline-block;
 	color: white;
 }
