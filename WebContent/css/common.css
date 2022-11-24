@@ -57,7 +57,6 @@
 #sidebar {
 	border : 1px solid #d5d5d5;
 	position: sticky; 
-/* 	top: 250px;  */
 /* 	bottom: 150px; */
 	right: 10px; 
 	width: 200px; 
@@ -66,7 +65,7 @@
 	font-size:13px;
     background-color: black;
     align-self: flex-start;
-    top: 0;
+    top: 250px;
     border-radius:10px;
 
 }
