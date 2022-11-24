@@ -6,16 +6,24 @@
 	border-top: 1px solid gray;
 	border-bottom: 1px solid gray;
 	margin-bottom: 10px;
+    background-color: #fff;
 	padding-left:100px;
+	position: sticky;
+	top: 100px;
+	z-index:20;
 }
-
 
 .banner{
 	margin:0 auto;
 	background-color: #ffffcc;
 	padding-left:120px;
 	padding-right:100px;
+	position: sticky;
+	top: 0;
+	z-index:20;
+	height:100px;
 }
+
 .shoesmain{
 	width: 1400px;
 	margin:0 auto !important;
@@ -32,6 +40,13 @@
 	height: 30px;
 }
 
+#wrapper {
+	width:1400px;
+	margin:0px auto;
+	padding-left : 100px;
+	padding-right : 100px;
+}
+
 
 /* ***********************************    사이드 바    ************************************** */
 #sidebar {
@@ -44,9 +59,10 @@
 	padding-top:30px; 
 	padding-bottom:30px;
 	font-size:13px;
-	
+    background-color: black;
     align-self: flex-start;
     top: 0;
+    border-radius:10px;
 
 }
 
