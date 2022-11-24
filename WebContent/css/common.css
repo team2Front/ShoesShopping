@@ -52,6 +52,7 @@
 .modal-backdrop {
 	z-index: 0; !important;
 }
+
 /* ***********************************    사이드 바    ************************************** */
 #sidebar {
 	border : 1px solid #d5d5d5;
