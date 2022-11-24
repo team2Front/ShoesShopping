@@ -25,6 +25,7 @@
 				width: 1400px;
 				margin:0 auto !important;
 			}
+			
 			#mypage_sidebar {
 				background-color:#F5F5F5;
 				position: sticky; 
@@ -36,24 +37,30 @@
 				padding-top:30px; 
 				padding-bottom:30px;
 				font-size:13px;
-				
 			    align-self: flex-start;
 			    top: 0;
-			    
-			
 			}
+			
 			#mainDiv{
 				width:95%;
 			}
+			
 			#mypage_sidemenu>a{
 				border:none;
 				color:black;
 				background-color: #F5F5F5;
 			}
+			
 			#mypage_sidemenu>a:hover{
 				background-color: #708090;
 				color:white;
 				text-decoration: none;
+			}
+			
+			.ubtn {
+				width: 100px;
+				font-size: 11px;
+				text-align: center;
 			}
 		</style>
 	</head>
@@ -170,7 +177,6 @@
 				 </div>
 				<div id="mypage_sidemenu">
 					 <a href="mypage_main.html" class="list-group-item text-center h7">나의 정보</a>
-					 <a href="#" class="list-group-item text-center h7">개인정보 수정</a>
 					 <a href="mypage_orderList.html" class="list-group-item text-center h7">주문 내역</a>
 					 <a href="#" class="list-group-item text-center h7">나의 리뷰</a>
 					 <a href="#" class="list-group-item text-center h7">회원 탈퇴</a>
@@ -178,10 +184,63 @@
 				
 			</div>
 		</div>
+		
 		<!-- main -->
 		<div class="col-md-10">
-			<div id="mainDiv">
-			메인페이지입니다.
+			<div id="mainDiv" class="card">
+				<div class="card-header"><strong style="font-size: 50px;">회원정보</strong></div>
+				<div class="card-body">
+					<table class="table table-striped">
+					    <!-- <thead>
+					      <tr>
+					        <th>사진</th>
+					        <th></th>
+					        <th></th>
+					      </tr>
+					    </thead> -->
+					    <tbody>
+					      <tr>
+					        <td>사진</td>
+					        <td id="userPhoto">
+					        	<i class="bi bi-person-circle" style="width: 1500px;"></i>
+					        	<small id="photoHelp" class="form-text text-muted">회원님을 알릴 수 있는 사진을 등록해주세요.
+					        												   <br>등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</small>
+				        	</td>
+					        <td><button id="changePhoto" class="ubtn btn btn-secondary btn-sm">사진변경</button></td>
+					      </tr>
+					      <tr>
+					        <td>아이디</td>
+					        <td id="userId"><strong>로그인한 아이디</strong></td>
+					        <td></td>
+					      </tr>
+					      <tr>
+					        <td>비밀번호</td>
+					        <td id="userPw"><strong>*******</strong></td>
+					        <td><button id="changePw" class="ubtn btn btn-secondary btn-sm">비밀번호 변경</button></td>
+					      </tr>
+					      <tr>
+					        <td>이름</td>
+					        <td id="userName"><strong>입력했던 이름</strong></td>
+					        <td><button id="changeName" class="ubtn btn btn-secondary btn-sm">이름 변경</button></td>
+					      </tr>
+					      <tr>
+					        <td>주소</td>
+					        <td id="userAddress"><strong>입력했던 주소</strong></td>
+					        <td><button id="changeAddress" class="ubtn btn btn-secondary btn-sm">주소 변경</button></td>
+					      </tr>
+					      <tr>
+					        <td>성별</td>
+					        <td id="userGender"><strong>입력했던 성별</strong></td>
+					        <td><button id="changeAddress" class="ubtn btn btn-secondary btn-sm">성별 변경</button></td>
+					      </tr>
+					      <tr>
+					        <td>핸드폰번호</td>
+					        <td id="userPhoneNum"><strong>010-****-1234</strong></td>
+					        <td><button id="changePhone" class="ubtn btn btn-secondary btn-sm">핸드폰번호 변경</button></td>
+					      </tr>
+					    </tbody>
+				  	</table>
+			  	</div>
 			</div>
 		</div>
 	</div>
