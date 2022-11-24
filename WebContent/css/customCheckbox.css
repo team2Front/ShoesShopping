@@ -14,6 +14,8 @@
 #wrapper {
 	width:1400px;
 	margin:0px auto;
+	padding-left : 100px;
+	padding-right : 100px;
 }
 
 .cbtn-group {
@@ -33,11 +35,11 @@
 	border-radius: 10px;
 }
 
-cbtn > input[type="checkbox"],  cbtn > .fa-check {
+.cbtn > input[type="checkbox"],  .cbtn > .fa-check {
 	display: none;
 }
 
-cbtn > input[type="checkbox"]:checked +  cbtn > .fa-check{
+.cbtn > input[type="checkbox"]:checked + .fa-check{
 	display: inline-block;
 	color: white;
 }
