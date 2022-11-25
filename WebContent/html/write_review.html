@@ -80,40 +80,39 @@
 			text-align: center;
     		vertical-align: middle;
    			 }
+   			 
+   			 /* 리뷰 작성창 */
+   			 .mypost {
+            width: 95%;
+            max-width: 800px;
+            margin: 20px auto 20px auto;
+
+            box-shadow: 0px 0px 3px 0px black;
+            padding: 20px;
+	        }
+	        
+	
+	        .mypost > button {
+	            margin-top: 15px;
+	        }
+	        #review-content{
+	        	height: 150px;
+	        }
+	        .mybtns {
+	            display: flex;
+	            flex-direction: row;
+	            align-items: center;
+	            justify-content: center;
+	
+	            margin-top: 20px;
+	        }
+	        .mybtns > button {
+	            margin-right: 10px;
+	        }
 		</style>
 		
-		<!-- 메인메뉴 내용 변경 AJAX-->
-		<script>
-			function requestMyReview(){
-				$.ajax({
-					url: "mypage_myReview.html",
-					type: "get",
-					success: function(data){
-						$(".shoesmain-2").html(data);
-					}
-				});
-			}
-			
-			function requestMyOrder(){
-				$.ajax({
-					url: "mypage_myOrder.html",
-					type: "get",
-					success: function(data){
-						$(".shoesmain-2").html(data);
-					}
-				});
-			}
-		</script>
 		
-		<!-- orderList -->
-		<script>
-			function claimHandler1(){
-				console.log("환불 요청");
-			}
-			function claimHandler2(){
-				console.log("후기 작성");
-			}
-		</script>
+		
 		
 	</head>
 	
@@ -240,59 +239,78 @@
 		<!-- main -->
 		<div class="shoesmain-2 col-md-10">
 			<div id="mainDiv" class="card">
-				<div class="card-header"><strong style="font-size: 50px;">회원정보</strong></div>
-				<div class="card-body">
-					<table class="table table-striped">
-					    <!-- <thead>
+				<div id="review-list-header"><h1 class="title mx-5 mt-5 mb-3">리뷰 작성하기</h1></div>
+					<ul class="n-info-txt mb-3">
+						<li>SaShoes에서 구매해주셔서 감사합니다</li>
+						<li>리뷰 작성은 판매자에게 큰 힘이 됩니다!^-^)/</li>
+					</ul>
+					<ul>
+						<li>아래에 해당할 경우 관리자에 의해 삭제될 수 있습니다.</li>
+						<li> - 상품과 관련없거나 문자 및 기호의 단순 나열, 반복된 내용의 후기</li>
+						<li> - 개인정보 및 광고, 비속어가 포함된 내용의 후기 (비노출 대상)</li>
+					</ul>
+					
+					<table class="table">
+					    <!-- <thead class="table-dark">
 					      <tr>
-					        <th>사진</th>
+					        <th></th>
 					        <th></th>
 					        <th></th>
 					      </tr>
 					    </thead> -->
 					    <tbody>
 					      <tr>
-					        <td>사진</td>
-					        <td id="userPhoto">
-					        	<i class="bi bi-person-circle" style="width: 1500px;"></i>
-					        	<small id="photoHelp" class="form-text text-muted">회원님을 알릴 수 있는 사진을 등록해주세요.
-					        												   <br>등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</small>
+					        <td colspan="2" >
+					        <div class="image-block d-flex justify-content-left" style="width:800px; margin: 20px auto 20px auto;">
+					        	<img src="../images/아디다스_가젤.jpg"/>
+					        	<ul class="info">
+									<li class="brand">아디다스</li>
+									<li class="name">가젤</li>
+									<li class="option">옵션: 검정, 사이즈: 240</li>
+								</ul>
+					        </div>
 				        	</td>
-					        <td><button id="changePhoto" class="ubtn btn btn-secondary btn-sm">사진변경</button></td>
+					        
 					      </tr>
 					      <tr>
-					        <td>아이디</td>
-					        <td id="userId"><strong>로그인한 아이디</strong></td>
-					        <td></td>
+					      	
+					        <td id="review-point" colspan="2">
+						        <div class="star-block d-flex justify-content-left" style="width:800px; margin: 20px auto 20px auto;">
+						        	<div class="input-group">
+								        <label class="input-group-text" for="inputGroupSelect01">별점</label>
+								        <select class="form-select" id="star">
+								            <option selected>-- 선택하기 --</option>
+								            <option value="1">⭐</option>
+								            <option value="2">⭐⭐</option>
+								            <option value="3">⭐⭐⭐</option>
+								            <option value="4">⭐⭐⭐⭐</option>
+								            <option value="5">⭐⭐⭐⭐⭐</option>
+								        </select>
+								    </div>
+						        </div>
+						    </td>
 					      </tr>
 					      <tr>
-					        <td>비밀번호</td>
-					        <td id="userPw"><strong>*******</strong></td>
-					        <td><button id="changePw" class="ubtn btn btn-secondary btn-sm">비밀번호 변경</button></td>
-					      </tr>
-					      <tr>
-					        <td>이름</td>
-					        <td id="userName"><strong>입력했던 이름</strong></td>
-					        <td><button id="changeName" class="ubtn btn btn-secondary btn-sm">이름 변경</button></td>
-					      </tr>
-					      <tr>
-					        <td>주소</td>
-					        <td id="userAddress"><strong>입력했던 주소</strong></td>
-					        <td><button id="changeAddress" class="ubtn btn btn-secondary btn-sm">주소 변경</button></td>
-					      </tr>
-					      <tr>
-					        <td>성별</td>
-					        <td id="userGender"><strong>입력했던 성별</strong></td>
-					        <td><button id="changeAddress" class="ubtn btn btn-secondary btn-sm">성별 변경</button></td>
-					      </tr>
-					      <tr>
-					        <td>핸드폰번호</td>
-					        <td id="userPhoneNum"><strong>010-****-1234</strong></td>
-					        <td><button id="changePhone" class="ubtn btn btn-secondary btn-sm">핸드폰번호 변경</button></td>
+					        <td id="review-content" colspan="2">
+					        	<label for="goods_text" class="lable">상품에 대한 평가를 작성해주세요.</label>
+					        	<div class="mypost">
+							        <div class="form-floating mb-3">
+							            <label for="floatingInput">제목</label>
+							            <input type="text" class="form-control" id="review-title" placeholder="title">
+							        </div>
+							        <div class="form-floating mb-5">
+								        <label for="floatingTextarea2">내용</label>
+								        <textarea id="review-content" class="form-control" placeholder="Leave a comment here"></textarea>
+								    </div>
+								    <div class="mybtns">
+								        <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
+								        <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+								    </div>
+							    </div>
+					        </td>
 					      </tr>
 					    </tbody>
 				  	</table>
-			  	</div>
 			</div>
 		</div>
 	</div>
