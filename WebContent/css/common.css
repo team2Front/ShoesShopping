@@ -13,15 +13,19 @@
 	z-index:20;
 }
 
-.banner{
+.banner {
 	margin:0 auto;
-	background-color: #ffffcc;
+	background-color: SlateGray;
 	padding-left:120px;
 	padding-right:100px;
 	position: sticky;
 	top: 0;
 	z-index:20;
 	height:100px;
+}
+
+.banner > img {
+	filter: contrast(200%);	
 }
 
 .shoesmain{
