@@ -73,7 +73,29 @@
 				font-size: 11px;
 				text-align: center;
 			}
-
+			
+			.image-block>img{
+				width:100px;
+			}
+			.buttons{
+				align-content: center;
+			}
+			
+			li{
+			text-align: left;
+			list-style: none;
+			}
+			
+			.n-row{
+				display: flex;
+				padding:10px;
+			}
+			.table td, th{
+			text-align: center;
+    		vertical-align: middle;
+   			 }
+			
+			
 			.pbtn {
 				font-size: 5px;
 			}
@@ -83,6 +105,40 @@
 			}
 
 		</style>
+		
+		<!-- 메인메뉴 내용 변경 AJAX-->
+		<script>
+			function requestMyReview(){
+				$.ajax({
+					url: "mypage_myReview.html",
+					type: "get",
+					success: function(data){
+						$(".shoesmain-2").html(data);
+					}
+				});
+			}
+			
+			function requestMyOrder(){
+				$.ajax({
+					url: "mypage_myOrder.html",
+					type: "get",
+					success: function(data){
+						$(".shoesmain-2").html(data);
+					}
+				});
+			}
+		</script>
+		
+		<!-- orderList -->
+		<script>
+			function claimHandler1(){
+				console.log("환불 요청");
+			}
+			function claimHandler2(){
+				console.log("후기 작성");
+			}
+		</script>
+		
 	</head>
 	
 	<body>
@@ -162,7 +218,7 @@
 	
 	<!-- 메인페이지 -->
 	<div class="shoesmain d-flex" >
-		<div class="col-xs-2"> 
+		<div class="shoesmain-1 col-xs-2"> 
 			<div id="mypage_sidebar" class="text-center">		
 				<div class="m-3">
 					<i class="bi bi-person-circle"></i><span>  환영합니다</span>
@@ -172,8 +228,8 @@
 				 </div>
 				<div id="mypage_sidemenu">
 					 <a href="mypage_main.html" class="list-group-item text-center h7">나의 정보</a>
-					 <a href="mypage_orderList.html" class="list-group-item text-center h7">주문 내역</a>
-					 <a href="#" class="list-group-item text-center h7">나의 리뷰</a>
+					 <a role="button" onclick="requestMyOrder()" class="list-group-item text-center h7">주문 내역</a>
+					 <a role="button" onclick="requestMyReview()" class="list-group-item text-center h7">나의 리뷰</a>
 					 <a href="mypage_withdraw.html" class="list-group-item text-center h7">회원 탈퇴</a>
 				 </div>
 				
@@ -181,7 +237,7 @@
 		</div>
 		
 		<!-- main -->
-		<div class="col-xs-10">
+		<div class="shoesmain-2 col-xs-10">
 			<!-- 기본회원정보 -->
 			<div id="mainDiv" class="card my-3">
 				<div class="card-header" style="background-color: LightGray;">
