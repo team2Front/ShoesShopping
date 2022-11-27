@@ -4,9 +4,11 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>	
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">		
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>		
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 		<script>
 			function change1() {
 				let img = document.querySelector("#img1");
@@ -32,124 +34,134 @@
 				let img = document.querySelector("#img1	");
 				img.src = "../images/bans/반스_월버_5.png";
 			}
-		
+			
 		</script>
 		<style>
 		 * { 
 /* 		 	border: 1px solid black;  */
 		 }
 		 
+		 .shoes-images-review {
+		 	width:100px;
+		 	height:100px;
+		 }
+		 
+		 li{
+         text-align: left;
+         list-style: none;
+         }
+         
+         .n-row{
+            display: flex;
+            padding:10px;
+         }
+         
+         .table td, th{
+         text-align: center;
+          vertical-align: middle;
+         }
+		 
+		 
+		 
 		</style>
+		<link rel="stylesheet" href="../css/shoescolors.css">
 		<link rel="stylesheet" href="../css/common.css">
+		<link rel="stylesheet" href="../css/customCheckbox.css">
+		<link rel="stylesheet" href="../css/customRadio.css">
 		
 	</head>
 	<body>
-		<div>
-		  <div class="banner d-flex justify-content-between">  
-		    <div class="p-2"><img src="../images/sashoes_logo.png" style="width:150px; height:100px;"/></div>
-		    
-		    <div class="p-2">
-			    <div class="row">
-			    	<input class="search col-10 search-txt" type="text" placeholder="검색어를 입력해 주세요">
-					<button class="search_button col-2 btn-primary" type="submit">찾기</button>
+	  <div class="banner d-flex justify-content-between">  
+	    <div class="p-2"><a href="home.html"><img src="../images/sashoes_logo.png" style="width:150px; margin-top:20px;"/></a></div>
+	    
+	    <div class="p-2">
+		    <div class="row">
+		    	<input class="search col-10 search-txt" type="text" placeholder="검색어를 입력해 주세요">
+				<button class="search_button col-2 btn-primary" type="submit">찾기</button>
+		    </div>
+		</div>
+		
+	    <div  style="text-align: center; padding-top: 35px;"><a href="joinForm.html">회원가입</a></div>
+	    <div  style="text-align: center; padding-top: 35px;"><a href="mypage_main.html">마이페이지</a></div>
+	    <div  style="text-align: center; padding-top: 35px;">
+	    <!--------------------------------------------------------- 로그인 창 --------------------------------------->
+	    	<a href="#" data-toggle="modal" data-target="#myLogin">로그인</a>
+	    	<div class="modal fade" id="myLogin">
+			    <div class="modal-dialog modal-sm modal-dialog-centered">
+			      <div class="modal-content">
+			      
+			        <!-- Modal Header -->
+			        <div class="modal-header">
+			          <h4 class="modal-title mx-auto">로그인</h4>
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        </div>
+			        
+			        <!-- Modal body -->
+			        <div class="modal-body">
+			            <form id="loginForm" name="loginForm" action="#" onsubmit="return handleCheckData()" novalidate>
+					          <div class="form-group">
+					            <label for="uid">ID</label>
+					            <input type="text" class="form-control" id="uid" name="uid" value=""/>
+					            <small id="uidHelp" class="form-text text-muted">알파벳 대소문자, 숫자를 혼용해서 6자 이상 10장 이하를 입력해주세요</small>
+					          </div>
+					
+					          <div class="form-group">
+					            <label for="password">Password</label>
+					            <input type="password" class="form-control" id="password" name="password" value=""/>
+					            <small id="passwordHelp" class="form-text text-muted">알파벳 대소문자, 숫자를 혼용해서 8자 이상 15장 이하를 입력해주세요</small>
+					          </div>
+			          	</form>
+			        </div>
+			        
+			        <!-- Modal footer -->
+			        <div class="modal-footer">
+			        	<button type="submit" class="btn bg-warning" data-dismiss="modal">로그인</button>
+			          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        </div>
+			        
+			      </div>
 			    </div>
 			</div>
 			
-		    <div class="p-2">
-		    <!--------------------------------------------------------- 로그인 창 --------------------------------------->
-		    	<a href="#" data-toggle="modal" data-target="#myModal">로그인</a>
-		    	<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
-				    <div class="modal-dialog modal-xl modal-dialog-centered">
-				      <div class="modal-content">
-				      
-				        <!-- Modal Header -->
-				        <div class="modal-header">
-				          <h4 class="modal-title">사진제목</h4>
-				          <button type="button" class="close" data-dismiss="modal">&times;</button>
-				        </div>
-				        
-				        <!-- Modal body -->
-				        <div class="modal-body">
-				            <img class="card-img-top rounded img-fluid" src="images/research/research-1.jpg">
-				        </div>
-				        
-				        <!-- Modal footer -->
-				        <div class="modal-footer">
-				          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				        </div>
-				        
-				      </div>
-				    </div>
+	    </div>
+	  </div>
+		<div id="navbar" class="shadow-sm">
+			<div class="btn-group">
+				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+					MEN
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">남성 운동화</a>
+					<a class="dropdown-item" href="#">남성 스니커즈</a>
+					<a class="dropdown-item" href="#">남성 샌들</a>
 				</div>
-				
-				 <!--------------------------------------------------------- 로그인 창 --------------------------------------->
-		    	<a href="#" data-toggle="modal" data-target="#myModal">회원가입</a>
-		    	<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
-				    <div class="modal-dialog modal-xl modal-dialog-centered">
-				      <div class="modal-content">
-				      
-				        <!-- Modal Header -->
-				        <div class="modal-header">
-				          <h4 class="modal-title">사진제목</h4>
-				          <button type="button" class="close" data-dismiss="modal">&times;</button>
-				        </div>
-				        
-				        <!-- Modal body -->
-				        <div class="modal-body">
-				            <img class="card-img-top rounded img-fluid" src="images/research/research-1.jpg">
-				        </div>
-				        
-				        <!-- Modal footer -->
-				        <div class="modal-footer">
-				          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				        </div>
-				        
-				      </div>
-				    </div>
-				</div>
-		    </div>
-		    
-		  </div>
-		 </div>
-		  
-		<div>
-			<div id="navbar">
-				<div class="btn-group">
-					<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
-						MEN
-					</button>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">남성 운동화</a>
-						<a class="dropdown-item" href="#">남성 스니커즈</a>
-						<a class="dropdown-item" href="#">남성 샌들</a>
-					</div>
-				</div>
-				<div class="btn-group">
-					<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
-						WOMEN
-					</button>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">여성 운동화</a>
-						<a class="dropdown-item" href="#">여성 스니커즈</a>
-						<a class="dropdown-item" href="#">여성 샌들</a>
-					</div>
-				</div>
-				<div class="btn-group">
-					<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
-						KIDS
-					</button>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">아이 운동화</a>
-						<a class="dropdown-item" href="#">아이 스니커즈</a>
-						<a class="dropdown-item" href="#">아이 샌들</a>
-					</div>
-				</div>	
 			</div>
+			<div class="btn-group">
+				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+					WOMEN
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">여성 운동화</a>
+					<a class="dropdown-item" href="#">여성 스니커즈</a>
+					<a class="dropdown-item" href="#">여성 샌들</a>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+					KIDS
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">아이 운동화</a>
+					<a class="dropdown-item" href="#">아이 스니커즈</a>
+					<a class="dropdown-item" href="#">아이 샌들</a>
+				</div>
+			</div>	
 		</div>
-		<div class="shoesmain container-fluid">
-			<div id="wrapper" class="row row-cols-2">
+	<div class="shoesmain container-fluid">
+		<div id="wrapper" >
+			<div class="row row-cols-2">
 				<!-- 이미지가 나오는 사이드 바 -->
-				<div id="img1" class="carousel slide col-md-5" data-ride="carousel" data-interval="0">
+				<div id="img1" class="carousel slide col-md-6" data-ride="carousel" data-interval="0">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
 							<img id="img1" src="../images/bans/반스_월버_1.png" style="width:500px; height:500px;" class="m-4"/>
@@ -183,66 +195,170 @@
 				</div>
 				
 				<!-- 신발에 대한 상세 설명 -->
-				<div id="detail" class="col-md-7">
+				<div id="detail" class="col-md-6">
 					<div class="container-fluid">
-						<div class="row m-4" style="font-size:40px; padding:10px"> 브랜드 : 반스 </div>
+						<div class="row m-4" style="font-size:38px; padding:10px"> 브랜드 : 반스 </div>
 						<div class="row m-4">
-							<div class="col-4" style="font-size:30px; padding:10px">
-								이름 : 월버
+							<div class="col" style="font-size:32px; padding:10px">
+								<b>정글 사이드월 Authentic 어센틱 44 DX</b>
 							</div>
-							<div class="col-8" style="font-size:30px; padding:10px">
-								카테고리 : 운동화
-							</div>
+<!-- 							<div class="col-8" style="font-size:30px; padding:10px"> -->
+<!-- 								카테고리 : 운동화 -->
+<!-- 							</div> -->
 						</div>
-						<div class="row m-4" style="font-size:30px; padding:10px"> 가격 : 39000 </div>
-						<div class="row m-4" style="font-size:30px; padding:10px"> 성별 : MALE </div>
+						<div class="row m-4" style="font-size:30px; padding:10px"><b> 9,9000원</b> </div>
+						<div class="row m-4" style="font-size:15px; padding:10px">남성용</div>
+						<hr/>
 						<div class="row m-4">
-							<div class="col-2 m-1 color-box" style="background-color:red"></div>
-							<div class="col-2 m-1" style="background-color:navy"></div>
-							<div class="col-2 m-1" style="background-color:purple"></div>
-							<div class="col-2 m-1" style="background-color:black"></div>
-							<div class="col-2 m-1" style="background-color:pink"></div>
-							<div class="col-2 m-1 color-box" style="background-color:yellow"></div>
-							<div class="col-2 m-1" style="background-color:orange"></div>
-							<div class="col-2 m-1" style="background-color:gray"></div>
-							<div class="col-2 m-1" style="background-color:white"></div>
-							<div class="col-2 m-1" style="background-color:green"></div>
+							<div class="btn-group btn-group" style="width:620px;">
+				       			<label for="pcolor" class="mx-2 my-2"><b>색상</b></label>
+				       			<div class="form-check">
+									<label class="cbtn btn red active" style="width:40px; height:40px;">
+										<input type="radio" name="colorOption">
+										<i class="fa fa-check"></i>
+									</label>
+									<label class="cbtn btn pink" style="width:40px; height:40px;">
+										<input type="radio" name="colorOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn orange" style="width:40px; height:40px;">
+										<input type="radio" name="colorOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn yellow" style="width:40px; height:40px;">
+										<input type="radio" name="colorOption">
+										<i class="fa fa-check" style="color:black"></i>
+									</label>			
+									<label class="cbtn btn lime" style="width:40px; height:40px;">
+										<input type="radio" name="colorOption">
+										<i class="fa fa-check"></i>
+									</label>
+								</div>		
+							</div>
 						</div>
-						<div class="row mx-4">
-							<div class="col m-1 border border-6">215</div>
-							<div class="col m-1 border border-6">220</div>
-							<div class="col m-1 border border-6">225</div>
-						</div>
-						<div class="row mx-4">
-							<div class="col m-1 border border-6">230</div>
-							<div class="col m-1 border border-6">235</div>
-							<div class="col m-1 border border-6">240</div>
-						</div>
-						<div class="row mx-4">
-							<div class="col m-1 border border-6">245</div>
-							<div class="col m-1 border border-6">250</div>
-							<div class="col m-1 border border-6">255</div>
-						</div>
-						<div class="row mx-4">
-							<div class="col m-1 border border-6">260</div>
-							<div class="col m-1 border border-6">265</div>
-							<div class="col m-1 border border-6">270</div>
+						<div class="row m-4 sizeList">
+							<div class="cbtn-group btn-group p-auto" data-toggle="buttons" style="width:600px;">
+				       			<label for="psize" class="mx-2 my-2"><b>사이즈</b></label>
+				       			<div class="form-radio">
+									<label class="cbtn btn" style="width:75px; height:40px; margin:3px auto;">
+										220
+										<input class="psize" type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										225
+										<input class="psize" type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										230
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										235
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										240
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										245
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										250
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										255
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										260
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										265
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										270
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										275
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>			
+									<label class="cbtn btn" style="width:75px; height:40px;">
+										280
+										<input type="radio" name="sizeOption">
+										<i class="fa fa-check"></i>
+									</label>																		
+								</div>
+							</div>
 						</div>
 						<div class="row m-4">
-							<div class="col-5 btn-dark" type="button" style="font-size:30px; padding:10px; text-align:center;">
-								바로 구매
+							<div class="col-5 btn-dark" type="button" data-toggle="modal" data-target="#buyNow" style="padding:10px; text-align:center; justify-content: center;">  <!--  font-size:30px; -->
+								<b>바로 구매</b>
 							</div>
-							<div class="col-2">
-							
+							<div class="modal fade" id="buyNow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog  modal-dialog-centered">
+									<div class="modal-content">
+									  <div class="modal-header">
+									    <h5 class="modal-title" id="exampleModalLabel">SaShoes</h5>
+									    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									      <span aria-hidden="true">&times;</span>
+									    </button>
+									  </div>
+									  <div class="modal-body">
+									    <p>정말 구매하시겠습니까?</p>
+									  </div>
+									  <div class="modal-footer">
+									    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+									    <a type="button" class="btn btn-primary"  href="orderForm.html">구매하기</a>
+									  </div>
+									</div>
+								</div>
 							</div>
-							<div class="col-5 btn-dark" type="button" style="font-size:30px; padding:10px; text-align:center;">
-								장바구니
+															
+							<div class="col-2"></div>
+							<div class="col-5 btn-secondary" type="button" data-toggle="modal" data-target="#putCart" style="padding:10px; text-align:center;">
+								<b>장바구니</b>
+							</div>
+							<div class="modal fade" id="putCart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog  modal-dialog-centered">
+									<div class="modal-content">
+									  <div class="modal-header">
+									    <h5 class="modal-title" id="exampleModalLabel">SaShoes</h5>
+									    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									      <span aria-hidden="true">&times;</span>
+									    </button>
+									  </div>
+									  <div class="modal-body">
+									    <p>장바구니에 성공적으로 담겼습니다 !</p>
+									  </div>
+									  <div class="modal-footer">
+									    <a type="button" class="btn btn-primary"  href="cartDetail.html">장바구니 보러가기</a>
+									  </div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<ul class="row nav nav-tabs" role="tablist">
+			<ul class="row nav nav-tabs pl-100" role="tablist">
 				<li class="col-4 p-3 nav-item">
 					<a class="nav-link active" data-toggle="tab" href="#shoes-detail" style="font-size:30px; text-align:center"> 상품 정보 </a>
 				</li>
@@ -257,61 +373,285 @@
 			<!-- Tab Content -->
 			<div class="tab-content">
 				<div class="tab-pane active container-fluid" id="shoes-detail">
-					<div class="m-4" style="font-size:30px; text-align:center"> 반스 ~ </div>
 					<div class="m-4" style="text-align:center">
 						<img src="../images/bans/정보_1.png" style="width:900px; height:400px; margin:0 auto;"class="active m-1 ml-4"/>
 						<img src="../images/bans/정보_2.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
+						<img src="../images/bans/정보3.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
+						<img src="../images/bans/정보4.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
+						<img src="../images/bans/정보5.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
 					</div>
 				</div>
 				<div class="tab-pane container-fluid" id="shoes-review">
-					<div class="container-fluid my-3" style="text-align:center">
-						<div class="row">
-							<div class="col-3" style="font-size:30px;"> 아이디 </div>
-							<div class="col-9" style="font-size:30px;"> 리뷰 내용 </div>
-						</div>
-						<div class="row my-2">
-							<div class="col-3" style="font-size:25px;"> 태희 </div>
-							<div class="col-9" style="font-size:25px;"> 좋아요~~~~~</div>
-						</div>
-						<div class="row my-2">
-							<div class="col-3" style="font-size:25px;"> 희률 </div>
-							<div class="col-9" style="font-size:25px;"> 좋아요~ </div>
-						</div>
-						<div class="row my-2">
-							<div class="col-3" style="font-size:25px;"> 송민 </div>
-							<div class="col-9" style="font-size:25px;"> 좋아요2~~~ </div>
-						</div>
-						<div class="row my-2">
-							<div class="col-3" style="font-size:25px;"> 정은 </div>
-							<div class="col-9" style="font-size:25px;"> 좋아요3~~~~~~ </div>
-						</div>
+					<div id="mainDiv" class="content">
+					   <div id="review-list">
+					      <div id="review-list-header">
+					      
+					      </div>
+					      <table class="table table-hover">
+					         <thead class="table-dark">
+					         <tr>
+					            <th scope="col">NO</th>
+					            <th scope="col" style="width:330px">상품 정보</th>
+					            <th scope="col" colspan="3">작성내용</th>
+					            <th></th>
+					         <tr>
+					         </thead>
+					         <tbody class="table-group-divider">
+					         <tr>
+					            <th scope="row">1</th>
+					            <td>
+					               <div class="n-row">
+					                  <a href="#" class="image-block"><img class="shoes-images-review" src="../images/반스_월버_노랑.jpg"/></a>
+					                  <ul class="info">
+					                     <li class="option">옵션: 노랑</li>
+					                     <li class="option">사이즈: 240</li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td colspan="3">
+					               <div id="review-info">
+					                  <ul id="review-detail">
+					                     <li class="order-name">작성자 이름 : 희률 </li>
+					                     <li class="review-stars">⭐⭐⭐⭐⭐</li>
+					                     <li class="review-contents">좋아요~~~편하고 예뻐요!</li>
+					                     <li class="review-comment">
+					                        댓글 <span class="review-comment-reply-cnt">0개</span>
+					                     </li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td style="text-align:center;">
+					               <div id="buttons" class="d-flex flex-column">
+					                  <button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="claimHandler1()">상세보기</button>
+					                  <button class="btn btn-secondary btn-sm" type="button" onclick="claimHandler2()">댓글달기</button>
+					               </div>
+					            </td>
+					         </tr>
+					         <!-- 주문 2 -->
+					         <tr>
+					         <th scope="row">2</th>
+					            <td>
+					               <div class="n-row">
+					                  <a href="#" class="image-block"><img class="shoes-images-review" src="../images/반스_월버_노랑.jpg""/></a>
+					                  <ul class="info">
+					                     <li class="option">옵션: 노랑</li>
+					                     <li class="option">사이즈: 260</li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td colspan="3">
+					               <div id="review-info">
+					                  <ul id="review-detail">
+					                     <li class="order-name">작성자 이름 : 태희 </li>
+					                     <li class="review-stars">⭐⭐⭐⭐⭐</li>
+					                     <li class="review-contents">좋아요~~~편하고 예뻐요!</li>
+					                     <li class="review-comment">
+					                        댓글 <span class="review-comment-reply-cnt">0개</span>
+					                     </li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td style="text-align:center;">
+					               <div id="buttons" class="d-flex flex-column">
+					                  <button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="location.href='reviewboarddetail.html'">상세보기</button>
+					                  <button class="btn btn-secondary btn-sm" type="button" onclick="claimHandler2()">댓글달기</button>
+					               </div>
+					            </td>
+					         </tr>
+					         
+					         <!-- 주문3 -->
+					         <tr>
+					         <th scope="row">3</th>
+					            <td>
+					               <div class="n-row">
+					                  <a href="#" class="image-block"><img class="shoes-images-review" src="../images/반스_월버_노랑.jpg	"/></a>
+					                  <ul class="info">
+					                     <li class="option">옵션: 노랑</li>
+					                     <li class="option">사이즈: 250</li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td colspan="3">
+					               <div id="review-info">
+					                  <ul id="review-detail">
+					                     <li class="order-name">작성자 이름 : 정은 </li>
+					                     <li class="review-stars">⭐⭐⭐⭐⭐</li>
+					                     <li class="review-contents">좋아요~~~편하고 예뻐요!</li>
+					                     <li class="review-comment">
+					                        댓글 <span class="review-comment-reply-cnt">0개</span>
+					                     </li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td style="text-align:center;">
+					               <div id="buttons" class="d-flex flex-column">
+					                  <button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="claimHandler1()">상세보기</button>
+					                  <button class="btn btn-secondary btn-sm" type="button" onclick="claimHandler2()">댓글달기</button>
+					               </div>
+					            </td>
+					         </tr>
+					         
+					         <!-- 주문4 -->
+					         <tr>
+					         <th scope="row">4</th>
+					            <td>
+					               <div class="n-row">
+					                  <a href="#" class="image-block"><img class="shoes-images-review" src="../images/반스_월버_노랑.jpg""/></a>
+					                  <ul class="info">
+					                     <li class="option">옵션: 노랑</li>
+					                     <li class="option">사이즈: 260</li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td colspan="3">
+					               <div id="review-info">
+					                  <ul id="review-detail">
+					                     <li class="order-name">작성자 이름 : 송민 </li>
+					                     <li class="review-stars">⭐⭐⭐⭐⭐</li>
+					                     <li class="review-contents">좋아요~~~편하고 예뻐요!</li>
+					                     <li class="review-comment">
+					                        댓글 <span class="review-comment-reply-cnt">0개</span>
+					                     </li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td style="text-align:center;">
+					               <div id="buttons" class="d-flex flex-column">
+					                  <button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="claimHandler1()">상세보기</button>
+					                  <button class="btn btn-secondary btn-sm" type="button" onclick="claimHandler2()">댓글달기</button>
+					               </div>
+					            </td>
+					         </tr>
+					         
+					         </tbody>
+					         
+					      </table>
+					   </div>
 					</div>
 				</div>
 				<div class="tab-pane container-fluid" id="shoes-q_a">
-					<div class="container-fluid my-3" style="text-align:center">
-						<div class="row">
-							<div class="col-3" style="font-size:30px;"> 아이디 </div>
-							<div class="col-9" style="font-size:30px;"> Q & A 내용 </div>
-						</div>
-						<div class="row my-2">
-							<div class="col-3" style="font-size:25px;"> 태희 </div>
-							<div class="col-9" style="font-size:25px;"> 좀 더 큰 사이즈가 있을까요? </div>
-						</div>
-						<div class="row my-2">
-							<div class="col-3" style="font-size:25px;"> 희률 </div>
-							<div class="col-9" style="font-size:25px;"> 다른 색이 또 있나요? </div>
-						</div>
-						<div class="row my-2">
-							<div class="col-3" style="font-size:25px;"> 송민 </div>
-							<div class="col-9" style="font-size:25px;"> 실제로 배송을 받아보니 하늘색이 왔어요? </div>
-						</div>
-						<div class="row my-2">
-							<div class="col-3" style="font-size:25px;"> 정은 </div>
-							<div class="col-9" style="font-size:25px;"> 궁금합니다! </div>
-						</div>
+					<div style="float:right"><button class="btn btn-lg btn-dark m-3"> Q & A 작성 </button></div>
+					<div id="mainDiv" class="content">
+					   <div id="review-list">
+					      <div id="review-list-header">
+					      
+					      </div>
+					      <table class="table table-hover">
+					         <thead class="table-dark">
+					         <tr>
+					            <th scope="col">NO</th>
+					            <th scope="col" style="width:330px">문의자 정보</th>
+					            <th scope="col" colspan="3">문의 제목</th>
+					            <th></th>
+					         <tr>
+					         </thead>
+					         <tbody class="table-group-divider">
+					         <tr>
+					            <th scope="row">1</th>
+					            <td>
+					               <div class="n-row">
+					                  <ul class="info">
+					                     <li class="order-id">태희</li>
+					                     <li class="option">2022-11-23</li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td colspan="3">
+					               <div id="review-info">
+						            <ul id="review-detail">
+										<li class="order-name"> 질문 </li>
+									</ul>
+					               </div>
+					            </td>
+					            <td style="text-align:center;">
+					               <div id="buttons" class="d-flex flex-column">
+					                  <button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="claimHandler1()">상세보기</button>
+					               </div>
+					            </td>
+					         </tr>
+					         <!-- 주문 2 -->
+					         <tr>
+					         <th scope="row">2</th>
+					            <td>
+					               <div class="n-row">
+					                  <ul class="info">
+					                     <li class="order-id">희률</li>
+					                     <li class="option">2022-11-21</li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td colspan="3">
+					               <div id="review-info">
+							        <ul id="review-detail">
+										<li class="order-name"> 구매할 때 어떤 방식으로 신청해야 </li>
+									</ul>
+					               </div>
+					            </td>
+					            <td style="text-align:center;">
+					               <div id="buttons" class="d-flex flex-column">
+					                  <button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="claimHandler1()">상세보기</button>
+					               </div>
+					            </td>
+					         </tr>
+					         
+					         <!-- 주문3 -->
+					         <tr>
+					         <th scope="row">3</th>
+					            <td>
+					               <div class="n-row">
+					                  <ul class="info">
+					                     <li class="order-id">정은</li>
+					                     <li class="option">2022-11-20</li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td colspan="3">
+					               <div id="review-info">
+					                  <ul id="review-detail">
+					                     <li class="order-name"> 궁금한게 있습니다. </li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td style="text-align:center;">
+					               <div id="buttons" class="d-flex flex-column">
+					                  <button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="claimHandler1()">상세보기</button>
+					               </div>
+					            </td>
+					         </tr>
+					         
+					         <!-- 주문4 -->
+					         <tr>
+					         <th scope="row">4</th>
+					            <td>
+					               <div class="n-row">
+					                  <ul class="info">
+					                     <li class="order-id">송민</li>
+					                     <li class="option">2022-11-19</li>
+					                  </ul>
+					               </div>
+					            </td>
+					            <td colspan="3">
+					               <div id="review-info">
+					               	<ul id="review-detail">
+										<li class="order-name"> 문의할게 있습니다. </li>
+									</ul>
+					               </div>
+					            </td>
+					            <td style="text-align:center;">
+					               <div id="buttons" class="d-flex flex-column">
+					                  <button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="claimHandler1()">상세보기</button>	
+					               </div>
+					            </td>
+					         </tr>
+					         
+					         </tbody>
+					         
+					      </table>
+					   </div>
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</body>
 </html>

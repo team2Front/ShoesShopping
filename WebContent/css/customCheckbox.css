@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+#banner {
+	background-image: url("../images/banner.png");
+	background-size: cover;
+}
+			
+.banner-font, .card-header {
+	font-family: 'Do Hyeon', serif;
+	font-weight: 500;
+	font-size: 70px;
+}
+			
+#wrapper {
+	width:1400px;
+	margin:0px auto;
+	padding-left : 100px;
+	padding-right : 100px;
+}
+
+.cbtn-group {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	display: block;
+}
+
+.cbtn {
+	margin-bottom: 0px;
+}
+
+.cbtn-group>.form-check {
+	padding-top: 8px;
+	padding-right: 20px;
+	border-style: groove;
+	border-radius: 10px;
+}
+
+.cbtn > input[type="checkbox"],  .cbtn > .fa-check {
+	display: none;
+}
+
+.cbtn > input[type="checkbox"]:checked + .fa-check{
+	display: inline-block;
+	color: white;
+}
