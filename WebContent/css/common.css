@@ -1,19 +1,40 @@
 @charset "UTF-8";
 
 #navbar {
-	width: 1400px;
 	margin: 0 auto;
 	height: 50px;
-	background-color: #FFFF99;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
 	margin-bottom: 10px;
+    background-color: #fff;
+	padding-left:100px;
+	position: sticky;
+	top: 100px;
+	z-index:20;
 }
 
+#adminButton button {
+	font-weight: bold;
+	border: 1px solid Indigo;
+	color: Indigo;
+	width:150px;
+}
 
-.banner{
-	width: 1400px;
+.banner {
 	margin:0 auto;
-	background-color: #ffffcc;
+	background-color: SlateGray;
+	padding-left:120px;
+	padding-right:100px;
+	position: sticky;
+	top: 0;
+	z-index:20;
+	height:100px;
 }
+
+.banner > img {
+	filter: contrast(200%);	
+}
+
 .shoesmain{
 	width: 1400px;
 	margin:0 auto !important;
@@ -30,21 +51,33 @@
 	height: 30px;
 }
 
+#wrapper {
+	width:1400px;
+	margin:0px auto;
+	padding-left : 100px;
+	padding-right : 100px;
+}
+
+
+
+.modal-backdrop {
+	z-index: 0; !important;
+}
 
 /* ***********************************    사이드 바    ************************************** */
 #sidebar {
 	border : 1px solid #d5d5d5;
 	position: sticky; 
-/* 	top: 250px;  */
 /* 	bottom: 150px; */
 	right: 10px; 
 	width: 200px; 
 	padding-top:30px; 
 	padding-bottom:30px;
 	font-size:13px;
-	
+    background-color: black;
     align-self: flex-start;
-    top: 0;
+    top: 250px;
+    border-radius:10px;
 
 }
 
