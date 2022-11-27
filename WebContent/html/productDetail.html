@@ -69,6 +69,22 @@
 		<link rel="stylesheet" href="../css/customCheckbox.css">
 		<link rel="stylesheet" href="../css/customRadio.css">
 		
+		<script>
+			$(document).ready(function() {
+				$("#qnaList tbody").on("click", "tr", function(){
+					let status = $( this ).find(".qnaDetail").css("display");
+	
+					if(status =="none"){
+						$( this ).find(".qnaDetail").css("display", "block");
+					}
+					else $( this ).find(".qnaDetail").css("display", "none");
+	
+				});
+				
+				
+			});
+		</script>
+		
 	</head>
 	<body>
 	  <div class="banner d-flex justify-content-between">  
@@ -572,7 +588,7 @@
 					      <div id="review-list-header">
 					      
 					      </div>
-					      <table class="table table-hover">
+					      <table class="table table-hover" id="qnaList">
 					         <thead class="table-dark">
 					         <tr>
 					            <th scope="col">NO</th>
@@ -582,7 +598,7 @@
 					         <tr>
 					         </thead>
 					         <tbody class="table-group-divider">
-					         <tr onclick="location.href='qnaboarddetail.html'">
+					         <tr>
 					            <th scope="row">1</th>
 					            <td>
 					               <div class="n-row">
@@ -597,6 +613,35 @@
 						            <ul id="review-detail">
 										<li class="order-name"> 질문 </li>
 									</ul>
+					               </div>
+					               <div class="qnaDetail" style="display:none; text-align: left;" class=" n-row">
+					                  <div class="p-3" style="width:100%; height:100px; ">
+					                  		<p>1 해당 상품 220 사이즈가 품절인데 재입고 예정일을 알 수 있을까요?</p>
+					                  		<p>2 해당 상품 220 사이즈가 품절인데 재입고 예정일을 알 수 있을까요?</p>
+					                  </div>
+					                  <table class="table">
+				                  	  	  <thead style="background-color: #f0f0f0; border-top: 3px solid #000;">
+										    <tr>
+										      <th class="col-10">답글 수: 2개</th>
+										      <th class="col-2"></th>
+										    </tr>
+										  </thead>
+										  <tbody>
+										    <tr style="border-top: 4px solid #000;">
+										      <th>안녕하세요 태희님, 해당 사이즈 재입고 날짜가 미정입니다. 죄송합니다</th>
+										      <td>관리자</td>
+										    </tr>
+										    <tr>
+										      <th>답변 감사합니다 !!</th>
+										      <td>태희</td>
+										    </tr>
+										    <tr>
+										      <th>네 고객님 좋은하루 되세요</th>
+										      <td>관리자</td>
+										    </tr>
+							   
+						  				 </tbody>
+					  				 </table>
 					               </div>
 					            </td>
 					            <td style="text-align:center;">
@@ -622,10 +667,39 @@
 										<li class="order-name"> 구매할 때 어떤 방식으로 신청해야 </li>
 									</ul>
 					               </div>
+					               <div class="qnaDetail" style="display:none;" class=" n-row">
+					                  <div class="p-3" style="width:100%; height:100px; ">
+					                  		<p>3 해당 상품 220 사이즈가 품절인데 재입고 예정일을 알 수 있을까요?</p>
+					                  		<p>4 해당 상품 220 사이즈가 품절인데 재입고 예정일을 알 수 있을까요?</p>
+					                  </div>
+					                  <table class="table">
+				                  	  	  <thead style="background-color: #f0f0f0; border-top: 3px solid #000;">
+										    <tr>
+										      <th class="col-10">답글 수: 2개</th>
+										      <th class="col-2"></th>
+										    </tr>
+										  </thead>
+										  <tbody>
+										    <tr style="border-top: 4px solid #000;">
+										      <th>안녕하세요 희률님, 해당 사이즈 재입고 날짜가 미정입니다. 죄송합니다</th>
+										      <td>관리자</td>
+										    </tr>
+										    <tr>
+										      <th>답변 감사합니다 !!</th>
+										      <td>희률</td>
+										    </tr>
+										    <tr>
+										      <th>네 고객님 좋은하루 되세요</th>
+										      <td>관리자</td>
+										    </tr>
+							   
+						  				 </tbody>
+					  				 </table>
+					               </div>
 					            </td>
 					            <td style="text-align:center;">
 									<div>
-										미답변
+										답변 완료
 									</div>
 					            </td>
 					         </tr>
