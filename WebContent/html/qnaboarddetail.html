@@ -16,19 +16,6 @@
 /*   				border: 1px solid black;   */
 			}
 		</style>
-		<script>
-			let state = 0;
-			
-			function changeimage(img) {
-				if(state === 0) {
-					img.src = "../images/heart_empty.png";
-					state = 1;
-				} else {
-					img.src = "../images/heart.png";
-					state = 0;
-				}
-			}
-		</script>
 	</head>
 	<body>
 		<div class="banner d-flex justify-content-between">
@@ -128,70 +115,27 @@
 		<div class="reviewmain container-fluid">
 			<div id="wrapper">
 				<div class="row table-dark" style="height:100px; border: 1px solid black">
-					<div class="my-auto col-6" style="font-size:30px">리뷰 번호 : 1</div>
+					<div class="my-auto col-6" style="font-size:30px">Q&A 번호 : 1</div>
 					<div class="my-auto col-6" style="font-size:30px"><div style="text-align:right">작성자: 태희</div></div>
 				</div>
 				<div class="row" style="height:100px; border: 1px solid black">
-					<div class="my-auto col-6" style="font-size:20px"> 리뷰 제목 : 좋아요 ~편하고 예뻐요! </div>
-					<div class="my-auto col-6" style="font-size:20px"><div style="text-align:right"> 리뷰 날짜 : 2022-11-24 </div></div>
+					<div class="my-auto col-6" style="font-size:20px"> 문의 제목 : 질문 </div>
+					<div class="my-auto col-6" style="font-size:20px"><div style="text-align:right"> 문의 날짜 : 2022-11-24 </div></div>
 				</div>
 				<div class="row" style="height:500px; border: 1px solid black">
 					<div class="mt-2 mx-3 row" style="width:100%; font-size:20px">
-						<div class="col-3">
-							<img src="../images/반스_월버_노랑.jpg" width="100%" height="300px"/>
-							<div class="mt-2" style="text-align:center; border-bottom:1px solid black"> 브랜드 : 반스 </div>
-							<div class="mt-2" style="text-align:center; border-bottom:1px solid black"> 상품명 : 월버 </div>
-							<div class="mt-2" style="text-align:center; border-bottom:1px solid black"> 가격 : 9,9000 </div>
-						</div>
-						<div class="col-9">
-							<div class="ml-3">
-								리뷰 내용에 관한 부분입니다. <p>
-								리뷰 이구요 <p>
-							</div>
+						<div class="ml-3">
+							문의 내용에 관한 부분입니다. <p>
 						</div>
 					</div>
 				</div>
 				<div class="row table-dark" style="height:50px; border: 1px solid black">
-					<div class="my-auto col-6" style="font-size:20px"> 평점 : ⭐⭐⭐⭐⭐ </div>
-					<div class="my-auto col-6" style="font-size:20px"><div style="text-align:right"> 댓글 수 (3) </div></div>
+					<div class="my-auto col-6" style="font-size:20px"> 답변 완료 </div>
 				</div>
 				<div class="row" style="height:50px; border-bottom:1px solid black">
 					<ul class="nav nav-tabs">
 						<li class="nav-item"><div style="height:50px">
 							<a class="my-auto col-12" data-toggle="tab" href="#reviewanswer"><img src="../images/word.png" class="p-1" style="height:100%"/></a>
-							<button class="btn btn-dark" data-toggle="modal" data-target="#creative"> 작성 </button>
-							<div class="modal fade" id="creative">
-								<div class="modal-dialog modal-dialog-centered">
-									<div class="modal-content">
-										<!-- Modal Header -->
-										<div class="modal-header">
-											<h4> 댓글 달기 </h4>
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-										</div>
-										
-										<!-- Modal body -->
-										<div class="modal-body">
-											<div>
-												<label> 댓글 제목 </label>
-												<input type="text"/>
-											</div>
-											<div>
-												<label> 댓글 내용 </label>
-												<div style="text-align:center">
-													<textarea placeholder="댓글 내용을 입력해주세요." style="width:400px; height:500px"></textarea>
-												</div>
-											</div>
-										</div>
-										
-										<!-- Modal footer -->
-										<div class="modal-footer">
-											<button type="submit" class="btn bg-warning" data-dismiss="modal">작성</button>
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<button class="btn btn-dark"> 삭제 </button>
 						</div></li>
 					</ul>
 				</div>
@@ -199,25 +143,8 @@
 					<div class="mt-3 tab-pane container fade" id="reviewanswer" style="font-size:20px">
 						<div class="container-fluid">
 							<div class="row py-3" style="border-bottom:1px solid black">
-								<div class="my-auto col-6" style="font-size:20px"> 아이디 : apple </div>
-								<div class="my-auto col-5" style="font-size:20px"><div style="text-align:right"> 여기에 쓰는 리뷰가 맞나요 ^^ </div></div>
-								<div class="my-auto col-1" style="font-size:20px; height:30px">
-									<img onclick="changeimage(this)" src="../images/heart.png" style="height:100%; cursor:pointer"/>
-								</div>
-							</div>
-							<div class="row py-3" style="border-bottom:1px solid black">
-								<div class="my-auto col-6" style="font-size:20px"> 아이디 : b </div>
-								<div class="my-auto col-5" style="font-size:20px"><div style="text-align:right"> 안뇽하세요 </div></div>
-								<div class="my-auto col-1" style="font-size:20px; height:30px">
-									<img onclick="changeimage(this)" src="../images/heart.png" style="height:100%; cursor:pointer"/>
-								</div>
-							</div>
-							<div class="row py-3" style="border-bottom:1px solid black">
-								<div class="my-auto col-6" style="font-size:20px"> 아이디 : c </div>
-								<div class="my-auto col-5" style="font-size:20px"><div style="text-align:right"> 반가워요 </div></div>
-								<div class="my-auto col-1" style="font-size:20px; height:30px">
-									<img onclick="changeimage(this)" src="../images/heart.png" style="height:100%; cursor:pointer"/>
-								</div>
+								<div class="my-auto col-6" style="font-size:20px"> 관리자 </div>
+								<div class="my-auto col-6" style="font-size:20px"><div style="text-align:right"> 질문에 대한 답변 </div></div>
 							</div>
 						</div>
 					</div>
