@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <div id="mainDiv" class="content">
 	<div id="review-list-header"><h1 class="title m-5">내 리뷰 조회</h1></div>

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <div id="mainDiv" class="content">
 	<h1 class="title m-5">주문/배송 조회</h1>
 	<div id="orderhistory">

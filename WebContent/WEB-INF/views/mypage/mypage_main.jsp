@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -144,7 +145,7 @@
 	
 	<body>
 	  <div class="banner d-flex justify-content-between align-items-center">  
-	    <div class="p-2"><a href="home.html" ><img src="../images/sashoes_Logo2.png" style="width:170px; "/></a></div>
+	    <div class="p-2"><a href="home.html" ><img src="../images/sashoes_logo.png" style="width:200px; height: 100px; color:white;"/></a></div>
 	    
 	    <div class="p-2">
 		    <div class="row">
