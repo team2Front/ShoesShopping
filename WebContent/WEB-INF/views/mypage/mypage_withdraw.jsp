@@ -69,7 +69,7 @@
 	
 	<body>
 	  <div class="banner d-flex justify-content-between">  
-	    <div class="p-2"><a href="home.html" ><img src="../images/sashoes_logo.png" style="width:150px; height: 100px"/></a></div>
+	    <div class="p-2"><a href="/shopping/mypage/MainController" ><img src="../resources/images/sashoes_Logo2.png" style="width:170px; "/></a></div>
 	    
 	    <div class="p-2">
 		    <div class="row">
@@ -174,7 +174,7 @@
 					<i class="bi bi-person-circle"></i><span>  환영합니다</span>
 				</div>
 				 <div class="" id="mypageDiv" style="height:45px; text-align:center; padding-top:10px; ">
-					 <a href="mypage_main.html" class="h5" style="color: black; text-decoration: none;"><b>마이 페이지</b></a>
+					 <a href="/shopping/mypage/MainController" class="h5" style="color: black; text-decoration: none;"><b>마이 페이지</b></a>
 				 </div>
 				<div id="mypage_sidemenu">
 					 <a href="/shopping/mypage/MainController" class="list-group-item text-center h7">나의 정보</a>
