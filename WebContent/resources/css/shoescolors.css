@@ -1,0 +1,60 @@
+/* 
+
+
+신발 색상 제공시 사용될 배경색
+
+ */
+ 
+ 
+.red{
+	background-color: red;
+}
+
+
+.orange{
+	background-color: orange;
+}
+
+.yellow{
+	background-color: yellow;
+}
+
+.green{
+	background-color: green;
+}
+
+.blue{
+	background-color: blue;
+}
+
+.lime{
+	background-color: lime;
+}
+
+.navy{
+	background-color: navy;
+}
+
+.purple{
+	background-color: purple;
+}
+
+.pink{
+	background-color: pink;
+}
+
+.brown{
+	background-color: brown;
+}
+
+.black{
+	background-color: black;
+}
+
+.gray{
+	background-color: gray;
+}
+
+.white{
+	background-color: white;
+}

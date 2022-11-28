@@ -1,0 +1,186 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>	
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">		
+		   
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>		
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>		
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+		<script>
+			function changeVaild(id){
+				id.innerHTML = '<h8><span style="color:green">올바른 입력입니다.</span></h8>';
+			}
+			
+			function changeInvaild(id){
+				id.innerHTML = '<h8><span style="color:red">잘못된 입력입니다.</span></h8>';
+			}
+			
+			function handleCheckData(){
+				var result = true;
+				//id검사
+				var uid = document.querySelector("#uid");
+				var uidValue = uid.value;
+				var uidPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
+				var uidTest = uidPattern.test(uidValue);
+				var uiddiv = document.getElementById("uiddiv");
+				if(uidTest){
+	            	changeVaild(uiddiv);
+	            	
+				}else{
+					changeInvaild(uiddiv);
+					result = false;
+				}
+				
+				//Password 유효성 검사 -------------------------------------------------------
+	            //패스워드 검사
+	            var password = document.querySelector("#password");
+				var passwordValue = password.value;
+	            var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/; 
+	            var passwordPatternTest = passwordPattern.test(passwordValue);
+	            var passworddiv = document.getElementById("passworddiv");
+	            if(passwordPatternTest) {
+	            	changeVaild(passworddiv);
+	            } else {
+	            	changeInvaild(passworddiv);
+					result = false;
+	            }
+	            
+	            //전화번호 유효성 검사
+	            var phone = document.querySelector("#phone");
+	            var phoneValue = phone.value;
+	            var phonePattern = /^010-\d{3,4}-\d{4}$/;
+	            var phonePatternTest = phonePattern.test(phoneValue);
+	            var phonediv = document.getElementById("phonediv");
+	            if(phonePatternTest) {
+	            	changeVaild(phonediv);
+	            } else {
+	            	changeInvaild(phonediv);
+					result = false;
+	            }
+	            
+				return result;
+			}
+		</script>
+		
+		<link rel="stylesheet" href="../css/common.css">
+		<link rel="stylesheet" href="../css/productList.css">
+		<link rel="stylesheet" href="../css/joinForm.css">
+		
+	</head>	
+	<body>
+<div class="banner d-flex justify-content-between">  
+	<div class="p-2"><a href="home.html" ><img src="../images/sashoes_logo.png" style="width:150px; height: 100px"/></a></div>
+   
+		<div class="p-2">
+    		<div class="row">
+		    	<input class="search col-10 search-txt" type="text" placeholder="검색어를 입력해 주세요">
+				<button class="search_button col-2 btn-primary" type="submit">찾기</button>
+   			</div>
+		</div>
+  	 <div class="p-2">로그인</div>
+		<div id="navbar">
+ 	</div>
+			<div class="btn-group">
+				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+					MEN
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">남성 운동화</a>
+					<a class="dropdown-item" href="#">남성 스니커즈</a>
+					<a class="dropdown-item" href="#">남성 샌들</a>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+					WOMEN
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">여성 운동화</a>
+					<a class="dropdown-item" href="#">여성 스니커즈</a>
+					<a class="dropdown-item" href="#">여성 샌들</a>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+					KIDS
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">아이 운동화</a>
+					<a class="dropdown-item" href="#">아이 스니커즈</a>
+					<a class="dropdown-item" href="#">아이 샌들</a>
+				</div>
+			</div>	
+		</div>
+		
+		<!-- 여기서부터 조인 페이지=============================================== -->
+		<div id="joinPage-wrap">
+	      <div class="card-header m-2 text-center"><h1>회원가입</h1></div>
+	
+	      <div class="card-body mx-10" >
+	      	<div id="texts" class="my-10">
+	      		<div id="test-head" class="m-10" style="border-bottom-style: solid;">
+		      		<h3 class="p-1" style="border-bottom-style: solid;">약관동의</h3>
+		      		<h5><input id="first" type="checkbox" name="first" value="first" /><label for="first">  전체 약관에 동의합니다</label></h5>
+		      		<h6><input id="second" type="checkbox" name="second" value="second" /><label for="second"><span style="color:red">[필수]</span>  사이트 이용 약관에 동의합니다</label></h6>
+		      		<h6><input id="third" type="checkbox" name="third" value="third" /><label for="third"><span style="color:red">[필수]</span>  개인정보 제공에 동의합니다</label></label></h6>
+	      		</div>
+	      	</div>
+	      	<br>
+	      	
+	        <form id="joinForm" name="joinForm" action="home.html" novalidate>
+	           <div class="form-group form-floating">
+	            <label for="uname">Name</label>
+	            <input type="text" class="form-control" placeholder="홍길동" id="uname" name="uname" />
+	            <small id="unameHelp" class="form-text text-muted">이름을 입력하세요</small>
+	          </div>
+	          
+	          
+	          <div class="form-label form-floating">
+	            <label for="uid">ID</label>
+	            <input type="text" class="form-control" placeholder="Abc123" id="uid" name="uid" />
+	            <small id="uidHelp" class="form-text text-muted">알파벳 대소문자, 숫자를 혼용해서 6자 이상 10장 이하</small>
+	            <div id="uiddiv"></div>
+	          </div>
+	
+	          <div class="form-group form-floating" >
+	            <label for="password">Password</label>
+	            <input type="password" class="form-control" placeholder="Password" id="password" name="password"/>
+	            <small id="passwordHelp" class="form-text text-muted">알파벳 대소문자, 숫자를 혼용해서 8자 이상 15장 이하</small>
+	            <div id="passworddiv"></div>
+	          </div>
+	
+	          <div class="form-group form-floating">
+	            <label for="phone">Phone</label>
+	            <input type="text" class="form-control" placeholder="010-123-1234" id="phone" name=""/>
+	            <small id="phoneHelp" class="form-text text-muted">예) 010-123-1234, 010-1234-1234</small>
+	            <div id="phonediv"></div>
+	          </div>
+	          
+	           <div class="form-group">
+	            <label for="address">Address</label><br>
+	            <!-- <input type="text" class="form-control" id="address" value="서울특별시 마포구..."/> -->
+	            <input type="text" id="postcode" name="zipcode" size="5" readonly>
+				<input type="button" value="우편번호검색" onclick="checkPost()"><br>
+				<input type="text" id="address" name="addr1" size="50" placeholder="주소" readonly><br>
+				<input type="text" id="detailAddress" name="addr2" size="50" placeholder="상세주소">
+	            <small id="addressHelp" class="form-text text-muted">예) 서울특별시 마포구...</small>
+	          </div>
+
+	         
+	          <div class="text-center">
+	          
+	            <input type="submit" class="btn btn-outline-success btn-lg" onclick="return handleCheckData()" value="Join"/>
+	          	 <a href="home.html" type="reset" class="btn btn-outline-warning btn-lg" >Reset</a>
+	          <!-- 	 <input type="reset"class="btn btn-outline-warning btn-lg" value="Reset" /> -->
+	          </div>
+	          
+	          
+	        </form>
+	      </div>
+	    </div>
+	</body>
+</html>
