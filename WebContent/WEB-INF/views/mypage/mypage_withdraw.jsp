@@ -10,8 +10,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-		<link rel="stylesheet" href="../css/common.css">
-		<script src="../javascript/mypage.js"></script>
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<script src="../resources/javascript/mypage.js"></script>
 		<style>
 			#navbar {
 				margin: 0 auto;
@@ -177,10 +177,11 @@
 					 <a href="mypage_main.html" class="h5" style="color: black; text-decoration: none;"><b>마이 페이지</b></a>
 				 </div>
 				<div id="mypage_sidemenu">
-					 <a href="mypage_main.html" class="list-group-item text-center h7">나의 정보</a>
-					 <a href="mypage_orderList.html" class="list-group-item text-center h7">주문 내역</a>
-					 <a href="#" class="list-group-item text-center h7">나의 리뷰</a>
-					 <a href="mypage_withdraw.html" class="list-group-item text-center h7">회원 탈퇴</a>
+					 <a href="/shopping/mypage/MainController" class="list-group-item text-center h7">나의 정보</a>
+					 <a href="/shopping/mypage/MyOrderController" role="button" class="list-group-item text-center h7">주문 내역</a>
+					 <a href="/shopping/mypage/MyReviewController" role="button"  class="list-group-item text-center h7">나의 리뷰</a>
+					 <a href="#" role="button"  class="list-group-item text-center h7">나의 QnA</a>
+					 <a href="/shopping/mypage/MyWithdrawController" class="list-group-item text-center h7">회원 탈퇴</a>
 				 </div>
 				
 			</div>
