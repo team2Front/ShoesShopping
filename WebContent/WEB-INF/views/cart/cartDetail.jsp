@@ -10,9 +10,9 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		
-		<link rel="stylesheet" href="../css/common.css">
-		<link rel="stylesheet" href="../css/productList.css">
-		<link rel="stylesheet" href="../css/shoescolors.css">
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<link rel="stylesheet" href="../resources/css/productList.css">
+		<link rel="stylesheet" href="../resources/css/shoescolors.css">
 		<style>
 			* {
 /*   				border: 1px solid black;  */
@@ -48,7 +48,7 @@
 	</head>
 	<body>
 	  <div class="banner d-flex justify-content-between">  
-	    <div class="p-2"><a href="home.html"><img src="../images/sashoes_logo.png" style="width:150px; margin-top:20px;"/></a></div>
+	    <div class="p-2"><a href="home.html"><img src="../resources/images/sashoes_logo.png" style="width:150px; margin-top:20px;"/></a></div>
 	    
 	    <div class="p-2">
 		    <div class="row">
@@ -149,7 +149,7 @@
  					<div class="card-body">
 	 					<div class="row" style="border-bottom: 1px solid black">
 	 						<input type="checkbox" name="shoes" onclick="select1()" style="zoom:2.0; margin:0px 0px 0px 10px" class="check"/>
-	 							<img src="../images/반스_월버_노랑.jpg" style="width:120px; height:120px; margin:10px"/>
+	 							<img src="../resources/images/반스_월버_노랑.jpg" style="width:120px; height:120px; margin:10px"/>
 	 							<div style="margin:auto 0px; width:250px">
 	 								<div style="margin:2px 10px; font-size:20px;"> 반스-월버 </div>
 	 								<div style="margin:2px 10px; font-size:20px;"> 노랑 </div>
@@ -173,7 +173,7 @@
 	 					</div>
 							<div class="row" style="border-bottom: 1px solid black">
 	 						<input type="checkbox" name="shoes" onclick="select1()" style="zoom:2.0; margin:0px 0px 0px 10px" class="check"/>
-	 							<img src="../images/아디다스_가젤.jpg" style="width:120px; height:120px; margin:10px"/>
+	 							<img src="../resources/images/아디다스_가젤.jpg" style="width:120px; height:120px; margin:10px"/>
 	 							<div style="margin:auto 0px; width:250px">
 	 								<div style="margin:2px 10px; font-size:20px;"> 아디다스-가젤 </div>
 	 								<div style="margin:2px 10px; font-size:20px;"> 검정 </div>
@@ -197,7 +197,7 @@
 	 					</div>
 						<div class="row" style="border-bottom: 1px solid black">
 	 						<input type="checkbox" name="shoes" onclick="select1()" style="zoom:2.0; margin:0px 0px 0px 10px" class="check"/>
-	 							<img src="../images/아디다스_슈퍼스타_82.jpg" style="width:120px; height:120px; margin:10px"/>
+	 							<img src="../resources/images/아디다스_슈퍼스타_82.jpg" style="width:120px; height:120px; margin:10px"/>
 	 							<div style="margin:auto 0px; width:250px">
 	 								<div style="margin:2px 10px; font-size:20px;"> 아디다스-슈퍼스타-82 </div>
 	 								<div style="margin:2px 10px; font-size:20px;"> 노랑 </div>

@@ -33,15 +33,15 @@
 		 }
 		 
 		</style>
-		<link rel="stylesheet" href="../css/shoescolors.css">
-		<link rel="stylesheet" href="../css/common.css">
-		<link rel="stylesheet" href="../css/customCheckbox.css">
-		<link rel="stylesheet" href="../css/customRadio.css">
+		<link rel="stylesheet" href="../resources/css/shoescolors.css">
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<link rel="stylesheet" href="../resources/css/customCheckbox.css">
+		<link rel="stylesheet" href="../resources/css/customRadio.css">
 		
 	</head>
 	<body>
 	  <div class="banner d-flex justify-content-between">  
-	    <div class="p-2"><a href="home.html" ><img src="../images/sashoes_logo.png" style="width:150px; height: 100px"/></a></div>
+	    <div class="p-2"><a href="home.html" ><img src="../resources/images/sashoes_logo.png" style="width:150px; height: 100px"/></a></div>
 	    
 	    <div class="p-2">
 		    <div class="row">
@@ -61,11 +61,6 @@
 			        <div class="modal-header">
 			          <h4 class="modal-title">사진제목</h4>
 			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			        </div>
-			        
-			        <!-- Modal body -->
-			        <div class="modal-body">
-			            <img class="card-img-top rounded img-fluid" src="images/research/research-1.jpg">
 			        </div>
 			        
 			        <!-- Modal footer -->
@@ -88,12 +83,7 @@
 			          <h4 class="modal-title">사진제목</h4>
 			          <button type="button" class="close" data-dismiss="modal">&times;</button>
 			        </div>
-			        
-			        <!-- Modal body -->
-			        <div class="modal-body">
-			            <img class="card-img-top rounded img-fluid" src="images/research/research-1.jpg">
-			        </div>
-			        
+			       			        
 			        <!-- Modal footer -->
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -162,21 +152,21 @@
 						  </thead>
 						  <tbody>
 						    <tr>
-						      <th><img src="../images/shoes1.png" style="width: 100px; height: 100px;"></th>
+						      <th><img src="../resources/images/shoes1.png" style="width: 100px; height: 100px;"></th>
 						      <th>아키클래식1</th>
 						      <td>수량: 1</td>
 						      <td>색상: beige</td>
 						      <td>사이즈 : 220</td>
 						    </tr>
 						    <tr>
-						      <th><img src="../images/shoes1.png" style="width: 100px; height: 100px;"></th>
+						      <th><img src="../resources/images/shoes1.png" style="width: 100px; height: 100px;"></th>
 						      <th>아키클래식2</th>
 						      <td>수량: 1</td>
 						      <td>색상: black</td>
 						      <td>사이즈 : 270</td>
 						    </tr>
 						    <tr>
-						      <th><img src="../images/shoes1.png" style="width: 100px; height: 100px;"></th>
+						      <th><img src="../resources/images/shoes1.png" style="width: 100px; height: 100px;"></th>
 						      <th>아키클래식2</th>
 						      <td>수량: 1</td>
 						      <td>색상: blue</td>
