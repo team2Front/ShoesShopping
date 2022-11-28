@@ -14,27 +14,27 @@
 		<script>
 			function change1() {
 				let img = document.querySelector("#img1");
-				img.src = "../images/bans/반스_월버_1.png";
+				img.src = "../resources/images/bans/반스_월버_1.png";
 			}
 			
 			function change2() {
 				let img = document.querySelector("#img1");
-				img.src = "../images/bans/반스_월버_2.png";
+				img.src = "../resources/images/bans/반스_월버_2.png";
 			}
 			
 			function change3() {
 				let img = document.querySelector("#img1");
-				img.src = "../images/bans/반스_월버_3.png";
+				img.src = "../resources/images/bans/반스_월버_3.png";
 			}
 			
 			function change4() {
 				let img = document.querySelector("#img1");
-				img.src = "../images/bans/반스_월버_4.png";
+				img.src = "../resources/images/bans/반스_월버_4.png";
 			}
 			
 			function change5() {
 				let img = document.querySelector("#img1	");
-				img.src = "../images/bans/반스_월버_5.png";
+				img.src = "../resources/images/bans/반스_월버_5.png";
 			}
 			
 		</script>
@@ -66,10 +66,10 @@
 		 
 		 
 		</style>
-		<link rel="stylesheet" href="../css/shoescolors.css">
-		<link rel="stylesheet" href="../css/common.css">
-		<link rel="stylesheet" href="../css/customCheckbox.css">
-		<link rel="stylesheet" href="../css/customRadio.css">
+		<link rel="stylesheet" href="../resources/css/shoescolors.css">
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<link rel="stylesheet" href="../resources/css/customCheckbox.css">
+		<link rel="stylesheet" href="../resources/css/customRadio.css">
 		
 		<script>
 			$(document).ready(function() {
@@ -182,19 +182,19 @@
 				<div id="img1" class="carousel slide col-md-6" data-ride="carousel" data-interval="0">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img id="img1" src="../images/bans/반스_월버_1.png" style="width:500px; height:500px;" class="m-4"/>
+							<img id="img1" src="../resources/images/bans/반스_월버_1.png" style="width:500px; height:500px;" class="m-4"/>
 						</div>
 						<div class="carousel-item">
-							<img id="img1" src="../images/bans/반스_월버_2.png" style="width:500px; height:500px;" class="m-4"/>
+							<img id="img1" src="../resources/images/bans/반스_월버_2.png" style="width:500px; height:500px;" class="m-4"/>
 						</div>
 						<div class="carousel-item">
-							<img id="img1" src="../images/bans/반스_월버_3.png" style="width:500px; height:500px;" class="m-4"/>
+							<img id="img1" src="../resources/images/bans/반스_월버_3.png" style="width:500px; height:500px;" class="m-4"/>
 						</div>
 						<div class="carousel-item">
-							<img id="img1" src="../images/bans/반스_월버_4.png" style="width:500px; height:500px;" class="m-4"/>
+							<img id="img1" src="../resources/images/bans/반스_월버_4.png" style="width:500px; height:500px;" class="m-4"/>
 						</div>
 						<div class="carousel-item">
-							<img id="img1" src="../images/bans/반스_월버_5.png" style="width:500px; height:500px;" class="m-4"/>
+							<img id="img1" src="../resources/images/bans/반스_월버_5.png" style="width:500px; height:500px;" class="m-4"/>
 						</div>
 					</div>
 					<a class="carousel-control-prev" href="#img1" data-slide="prev">
@@ -204,11 +204,11 @@
 						<span class="carousel-control-next-icon"></span>
 					</a>
 					<div class="carousel">
-						<img data-target="#img1" data-slide-to="0" onclick="change1()" src="../images/bans/반스_월버_1.png" style="width:90px; height:90px;"class="active m-1 ml-4"/>
-						<img data-target="#img1" data-slide-to="1" onclick="change2()" src="../images/bans/반스_월버_2.png" style="width:90px; height:90px;"class="m-1"/>
-						<img data-target="#img1" data-slide-to="2" onclick="change3()" src="../images/bans/반스_월버_3.png" style="width:90px; height:90px;"class="m-1"/>
-						<img data-target="#img1" data-slide-to="3" onclick="change4()" src="../images/bans/반스_월버_4.png" style="width:90px; height:90px;"class="m-1"/>
-						<img data-target="#img1" data-slide-to="4" onclick="change5()" src="../images/bans/반스_월버_5.png" style="width:90px; height:90px;"class="m-1"/>
+						<img data-target="#img1" data-slide-to="0" onclick="change1()" src="../resources/images/bans/반스_월버_1.png" style="width:90px; height:90px;"class="active m-1 ml-4"/>
+						<img data-target="#img1" data-slide-to="1" onclick="change2()" src="../resources/images/bans/반스_월버_2.png" style="width:90px; height:90px;"class="m-1"/>
+						<img data-target="#img1" data-slide-to="2" onclick="change3()" src="../resources/images/bans/반스_월버_3.png" style="width:90px; height:90px;"class="m-1"/>
+						<img data-target="#img1" data-slide-to="3" onclick="change4()" src="../resources/images/bans/반스_월버_4.png" style="width:90px; height:90px;"class="m-1"/>
+						<img data-target="#img1" data-slide-to="4" onclick="change5()" src="../resources/images/bans/반스_월버_5.png" style="width:90px; height:90px;"class="m-1"/>
 					</div>
 				</div>
 				
@@ -344,7 +344,7 @@
 									  </div>
 									  <div class="modal-footer">
 									    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-									    <a type="button" class="btn btn-primary"  href="orderForm.html">구매하기</a>
+									    <a type="button" class="btn btn-primary"  href="/shopping/order/OrderController">구매하기</a>
 									  </div>
 									</div>
 								</div>
@@ -367,7 +367,7 @@
 									    <p>장바구니에 성공적으로 담겼습니다 !</p>
 									  </div>
 									  <div class="modal-footer">
-									    <a type="button" class="btn btn-primary"  href="cartDetail.html">장바구니 보러가기</a>
+									    <a type="button" class="btn btn-primary"  href="/shopping/cart/CartController">장바구니 보러가기</a>
 									  </div>
 									</div>
 								</div>
@@ -392,11 +392,11 @@
 			<div class="tab-content">
 				<div class="tab-pane active container-fluid" id="shoes-detail">
 					<div class="m-4" style="text-align:center">
-						<img src="../images/bans/정보_1.png" style="width:900px; height:400px; margin:0 auto;"class="active m-1 ml-4"/>
-						<img src="../images/bans/정보_2.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
-						<img src="../images/bans/정보3.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
-						<img src="../images/bans/정보4.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
-						<img src="../images/bans/정보5.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
+						<img src="../resources/images/bans/정보_1.png" style="width:900px; height:400px; margin:0 auto;"class="active m-1 ml-4"/>
+						<img src="../resources/images/bans/정보_2.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
+						<img src="../resources/images/bans/정보3.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
+						<img src="../resources/images/bans/정보4.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
+						<img src="../resources/images/bans/정보5.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
 					</div>
 				</div>
 				<div class="tab-pane container-fluid" id="shoes-review">

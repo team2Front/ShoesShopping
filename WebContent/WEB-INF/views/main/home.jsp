@@ -10,9 +10,9 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		
-		<link rel="stylesheet" href="../css/common.css">
-		<link rel="stylesheet" href="../css/productList.css">
-		<link rel="stylesheet" href="../css/shoescolors.css">
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<link rel="stylesheet" href="../resources/css/productList.css">
+		<link rel="stylesheet" href="../resources/css/shoescolors.css">
 		
 	</head>
 	<body>
@@ -26,8 +26,8 @@
 		    </div>
 		</div>
 		
-	    <div  style="text-align: center; padding-top: 35px;"><a href="joinForm.html">회원가입</a></div>
-	    <div  style="text-align: center; padding-top: 35px;"><a href="mypage_main.html">마이페이지</a></div>
+	    <div  style="text-align: center; padding-top: 35px;"><a href="/shopping/user/JoinFormController">회원가입</a></div>
+	    <div  style="text-align: center; padding-top: 35px;"><a href="/shopping/mypage/MainController">마이페이지</a></div>
 	    <div  style="text-align: center; padding-top: 35px;">
 	    <!--------------------------------------------------------- 로그인 창 --------------------------------------->
 	    	<a href="#" data-toggle="modal" data-target="#myLogin">로그인</a>
@@ -219,7 +219,7 @@
 				   <div class="d-flex justify-content-between flex-wrap" style="width:1000px;" >
 				        <div class="card">
 				           <div class="card-head">
-							  <img class="card-img-top" src="../images/반스_월버_노랑.jpg">
+							  <img class="card-img-top" src="../resources/images/반스_월버_노랑.jpg">
 							</div>
 							<div class="card-body">
 							    <p class="card-brand m-0">반스</p>
@@ -228,12 +228,12 @@
 							    <span class="sale" style="color:red">50000원</span>
 							    </p>
 							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
-							    <a href="productDetail.html" class="btn btn-primary">자세히보기</a>
+							    <a href="/shopping/product/ProductController" class="btn btn-primary">자세히보기</a>
 							 </div>
 						</div>
 				        <div class="card">
 				           <div class="card-head">
-							  <img class="card-img-top" src="../images/아디다스_가젤.jpg">
+							  <img class="card-img-top" src="../resources/images/아디다스_가젤.jpg">
 							</div>
 						  	<div class="card-body">
 						  		<p class="card-brand m-0">아디다스</p>
@@ -241,14 +241,14 @@
 							    <p class="card-text">
 							    <span class="sale" style="color:red">70000원</span>
 							    </p>
-	  							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+	  							    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 							    <a href="#" class="btn btn-primary">자세히보기</a>
 						  	</div>
 				        </div>
 				        
 				        <div class="card">
 				           <div class="card-head">
-							  <img class="card-img-top" src="../images/아디다스_그랜드코트베이스_검정.jpg">
+							  <img class="card-img-top" src="../resources/images/아디다스_그랜드코트베이스_검정.jpg">
 							</div>
 							<div class="card-body">
 								<p class="card-brand m-0">아디다스</p>
@@ -262,7 +262,7 @@
 						</div>
 				        <div class="card">
 				           <div class="card-head">
-							  <img class="card-img-top" src="../images/아디다스_스탠스미스_하양.jpg">
+							  <img class="card-img-top" src="../resources/images/아디다스_스탠스미스_하양.jpg">
 							</div>
 						  	<div class="card-body">
 						  		<p class="card-brand m-0">아디다스</p>
@@ -277,7 +277,7 @@
 				       
 				        <div class="card">
 				           <div class="card-head">
-							  <img class="card-img-top" src="../images/아디다스_퍼피렛_검정.jpg">
+							  <img class="card-img-top" src="../resources/images/아디다스_퍼피렛_검정.jpg">
 							</div>
 						  <div class="card-body">
 						  	<p class="card-brand m-0">아디다스</p>
@@ -285,13 +285,13 @@
 						    <p class="card-text">
 						    <span class="sale" style="color:red">36400원</span>
 						    </p>
-						    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 						    <a href="#" class="btn btn-primary">자세히보기</a>
 						  </div>
 						</div>
 						<div class="card">
 				           <div class="card-head">
-							  <img class="card-img-top" src="../images/아디다스_퍼피렛_하양.jpg">
+							  <img class="card-img-top" src="../resources/images/아디다스_퍼피렛_하양.jpg">
 							</div>
 						  <div class="card-body">
 						  	<p class="card-brand m-0">아디다스</p>
@@ -299,13 +299,13 @@
 						    <p class="card-text">
 						    <span class="sale" style="color:red">37400원</span>
 						    </p>
-						    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 						    <a href="#" class="btn btn-primary">자세히보기</a>
 						  </div>
 				        </div>
 				        <div class="card">
 				           <div class="card-head">
-							  <img class="card-img-top" src="../images/컨버스_척테일러올스타70.jpg">
+							  <img class="card-img-top" src="../resources/images/컨버스_척테일러올스타70.jpg">
 							</div>
 						  <div class="card-body">
 						  	<p class="card-brand m-0">컨버스 </p>
@@ -313,13 +313,13 @@
 						    <p class="card-text">
 						    <span class="sale" style="color:red">74400원</span>
 						    </p>
-						    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 						    <a href="#" class="btn btn-primary">자세히보기</a>
 						  </div>
 				        </div>
 				        <div class="card">
 				           <div class="card-head">
-							  <img class="card-img-top" src="../images/컨버스_척테일러올스타코어_검정.jpg">
+							  <img class="card-img-top" src="../resources/images/컨버스_척테일러올스타코어_검정.jpg">
 							</div>
 						  <div class="card-body">
 						  	<p class="card-brand m-0">컨버스 </p>
@@ -327,14 +327,14 @@
 						    <p class="card-text">
 						    <span class="sale" style="color:red">74700원</span>
 						    </p>
-						    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 						    <a href="#" class="btn btn-primary">자세히보기</a>
 						  </div>
 				        </div>
 				       
 				         <div class="card">
 				           <div class="card-head">
-							  <img class="card-img-top" src="../images/아디다스_슈퍼스타_82.jpg">
+							  <img class="card-img-top" src="../resources/images/아디다스_슈퍼스타_82.jpg">
 							</div>
 						  <div class="card-body">
 						  	<p class="card-brand m-0">아디다스 </p>
@@ -342,7 +342,7 @@
 						    <p class="card-text">
 						    <span class="sale" style="color:red">65000원</span>
 						    </p>
-						    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 						    <a href="#" class="btn btn-primary">자세히보기</a>
 						  </div>
 				        </div>

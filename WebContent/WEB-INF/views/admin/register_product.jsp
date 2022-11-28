@@ -11,10 +11,11 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		
-		<!-- 추가코드 -->
-		<link rel="stylesheet" href="../css/customCheckbox.css">
-		<link rel="stylesheet" href="../css/common.css">
-		<link rel="stylesheet" href="../css/shoescolors.css">
+		<!-- 공통 css -->
+		<link rel="stylesheet" href="../resources/css/customCheckbox.css">
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<link rel="stylesheet" href="../resources/css/shoescolors.css">
+		<!-- 구글폰트 -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
@@ -23,7 +24,7 @@
 	<body>
 		<div id="banner">
 			<div style="width:500px; margin:0px auto;">
-    			<a href="admin_home.html"><img src="../images/sashoes_logo.png" style="width:250px; height:100px;"/></a>
+    			<a href="/shopping/admin/HomeController"><img src="../images/sashoes_logo.png" style="width:250px; height:100px;"/></a>
    				<span class="banner-font p-2">관리자</span>
 			</div>	  	
 	  	</div>

@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "admin.Home", urlPatterns="/admin/Home")
-public class Home extends HttpServlet {
+@WebServlet(name = "admin.HomeController", urlPatterns="/admin/HomeController")
+public class HomeController extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/html/admin_home.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/home.jsp").forward(request, response);
 	}
 
 }

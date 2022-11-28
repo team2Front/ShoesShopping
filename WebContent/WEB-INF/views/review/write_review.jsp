@@ -10,7 +10,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-		<link rel="stylesheet" href="../css/common.css">
+		<link rel="stylesheet" href="../resources/css/common.css">
 		<script>
 			
 		</script>
@@ -120,7 +120,7 @@
 	
 	<body>
 	  <div class="banner d-flex justify-content-between">  
-	    <div class="p-2"><a href="home.html" ><img src="../images/sashoes_logo.png" style="width:150px; height: 100px"/></a></div>
+	    <div class="p-2"><a href="home.html" ><img src="../resources/images/sashoes_logo.png" style="width:150px; height: 100px"/></a></div>
 	    
 	    <div class="p-2">
 		    <div class="row">
@@ -144,7 +144,7 @@
 			        
 			        <!-- Modal body -->
 			        <div class="modal-body">
-			            <img class="card-img-top rounded img-fluid" src="images/research/research-1.jpg">
+			        	
 			        </div>
 			        
 			        <!-- Modal footer -->
@@ -170,7 +170,7 @@
 			        
 			        <!-- Modal body -->
 			        <div class="modal-body">
-			            <img class="card-img-top rounded img-fluid" src="images/research/research-1.jpg">
+			        	
 			        </div>
 			        
 			        <!-- Modal footer -->
@@ -185,7 +185,7 @@
 	  </div>
 	<!-- navbar -->
 	<div id="navbar" class="shadow-sm">
-		<a href="home.html" ><img src="../images/sashoes_logo.png" style="width:100px"/></a>
+		<a href="home.html" ><img src="../resources/images/sashoes_logo.png" style="width:100px"/></a>
 		<div class="btn-group pl-10">
 			<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
 				MEN
@@ -264,7 +264,7 @@
 					      <tr>
 					        <td colspan="2" >
 					        <div class="image-block d-flex justify-content-left" style="width:800px; margin: 20px auto 20px auto;">
-					        	<img src="../images/아디다스_가젤.jpg"/>
+					        	<img src="../resources/images/아디다스_가젤.jpg"/>
 					        	<ul class="info">
 									<li class="brand">아디다스</li>
 									<li class="name">가젤</li>
