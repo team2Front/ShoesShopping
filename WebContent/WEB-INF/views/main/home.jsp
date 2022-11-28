@@ -26,8 +26,8 @@
 		    </div>
 		</div>
 		
-	    <div  style="text-align: center; padding-top: 35px;"><a href="joinForm.html">회원가입</a></div>
-	    <div  style="text-align: center; padding-top: 35px;"><a href="mypage_main.html">마이페이지</a></div>
+	    <div  style="text-align: center; padding-top: 35px;"><a href="/shopping/user/JoinFormController">회원가입</a></div>
+	    <div  style="text-align: center; padding-top: 35px;"><a href="/shopping/mypage/MainController">마이페이지</a></div>
 	    <div  style="text-align: center; padding-top: 35px;">
 	    <!--------------------------------------------------------- 로그인 창 --------------------------------------->
 	    	<a href="#" data-toggle="modal" data-target="#myLogin">로그인</a>
@@ -228,7 +228,7 @@
 							    <span class="sale" style="color:red">50000원</span>
 							    </p>
 							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
-							    <a href="productDetail.html" class="btn btn-primary">자세히보기</a>
+							    <a href="/shopping/product/ProductController" class="btn btn-primary">자세히보기</a>
 							 </div>
 						</div>
 				        <div class="card">

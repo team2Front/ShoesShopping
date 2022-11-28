@@ -219,7 +219,7 @@
 						    <span class="sale" style="color:red">50000원</span>
 						    </p>
 						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
-						    <a href="productDetail.html" class="btn btn-primary">자세히보기</a>
+						    <a href="/shopping/product/ProductController.html" class="btn btn-primary">자세히보기</a>
 						 </div>
 					</div>
 			        <div class="card">
