@@ -15,9 +15,9 @@
 
 #adminButton button {
 	font-weight: bold;
-	border: 1px solid Indigo;
-	color: Indigo;
-	width:150px;
+	color: DarkSlateBlue;
+	width:115px;
+	margin: 0px 2px;
 }
 
 .banner {
