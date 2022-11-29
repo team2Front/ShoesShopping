@@ -4,16 +4,23 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>	
+		<title>Insert title here</title>
+		<!-- 부트스트랩 -->	
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">		
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		
+		<!-- resource/css 링크 -->
 		<link rel="stylesheet" href="../resources/css/common.css">
 		<link rel="stylesheet" href="../resources/css/productList.css">
 		<link rel="stylesheet" href="../resources/css/shoescolors.css">
 		
+		<!-- font 링크 -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	
 	<script>
@@ -30,16 +37,13 @@
 	
 	<body>
 		<!-- 배너창 -->
-	    <div class="banner d-flex justify-content-between">  
-	    	<div><img src="../resources/images/sashoes_logo.png" style="width:150px;"/></div>
-	    
-	    	<div style="text-align: center; width:600px; font-size: 50px;"><b>관리자 전용</b></div>
-
-		    <div style="text-align: center; width:300px;">
-		    	<a href="mypage_main.html">마이페이지</a>
-		    	<button id="logout" class="btn btn-secondary mx-5">로그아웃</button>
-	    	</div>
-				
+	    <div id ="adminBanner" class="d-flex align-items-center">
+    		<div class="adminLogo">
+   				<a href="/shopping/admin/HomeController"><img src="../resources/images/sashoes_logo.png"/></a>
+			</div>	
+			<div class="adminBanner-font p-2" style="white-space:nowrap;">관리자</div>
+			
+	    	<div class="logoutButton"><button id="logout" class="btn btn-secondary btn-sm mx-5" style="width:90px;">로그아웃</button></div>
 	    </div>
 	  	
 	  	<!-- 메뉴바 -->
@@ -210,7 +214,7 @@
 				<div class="d-flex justify-content-between flex-wrap" style="width:1000px;" >
 			        <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/반스_월버_노랑.jpg">
+						  <img class="card-img-top" src="../resources/images/반스_월버_노랑.jpg">
 						</div>
 						<div class="card-body">
 						    <p class="card-brand m-0">반스</p>
@@ -224,7 +228,7 @@
 					</div>
 			        <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/아디다스_가젤.jpg">
+						  <img class="card-img-top" src="../resources/images/아디다스_가젤.jpg">
 						</div>
 					  	<div class="card-body">
 					  		<p class="card-brand m-0">아디다스</p>
@@ -269,7 +273,7 @@
 			       
 			        <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/아디다스_퍼피렛_검정.jpg">
+						  <img class="card-img-top" src="../resources/images/아디다스_퍼피렛_검정.jpg">
 						</div>
 					  <div class="card-body">
 					  	<p class="card-brand m-0">아디다스</p>
@@ -283,7 +287,7 @@
 					</div>
 					<div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/아디다스_퍼피렛_하양.jpg">
+						  <img class="card-img-top" src="../resources/images/아디다스_퍼피렛_하양.jpg">
 						</div>
 					  <div class="card-body">
 					  	<p class="card-brand m-0">아디다스</p>
@@ -326,7 +330,7 @@
 			       
 			         <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/아디다스_슈퍼스타_82.jpg">
+						  <img class="card-img-top" src="../resource/images/아디다스_슈퍼스타_82.jpg">
 						</div>
 					  <div class="card-body">
 					  	<p class="card-brand m-0">아디다스 </p>

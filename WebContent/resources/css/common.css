@@ -13,13 +13,6 @@
 	z-index:20;
 }
 
-#adminButton button {
-	font-weight: bold;
-	border: 1px solid Indigo;
-	color: Indigo;
-	width:150px;
-}
-
 .banner {
 	margin:0 auto;
 	background-color:#343a40;
@@ -30,6 +23,7 @@
 	z-index:20;
 	height:100px;
 }
+
 
 .banner > img {
 	filter: contrast(200%);	
@@ -57,7 +51,6 @@
 	padding-left : 100px;
 	padding-right : 100px;
 }
-
 
 
 .modal-backdrop {
@@ -128,5 +121,44 @@
 .size-btn:focus {
 	outline: 1px !important;
 	outline-color: red !important;
-
 }
+
+
+/* ================== 관리자 ================== */
+#adminBanner {
+	background-image: url("../images/banner.png");
+	background-size: cover;
+	position: sticky;
+	height: 100px;
+	top: 0;
+	z-index:20;
+}
+
+.adminLogo img {
+	width:250px; 
+	height:100px;
+	margin-left: 300px;
+	margin-right: 70px;
+}
+
+.logoutButton {
+	margin-left: 500px;
+}
+
+.adminBanner-font {
+	font-family: 'Do Hyeon', serif;
+	font-weight: 500;
+	font-size: 70px;
+}
+
+#adminButton button {
+	font-weight: bold;
+	border: 1px solid black;
+	color: black;
+	width:150px;
+}
+
+#adminMain {
+	width: 1000px;
+}
+

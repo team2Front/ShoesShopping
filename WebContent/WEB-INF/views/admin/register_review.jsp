@@ -11,25 +11,26 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		
-		<!-- 추가코드 -->
+		<!-- resource/css 링크 -->
 		<link rel="stylesheet" href="../resources/css/customCheckbox.css">
 		<link rel="stylesheet" href="../resources/css/common.css">
 		<link rel="stylesheet" href="../resources/css/shoescolors.css">
+		
+		<!-- font 링크 -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		
 	</head>
 	<body>
-		<!-- 배너 -->
-		<div id="banner">
-			<div style="width:500px; margin:0px auto;">
-    			<a href="/shopping/admin/HomeController"><img src="../resources/images/sashoes_logo.png" style="width:250px; height:100px;"/></a>
-   				<span class="banner-font p-2">관리자</span>
-			</div>	  	
-	  	</div>
-
+		<!-- 배너부분 -->
+	    <div id ="adminBanner" class="d-flex align-items-center">
+    		<div class="adminLogo">
+   				<a href="/shopping/admin/HomeController"><img src="../resources/images/sashoes_logo.png"/></a>
+			</div>	
+			<div class="adminBanner-font p-2" style="white-space:nowrap;">관리자</div>
+	    </div>
+	  	
 		<!-- 메인부분 -->
 		<div id="mainDiv" class="content">
 			<div id="review-list-header"><h1 class="title m-5">리뷰 조회</h1></div>
