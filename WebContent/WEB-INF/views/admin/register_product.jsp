@@ -29,7 +29,7 @@
 			</div>	  	
 	  	</div>
 	  	
-	    <div id="wrapper" class="card">
+	    <div class="card mx-auto" style="width:1000px">
 	      <div class="card-header">상품등록</div>
 	      <div class="card-body">
 	        <form id="pnameForm" name="pnameForm" action="#" onsubmit="handleCheckData()" novalidate>
@@ -44,70 +44,70 @@
 	            <input type="text" class="form-control" id="price" name="price" value="(ex) 129000"/>
 	          </div>
 	
-       		<div class="cbtn-group btn-group" data-toggle="buttons" style="width:1100px;">
+       		<div class="cbtn-group btn-group" data-toggle="buttons" style="width:800px;">
        			<label for="psize" class="mx-2 my-2">사이즈</label>
        			<div class="form-check">
-					<label class="cbtn btn btn-info" style="width:75px; height:40px; margin:3px auto;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px; margin:3px auto;">
 						220
 						<input class="psize" type="checkbox" autocomplete="off" checked>
 						<i class="fa fa-check"></i>
 					</label>
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						225
 						<input class="psize" type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						230
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						235
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						240
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						245
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						250
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						255
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						260
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						265
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						270
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						275
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
 					</label>			
-					<label class="cbtn btn btn-info" style="width:75px; height:40px;">
+					<label class="cbtn btn btn-secondary" style="width:75px; height:40px;">
 						280
 						<input type="checkbox" autocomplete="off">
 						<i class="fa fa-check"></i>
