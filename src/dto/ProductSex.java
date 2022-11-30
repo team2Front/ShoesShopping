@@ -1,4 +1,4 @@
-package controller.dto;
+package dto;
 
 public enum ProductSex {
 	FEMALE, MALE, ALL;
