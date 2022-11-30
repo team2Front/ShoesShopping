@@ -47,9 +47,9 @@
 	    </div>
 	  	
 	  	<!-- 메뉴바 -->
-		<div id="navbar" class="shadow-sm d-flex">
+		<div id="adminNavbar" class="shadow-sm d-flex align-items-center">
 			<div class="btn-group">
-				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+				<button id="draopdownBtn" type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="margin-left: 150px;">
 					MEN
 				</button>
 				<div class="dropdown-menu">
@@ -59,7 +59,7 @@
 				</div>
 			</div>
 			<div class="btn-group">
-				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+				<button id="draopdownBtn" type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
 					WOMEN
 				</button>
 				<div class="dropdown-menu">
@@ -69,7 +69,7 @@
 				</div>
 			</div>
 			<div class="btn-group">
-				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+				<button id="draopdownBtn" type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
 					KIDS
 				</button>
 				<div class="dropdown-menu">
@@ -80,18 +80,18 @@
 			</div>	
 			
 			<!-- 관리자 버튼(상품등록/관리자등록/QnA/Review) -->
-			<div id="adminButton"> 
-				<button type="button" class="btn mt-1 ml-4" onclick="location.href='/shopping/admin/Register_ProductController'">상품 등록</button>
+			<div id="adminButton" style="margin-left: 150px;"> 
+				<button type="button" class="btn btn-warning btn-sm mt-1 ml-4" onclick="location.href='/shopping/admin/Register_ProductController'">상품 등록</button>
 			</div>
 			<div id="adminButton"> 
-				<button type="button" class="btn mt-1 ml-4" onclick="location.href='/shopping/admin/Register_NewAdminController'">관리자 등록</button>
+				<button type="button" class="btn btn-warning btn-sm mt-1 ml-4" onclick="location.href='/shopping/admin/Register_NewAdminController'">관리자 등록</button>
 			</div>
 			<div id="adminButton"> 
-				<button type="button" class="btn mt-1 ml-4" onclick="location.href='/shopping/admin/Register_ReviewController'">리뷰</button>
+				<button type="button" class="btn btn-warning btn-sm mt-1 ml-4" onclick="location.href='/shopping/admin/Register_ReviewController'">리뷰</button>
 				<!-- <a role="button" onclick="requestAdminReview()" class="list-group-item text-center h7">리뷰</a> -->
 			</div>
 			<div id="adminButton"> 
-				<button type="button" class="btn mt-1 ml-4" onclick="location.href='register_admin.html'">QnA</button>
+				<button type="button" class="btn btn-warning btn-sm mt-1 ml-4" onclick="location.href='register_admin.html'">QnA</button>
 			</div>
 		</div>
 		

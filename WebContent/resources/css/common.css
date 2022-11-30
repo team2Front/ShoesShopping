@@ -124,7 +124,7 @@
 }
 
 
-/* ================== 관리자 ================== */
+/* ***********************************    관리자    ************************************** */
 #adminBanner {
 	background-image: url("../images/banner.png");
 	background-size: cover;
@@ -151,11 +151,21 @@
 	font-size: 70px;
 }
 
+#adminNavbar {
+	background-color: #343a40;
+	height: 50px;
+	position: sticky;
+	top: 100px;
+	z-index:20;
+}
+
+#draopdownBtn {
+	color:white;
+}
+
 #adminButton button {
 	font-weight: bold;
-	border: 1px solid black;
-	color: black;
-	width:150px;
+	white-space: nowrap;
 }
 
 #adminMain {
