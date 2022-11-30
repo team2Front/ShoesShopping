@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Color;
-import provider.ConnectionProvider;
+import util.ConnectionProvider;
 
 public class ProductAndColorDao {
 	private static ProductAndColorDao productAndColorDao = new ProductAndColorDao();

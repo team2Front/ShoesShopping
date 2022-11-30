@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.dto.PagingVo;
 import domain.OrderDetailDto;
 import domain.Orders;
-import provider.ConnectionProvider;
+import util.ConnectionProvider;
+import util.PagingVo;
 
 public class OrderDao {
 	private static PreparedStatement pstmt;

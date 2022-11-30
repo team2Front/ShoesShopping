@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.dto.PagingVo;
-import controller.dto.ProductList;
-import provider.ConnectionProvider;
+import dto.ProductList;
+import util.ConnectionProvider;
+import util.PagingVo;
 
 public class PfilteringDao {
 	//싱글톤

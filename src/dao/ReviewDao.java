@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.dto.PagingVo;
-import controller.dto.RReply;
-import controller.dto.ReviewList;
 import domain.Product;
 import domain.Review;
-import provider.ConnectionProvider;
+import dto.RReply;
+import dto.ReviewList;
 import service.ProductService;
+import util.ConnectionProvider;
+import util.PagingVo;
 
 public class ReviewDao {
 

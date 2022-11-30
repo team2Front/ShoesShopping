@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import controller.dto.PagingVo;
-import controller.dto.ReviewList;
 import dao.ReviewDao;
 import domain.Review;
+import dto.ReviewList;
+import util.PagingVo;
 
 public class ReviewService {
    private static ReviewService reviewService = new ReviewService();

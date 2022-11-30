@@ -1,19 +1,19 @@
 package dao;
 
-import java.sql.Connection; 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.dto.PagingVo;
-import controller.dto.ProductList;
-import controller.dto.RegisterProduct;
 import domain.Product;
-import provider.ConnectionProvider;
+import dto.ProductList;
+import dto.RegisterProduct;
 import service.ProductAndColorService;
 import service.ProductAndSizeService;
+import util.ConnectionProvider;
+import util.PagingVo;
 
 public class ProductDao {
 	private static ProductDao productDao = new ProductDao();

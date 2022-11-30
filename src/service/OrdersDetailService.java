@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import controller.dto.OrderDto;
 import dao.OrderDetailDao;
 import domain.CartDetail;
 import domain.OrderDetailDto;
 import domain.Product;
-import provider.ConnectionProvider;
+import dto.OrderDto;
+import util.ConnectionProvider;
 
 public class OrdersDetailService {
 	static PreparedStatement pstmt;

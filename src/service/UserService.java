@@ -2,9 +2,9 @@ package service;
 
 import java.sql.SQLException;
 
-import controller.dto.UserInfo;
 import dao.UserDao;
 import domain.User;
+import dto.UserInfo;
 
 public class UserService {
 	String result = "";

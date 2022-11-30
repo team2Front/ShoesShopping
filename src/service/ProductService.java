@@ -5,15 +5,15 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import controller.dto.PagingVo;
-import controller.dto.ProductList;
-import controller.dto.RegisterProduct;
 import dao.PfilteringDao;
 import dao.ProductAndColorDao;
 import dao.ProductAndSizeDao;
 import dao.ProductDao;
 import domain.Product;
-import provider.ConnectionProvider;
+import dto.ProductList;
+import dto.RegisterProduct;
+import util.ConnectionProvider;
+import util.PagingVo;
 
 public class ProductService {
 	//싱글톤 구현

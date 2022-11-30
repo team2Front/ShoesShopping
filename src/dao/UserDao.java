@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import controller.dto.UserInfo;
 import domain.User;
-import provider.ConnectionProvider;
+import dto.UserInfo;
+import util.ConnectionProvider;
 
 public class UserDao {
    //field

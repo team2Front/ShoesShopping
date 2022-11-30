@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.dto.PagingVo;
-import controller.dto.QReply;
-import controller.dto.QnaList;
 import domain.Qna;
-import provider.ConnectionProvider;
+import dto.QReply;
+import dto.QnaList;
+import util.ConnectionProvider;
+import util.PagingVo;
 
 public class QnaDao {
    private static QnaDao qnaDao = new QnaDao();
