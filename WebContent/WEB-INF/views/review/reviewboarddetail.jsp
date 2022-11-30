@@ -9,9 +9,9 @@
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-		<link rel="stylesheet" href="../css/shoescolors.css">
-		<link rel="stylesheet" href="../css/common.css">
-		<link rel="stylesheet" href="../css/productList.css">
+		<link rel="stylesheet" href="../resources/css/shoescolors.css">
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<link rel="stylesheet" href="../resources/css/productList.css">
 
 		<style>
 			* {
@@ -23,10 +23,10 @@
 			
 			function changeimage(img) {
 				if(state === 0) {
-					img.src = "../images/heart_empty.png";
+					img.src = "../resources/images/heart_empty.png";
 					state = 1;
 				} else {
-					img.src = "../images/heart.png";
+					img.src = "../resources/images/heart.png";
 					state = 0;
 				}
 			}
@@ -35,7 +35,7 @@
 	<body>
 		<div class="banner d-flex justify-content-between">
 			<div class="p-2">
-				<a href="home.html"><img src="../images/sashoes_logo.png"
+				<a href="home.html"><img src="../resources/images/sashoes_logo.png"
 					style="width: 150px; margin-top: 20px;" /></a>
 			</div>
 	
@@ -140,7 +140,7 @@
 				<div class="row" style="height:500px; border: 1px solid black">
 					<div class="mt-2 mx-3 row" style="width:100%; font-size:20px">
 						<div class="col-3">
-							<img src="../images/반스_월버_노랑.jpg" width="100%" height="300px"/>
+							<img src="../resources/images/반스_월버_노랑.jpg" width="100%" height="300px"/>
 							<div class="mt-2" style="text-align:center; border-bottom:1px solid black"> 브랜드 : 반스 </div>
 							<div class="mt-2" style="text-align:center; border-bottom:1px solid black"> 상품명 : 월버 </div>
 							<div class="mt-2" style="text-align:center; border-bottom:1px solid black"> 가격 : 9,9000 </div>
@@ -160,7 +160,7 @@
 				<div class="row" style="height:50px; border-bottom:1px solid black">
 					<ul class="nav nav-tabs">
 						<li class="nav-item"><div style="height:50px">
-							<a class="my-auto col-12" data-toggle="tab" href="#reviewanswer"><img src="../images/word.png" class="p-1" style="height:100%"/></a>
+							<a class="my-auto col-12" data-toggle="tab" href="#reviewanswer"><img src="../resources/images/word.png" class="p-1" style="height:100%"/></a>
 							<button class="btn btn-dark" data-toggle="modal" data-target="#creative"> 작성 </button>
 							<div class="modal fade" id="creative">
 								<div class="modal-dialog modal-dialog-centered">
@@ -204,21 +204,21 @@
 								<div class="my-auto col-6" style="font-size:20px"> 아이디 : apple </div>
 								<div class="my-auto col-5" style="font-size:20px"><div style="text-align:right"> 여기에 쓰는 리뷰가 맞나요 ^^ </div></div>
 								<div class="my-auto col-1" style="font-size:20px; height:30px">
-									<img onclick="changeimage(this)" src="../images/heart.png" style="height:100%; cursor:pointer"/>
+									<img onclick="changeimage(this)" src="../resources/images/heart.png" style="height:100%; cursor:pointer"/>
 								</div>
 							</div>
 							<div class="row py-3" style="border-bottom:1px solid black">
 								<div class="my-auto col-6" style="font-size:20px"> 아이디 : b </div>
 								<div class="my-auto col-5" style="font-size:20px"><div style="text-align:right"> 안뇽하세요 </div></div>
 								<div class="my-auto col-1" style="font-size:20px; height:30px">
-									<img onclick="changeimage(this)" src="../images/heart.png" style="height:100%; cursor:pointer"/>
+									<img onclick="changeimage(this)" src="../resources/images/heart.png" style="height:100%; cursor:pointer"/>
 								</div>
 							</div>
 							<div class="row py-3" style="border-bottom:1px solid black">
 								<div class="my-auto col-6" style="font-size:20px"> 아이디 : c </div>
 								<div class="my-auto col-5" style="font-size:20px"><div style="text-align:right"> 반가워요 </div></div>
 								<div class="my-auto col-1" style="font-size:20px; height:30px">
-									<img onclick="changeimage(this)" src="../images/heart.png" style="height:100%; cursor:pointer"/>
+									<img onclick="changeimage(this)" src="../resources/images/heart.png" style="height:100%; cursor:pointer"/>
 								</div>
 							</div>
 						</div>

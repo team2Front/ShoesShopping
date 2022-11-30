@@ -66,14 +66,14 @@
 			}
 		</script>
 		
-		<link rel="stylesheet" href="../css/common.css">
-		<link rel="stylesheet" href="../css/productList.css">
-		<link rel="stylesheet" href="../css/joinForm.css">
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<link rel="stylesheet" href="../resources/css/productList.css">
+		<link rel="stylesheet" href="../resources/css/joinForm.css">
 		
 	</head>	
 	<body>
 <div class="banner d-flex justify-content-between">  
-	<div class="p-2"><a href="home.html" ><img src="../images/sashoes_logo.png" style="width:150px; height: 100px"/></a></div>
+	<div class="p-2"><a href="home.html" ><img src="../resources/images/sashoes_logo.png" style="width:150px; height: 100px"/></a></div>
    
 		<div class="p-2">
     		<div class="row">

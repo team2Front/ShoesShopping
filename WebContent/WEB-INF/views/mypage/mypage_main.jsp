@@ -11,9 +11,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		<!-- 공통 css -->
-		<link rel="stylesheet" href="../css/common.css">
-		<!-- 마이페이지_자바스크립트 -->
-		<script src="../javascript/mypage.js"></script>
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<script src="../resources/javascript/mypage.js"></script>
 		<style>
 			#navbar {
 				margin: 0 auto;
@@ -107,29 +106,7 @@
 			}
 
 		</style>
-		
-		<!-- 메인메뉴 내용 변경 AJAX-->
-		<script>
-			function requestMyReview(){
-				$.ajax({
-					url: "mypage_myReview.html",
-					type: "get",
-					success: function(data){
-						$(".shoesmain-2").html(data);
-					}
-				});
-			}
-			
-			function requestMyOrder(){
-				$.ajax({
-					url: "mypage_myOrder.html",
-					type: "get",
-					success: function(data){
-						$(".shoesmain-2").html(data);
-					}
-				});
-			}
-		</script>
+
 		
 		<!-- orderList -->
 		<script>
@@ -145,7 +122,7 @@
 	
 	<body>
 	  <div class="banner d-flex justify-content-between align-items-center">  
-	    <div class="p-2"><a href="home.html" ><img src="../images/sashoes_logo.png" style="width:200px; height: 100px; color:white;"/></a></div>
+	    <div class="p-2"><a href="/shopping/mypage/MainController" ><img src="../resources/images/sashoes_Logo2.png" style="width:170px; "/></a></div>
 	    
 	    <div class="p-2">
 		    <div class="row">
@@ -185,7 +162,7 @@
 	  
 	<!-- navbar -->
 	<div id="navbar" class="shadow-sm">
-		<a href="home.html" ><img src="../images/sashoes_logo.png" style="width:100px"/></a>
+		<a href="home.html" ><img src="../resources/images/sashoes_Logo2.png" style="width:170px; "/></a>
 		<div class="btn-group pl-10">
 			<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
 				MEN
@@ -226,13 +203,14 @@
 					<i class="bi bi-person-circle"></i><span>  환영합니다</span>
 				</div>
 				 <div class="" id="mypageDiv" style="height:45px; text-align:center; padding-top:10px; ">
-					 <a href="mypage_main.html" class="h5" style="color: black; text-decoration: none;"><b>마이 페이지</b></a>
+					 <a href="/shopping/mypage/MainController" class="h5" style="color: black; text-decoration: none;"><b>마이 페이지</b></a>
 				 </div>
 				<div id="mypage_sidemenu">
-					 <a href="mypage_main.html" class="list-group-item text-center h7">나의 정보</a>
-					 <a role="button" onclick="requestMyOrder()" class="list-group-item text-center h7">주문 내역</a>
-					 <a role="button" onclick="requestMyReview()" class="list-group-item text-center h7">나의 리뷰</a>
-					 <a href="mypage_withdraw.html" class="list-group-item text-center h7">회원 탈퇴</a>
+					 <a href="/shopping/mypage/MainController" class="list-group-item text-center h7">나의 정보</a>
+					 <a href="/shopping/mypage/MyOrderController" role="button" class="list-group-item text-center h7">주문 내역</a>
+					 <a href="/shopping/mypage/MyReviewController" role="button"  class="list-group-item text-center h7">나의 리뷰</a>
+					 <a href="#" role="button"  class="list-group-item text-center h7">나의 QnA</a>
+					 <a href="/shopping/mypage/MyWithdrawController" class="list-group-item text-center h7">회원 탈퇴</a>
 				 </div>
 				
 			</div>
@@ -343,9 +321,6 @@
 			</div>
 			
 		</div>
-		
 	</div>
-		
-			
 	</body>
 </html>

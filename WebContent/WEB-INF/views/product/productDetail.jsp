@@ -344,7 +344,7 @@
 									  </div>
 									  <div class="modal-footer">
 									    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-									    <a type="button" class="btn btn-primary"  href="orderForm.html">구매하기</a>
+									    <a type="button" class="btn btn-primary"  href="/shopping/order/OrderController">구매하기</a>
 									  </div>
 									</div>
 								</div>
@@ -367,7 +367,7 @@
 									    <p>장바구니에 성공적으로 담겼습니다 !</p>
 									  </div>
 									  <div class="modal-footer">
-									    <a type="button" class="btn btn-primary"  href="cartDetail.html">장바구니 보러가기</a>
+									    <a type="button" class="btn btn-primary"  href="/shopping/cart/CartController">장바구니 보러가기</a>
 									  </div>
 									</div>
 								</div>

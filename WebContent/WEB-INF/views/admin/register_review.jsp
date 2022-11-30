@@ -11,31 +11,29 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		
-		<!-- 추가코드 -->
-		<link rel="stylesheet" href="../css/customCheckbox.css">
-		<link rel="stylesheet" href="../css/common.css">
-		<link rel="stylesheet" href="../css/shoescolors.css">
+		<!-- resource/css 링크 -->
+		<link rel="stylesheet" href="../resources/css/customCheckbox.css">
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<link rel="stylesheet" href="../resources/css/shoescolors.css">
+		
+		<!-- font 링크 -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		
-		<style>
-		</style>
-
 	</head>
 	<body>
-		<!-- 배너 -->
-		<div id="banner">
-			<div style="width:500px; margin:0px auto;">
-    			<a href="admin_home.html"><img src="../images/sashoes_logo.png" style="width:250px; height:100px;"/></a>
-   				<span class="banner-font p-2">관리자</span>
-			</div>	  	
-	  	</div>
-
+		<!-- 배너부분 -->
+	    <div id ="adminBanner" class="d-flex align-items-center">
+    		<div class="adminLogo">
+   				<a href="/shopping/admin/HomeController"><img src="../resources/images/sashoes_logo.png"/></a>
+			</div>	
+			<div class="adminBanner-font p-2" style="white-space:nowrap;">관리자</div>
+	    </div>
+	  	
 		<!-- 메인부분 -->
 		<div id="mainDiv" class="content">
-			<div id="review-list-header"><h1 class="title m-5">내 리뷰 조회</h1></div>
+			<div id="review-list-header"><h1 class="title m-5">리뷰 조회</h1></div>
 			<ul class="n-info-txt">
 				<li>지금까지 고객님께서 작성하신 리뷰를 확인하실 수 있습니다</li>
 				<li>리뷰 작성은 구매리스트를 통해 가능합니다</li>
@@ -58,7 +56,7 @@
 						<th scope="row">1</th>
 						<td>
 							<div class="n-row">
-								<a href="#" class="image-block"><img src="../images/반스_월버_노랑.jpg"/></a>
+								<a href="#" class="image-block"><img src="../resources/images/반스_월버_노랑.jpg"/></a>
 								<ul class="info">
 									<li class="brand">반스</li>
 									<li class="name">윌버 노랑</li>
@@ -90,7 +88,7 @@
 					<th scope="row">2</th>
 						<td>
 							<div class="n-row">
-								<a href="#" class="image-block"><img src="../images/컨버스_척테일러올스타코어_검정.jpg"/></a>
+								<a href="#" class="image-block"><img src="../resources/images/컨버스_척테일러올스타코어_검정.jpg"/></a>
 								<ul class="info">
 									<li class="brand">컨버스</li>
 									<li class="name">척테일러올스타코어</li>
@@ -123,7 +121,7 @@
 					<th scope="row">3</th>
 						<td>
 							<div class="n-row">
-								<a href="#" class="image-block"><img src="../images/아디다스_가젤.jpg"/></a>
+								<a href="#" class="image-block"><img src="../resources/images/아디다스_가젤.jpg"/></a>
 								<ul class="info">
 									<li class="brand">아디다스</li>
 									<li class="name">가젤</li>

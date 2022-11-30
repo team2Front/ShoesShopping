@@ -214,7 +214,7 @@
 									    <p>주문이 완료되었습니다 !</p>
 									  </div>
 									  <div class="modal-footer">
-									    <a type="button" class="btn btn-primary"  href="mypage_orderList.html">확인</a>
+									    <a type="button" class="btn btn-primary"  href="shopping/mypage/MyOrderController">확인</a>
 									  </div>
 									</div>
 								</div>

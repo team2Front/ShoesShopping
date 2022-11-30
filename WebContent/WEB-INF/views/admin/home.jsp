@@ -1,19 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>	
+		<title>Insert title here</title>
+		<!-- 부트스트랩 -->	
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">		
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		
-		<link rel="stylesheet" href="../css/common.css">
-		<link rel="stylesheet" href="../css/productList.css">
-		<link rel="stylesheet" href="../css/shoescolors.css">
+		<!-- resource/css 링크 -->
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<link rel="stylesheet" href="../resources/css/productList.css">
+		<link rel="stylesheet" href="../resources/css/shoescolors.css">
 		
+		<!-- font 링크 -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	
 	<script>
@@ -30,22 +37,19 @@
 	
 	<body>
 		<!-- 배너창 -->
-	    <div class="banner d-flex justify-content-between">  
-	    	<div><img src="../images/sashoes_logo.png" style="width:150px;"/></div>
-	    
-	    	<div style="text-align: center; width:600px; font-size: 50px;"><b>관리자 전용</b></div>
-
-		    <div style="text-align: center; width:300px;">
-		    	<a href="mypage_main.html">마이페이지</a>
-		    	<button id="logout" class="btn btn-secondary mx-5">로그아웃</button>
-	    	</div>
-				
+	    <div id ="adminBanner" class="d-flex align-items-center">
+    		<div class="adminLogo">
+   				<a href="/shopping/admin/HomeController"><img src="../resources/images/sashoes_logo.png"/></a>
+			</div>	
+			<div class="adminBanner-font p-2" style="white-space:nowrap;">관리자</div>
+			
+	    	<div class="logoutButton"><button id="logout" class="btn btn-secondary btn-sm mx-5" style="width:90px;">로그아웃</button></div>
 	    </div>
 	  	
 	  	<!-- 메뉴바 -->
-		<div id="navbar" class="shadow-sm d-flex">
+		<div id="adminNavbar" class="shadow-sm d-flex align-items-center">
 			<div class="btn-group">
-				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+				<button id="draopdownBtn" type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="margin-left: 150px;">
 					MEN
 				</button>
 				<div class="dropdown-menu">
@@ -55,7 +59,7 @@
 				</div>
 			</div>
 			<div class="btn-group">
-				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+				<button id="draopdownBtn" type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
 					WOMEN
 				</button>
 				<div class="dropdown-menu">
@@ -65,7 +69,7 @@
 				</div>
 			</div>
 			<div class="btn-group">
-				<button type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
+				<button id="draopdownBtn" type="button" class="btn dropdown-toggle m-2" data-toggle="dropdown">
 					KIDS
 				</button>
 				<div class="dropdown-menu">
@@ -76,18 +80,18 @@
 			</div>	
 			
 			<!-- 관리자 버튼(상품등록/관리자등록/QnA/Review) -->
-			<div id="adminButton"> 
-				<button type="button" class="btn mt-1 ml-4" onclick="location.href='admin_register_product.html'">상품 등록</button>
+			<div id="adminButton" style="margin-left: 150px;"> 
+				<button type="button" class="btn btn-warning btn-sm mt-1 ml-4" onclick="location.href='/shopping/admin/Register_ProductController'">상품 등록</button>
 			</div>
 			<div id="adminButton"> 
-				<button type="button" class="btn mt-1 ml-4" onclick="location.href='admin_register_newAdmin.html'">관리자 등록</button>
+				<button type="button" class="btn btn-warning btn-sm mt-1 ml-4" onclick="location.href='/shopping/admin/Register_NewAdminController'">관리자 등록</button>
 			</div>
 			<div id="adminButton"> 
-				<button type="button" class="btn mt-1 ml-4" onclick="location.href='admin_register_review.html'">리뷰</button>
+				<button type="button" class="btn btn-warning btn-sm mt-1 ml-4" onclick="location.href='/shopping/admin/Register_ReviewController'">리뷰</button>
 				<!-- <a role="button" onclick="requestAdminReview()" class="list-group-item text-center h7">리뷰</a> -->
 			</div>
 			<div id="adminButton"> 
-				<button type="button" class="btn mt-1 ml-4" onclick="location.href='register_admin.html'">QnA</button>
+				<button type="button" class="btn btn-warning btn-sm mt-1 ml-4" onclick="location.href='register_admin.html'">QnA</button>
 			</div>
 		</div>
 		
@@ -210,7 +214,7 @@
 				<div class="d-flex justify-content-between flex-wrap" style="width:1000px;" >
 			        <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/반스_월버_노랑.jpg">
+						  <img class="card-img-top" src="../resources/images/반스_월버_노랑.jpg">
 						</div>
 						<div class="card-body">
 						    <p class="card-brand m-0">반스</p>
@@ -218,13 +222,13 @@
 						    <p class="card-text">
 						    <span class="sale" style="color:red">50000원</span>
 						    </p>
-						    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
-						    <a href="productDetail.html" class="btn btn-primary">자세히보기</a>
+						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
+						    <a href="/shopping/product/ProductController.html" class="btn btn-primary">자세히보기</a>
 						 </div>
 					</div>
 			        <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/아디다스_가젤.jpg">
+						  <img class="card-img-top" src="../resources/images/아디다스_가젤.jpg">
 						</div>
 					  	<div class="card-body">
 					  		<p class="card-brand m-0">아디다스</p>
@@ -232,7 +236,7 @@
 						    <p class="card-text">
 						    <span class="sale" style="color:red">70000원</span>
 						    </p>
-						    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 						    <a href="#" class="btn btn-secondary">자세히보기</a>
 						    <a href="#" class="btn btn-primary">삭제</a>
 					  	</div>
@@ -240,7 +244,7 @@
 			        
 			        <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/아디다스_그랜드코트베이스_검정.jpg">
+						  <img class="card-img-top" src="../resources/images/아디다스_그랜드코트베이스_검정.jpg">
 						</div>
 						<div class="card-body">
 							<p class="card-brand m-0">아디다스</p>
@@ -248,13 +252,13 @@
 						    <p class="card-text">
 						    <span class="sale" style="color:red">64000원</span>
 						    </p>
-						    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
+						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
 						    <a href="#" class="btn btn-primary">자세히보기</a>
 						 </div>
 					</div>
 			        <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/아디다스_스탠스미스_하양.jpg">
+						  <img class="card-img-top" src="../resources/images/아디다스_스탠스미스_하양.jpg">
 						</div>
 					  	<div class="card-body">
 					  		<p class="card-brand m-0">아디다스</p>
@@ -262,14 +266,14 @@
 						    <p class="card-text">
 						    <span class="sale" style="color:red">45000원</span>
 						    </p>
-  							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+  							    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 						    <a href="#" class="btn btn-primary">자세히보기</a>
 					  	</div>
 			        </div>
 			       
 			        <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/아디다스_퍼피렛_검정.jpg">
+						  <img class="card-img-top" src="../resources/images/아디다스_퍼피렛_검정.jpg">
 						</div>
 					  <div class="card-body">
 					  	<p class="card-brand m-0">아디다스</p>
@@ -277,13 +281,13 @@
 					    <p class="card-text">
 					    <span class="sale" style="color:red">36400원</span>
 					    </p>
-					    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+					    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 					    <a href="#" class="btn btn-primary">자세히보기</a>
 					  </div>
 					</div>
 					<div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/아디다스_퍼피렛_하양.jpg">
+						  <img class="card-img-top" src="../resources/images/아디다스_퍼피렛_하양.jpg">
 						</div>
 					  <div class="card-body">
 					  	<p class="card-brand m-0">아디다스</p>
@@ -291,13 +295,13 @@
 					    <p class="card-text">
 					    <span class="sale" style="color:red">37400원</span>
 					    </p>
-					    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+					    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 					    <a href="#" class="btn btn-primary">자세히보기</a>
 					  </div>
 			        </div>
 			        <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/컨버스_척테일러올스타70.jpg">
+						  <img class="card-img-top" src="../resources/images/컨버스_척테일러올스타70.jpg">
 						</div>
 					  <div class="card-body">
 					  	<p class="card-brand m-0">컨버스 </p>
@@ -305,13 +309,13 @@
 					    <p class="card-text">
 					    <span class="sale" style="color:red">74400원</span>
 					    </p>
-					    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+					    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 					    <a href="#" class="btn btn-primary">자세히보기</a>
 					  </div>
 			        </div>
 			        <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/컨버스_척테일러올스타코어_검정.jpg">
+						  <img class="card-img-top" src="../resources/images/컨버스_척테일러올스타코어_검정.jpg">
 						</div>
 					  <div class="card-body">
 					  	<p class="card-brand m-0">컨버스 </p>
@@ -319,14 +323,14 @@
 					    <p class="card-text">
 					    <span class="sale" style="color:red">74700원</span>
 					    </p>
-					    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+					    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 					    <a href="#" class="btn btn-primary">자세히보기</a>
 					  </div>
 			        </div>
 			       
 			         <div class="card">
 			           <div class="card-head">
-						  <img class="card-img-top" src="../images/아디다스_슈퍼스타_82.jpg">
+						  <img class="card-img-top" src="../resource/images/아디다스_슈퍼스타_82.jpg">
 						</div>
 					  <div class="card-body">
 					  	<p class="card-brand m-0">아디다스 </p>
@@ -334,7 +338,7 @@
 					    <p class="card-text">
 					    <span class="sale" style="color:red">65000원</span>
 					    </p>
-					    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
+					    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
 					    <a href="#" class="btn btn-primary">자세히보기</a>
 					  </div>
 			        </div>

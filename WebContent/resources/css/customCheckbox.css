@@ -1,23 +1,5 @@
 @charset "UTF-8";
 
-#banner {
-	background-image: url("../images/banner.png");
-	background-size: cover;
-}
-			
-.banner-font, .card-header {
-	font-family: 'Do Hyeon', serif;
-	font-weight: 500;
-	font-size: 70px;
-}
-			
-#wrapper {
-	width:1400px;
-	margin:0px auto;
-	padding-left : 100px;
-	padding-right : 100px;
-}
-
 .cbtn-group {
 	margin-top: 5px;
 	margin-bottom: 5px;
