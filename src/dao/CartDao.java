@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import controller.dto.CartDto;
-import provider.ConnectionProvider;
+import dto.CartDto;
+import util.ConnectionProvider;
 
 public class CartDao {
 	// 데이터베이스와 연동하여 데이터를 추출한다.
