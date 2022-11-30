@@ -1,4 +1,4 @@
-package controller.dto;
+package dto;
 
 import org.json.JSONObject;
 
