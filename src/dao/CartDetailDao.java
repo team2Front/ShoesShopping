@@ -7,25 +7,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.OrderDto;
+import javax.servlet.ServletContext;
+
 import domain.CartDetail;
 import domain.Color;
 import domain.Product;
+import dto.OrderDto;
 
 public class CartDetailDao {
-	PreparedStatement pstmt;
-	private static CartDetailDao cartDetailDao = new CartDetailDao();
-	ProductDao productDao = ProductDao.getInstance();
-	ColorDao colorDao = ColorDao.getInstance();
-
-	public static CartDetailDao getInstance() {
-		return cartDetailDao;
+	ProductDao productDao;
+	ColorDao colorDao;
+	
+	public CartDetailDao(ServletContext application) {
+		this.productDao = (ProductDao) application.getAttribute("productDao");
+		this.colorDao = (ColorDao) application.getAttribute("colorDao");
 	}
 	
 	// 장바구니에 담긴 내역 1개 조회 
 	public CartDetail selectCartDetail(Connection conn, int cdId) throws SQLException {
 		String sql = "select cart_detail_id, product_id, quantity, size_id, color_id, user_id from cart_detail where cart_detail_id=?";
-		pstmt = conn.prepareStatement(sql);
+		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1,  cdId);
 		
 		ResultSet rs = pstmt.executeQuery();
@@ -51,7 +52,7 @@ public class CartDetailDao {
 	// 장바구니에 담긴 내역들 조회 
 	public List<CartDetail> selectCartDetails(Connection conn, String userId) throws SQLException { 
 		String sql = "select cart_detail_id, product_id, quantity, size_id, color_id, user_id from cart_detail where user_id=?";
-		pstmt = conn.prepareStatement(sql);
+		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1,  userId);
 		
 		ResultSet rs = pstmt.executeQuery();
@@ -83,7 +84,7 @@ public class CartDetailDao {
 		int quantity = od.getQuantity();
 		
 		String sql = "insert into cart_detail(cart_detail_id, product_id, user_id, size_id, color_id, quantity) values (cartDetail_seq.nextval,?,?,?,?,?)";
-		pstmt = conn.prepareStatement(sql);
+		PreparedStatement pstmt = conn.prepareStatement(sql);
 
 		pstmt.setInt(1, productId);
 		pstmt.setString(2, userId);
@@ -102,7 +103,7 @@ public class CartDetailDao {
 		String sql = "delete from cart_detail where cart_detail_id=?";
 		int row = 0;
 		try {
-			pstmt = conn.prepareStatement(sql);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			row = pstmt.executeUpdate();			
 		} catch (SQLException e) {
@@ -118,7 +119,7 @@ public class CartDetailDao {
     	 int rows = 0;
     	 
          try {
-            pstmt = conn.prepareStatement(sql);
+        	 PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, quantity);
             pstmt.setInt(2, id);
             

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import dao.CartDao;
 import domain.CartDetail;
 import dto.CartDetailDto;
@@ -11,14 +13,10 @@ import dto.CartDto;
 import util.ConnectionProvider;
 
 public class CartService {
-    private static CartService cartService = new CartService();
+    CartDao cartDao;
     
-    CartDao cartDao = CartDao.getInstance();
-    
-    private CartService() {}
-    
-    public static CartService getInstance() {
-    	return cartService;
+    public CartService(ServletContext application) {
+    	this.cartDao = (CartDao) application.getAttribute("cartDao");
     }
     
     // 회원가입시 유저 당 카트 생성 

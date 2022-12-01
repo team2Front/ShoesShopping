@@ -13,21 +13,12 @@ public class CartDao {
 	// 데이터베이스와 연동하여 데이터를 추출한다.
 	// DTO 를 리턴한다.	
 	
-	static PreparedStatement pstmt;
-	private static CartDao cartDao = new CartDao();
-	
-	private CartDao() {}
-	
-	public static CartDao getInstance() {
-		return cartDao;
-	}
-	
 	//장바구니 생성
 	public int insertCart(String userId) throws SQLException {
 		Connection conn = ConnectionProvider.getConnection();
 
 		String sql = "insert into cart(user_id, total_price, total_quantity) values (?,?,?)";
-		pstmt = conn.prepareStatement(sql);
+		PreparedStatement pstmt = conn.prepareStatement(sql);
 
 		pstmt.setString(1, userId);
 		pstmt.setInt(2, 0);
@@ -40,7 +31,7 @@ public class CartDao {
 	// 장바구니 조회 
 	public CartDto selectCart(Connection conn, String userId) throws SQLException {
 		String sql = "select total_price, total_quantity from cart where user_id=?";
-		pstmt = conn.prepareStatement(sql);
+		PreparedStatement pstmt = conn.prepareStatement(sql);
 	    pstmt.setString(1, userId);
 	    
 	    ResultSet rs = pstmt.executeQuery();
@@ -66,7 +57,7 @@ public class CartDao {
 		System.out.println(quantity);
 		try {
 		String sql = "update cart set total_price=?, total_quantity=? where user_id=?";
-			pstmt = conn.prepareStatement(sql);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, price);           
 			pstmt.setInt(2, quantity);
 		    pstmt.setString(3, userId);

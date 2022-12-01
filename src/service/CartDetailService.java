@@ -1,9 +1,10 @@
 package service;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import dao.CartDetailDao;
 import domain.CartDetail;
@@ -12,19 +13,14 @@ import dto.OrderDto;
 import util.ConnectionProvider;
 
 public class CartDetailService {
-	static PreparedStatement pstmt;
-	private static CartDetailService cartDetailService = new CartDetailService();
+	CartDetailDao cartDetailDao;
+	ProductService productService;
+	ProductAndColorService productAndColorService;
+	ProductAndSizeService productAndSizeService;
+	CartService cartService;
 	
-	CartService cartService = CartService.getInstance();
-	CartDetailDao cartDetailDao = CartDetailDao.getInstance();
-	ProductService productService = ProductService.getInstance();
-	ProductAndColorService productAndColorService = ProductAndColorService.getInstance();
-	ProductAndSizeService productAndSizeService = ProductAndSizeService.getInstance();
-	
-	private CartDetailService() {}
-	
-	public static CartDetailService getInstance() {
-		return cartDetailService;
+	public CartDetailService(ServletContext application) {
+		this.cartDetailDao = (CartDetailDao) application.getAttribute("cartDetailDao");
 	}
 	
 	// 해당 상품을 장바구니에 넣는다.
@@ -37,7 +33,8 @@ public class CartDetailService {
     		conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-    		Product product = productService.showOneProduct(od.getProductId());
+			
+			Product product = productService.showOneProduct(od.getProductId());
 
     		
     		// 주문한 상품 색상, 사이즈  확인 필요
