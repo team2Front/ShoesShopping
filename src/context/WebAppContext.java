@@ -4,6 +4,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import dao.CartDao;
+import dao.CartDetailDao;
 import dao.ColorDao;
 import dao.OrderDao;
 import dao.OrderDetailDao;
@@ -15,6 +17,8 @@ import dao.QnaDao;
 import dao.ReplyDao;
 import dao.ReviewDao;
 import dao.UserDao;
+import service.CartDetailService;
+import service.CartService;
 import service.OrderService;
 import service.OrdersDetailService;
 import service.ProductAndColorService;
@@ -44,6 +48,9 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("productAndColorDao",  new ProductAndColorDao(application));
 		application.setAttribute("productAndSizeDao", new ProductAndSizeDao());
 		
+		application.setAttribute("cartDao", new CartDao());
+		application.setAttribute("cartDetailDao", new CartDetailDao(application));
+		
 		application.setAttribute("userDao", new UserDao(application));
 		
 		application.setAttribute("orderDetailDao", new OrderDetailDao(application));
@@ -59,6 +66,10 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("productAndSizeService", new ProductAndSizeService(application));
 		application.setAttribute("productService", new ProductService(application));
 
+		
+		application.setAttribute("cartService", new CartService(application));
+		application.setAttribute("cartDetailService", new CartDetailService(application));
+		
 		application.setAttribute("userDao", new UserService(application));
 
 		application.setAttribute("ordersDetailService", new OrdersDetailService(application));
