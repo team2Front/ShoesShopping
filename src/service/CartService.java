@@ -14,9 +14,11 @@ import util.ConnectionProvider;
 
 public class CartService {
     CartDao cartDao;
+    private ServletContext application;
     
     public CartService(ServletContext application) {
     	this.cartDao = (CartDao) application.getAttribute("cartDao");
+    	this.application = application;
     }
     
     // 회원가입시 유저 당 카트 생성 
@@ -26,7 +28,7 @@ public class CartService {
     
 	//장바구니에 담긴 상품들 ,총 수량, 총 금액 보여준다.
     public CartDto showCart(String userId) throws SQLException {
-    	CartDetailService cartDetailService = CartDetailService.getInstance();
+    	CartDetailService cartDetailService = new CartDetailService(application);
     	Connection conn = ConnectionProvider.getConnection();
     	CartDto cartDto = null;
     	

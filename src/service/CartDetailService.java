@@ -13,14 +13,16 @@ import dto.OrderDto;
 import util.ConnectionProvider;
 
 public class CartDetailService {
-	CartDetailDao cartDetailDao;
-	ProductService productService;
-	ProductAndColorService productAndColorService;
-	ProductAndSizeService productAndSizeService;
-	CartService cartService;
+	private CartDetailDao cartDetailDao;
+	private ProductService productService;
+	private ProductAndColorService productAndColorService;
+	private ProductAndSizeService productAndSizeService;
+	private CartService cartService;
+	private ServletContext application;
 	
 	public CartDetailService(ServletContext application) {
 		this.cartDetailDao = (CartDetailDao) application.getAttribute("cartDetailDao");
+		this.application = application;
 	}
 	
 	// 해당 상품을 장바구니에 넣는다.
@@ -47,8 +49,6 @@ public class CartDetailService {
 				return od.getProductId() + "번 상품을 장바구니에 담는데 실패했습니다."; 
 
 			}
-
-			int r = cartDetailDao.insertCartDetail(conn, od);
 			
 			// 장바구니에 상품을 담았으므로, 장바구니의 총 수량과 총 금액을 업데이트 해야된다.
 			cartService.refreshCart(conn, od.getUserId(), product.getProductPrice() * od.getQuantity(), od.getQuantity());
