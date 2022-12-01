@@ -5,25 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
+
 import domain.User;
 import dto.UserInfo;
 import util.ConnectionProvider;
 
 public class UserDao {
-   //field
-   private static UserDao userDao; //싱글톤: 필드
-   
-   //constructor : 싱글톤
-   private UserDao() {};
-   
-   //method: 싱글톤
-   public static UserDao getInstance() { 
-      if(userDao == null) {
-         userDao = new UserDao();
-      }
-      return userDao; 
-   }
-   
+	//field
+	private static PreparedStatement pstmt;
+	private ServletContext application;
+	
+	//constructor
+	public UserDao(ServletContext application) {
+		this.application = application;
+	}
+	
    //method: select문 - 아이디 중복 여부 판별
    public boolean selectUserId(String id) { 
       Connection conn = ConnectionProvider.getConnection();
