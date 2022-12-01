@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import controller.dto.PagingVo;
 import dao.OrderDao;
 import domain.Orders;
 import lombok.NoArgsConstructor;
+import util.PagingVo;
 
 @NoArgsConstructor
 public class OrderService {

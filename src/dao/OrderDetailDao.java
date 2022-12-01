@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.dto.OrderDto;
 import domain.CartDetail;
 import domain.Color;
 import domain.OrderDetailDto;
 import domain.Product;
-import provider.ConnectionProvider;
+import dto.OrderDto;
 import service.ProductAndColorService;
 import service.ProductAndSizeService;
+import util.ConnectionProvider;
 
 public class OrderDetailDao {
 	private static PreparedStatement pstmt;

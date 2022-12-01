@@ -5,7 +5,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import controller.dto.RReply;
+import dto.RReply;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;

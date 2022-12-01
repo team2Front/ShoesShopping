@@ -1,13 +1,13 @@
 package service;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import controller.dto.PagingVo;
-import controller.dto.QnaList;
 import dao.QnaDao;
 import domain.Qna;
+import dto.QnaList;
+import util.PagingVo;
 
 public class QnAService {
    private static QnAService qnaService = new QnAService();

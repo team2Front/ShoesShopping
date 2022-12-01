@@ -3,9 +3,9 @@ package service;
 import java.sql.SQLException;
 import java.util.List;
 
-import controller.dto.QReply;
-import controller.dto.RReply;
 import dao.ReplyDao;
+import dto.QReply;
+import dto.RReply;
 
 public class ReplyService {
    ReplyDao replyDao = ReplyDao.getInstance();

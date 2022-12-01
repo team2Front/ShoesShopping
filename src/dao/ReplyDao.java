@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.dto.QReply;
-import controller.dto.RReply;
-import provider.ConnectionProvider;
+import dto.QReply;
+import dto.RReply;
+import util.ConnectionProvider;
 
 public class ReplyDao {
    //싱글톤

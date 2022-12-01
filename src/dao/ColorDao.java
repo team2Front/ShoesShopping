@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import domain.Color;
-import provider.ConnectionProvider;
+import util.ConnectionProvider;
 
 public class ColorDao {
 	private static ColorDao colorDao = new ColorDao();
