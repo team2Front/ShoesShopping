@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import domain.CartDetail;
 import domain.Color;
 import domain.OrderDetailDto;
@@ -17,18 +19,26 @@ import service.ProductAndSizeService;
 import util.ConnectionProvider;
 
 public class OrderDetailDao {
+	//field
 	private static PreparedStatement pstmt;
-	private static OrderDetailDao orderDetailDao = new OrderDetailDao();
-	ColorDao colorDao = ColorDao.getInstance();
-
-	public static OrderDetailDao getInstance() {
-		return orderDetailDao;
-	}
+	private ServletContext application;
+	private ColorDao colorDao;
+	private ProductDao productDao;
+	//private ProductAndColorDao productAndColorDao;
+	//private ProductAndSizeDao productAndSizeDao;
+	private ProductAndColorService productAndColorService;
+	private ProductAndSizeService productAndSizeService;
 	
-//	OrderDao orderDao = OrderDao.getInstace();
-	ProductDao productDao = ProductDao.getInstance();
-	ProductAndColorService productAndColorService = ProductAndColorService.getInstance();
-	ProductAndSizeService productAndSizeService = ProductAndSizeService.getInstance();
+	//constructor
+	public OrderDetailDao(ServletContext application) {
+		this.application = application;
+		this.colorDao = (ColorDao) application.getAttribute("colorDao");
+		this.productDao = (ProductDao) application.getAttribute("productDao");
+		//this.productAndColorDao = (ProductAndColorService) application.getAttribute("productAndColorDao");
+		//this.productAndSizeDao = (ProductAndSizeDao) application.getAttribute("productAndSizeDao");
+		this.productAndColorService = (ProductAndColorService) application.getAttribute("productAndColorService");
+		this.productAndSizeService = (ProductAndSizeService) application.getAttribute("productAndSizeService");
+	}
 	
 	// 주문1 에 해당하는 orderDetail 들 조회하기 : 주문내역 상세보기 
 	public List<OrderDetailDto> selectOrderDetails (int orderId) {

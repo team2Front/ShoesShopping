@@ -10,13 +10,6 @@ import java.util.List;
 import util.ConnectionProvider;
 
 public class ProductAndSizeDao {
-	
-	private static ProductAndSizeDao productAndSizeDao = new ProductAndSizeDao();
-	private ProductAndSizeDao() {
-	}
-	public static ProductAndSizeDao getInstance() {
-		return productAndSizeDao;
-	}
 
 	public int insertProductSizes(int pid, List<Integer> sizeList) throws SQLException {
 		// 상품 id ,그 상품의 사이즈들을 리스트로 받아와서 각각 Product_size 테이블에 삽입한다.

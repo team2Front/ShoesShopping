@@ -8,14 +8,7 @@ import java.sql.SQLException;
 import domain.Color;
 import util.ConnectionProvider;
 
-public class ColorDao {
-	private static ColorDao colorDao = new ColorDao();
-	private ColorDao() {
-	}
-	public static ColorDao getInstance() {
-		return colorDao;
-	}
-	
+public class ColorDao {	
 	// 색상 번호로 색상을 찾고 객체로 반환
 	public Color selectColor(int colorId) throws SQLException {
 		Connection conn = ConnectionProvider.getConnection();

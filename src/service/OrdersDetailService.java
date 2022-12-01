@@ -7,8 +7,9 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import dao.OrderDao;
 import dao.OrderDetailDao;
+import dao.ProductAndColorDao;
+import dao.ProductAndSizeDao;
 import domain.CartDetail;
 import domain.OrderDetailDto;
 import domain.Product;
@@ -19,20 +20,23 @@ public class OrdersDetailService {
 	//field
 	static PreparedStatement pstmt;
 	private ServletContext application;
-	private OrderDetailDao orderDetailDao; 
+	private OrderDetailDao orderDetailDao;
+	private OrderService orderService;
+	private ProductAndColorService productAndColorService;
+	private ProductAndSizeService productAndSizeService;
+	private CartService CartService;
 		
 	//constructor
 	public OrderDetailService(ServletContext application) {
 		this.application = application;
 		this.orderDetailDao = (OrderDetailDao) application.getAttribute("orderDetailDao");
+		this.orderService = (OrderService) application.getAttribute("orderService");
+		this.productAndColorService = (ProductAndColorDao) application.getAttribute("productAndColorService");
+		this.productAndSizeService = (ProductAndSizeDao) application.getAttribute("productAndSizeService");
+		this.cartService = (Cart) application.getAttribute("cart");
 	}
 	
-	private static OrdersDetailService ordersDetailService = new OrdersDetailService();	
-	OrderService orderService = OrderService.getInstance();
 	CartDetailService cartDetailService = CartDetailService.getInstance();
-	OrderDetailDao orderDetailDao = OrderDetailDao.getInstance();
-	ProductAndColorService productAndColorService = ProductAndColorService.getInstance();
-	ProductAndSizeService productAndSizeService = ProductAndSizeService.getInstance();
 	
 	private OrdersDetailService() {};
 	

@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import domain.Product;
 import dto.ProductList;
 import dto.RegisterProduct;
@@ -16,18 +18,15 @@ import util.ConnectionProvider;
 import util.PagingVo;
 
 public class ProductDao {
-	private static ProductDao productDao = new ProductDao();
+	ProductAndSizeDao productAndSizeDao ;
+	ProductAndColorDao productAndColorDao;
+	CategoryDao categoryDao;
 
-	private ProductDao() {
+	public ProductDao(ServletContext application) {
+		this.productAndSizeDao = (ProductAndSizeDao) application.getAttribute("productAndSizeDao");
+		this.productAndColorDao = (ProductAndColorDao) application.getAttribute("productAndColorDao");
+		this.categoryDao = (CategoryDao) application.getAttribute("categoryDao");
 	}
-
-	public static ProductDao getInstance() {
-		return productDao;
-	}
-
-	ProductAndSizeService productAndSizeService = ProductAndSizeService.getInstance();
-	ProductAndColorService productAndColorService = ProductAndColorService.getInstance();
-	CategoryDao categoryDao = CategoryDao.getInstance();
 
 	// 상품의 총수량
 	public int selectCountAll() throws SQLException {
@@ -122,30 +121,30 @@ public class ProductDao {
 	
 	// 상품하나만 가져오기 정은
 		public Product selectProductOne(int productId) throws SQLException {
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = null;
-			Product p = null;
-			try {
-				String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, productId);
-				ResultSet rs = pstmt.executeQuery();
-
-				if (rs.next()) {
-					int pid = rs.getInt("product_id");
-
-					p = new Product(pid, rs.getString("product_name"), rs.getBoolean("is_deleted"),rs.getInt("product_price"),
-							rs.getString("product_sex"), selectFindCompany(rs.getInt("company_id")),
-							categoryDao.findCategoty(rs.getInt("category_id")),
-							productAndColorService.findProductColors(pid), productAndSizeService.findProductSizeList(pid));
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			pstmt.close();
-			conn.close();
-			return p;
+//			Connection conn = ConnectionProvider.getConnection();
+//			PreparedStatement pstmt = null;
+//			Product p = null;
+//			try {
+//				String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setInt(1, productId);
+//				ResultSet rs = pstmt.executeQuery();
+//
+//				if (rs.next()) {
+//					int pid = rs.getInt("product_id");
+//
+//					p = new Product(pid, rs.getString("product_name"), rs.getBoolean("is_deleted"),rs.getInt("product_price"),
+//							rs.getString("product_sex"), selectFindCompany(rs.getInt("company_id")),
+//							categoryDao.findCategoty(rs.getInt("category_id")),
+//							productAndColorService.findProductColors(pid), productAndSizeService.findProductSizeList(pid));
+//				}
+//
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			pstmt.close();
+//			conn.close();
+			return null;
 
 		}
 

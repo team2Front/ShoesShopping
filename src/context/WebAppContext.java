@@ -8,6 +8,12 @@ import dao.OrderDao;
 import dao.OrderDetailDao;
 import service.OrderService;
 
+import dao.ColorDao;
+import dao.PfilteringDao;
+import dao.ProductAndColorDao;
+import dao.ProductAndSizeDao;
+import dao.ProductDao;
+
 public class WebAppContext implements ServletContextListener{
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
@@ -19,11 +25,17 @@ public class WebAppContext implements ServletContextListener{
 		// Servlet Context 객체에 데이터(객체) 저장하기 , 모든 쿨라이언트들이 사용 가능한 공유 객체가 된다.
 		
 		//-------------------- Dao ------------------
+		application.setAttribute("pfilteringDao", new PfilteringDao());
+		application.setAttribute("colorDao", new ColorDao());
+		application.setAttribute("productAndColorDao",  new ProductAndColorDao(application));
+		application.setAttribute("productAndSizeDao", new ProductAndSizeDao());
+		
 		application.setAttribute("orderDetailDao", new OrderDetailDao(application));
 		application.setAttribute("orderDao", new OrderDao(application));
 		
 		
 		//-------------------- 서비스 ------------------
+		application.setAttribute("productDao", new ProductDao(application));
 		application.setAttribute("orderDetailService", new OrderDetailService(application));
 		application.setAttribute("orderService", new OrderService(application));
 		

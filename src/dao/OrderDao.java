@@ -18,7 +18,7 @@ public class OrderDao {
 	//field
 	private static PreparedStatement pstmt;
 	private ServletContext application;
-	private OrderDetailDao orderDaoDetail; 
+	private OrderDetailDao orderDetailDao; 
 		
 	//constructor
 	public OrderDao(ServletContext application) {
