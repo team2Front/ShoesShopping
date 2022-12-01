@@ -7,18 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import dto.QReply;
 import dto.RReply;
 import util.ConnectionProvider;
 
 public class ReplyDao {
-   //싱글톤
-   private static ReplyDao replyDao = new ReplyDao();
-   private ReplyDao() {}
-   public static ReplyDao getInstance() {
-      return replyDao;
-   }
-
+   
    public int insertReviewReply(RReply rreply) throws SQLException {
       Connection conn = ConnectionProvider.getConnection();
       String sql = "INSERT INTO reply (reply_id, reply_content, user_id, reply_date, review_id)"

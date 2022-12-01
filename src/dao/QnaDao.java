@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import domain.Qna;
 import dto.QReply;
 import dto.QnaList;
@@ -14,15 +16,12 @@ import util.ConnectionProvider;
 import util.PagingVo;
 
 public class QnaDao {
-   private static QnaDao qnaDao = new QnaDao();
-   private QnaDao() {}
-   public static QnaDao getInstacne() {
-      return qnaDao;
+   private ReplyDao replyDao;
+   
+   public QnaDao(ServletContext application) {
+	   this.replyDao = (ReplyDao) application.getAttribute("replyDao");
    }
-   ReplyDao replyDao = ReplyDao.getInstance();
    
-   
-
    public int selectCount(int productId) throws SQLException {
       Connection conn = ConnectionProvider.getConnection();
       String sql = "select count(*) from qna where product_id = ? ";

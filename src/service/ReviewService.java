@@ -4,19 +4,20 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import dao.ReviewDao;
 import domain.Review;
 import dto.ReviewList;
 import util.PagingVo;
 
 public class ReviewService {
-   private static ReviewService reviewService = new ReviewService();
-   private ReviewService() {}
-   public static ReviewService getInstance() {
-      return reviewService;
-   }
    
-   ReviewDao reviewDao = ReviewDao.getInstance();
+   private ReviewDao reviewDao;
+   
+   public ReviewService(ServletContext application) {
+	   this.reviewDao = (ReviewDao) application.getAttribute("reviewDao");
+   }
    
 
    public List<ReviewList> showReviewList(int productId,PagingVo pvo) throws SQLException {

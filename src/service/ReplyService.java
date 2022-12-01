@@ -3,18 +3,17 @@ package service;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import dao.ReplyDao;
 import dto.QReply;
 import dto.RReply;
 
 public class ReplyService {
-   ReplyDao replyDao = ReplyDao.getInstance();
+   private ReplyDao replyDao;
    
-   private static ReplyService replyService = new ReplyService();
-   private ReplyService() {}
-   
-   public static ReplyService getInstance() {
-      return replyService;
+   public ReplyService(ServletContext application) {
+	   this.replyDao = (ReplyDao) application.getAttribute("replyDao");
    }
    
    

@@ -11,12 +11,18 @@ import dao.PfilteringDao;
 import dao.ProductAndColorDao;
 import dao.ProductAndSizeDao;
 import dao.ProductDao;
+import dao.QnaDao;
+import dao.ReplyDao;
+import dao.ReviewDao;
 import dao.UserDao;
 import service.OrderService;
 import service.OrdersDetailService;
 import service.ProductAndColorService;
 import service.ProductAndSizeService;
 import service.ProductService;
+import service.QnAService;
+import service.ReplyService;
+import service.ReviewService;
 import service.UserService;
 
 public class WebAppContext implements ServletContextListener{
@@ -43,6 +49,9 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("orderDetailDao", new OrderDetailDao(application));
 		application.setAttribute("orderDao", new OrderDao(application));
 		
+		application.setAttribute("qnaDao", new QnaDao(application));
+		application.setAttribute("reviewDao", new ReviewDao(application));
+		application.setAttribute("replyDao", new ReplyDao());
 		
 		//-------------------- 서비스 ------------------
 		application.setAttribute("productDao", new ProductDao(application));
@@ -54,6 +63,10 @@ public class WebAppContext implements ServletContextListener{
 
 		application.setAttribute("ordersDetailService", new OrdersDetailService(application));
 		application.setAttribute("orderService", new OrderService(application));
+		
+		application.setAttribute("qnaService", new QnAService(application));
+		application.setAttribute("reviewService", new ReviewService(application));
+		application.setAttribute("replyService", new ReplyService(application));
 
 	
 	}

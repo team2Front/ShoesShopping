@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import domain.Product;
 import domain.Review;
 import dto.RReply;
@@ -16,19 +18,13 @@ import util.ConnectionProvider;
 import util.PagingVo;
 
 public class ReviewDao {
-
-   // 싱글톤 생성
-   private static ReviewDao reviewDao = new ReviewDao();
-
-   private ReviewDao() {
+   private ReplyDao replyDao;
+   private ProductDao productDao;
+   
+   public ReviewDao(ServletContext application) {
+	   this.replyDao = (ReplyDao) application.getAttribute("replyDao");
+	   this.productDao = (ProductDao) application.getAttribute("productDao");
    }
-
-   public static ReviewDao getInstance() {
-      return reviewDao;
-   }
-
-   ReplyDao replyDao = ReplyDao.getInstance();
-
    public int selectCount(int productId) throws SQLException {
       Connection conn = ConnectionProvider.getConnection();
       String sql = "select count(*) from review where product_id = ? ";
@@ -72,14 +68,14 @@ public class ReviewDao {
       ResultSet rs = pstmt.executeQuery();
       List<RReply> list = replyDao.selectReviewReply(reviewId);// 댓글 리스트임
       Review r1 = null;
-      while (rs.next()) {
-         int pid = rs.getInt("product_id");
-         Product product = ProductService.getInstance().showOneProduct(pid);
-         r1 = new Review(rs.getInt("review_id"), rs.getString("review_title"), rs.getString("review_content"),
-               rs.getString("review_date"), rs.getString("user_id"), rs.getInt("star_score"),
-               rs.getInt("heart_count"), product, list);
-
-      }
+//      while (rs.next()) {
+//         int pid = rs.getInt("product_id");
+//         Product product = productService.showOneProduct(pid);
+//         r1 = new Review(rs.getInt("review_id"), rs.getString("review_title"), rs.getString("review_content"),
+//               rs.getString("review_date"), rs.getString("user_id"), rs.getInt("star_score"),
+//               rs.getInt("heart_count"), product, list);
+//
+//      }
       pstmt.close();
       conn.close();
 

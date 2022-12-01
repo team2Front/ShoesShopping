@@ -4,20 +4,19 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import dao.QnaDao;
 import domain.Qna;
 import dto.QnaList;
 import util.PagingVo;
 
 public class QnAService {
-   private static QnAService qnaService = new QnAService();
-   private QnAService() {}
-   public static QnAService getInstacne() {
-      return qnaService;
-   }
-   
-   QnaDao qnaDao = QnaDao.getInstacne();
-
+	private QnaDao qnaDao;
+	
+	public QnAService(ServletContext application) {
+		this.qnaDao = (QnaDao) application.getAttribute("qnaDao");
+	}
     
     //큐엔에이 전체 글 수 구하기
    public int countAllQnas(int productId) throws SQLException {
