@@ -22,6 +22,7 @@ public class OrderDetailDao {
 	//field
 	private static PreparedStatement pstmt;
 	private ServletContext application;
+	private OrderDao orderDao;
 	private ColorDao colorDao;
 	private ProductDao productDao;
 	//private ProductAndColorDao productAndColorDao;
@@ -32,6 +33,7 @@ public class OrderDetailDao {
 	//constructor
 	public OrderDetailDao(ServletContext application) {
 		this.application = application;
+		this.orderDao = (OrderDao) application.getAttribute("orderDao");
 		this.colorDao = (ColorDao) application.getAttribute("colorDao");
 		this.productDao = (ProductDao) application.getAttribute("productDao");
 		//this.productAndColorDao = (ProductAndColorService) application.getAttribute("productAndColorDao");
@@ -108,7 +110,7 @@ public class OrderDetailDao {
 				int totalPrice = product.getProductPrice() * quantity;
 				
 				// order 테이블에 정보 삽입  orders_id 값 받아오기
-				int oId = OrderDao.getInstace().insertOrder(conn, userId, totalPrice, quantity);
+				int oId = orderDao.insertOrder(conn, userId, totalPrice, quantity);
 				
 				//oder details 테이블에 데이터 삽입하기 
 				String sql ="insert into orders_detail (orders_detail_id, product_id, orders_id, quantity, size_id, color_id) values(ordersDetail_seq.nextval, ?, ?, ?, ?, ?)";

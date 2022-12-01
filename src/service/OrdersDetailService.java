@@ -8,8 +8,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import dao.OrderDetailDao;
-import dao.ProductAndColorDao;
-import dao.ProductAndSizeDao;
+import domain.Cart;
 import domain.CartDetail;
 import domain.OrderDetailDto;
 import domain.Product;
@@ -24,24 +23,16 @@ public class OrdersDetailService {
 	private OrderService orderService;
 	private ProductAndColorService productAndColorService;
 	private ProductAndSizeService productAndSizeService;
-	private CartService CartService;
+	private CartDetailService cartDetailService;
 		
 	//constructor
-	public OrderDetailService(ServletContext application) {
+	public OrdersDetailService(ServletContext application) {
 		this.application = application;
-		this.orderDetailDao = (OrderDetailDao) application.getAttribute("orderDetailDao");
+		this.orderDetailDao = (OrderDetailDao) application.getAttribute("ordersDetailDao");
 		this.orderService = (OrderService) application.getAttribute("orderService");
-		this.productAndColorService = (ProductAndColorDao) application.getAttribute("productAndColorService");
-		this.productAndSizeService = (ProductAndSizeDao) application.getAttribute("productAndSizeService");
-		this.cartService = (Cart) application.getAttribute("cart");
-	}
-	
-	CartDetailService cartDetailService = CartDetailService.getInstance();
-	
-	private OrdersDetailService() {};
-	
-	public static OrdersDetailService getInstance() {
-		return ordersDetailService;
+		this.productAndColorService = (ProductAndColorService) application.getAttribute("productAndColorService");
+		this.productAndSizeService = (ProductAndSizeService) application.getAttribute("productAndSizeService");
+		this.cartDetailService = (CartDetailService) application.getAttribute("cartDetailService");
 	}
 	
 	

@@ -4,15 +4,18 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import dao.ColorDao;
 import dao.OrderDao;
 import dao.OrderDetailDao;
-import service.OrderService;
-
-import dao.ColorDao;
 import dao.PfilteringDao;
 import dao.ProductAndColorDao;
 import dao.ProductAndSizeDao;
 import dao.ProductDao;
+import service.OrderService;
+import service.OrdersDetailService;
+import service.ProductAndColorService;
+import service.ProductAndSizeService;
+import service.ProductService;
 
 public class WebAppContext implements ServletContextListener{
 	@Override
@@ -36,10 +39,13 @@ public class WebAppContext implements ServletContextListener{
 		
 		//-------------------- 서비스 ------------------
 		application.setAttribute("productDao", new ProductDao(application));
-		application.setAttribute("orderDetailService", new OrderDetailService(application));
+		application.setAttribute("productAndColorService", new ProductAndColorService(application));
+		application.setAttribute("productAndSizeService", new ProductAndSizeService(application));
+		application.setAttribute("productService", new ProductService(application));
+
+		application.setAttribute("ordersDetailService", new OrdersDetailService(application));
 		application.setAttribute("orderService", new OrderService(application));
-		
-		
+
 	
 	}
 }
