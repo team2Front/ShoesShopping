@@ -4,6 +4,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import dao.OrderDao;
+import dao.OrderDetailDao;
+import service.OrderService;
+
 public class WebAppContext implements ServletContextListener{
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
@@ -14,11 +18,16 @@ public class WebAppContext implements ServletContextListener{
 		
 		// Servlet Context 객체에 데이터(객체) 저장하기 , 모든 쿨라이언트들이 사용 가능한 공유 객체가 된다.
 		
-		//-------------------- 서비스 ------------------
-		
-		
-		
 		//-------------------- Dao ------------------
+		application.setAttribute("orderDetailDao", new OrderDetailDao(application));
+		application.setAttribute("orderDao", new OrderDao(application));
+		
+		
+		//-------------------- 서비스 ------------------
+		application.setAttribute("orderDetailService", new OrderDetailService(application));
+		application.setAttribute("orderService", new OrderService(application));
+		
+		
 	
 	}
 }

@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
+import dao.OrderDao;
 import dao.OrderDetailDao;
 import domain.CartDetail;
 import domain.OrderDetailDto;
@@ -13,7 +16,17 @@ import dto.OrderDto;
 import util.ConnectionProvider;
 
 public class OrdersDetailService {
+	//field
 	static PreparedStatement pstmt;
+	private ServletContext application;
+	private OrderDetailDao orderDetailDao; 
+		
+	//constructor
+	public OrderDetailService(ServletContext application) {
+		this.application = application;
+		this.orderDetailDao = (OrderDetailDao) application.getAttribute("orderDetailDao");
+	}
+	
 	private static OrdersDetailService ordersDetailService = new OrdersDetailService();	
 	OrderService orderService = OrderService.getInstance();
 	CartDetailService cartDetailService = CartDetailService.getInstance();

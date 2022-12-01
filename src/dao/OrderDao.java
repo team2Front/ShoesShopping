@@ -7,18 +7,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import domain.OrderDetailDto;
 import domain.Orders;
 import util.ConnectionProvider;
 import util.PagingVo;
 
 public class OrderDao {
+	//field
 	private static PreparedStatement pstmt;
-	private static OrderDao orderDao = new OrderDao();
-	OrderDetailDao orderDetailDao = OrderDetailDao.getInstance();
-
-	public static OrderDao getInstace() {
-		return orderDao;
+	private ServletContext application;
+	private OrderDetailDao orderDaoDetail; 
+		
+	//constructor
+	public OrderDao(ServletContext application) {
+		this.application = application;
+		this.orderDetailDao = (OrderDetailDao) application.getAttribute("orderDetailDao");
 	}
 	
 	// order 테이블 전체 count

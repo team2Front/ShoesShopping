@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import dao.OrderDao;
 import domain.Orders;
 import lombok.NoArgsConstructor;
@@ -11,11 +13,14 @@ import util.PagingVo;
 
 @NoArgsConstructor
 public class OrderService {
-	private static OrderService orderService = new OrderService();
-	OrderDao orderDao = OrderDao.getInstace();
-
-	public static OrderService getInstance() {
-		return orderService;
+	//field
+	private ServletContext application;
+	private OrderDao orderDao; 
+	
+	//constructor
+	public OrderService(ServletContext application) {
+		this.application = application;
+		this.orderDao = (OrderDao) application.getAttribute("orderDao");
 	}
 	
 	// order 테이블 전체 count
