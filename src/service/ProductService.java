@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import dao.PfilteringDao;
 import dao.ProductAndColorDao;
 import dao.ProductAndSizeDao;
@@ -16,19 +18,18 @@ import util.ConnectionProvider;
 import util.PagingVo;
 
 public class ProductService {
-	//싱글톤 구현
-	private static ProductService productService = new ProductService();
-	private ProductService() {
-	}
-	public static ProductService getInstance() {
-		return productService;
-	}
-	// ProductDao 객체 불러옴
-	ProductDao productDao = ProductDao.getInstance();
-	PfilteringDao pfilteringDao = PfilteringDao.getInstance();
-	ProductAndColorDao productAndColorDao = ProductAndColorDao.getInstance();
-	ProductAndSizeDao productAndSizeDao = ProductAndSizeDao.getInstance();
+	ProductDao productDao;
+	PfilteringDao pfilteringDao;
+	ProductAndColorDao productAndColorDao;
+	ProductAndSizeDao productAndSizeDao;
 	
+	public ProductService(ServletContext application) {
+		this.productDao = (ProductDao) application.getAttribute("productDao");
+		this.pfilteringDao = (PfilteringDao) application.getAttribute("pfilteringDao");
+		this.productAndColorDao = (ProductAndColorDao) application.getAttribute("productAndColorDao");
+		this.productAndSizeDao = (ProductAndSizeDao) application.getAttribute("productAndSizeDao");
+	}
+
 	// 필터링 x
 	// 상품 총수량
 	public int countAllProducts() throws SQLException {

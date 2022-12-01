@@ -9,6 +9,9 @@ import dao.PfilteringDao;
 import dao.ProductAndColorDao;
 import dao.ProductAndSizeDao;
 import dao.ProductDao;
+import service.ProductAndColorService;
+import service.ProductAndSizeService;
+import service.ProductService;
 
 public class WebAppContext implements ServletContextListener{
 	@Override
@@ -30,7 +33,9 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("productDao", new ProductDao(application));
 		
 		//-------------------- 서비스 ------------------
-		
-		
+		application.setAttribute("productAndColorService", new ProductAndColorService(application));
+		application.setAttribute("productAndSizeService", new ProductAndSizeService(application));
+		application.setAttribute("productService", new ProductService(application));
+
 	}
 }

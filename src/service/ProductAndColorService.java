@@ -3,20 +3,20 @@ package service;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import dao.ProductAndColorDao;
 import domain.Color;
 
 public class ProductAndColorService {
-	private static ProductAndColorService productAndColorService = new ProductAndColorService();
-	private ProductAndColorService() {}
-	public static ProductAndColorService getInstance() {
-		return productAndColorService;
-	}
+	ProductAndColorDao productAndColorDao;
 	
-	ProductAndColorDao productAndColorDao = ProductAndColorDao.getInstance();
+	public ProductAndColorService(ServletContext application) {
+		this.productAndColorDao = (ProductAndColorDao) application.getAttribute("productAndColorDao");
+	}
+
 	public void addProductColors(int pid, List<Integer> colorList) throws SQLException {
 		productAndColorDao.insertProductColors(pid, colorList);
-
 	}
 
 	// 해당상품의 전체 색상 리스트 리턴

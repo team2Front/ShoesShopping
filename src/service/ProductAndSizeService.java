@@ -3,16 +3,18 @@ package service;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import dao.ProductAndSizeDao;
 
 public class ProductAndSizeService {
-	private static ProductAndSizeService productAndSizeService = new ProductAndSizeService();
-	private ProductAndSizeService() {}
-	public static ProductAndSizeService getInstance() {
-		return productAndSizeService;
-	}
+	ProductAndSizeDao productAndSizeDao;
 	
-	ProductAndSizeDao productAndSizeDao = ProductAndSizeDao.getInstance();
+	public ProductAndSizeService(ServletContext application) {
+		this.productAndSizeDao = (ProductAndSizeDao) application.getAttribute("productAndSizeDao");
+	}
+
+	
 
 	public void addProductSizes(int pid, List<Integer> sizeList) throws SQLException {
 		// 상품 id ,그 상품의 사이즈들을 리스트로 받아와서 각각 Product_size 테이블에 삽입한다.
