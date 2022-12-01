@@ -12,14 +12,6 @@ import util.ConnectionProvider;
 import util.PagingVo;
 
 public class PfilteringDao {
-	//싱글톤
-	private static PfilteringDao pfilteringDao = new PfilteringDao();
-	private PfilteringDao() {
-	}
-	public static PfilteringDao getInstance() {
-		return pfilteringDao;
-	}
-
 	// 1) 카테고리
 	public int selectCountCategory(int cateId) throws SQLException {// 선택한 카테고리상품의 총수량
 		Connection conn = ConnectionProvider.getConnection();

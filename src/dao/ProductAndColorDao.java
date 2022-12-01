@@ -7,20 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import domain.Color;
 import util.ConnectionProvider;
 
-public class ProductAndColorDao {
-	private static ProductAndColorDao productAndColorDao = new ProductAndColorDao();
+public class ProductAndColorDao {	
+	ColorDao colorDao;
 
-	private ProductAndColorDao() {
+	public ProductAndColorDao(ServletContext application) {
+		this.colorDao = (ColorDao) application.getAttribute("colorDao");
 	}
-
-	public static ProductAndColorDao getInstance() {
-		return productAndColorDao;
-	}
-
-	ColorDao colorDao = ColorDao.getInstance();
 
 	// 상품 id ,그 상품의 사이즈들을 리스트로 받아와서 각각 Product_size 테이블에 삽입한다.
 	public int insertProductColors(int pid, List<Integer> colorList) throws SQLException {
