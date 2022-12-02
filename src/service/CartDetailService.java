@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 
 import dao.CartDetailDao;
 import domain.CartDetail;
@@ -13,16 +15,28 @@ import dto.OrderDto;
 import util.ConnectionProvider;
 
 public class CartDetailService {
+	private DataSource ds;
 	private CartDetailDao cartDetailDao;
 	private ProductService productService;
 	private ProductAndColorService productAndColorService;
 	private ProductAndSizeService productAndSizeService;
 	private CartService cartService;
-	private ServletContext application;
 	
 	public CartDetailService(ServletContext application) {
+		try {
+		      InitialContext ic = new InitialContext();
+		      ds = (DataSource) ic.lookup("java:comp/env/jdbc/java");
+		      Connection conn = ds.getConnection();
+		      conn.close();
+		      }catch(Exception e) {
+		         e.printStackTrace();
+		      }
+		
 		this.cartDetailDao = (CartDetailDao) application.getAttribute("cartDetailDao");
-		this.application = application;
+		this.productService = (ProductService) application.getAttribute("productService");
+		this.productAndColorService = (ProductAndColorService) application.getAttribute("productAndColorService");
+		this.productAndSizeService = (ProductAndSizeService) application.getAttribute("productAndSizeService");
+		this.cartService = (CartService) application.getAttribute("cartService");
 	}
 	
 	// 해당 상품을 장바구니에 넣는다.
@@ -32,7 +46,7 @@ public class CartDetailService {
 		String result = "";
     	
     	try {
-    		conn = ConnectionProvider.getConnection();
+    		conn = ds.getConnection();
 			conn.setAutoCommit(false);
 			
 			
@@ -71,8 +85,13 @@ public class CartDetailService {
   
     
     // 장바구니에 담긴 내역들 list 로 Cart 에 전달하기
-    public List<CartDetail> findByUserId(Connection conn, String userId) throws SQLException {
-    	List<CartDetail> list = cartDetailDao.selectCartDetails(conn, userId);
+    public List<CartDetail> findByUserId(Connection conn, String userId) {
+    	List<CartDetail> list = null;
+		try {
+			list = cartDetailDao.selectCartDetails(conn, userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return list;
     }
     
@@ -83,7 +102,7 @@ public class CartDetailService {
     	String result = "";
     	
 		try {
-			conn = ConnectionProvider.getConnection();
+			conn = ds.getConnection();
 			conn.setAutoCommit(false);
 			
 			CartDetail cd = getCartDetailOne(conn, cdId);
@@ -125,7 +144,7 @@ public class CartDetailService {
     	CartDetail cd;
 		try {
 			cd = cartDetailDao.selectCartDetail(conn, cartDetailId);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
@@ -140,7 +159,7 @@ public class CartDetailService {
      	String str = "";
      	   	
      	try {
-     		conn = ConnectionProvider.getConnection();
+     		conn = ds.getConnection();
      		conn.setAutoCommit(false);
      		
      		// 변경 전 기존의 수량, 수량*상품금액 가져오기

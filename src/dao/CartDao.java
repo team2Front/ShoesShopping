@@ -14,9 +14,7 @@ public class CartDao {
 	// DTO 를 리턴한다.	
 	
 	//장바구니 생성
-	public int insertCart(String userId) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
-
+	public int insertCart(Connection conn, String userId) throws Exception {
 		String sql = "insert into cart(user_id, total_price, total_quantity) values (?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -29,7 +27,7 @@ public class CartDao {
 	}
 
 	// 장바구니 조회 
-	public CartDto selectCart(Connection conn, String userId) throws SQLException {
+	public CartDto selectCart(Connection conn, String userId) throws Exception {
 		String sql = "select total_price, total_quantity from cart where user_id=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 	    pstmt.setString(1, userId);
@@ -49,13 +47,13 @@ public class CartDao {
 	
 	
 	// 장바구니 수정
-	public void updateCart(Connection conn, String userId, int price, int quantity) {
+	public void updateCart(Connection conn, String userId, int price, int quantity) throws Exception {
     	//cart 에 정보 수하기
 		System.out.println("!!! " + conn);
 		System.out.println(userId);
 		System.out.println(price);
 		System.out.println(quantity);
-		try {
+		
 		String sql = "update cart set total_price=?, total_quantity=? where user_id=?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, price);           
@@ -64,11 +62,6 @@ public class CartDao {
 		    
 		   int rows = pstmt.executeUpdate();
 		   System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~   " + rows);
-
-		}catch(SQLException e) {
-			e.printStackTrace();
-//			throw new RuntimeException(e);
-		}
 	}
 
 }
