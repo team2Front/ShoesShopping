@@ -8,14 +8,6 @@ import java.sql.SQLException;
 import util.ConnectionProvider;
 
 public class CategoryDao {
-	
-	private static CategoryDao categoryDao = new CategoryDao();
-	private CategoryDao() {
-	}
-	public static CategoryDao getInstance() {
-		return categoryDao;
-	}
-
 	public String findCategoty(int categoryId) throws SQLException {
 		Connection conn = ConnectionProvider.getConnection();
 		PreparedStatement pstmt= null;

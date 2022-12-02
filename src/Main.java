@@ -17,9 +17,9 @@ public class Main {
 //	         QnAService.startQnAService(conn);
 //	         System.out.println();
 //	         QnAService.writeQna(2, "제발 되라", "되면 국밥이다", "d", 3);
-	        ProductService productService = ProductService.getInstance();
-	        System.out.println(productService.showOneProduct(1));
-	        
+//	        ProductService productService = ProductService.getInstance();
+//	        System.out.println(productService.showOneProduct(1));
+//	        
 	         
 	         
 	      } catch (Exception e) {

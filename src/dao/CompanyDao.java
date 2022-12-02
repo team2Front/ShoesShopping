@@ -8,13 +8,6 @@ import java.sql.SQLException;
 import util.ConnectionProvider;
 
 public class CompanyDao {
-	private static CompanyDao companyDao = new CompanyDao();
-	private CompanyDao() {
-	}
-	public static CompanyDao getInstance() {
-		return companyDao;
-	}
-	
 	//아이디를 이름으로 리턴
 	public String selectFindCompany(int companyId) throws SQLException {
 		Connection conn = ConnectionProvider.getConnection();

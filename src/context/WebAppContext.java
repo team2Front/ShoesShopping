@@ -6,7 +6,9 @@ import javax.servlet.ServletContextListener;
 
 import dao.CartDao;
 import dao.CartDetailDao;
+import dao.CategoryDao;
 import dao.ColorDao;
+import dao.CompanyDao;
 import dao.OrderDao;
 import dao.OrderDetailDao;
 import dao.PfilteringDao;
@@ -43,6 +45,8 @@ public class WebAppContext implements ServletContextListener{
 		/*객체 순서: product -> cart -> user -> reply/review/qna -> order */
 		
 		//-------------------- Dao ------------------
+		application.setAttribute("companyDao", new CompanyDao());
+		application.setAttribute("categoryDao", new CategoryDao());
 		application.setAttribute("pfilteringDao", new PfilteringDao());
 		application.setAttribute("colorDao", new ColorDao());
 		application.setAttribute("productAndColorDao",  new ProductAndColorDao(application));
