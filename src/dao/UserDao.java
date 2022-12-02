@@ -13,7 +13,6 @@ import util.ConnectionProvider;
 
 public class UserDao {
 	//field
-	private static PreparedStatement pstmt;
 	private ServletContext application;
 	
 	//constructor
