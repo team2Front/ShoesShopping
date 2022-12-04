@@ -25,5 +25,4 @@ public class CategoryDao {
 		
 		return category;
 	}
-
 }

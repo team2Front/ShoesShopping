@@ -3,43 +3,33 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
-import javax.sql.DataSource;
 
 import domain.Product;
 import dto.ProductList;
 import dto.RegisterProduct;
-import util.ConnectionProvider;
+import service.ProductAndColorService;
+import service.ProductAndSizeService;
 import util.PagingVo;
 
 public class ProductDao {
-	ProductAndSizeDao productAndSizeDao ;
+	ProductAndSizeDao productAndSizeDao;
 	ProductAndColorDao productAndColorDao;
+	ProductAndColorService productAndColorService;
+	ProductAndSizeService productAndSizeService;
 	CategoryDao categoryDao;
-	private ServletContext application;
-	private DataSource ds;
 
 	public ProductDao(ServletContext application) {
 		this.productAndSizeDao = (ProductAndSizeDao) application.getAttribute("productAndSizeDao");
 		this.productAndColorDao = (ProductAndColorDao) application.getAttribute("productAndColorDao");
 		this.categoryDao = (CategoryDao) application.getAttribute("categoryDao");
-		this.application = application;
-		try {
-			InitialContext ic = new InitialContext();
-			ds = (DataSource) ic.lookup("java:comp/env/jdbc/java");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	// 상품의 총수량
-	public int selectCountAll() throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public int selectCountAll(Connection conn) throws Exception {
 		String sql = "select count(product_id) from product where is_deleted = '0'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
@@ -49,19 +39,16 @@ public class ProductDao {
 			cnt = rs.getInt(1);
 		}
 		pstmt.close();
-		conn.close();
+		
 		return cnt;
 	}
 
 	// 모든 상품 목록(간단히 보기)
-	public List<ProductList> selectProductList(PagingVo pvo) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public List<ProductList> selectProductList(Connection conn, PagingVo pvo) throws Exception {
 		ProductList pdl = null;
 
 		int endRn = pvo.getEndRowNo(); // 페이지의 끝행 번호
 		int startRn = pvo.getStartRowNo();// 페이지의 시작 행 번호
-		System.out.println(endRn);
-		System.out.println(startRn);
 
 		String sql = "select rm, product_id, product_name, company_id, category_id, product_sex, product_price  "
 				+ "from( "
@@ -79,19 +66,17 @@ public class ProductDao {
 		while (rs.next()) {
 
 			pdl = new ProductList(rs.getInt("product_id"), rs.getString("product_name"),
-					selectFindCompany(rs.getInt("company_id")), selectFindCategory(rs.getInt("category_id")),
+					selectFindCompany(conn, rs.getInt("company_id")), selectFindCategory(conn, rs.getInt("category_id")),
 					rs.getString("product_sex"), rs.getInt("product_price"));
 			list.add(pdl);
 		}
 		pstmt.close();
-		conn.close();
+		
 		return list;
 	}
 
 	// companyId로 회사명 가져오기
-	public String selectFindCompany(int companyId) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
-
+	public String selectFindCompany(Connection conn, int companyId) throws Exception {
 		String sql = "select company_name from company where company_id=? ";
 		String cname = "";
 
@@ -102,15 +87,13 @@ public class ProductDao {
 		if (rs.next()) {
 			cname = rs.getString("company_name");
 		}
-		conn.close();
 		pstmt.close();
+		
 		return cname;
 	}
 
 	// 아이디로 카테고리 명 가져오기
-	public String selectFindCategory(int category) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
-
+	public String selectFindCategory(Connection conn, int category) throws Exception {
 		String sql = "select category_kind from category where category_id=?";
 		String cname = "";
 
@@ -122,96 +105,72 @@ public class ProductDao {
 			cname = rs.getString("category_kind");
 
 		}
-		conn.close();
 		pstmt.close();
+		
 		return cname;
 	}
 
 	
 	// 상품하나만 가져오기 정은
-		public Product selectProductOne(int productId) throws Exception {
-			CategoryDao categoryDao = (CategoryDao) application.getAttribute("categoryDao");
-			Connection conn = ds.getConnection();
-			PreparedStatement pstmt = null;
-			Product p = null;
-			try {
-				String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, productId);
-				ResultSet rs = pstmt.executeQuery();
-
-				if (rs.next()) {
-					int pid = rs.getInt("product_id");
-					p = new Product(pid, rs.getString("product_name"), rs.getBoolean("is_deleted"),rs.getInt("product_price"),
-							rs.getString("product_sex"), selectFindCompany(rs.getInt("company_id")),
-							categoryDao.findCategoty(conn, rs.getInt("category_id")),
-							productAndColorService.findProductColors(pid), productAndSizeService.findProductSizeList(pid));
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				try { conn.close(); } catch(Exception e) {}
-			}
-			pstmt.close();
-			return p;
+	public Product selectProductOne(Connection conn, int productId) throws Exception {
+		PreparedStatement pstmt = null;
+		Product p = null;
+		
+		String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, productId);
+		ResultSet rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			int pid = rs.getInt("product_id");
+			p = new Product(pid, rs.getString("product_name"), rs.getBoolean("is_deleted"),
+					rs.getInt("product_price"), rs.getString("product_sex"),
+					selectFindCompany(conn, rs.getInt("company_id")),
+					categoryDao.findCategoty(conn, rs.getInt("category_id")),
+					productAndColorService.findProductColors(pid), productAndSizeService.findProductSizeList(pid));
 		}
+		
+		pstmt.close();
+		
+		return p;
+	}
 
 	
 
 	// 트랜잭션
-	public void selectCheckColor(Connection conn, List<Integer> colorList) {
+	public void selectCheckColor(Connection conn, List<Integer> colorList) throws Exception {
 		PreparedStatement pstmt = null;
-		System.out.println("셀렉트체크");
 		for (Integer i : colorList) {
 			String sql = "select color_id from color where color_id=?";
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, i);
-				ResultSet rs = pstmt.executeQuery();
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			ResultSet rs = pstmt.executeQuery();
 
-				if (!rs.next()) {
-					throw new RuntimeException("컬러 없는 상품입니다.");
-				}
-			} catch (SQLException e) {
-			} finally {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-				}
+			if (!rs.next()) {
+				throw new RuntimeException("컬러 없는 상품입니다.");
 			}
 		}
-
-	
 	}
 
-	public void selectCheckSize(Connection conn, List<Integer> sizeList) throws SQLException {
+	public void selectCheckSize(Connection conn, List<Integer> sizeList) throws Exception {
 		PreparedStatement pstmt = null;
 
 		for (Integer i : sizeList) {
 			String sql = "select size_id from ssize where size_id=?";
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, i);
-				ResultSet rs = pstmt.executeQuery();
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			ResultSet rs = pstmt.executeQuery();
 
-				if (!rs.next()) {
-					throw new RuntimeException("사이즈 없는 상품입니다.");
-				}
-			} catch (SQLException e) {
-			} finally {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-				}
+			if (!rs.next()) {
+				throw new RuntimeException("사이즈 없는 상품입니다.");
 			}
-
 		}
-
 	}
 
 	// 상품 등록하기
-	public int insertProduct(Connection conn, RegisterProduct ap) throws SQLException {
+	public int insertProduct(Connection conn, RegisterProduct ap) throws Exception {
 		int pid = 0;
 		String sql = "insert into product" + "(product_id, product_name, product_price, category_id, company_id , "
 				+ "product_sex) values (product_seq.nextval,?,?,?,?,?)";
@@ -236,16 +195,14 @@ public class ProductDao {
 				pid = rs.getInt("product_id");
 				// pid = rs.getInt(1);
 			}
-			System.out.println(pid);
 		}
 		pstmt.close();
+		
 		return pid;
-
 	}
 
 	// 상품 삭제하기
-	public boolean deleteProduct(int pId) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public boolean deleteProduct(Connection conn, int pId) throws Exception {
 		String sql = "update product set is_deleted = '1' where product_id=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pId);
@@ -254,11 +211,12 @@ public class ProductDao {
 		boolean result;
 		if (rows == 1) {
 			result = true;
-		} else
+		} else {
 			result = false;
-
-		conn.close();
+		}
+		
 		pstmt.close();
+		
 		return result;
 	}
 

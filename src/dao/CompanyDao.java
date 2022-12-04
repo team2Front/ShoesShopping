@@ -3,9 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import util.ConnectionProvider;
 
 public class CompanyDao {
 	//아이디를 이름으로 리턴

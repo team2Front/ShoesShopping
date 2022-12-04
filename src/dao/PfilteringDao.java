@@ -3,18 +3,16 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import dto.ProductList;
-import util.ConnectionProvider;
 import util.PagingVo;
 
 public class PfilteringDao {
 	// 1) 카테고리
-	public int selectCountCategory(int cateId) throws SQLException {// 선택한 카테고리상품의 총수량
-		Connection conn = ConnectionProvider.getConnection();
+	public int selectCountCategory(Connection conn, int cateId) throws Exception {
+		// 선택한 카테고리상품의 총수량
 		String sql = "select count(product_id) from product  where category_id=? and is_deleted = '0'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, cateId);
@@ -25,18 +23,16 @@ public class PfilteringDao {
 			cnt = rs.getInt(1);
 		}
 		pstmt.close();
-		conn.close();
+		
 		return cnt;
+		
 	}
 
-	public List<ProductList> selectShowCategory(PagingVo pvo, int category) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public List<ProductList> selectShowCategory(Connection conn, PagingVo pvo, int category) throws Exception {
 		ProductList pdl = null;
 
 		int endRn = pvo.getEndRowNo(); // 페이지의 끝행 번호
 		int startRn = pvo.getStartRowNo();// 페이지의 시작 행 번호
-		System.out.println(endRn);
-		System.out.println(startRn);
 
 		String sql = "select rm, product_id, product_name, company_id, category_id, product_sex, product_price  "
 				+ "from( "
@@ -56,18 +52,17 @@ public class PfilteringDao {
 		while (rs.next()) {
 			System.out.println("~~~~~~~");
 			pdl = new ProductList(rs.getInt("product_id"), rs.getString("product_name"),
-					selectFindCompany(rs.getInt("company_id")), selectFindCategory(rs.getInt("category_id")),
+					selectFindCompany(conn, rs.getInt("company_id")), selectFindCategory(conn, rs.getInt("category_id")),
 					rs.getString("product_sex"), rs.getInt("product_price"));
 			list.add(pdl);
 		}
 		pstmt.close();
-		conn.close();
+		
 		return list;
 	}
 
 	// 2) 회사 기준
-	public int selectCountCompany(int company) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public int selectCountCompany(Connection conn, int company) throws Exception {
 		String sql = "select count(product_id) from product  where company_id=? and is_deleted = '0'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, company);
@@ -78,18 +73,15 @@ public class PfilteringDao {
 			cnt = rs.getInt(1);
 		}
 		pstmt.close();
-		conn.close();
+		
 		return cnt;
 	}
 
-	public List<ProductList> selectShowCompany(PagingVo pvo, int company) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public List<ProductList> selectShowCompany(Connection conn, PagingVo pvo, int company) throws Exception {
 		ProductList pdl = null;
 
 		int endRn = pvo.getEndRowNo(); // 페이지의 끝행 번호
 		int startRn = pvo.getStartRowNo();// 페이지의 시작 행 번호
-		System.out.println(endRn);
-		System.out.println(startRn);
 
 		String sql = "select rm, product_id, product_name, company_id, category_id, product_sex, product_price  "
 				+ "from( "
@@ -109,18 +101,17 @@ public class PfilteringDao {
 		while (rs.next()) {
 			System.out.println("~~~~~~~");
 			pdl = new ProductList(rs.getInt("product_id"), rs.getString("product_name"),
-					selectFindCompany(rs.getInt("company_id")), selectFindCategory(rs.getInt("category_id")),
+					selectFindCompany(conn, rs.getInt("company_id")), selectFindCategory(conn, rs.getInt("category_id")),
 					rs.getString("product_sex"), rs.getInt("product_price"));
 			list.add(pdl);
 		}
 		pstmt.close();
-		conn.close();
+		
 		return list;
 	}
 
 	// 3) 성별 기준
-	public int selectCountSex(String sex) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public int selectCountSex(Connection conn, String sex) throws Exception {
 		String sql = "select count(product_id) from product  where product_sex=? and is_deleted = '0'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, sex);
@@ -131,18 +122,15 @@ public class PfilteringDao {
 			cnt = rs.getInt(1);
 		}
 		pstmt.close();
-		conn.close();
+		
 		return cnt;
 	}
 
-	public List<ProductList> selectShowSex(PagingVo pvo, String sex) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public List<ProductList> selectShowSex(Connection conn, PagingVo pvo, String sex) throws Exception {
 		ProductList pdl = null;
 
 		int endRn = pvo.getEndRowNo(); // 페이지의 끝행 번호
 		int startRn = pvo.getStartRowNo();// 페이지의 시작 행 번호
-		System.out.println(endRn);
-		System.out.println(startRn);
 
 		String sql = "select rm, product_id, product_name, company_id, category_id, product_sex, product_price  "
 				+ "from( "
@@ -160,26 +148,22 @@ public class PfilteringDao {
 		List<ProductList> list = new ArrayList<>();
 
 		while (rs.next()) {
-			System.out.println("~~~~~~~");
 			pdl = new ProductList(rs.getInt("product_id"), rs.getString("product_name"),
-					selectFindCompany(rs.getInt("company_id")), selectFindCategory(rs.getInt("category_id")),
+					selectFindCompany(conn, rs.getInt("company_id")), selectFindCategory(conn, rs.getInt("category_id")),
 					rs.getString("product_sex"), rs.getInt("product_price"));
 			list.add(pdl);
 		}
 		pstmt.close();
-		conn.close();
+		
 		return list;
 	}
 	// 4) 가격 기준
 
-	public List<ProductList> selectShowPrice(PagingVo pvo, String price) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public List<ProductList> selectShowPrice(Connection conn, PagingVo pvo, String price) throws Exception {
 		ProductList pdl = null;
 
 		int endRn = pvo.getEndRowNo(); // 페이지의 끝행 번호
 		int startRn = pvo.getStartRowNo();// 페이지의 시작 행 번호
-		System.out.println(endRn);
-		System.out.println(startRn);
 
 		String sql = "";
 		if (price.equals("asc")) {
@@ -209,19 +193,17 @@ public class PfilteringDao {
 		while (rs.next()) {
 			System.out.println("~~~~~~~");
 			pdl = new ProductList(rs.getInt("product_id"), rs.getString("product_name"),
-					selectFindCompany(rs.getInt("company_id")), selectFindCategory(rs.getInt("category_id")),
+					selectFindCompany(conn, rs.getInt("company_id")), selectFindCategory(conn, rs.getInt("category_id")),
 					rs.getString("product_sex"), rs.getInt("product_price"));
 			list.add(pdl);
 		}
 		pstmt.close();
-		conn.close();
+		
 		return list;
 	}
 
 	// 회사 아이디를 입력하면 회사 이름으로 출력해줌
-	public String selectFindCompany(int companyId) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
-
+	public String selectFindCompany(Connection conn, int companyId) throws Exception {
 		String sql = "select company_name from company where company_id=?";
 		String cname = "";
 
@@ -234,14 +216,12 @@ public class PfilteringDao {
 
 		}
 		conn.close();
-		pstmt.close();
+		
 		return cname;
 	}
 
 	// 아이디로 카테고리 명 가져오기
-	public String selectFindCategory(int category) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
-
+	public String selectFindCategory(Connection conn, int category) throws Exception {
 		String sql = "select category_kind from category where category_id=?";
 		String cname = "";
 
@@ -254,7 +234,7 @@ public class PfilteringDao {
 
 		}
 		conn.close();
-		pstmt.close();
+		
 		return cname;
 	}
 

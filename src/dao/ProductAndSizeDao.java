@@ -3,17 +3,13 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.ConnectionProvider;
-
 public class ProductAndSizeDao {
 
-	public int insertProductSizes(int pid, List<Integer> sizeList) throws SQLException {
+	public int insertProductSizes(Connection conn, int pid, List<Integer> sizeList) throws Exception {
 		// 상품 id ,그 상품의 사이즈들을 리스트로 받아와서 각각 Product_size 테이블에 삽입한다.
-		Connection conn = ConnectionProvider.getConnection();
 		PreparedStatement pstmt = null;
 		int sum = 0;
 		int result = 0;
@@ -30,7 +26,6 @@ public class ProductAndSizeDao {
 				result = 1;
 			}
 			conn.close();
-			pstmt.close();
 			
 			return result;
 			
@@ -38,9 +33,7 @@ public class ProductAndSizeDao {
 	}
 	
 	// 해당상품의 전체 사이즈  리스트 리턴 
-	public List<Integer> selectProductSizes(int productId) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
-
+	public List<Integer> selectProductSizes(Connection conn, int productId) throws Exception {
 		String sql = "select size_id from product_size where product_id=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1,  productId);
@@ -52,7 +45,7 @@ public class ProductAndSizeDao {
 			
         }
 		pstmt.close();
-		conn.close();
+		
 		return sizeList;
 	}
 }
