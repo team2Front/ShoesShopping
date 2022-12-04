@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 
 import domain.Product;
 import dto.ProductList;
 import dto.RegisterProduct;
-import service.ProductAndColorService;
-import service.ProductAndSizeService;
 import util.ConnectionProvider;
 import util.PagingVo;
 
@@ -21,11 +21,20 @@ public class ProductDao {
 	ProductAndSizeDao productAndSizeDao ;
 	ProductAndColorDao productAndColorDao;
 	CategoryDao categoryDao;
+	private ServletContext application;
+	private DataSource ds;
 
 	public ProductDao(ServletContext application) {
 		this.productAndSizeDao = (ProductAndSizeDao) application.getAttribute("productAndSizeDao");
 		this.productAndColorDao = (ProductAndColorDao) application.getAttribute("productAndColorDao");
 		this.categoryDao = (CategoryDao) application.getAttribute("categoryDao");
+		this.application = application;
+		try {
+			InitialContext ic = new InitialContext();
+			ds = (DataSource) ic.lookup("java:comp/env/jdbc/java");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	// 상품의 총수량
@@ -120,32 +129,32 @@ public class ProductDao {
 
 	
 	// 상품하나만 가져오기 정은
-		public Product selectProductOne(int productId) throws SQLException {
-//			Connection conn = ConnectionProvider.getConnection();
-//			PreparedStatement pstmt = null;
-//			Product p = null;
-//			try {
-//				String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setInt(1, productId);
-//				ResultSet rs = pstmt.executeQuery();
-//
-//				if (rs.next()) {
-//					int pid = rs.getInt("product_id");
-//
-//					p = new Product(pid, rs.getString("product_name"), rs.getBoolean("is_deleted"),rs.getInt("product_price"),
-//							rs.getString("product_sex"), selectFindCompany(rs.getInt("company_id")),
-//							categoryDao.findCategoty(rs.getInt("category_id")),
-//							productAndColorService.findProductColors(pid), productAndSizeService.findProductSizeList(pid));
-//				}
-//
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			pstmt.close();
-//			conn.close();
-			return null;
+		public Product selectProductOne(int productId) throws Exception {
+			CategoryDao categoryDao = (CategoryDao) application.getAttribute("categoryDao");
+			Connection conn = ds.getConnection();
+			PreparedStatement pstmt = null;
+			Product p = null;
+			try {
+				String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, productId);
+				ResultSet rs = pstmt.executeQuery();
 
+				if (rs.next()) {
+					int pid = rs.getInt("product_id");
+					p = new Product(pid, rs.getString("product_name"), rs.getBoolean("is_deleted"),rs.getInt("product_price"),
+							rs.getString("product_sex"), selectFindCompany(rs.getInt("company_id")),
+							categoryDao.findCategoty(conn, rs.getInt("category_id")),
+							productAndColorService.findProductColors(pid), productAndSizeService.findProductSizeList(pid));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try { conn.close(); } catch(Exception e) {}
+			}
+			pstmt.close();
+			return p;
 		}
 
 	

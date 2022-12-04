@@ -36,7 +36,7 @@ public class ProductService {
 		return productDao.selectCountAll();
 	}
 
-	// 상품 간단히 보기
+	// 상품 간단히 보기`
 	public List<ProductList> showProducts(PagingVo pvo) throws SQLException { // List<ProductList>
 		List<ProductList> list = productDao.selectProductList(pvo);
 		return list;
@@ -83,7 +83,6 @@ public class ProductService {
 	// 상품 상세보기
 	public Product showOneProduct(int pid) throws SQLException {
 		return productDao.selectProductOne(pid);
-
 	}
 
 	// 관리자 버전

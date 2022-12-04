@@ -46,7 +46,7 @@ public class UserService {
 		return result;
 	}
 
-	// method: 유저 등록(추가)
+	// method: 유저 등록(추가)`
 	public String registerUser(User user) throws SQLException {
 		String result = null;
 		
