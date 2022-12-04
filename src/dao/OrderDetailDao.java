@@ -42,13 +42,39 @@ public class OrderDetailDao {
 		this.productAndSizeService = (ProductAndSizeService) application.getAttribute("productAndSizeService");
 	}
 	
-	// 주문1 에 해당하는 orderDetail 들 조회하기 : 주문내역 상세보기 
-	public List<OrderDetailDto> selectOrderDetails (int orderId) {
-		Connection conn = ConnectionProvider.getConnection();
+	// 주문1 에 해당하는 orderDetail들 조회하기 : 주문내역 상세보기 
+	// 트랜잭션 처리되었던 메소드 새로 수정(아래에 기존 코드 복붙해놓음)
+	public List<OrderDetailDto> selectOrderDetails (Connection conn, int orderId) throws Exception {
 		List<OrderDetailDto> list = new ArrayList<>();
 		
-    	try {
-    		conn = ConnectionProvider.getConnection();
+		String sql = "select orders_detail_id, product_id, quantity, size_id, color_id from orders_detail where orders_id=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1,  orderId);
+			
+		ResultSet rs = pstmt.executeQuery();
+			
+		while(rs.next()) {
+			int odId = rs.getInt("orders_detail_id");
+			int pid = rs.getInt("product_id");
+			Product product = productDao.selectProductOne(conn, pid);
+			
+			int qt = rs.getInt("quantity");
+			int size = rs.getInt("size_id");
+			int colorId = rs.getInt("color_id");
+			Color color = colorDao.selectColor(conn, colorId);
+			
+			list.add(new OrderDetailDto(odId, qt, product, size, color.getColor_name()));
+		}
+		
+		return list;
+	}
+
+/*	// 주문1 에 해당하는 orderDetail들 조회하기 : 주문내역 상세보기 
+	public List<OrderDetailDto> selectOrderDetails (Connection conn, int orderId) {
+		List<OrderDetailDto> list = new ArrayList<>();
+		
+		try {
+			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
 			String sql = "select orders_detail_id, product_id, quantity, size_id, color_id from orders_detail where orders_id=?";
@@ -82,8 +108,51 @@ public class OrderDetailDao {
 		}
 		return list;
 	}
+*/	
 	
 	// 하나의 상품 구매하기
+	// 트랜잭션 처리되었던 메소드 새로 수정(아래에 기존 코드 복붙해놓음)
+	public int insertOrderDetail(Connection conn, OrderDto od) throws Exception {
+		String userId = od.getUserId();
+		int productId = od.getProductId();
+		int color = od.getColor();
+		int size = od.getSize();
+		int quantity = od.getQuantity();
+		int rows = 0;
+
+		// 주문한 상품 삭제 여부 확인 필요
+		Product product = productDao.selectProductOne(conn, productId);
+		boolean colorCheck = productAndColorService.checkColor(productId, color);
+		boolean sizeCheck = productAndSizeService.checkSize(productId, size);
+		
+		// 삭제되지 않은 상품 구매 
+		if(!product.isDeleted() && colorCheck && sizeCheck) {
+			System.out.println("~~~~~!!!!!!!!!!! 오 지 마 ");
+			// 주문한 총 금액 계산하
+			int totalPrice = product.getProductPrice() * quantity;
+			
+			// order 테이블에 정보 삽입  orders_id 값 받아오기
+			int oId = orderDao.insertOrder(conn, userId, totalPrice, quantity);
+			
+			//oder details 테이블에 데이터 삽입하기 
+			String sql ="insert into orders_detail (orders_detail_id, product_id, orders_id, quantity, size_id, color_id) values(ordersDetail_seq.nextval, ?, ?, ?, ?, ?)";
+			// orderId 받아오
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productId);
+			pstmt.setInt(2, oId);
+			pstmt.setInt(3, quantity);
+			pstmt.setInt(4, size);
+			pstmt.setInt(5, color);
+			
+			rows = pstmt.executeUpdate();
+				
+		}
+			
+		return rows;
+	}
+	
+/*	// 하나의 상품 구매하기
 	public int insertOrderDetail(OrderDto od) throws SQLException {
 		Connection conn = null;
 		int rows = 0;
@@ -137,29 +206,24 @@ public class OrderDetailDao {
 			}
 		}
 		
-		
 		return rows;
 	}
+*/	
 	
 	// 장바구니에서 상품1개 구매하기
-	public int insertCartDetailToOrderDetail(Connection conn, String userId, int oId, CartDetail cd) {
+	public int insertCartDetailToOrderDetail(Connection conn, String userId, int oId, CartDetail cd) throws Exception {
 		//oder details 테이블에 데이터 삽입하기 
 		String sql ="insert into orders_detail (orders_detail_id, product_id, orders_id, quantity, size_id, color_id) values(ordersDetail_seq.nextval, ?, ?, ?, ?, ?)";
-		// orderId 받아오
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, cd.getProduct().getProductId());
+		pstmt.setInt(2, oId);
+		pstmt.setInt(3, cd.getQuantity());
+		pstmt.setInt(4, cd.getSize_id());
+		pstmt.setInt(5, cd.getColor().getColor_id());
+		
 		int rows = 0;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, cd.getProduct().getProductId());
-			pstmt.setInt(2, oId);
-			pstmt.setInt(3, cd.getQuantity());
-			pstmt.setInt(4, cd.getSize_id());
-			pstmt.setInt(5, cd.getColor().getColor_id());
-			
-			rows = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		rows = pstmt.executeUpdate();
 		return rows;
 	}
 	

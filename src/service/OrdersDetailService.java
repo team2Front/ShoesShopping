@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 
 import dao.OrderDetailDao;
 import domain.Cart;
@@ -17,8 +19,8 @@ import util.ConnectionProvider;
 
 public class OrdersDetailService {
 	//field
-	static PreparedStatement pstmt;
 	private ServletContext application;
+	private DataSource ds;
 	private OrderDetailDao orderDetailDao;
 	private OrderService orderService;
 	private ProductAndColorService productAndColorService;
@@ -33,17 +35,40 @@ public class OrdersDetailService {
 		this.productAndColorService = (ProductAndColorService) application.getAttribute("productAndColorService");
 		this.productAndSizeService = (ProductAndSizeService) application.getAttribute("productAndSizeService");
 		this.cartDetailService = (CartDetailService) application.getAttribute("cartDetailService");
+		
+		try {
+			InitialContext ic = new InitialContext();
+			ds = (DataSource) ic.lookup("java:comp/env/jbc/java");
+			
+			//트랜잭션을 위한 커넥션
+			Connection conn = ds.getConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 	}
 	
 	
 	// 하나의 상품 구매하기 (하나의 orders_detail 생성하는 로직)
 	public String addProductToOrder(OrderDto od) throws SQLException {
-		int r = orderDetailDao.insertOrderDetail(od);
+		Connection conn = null;
+		int rows = 0;
 		String result = "";
-		if(r == 1) {
-			result = od.getProductId() + "번 상품 주문이 완료되었습니다.";
+		
+		try {
+			conn = ds.getConnection();
+			rows = orderDetailDao.insertOrderDetail(conn, od);
+		
+			if(rows == 1) {
+				result = od.getProductId() + "번 상품 주문이 완료되었습니다.";
+			}
+			else result = od.getProductId() + "번 상품 주문에 실패되었습니다.";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close();} catch (SQLException e) {}
 		}
-		else result = od.getProductId() + "번 상품 주문에 실패되었습니다.";
+		
 		return result;
 	}
 	
@@ -100,34 +125,52 @@ public class OrdersDetailService {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+		} finally {
+			try { conn.close();} catch (SQLException e) {}
 		}
 		return result;
 	}
 	
 	// 장바구니 상품 하나(씩) 주문하기
 	// 주문되면 장바구니에서 제거해야 된다.
-	public String cartDetailToOrderDetail(Connection conn, String userId, int oId, int cartDetailId) throws SQLException {		
+	public String cartDetailToOrderDetail(Connection conn, String userId, int oId, int cartDetailId) {		
+		int rows = 0;
 		String result = "";
 		CartDetail cartDetail = cartDetailService.getCartDetailOne(conn, cartDetailId);
 		
 		// 장바구니 상품1을 주문한다. -> orders_detail 테이블에 삽입된다.
-		int row = orderDetailDao.insertCartDetailToOrderDetail(conn, userId, oId, cartDetail);
-		
-		// 주문이 되면 장바구니에서 제거해야 된다.
-		
-		if(row == 1) {
-			result =  cartDetailId + "번 장바구니 상품이 주문완료되었습니다. \n";
+		try {
+			rows = orderDetailDao.insertCartDetailToOrderDetail(conn, userId, oId, cartDetail);
+
+			// 주문이 되면 장바구니에서 제거해야 된다.
+			if(rows == 1) {
+				result =  cartDetailId + "번 장바구니 상품이 주문완료되었습니다. \n";
+			}
+			else  result =  cartDetailId + "번 장바구니 상품 주문에 실패되었습니다. \n"; 		
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close();} catch (SQLException e) {}
 		}
-		else  result =  cartDetailId + "번 장바구니 상품 주문에 실패되었습니다. \n"; 		
 		
 		return result;
-	
 	}
 
 	
 	// 주문내역 상세보기
     public List<OrderDetailDto> orderDetailList(int orderId) {
-		List<OrderDetailDto> list = orderDetailDao.selectOrderDetails(orderId);
+    	Connection conn = null;
+		List<OrderDetailDto> list = null;
+		
+		try {
+			list = orderDetailDao.selectOrderDetails(conn, orderId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close();} catch (SQLException e) {}
+		}
+		
 		return list;
     }
 

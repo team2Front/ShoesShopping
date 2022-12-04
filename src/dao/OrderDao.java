@@ -27,75 +27,63 @@ public class OrderDao {
 	}
 	
 	// order 테이블 전체 count
-	public int selectCount(String userId) {
-		Connection conn = ConnectionProvider.getConnection();
-		int counts = 0;
-		
-		try {
-			String sql = "select  count(orders_id) from orders where user_id=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,  userId);
-			
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				counts = rs.getInt(1);
-		      }
-			
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public int selectCount(Connection conn, String userId) throws Exception {
+		String sql = "select  count(orders_id) from orders where user_id=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, userId);
 
+		ResultSet rs = pstmt.executeQuery();
+		
+		int counts = 0;
+		if (rs.next()) {
+			counts = rs.getInt(1);
+		}
+		
+		conn.close();
 		
 		return counts;
 	}
 	
 	// 유저의 모든 주문들 조회 
-	public List<Orders> selectOrder(String userId, PagingVo pvo) {
-		Connection conn = ConnectionProvider.getConnection();
+	public List<Orders> selectOrder(Connection conn, String userId, PagingVo pvo) throws Exception {
 		List<Orders> orderList = new ArrayList<>();
 		
 		int endRn = pvo.getEndRowNo(); //페이지의 끝행 번호 
 		int startRn = pvo.getStartRowNo();//페이지의 시작 행 번호
 		
-		try {
-			String sql = "select rm, orders_id, orders_date, orders_is_deleted, total_price, quantity  "
-					+ "from( "
-					+ "select rownum as rm, orders_id, orders_date, orders_is_deleted, total_price, quantity "
-					+ "from ("
-					+ "select orders_id, orders_date, orders_is_deleted, total_price, quantity "
-					+ "from orders "
-					+ "where user_id=? "
-					+ "order by orders_id"
-					+ ")"
-					+ " where rownum <= ? ) "
-					+ "where rm >= ?";
+		String sql = "select rm, orders_id, orders_date, orders_is_deleted, total_price, quantity  "
+				+ "from( "
+				+ "select rownum as rm, orders_id, orders_date, orders_is_deleted, total_price, quantity "
+				+ "from ("
+				+ "select orders_id, orders_date, orders_is_deleted, total_price, quantity "
+				+ "from orders "
+				+ "where user_id=? "
+				+ "order by orders_id"
+				+ ")"
+				+ " where rownum <= ? ) "
+				+ "where rm >= ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,  userId);
+		pstmt.setInt(2, endRn);
+		pstmt.setInt(3, startRn);
+		
+//		String sql = "select orders_id, orders_date, orders_is_deleted, total_price, quantity from orders where user_id=?";
+//		pstmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()) {
+			int odId = rs.getInt("orders_id");
+			String date = rs.getDate("orders_date").toString();
+			boolean isDel = rs.getBoolean("orders_is_deleted");
+			int price = rs.getInt("total_price");
+			int q = rs.getInt("quantity");
 			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,  userId);
-			pstmt.setInt(2, endRn);
-			pstmt.setInt(3, startRn);
+			// 해당 order의 orderDetail 들을 가져온다.
+			List<OrderDetailDto> odList = orderDetailDao.selectOrderDetails(conn, odId);
 			
-//			String sql = "select orders_id, orders_date, orders_is_deleted, total_price, quantity from orders where user_id=?";
-//			pstmt = conn.prepareStatement(sql);
-			
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				int odId = rs.getInt("orders_id");
-				String date = rs.getDate("orders_date").toString();
-				boolean isDel = rs.getBoolean("orders_is_deleted");
-				int price = rs.getInt("total_price");
-				int q = rs.getInt("quantity");
-				
-				// 해당 order의 orderDetail 들을 가져온다.
-				List<OrderDetailDto> odList = orderDetailDao.selectOrderDetails(odId);
-				
-				orderList.add(new Orders(odId, date, isDel, price, q, odList));
-	        }		
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}	
+			orderList.add(new Orders(odId, date, isDel, price, q, odList));
+        }		
 		return orderList;
 	}
 	
@@ -125,24 +113,16 @@ public class OrderDao {
 	}
 		
    //주문 취소
-   public int deleteOrders(int oId) {
-      Connection conn = ConnectionProvider.getConnection();
-      
-      String sql = "update orders set orders_is_deleted=? where orders_id=?";
-      int rows = 0;
-      
-      try {
-         pstmt = conn.prepareStatement(sql);
-         pstmt.setBoolean(1, true);
-         pstmt.setInt(2, oId);
-         
-         rows = pstmt.executeUpdate();
-         
-         conn.close();
-      } catch (SQLException e) {
-         e.printStackTrace();
-      }
-      
-      return rows;
+	public int deleteOrders(Connection conn, int oId) throws Exception {
+		String sql = "update orders set orders_is_deleted=? where orders_id=?";
+  
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setBoolean(1, true);	
+		pstmt.setInt(2, oId);
+ 
+		int rows = 0;
+		rows = pstmt.executeUpdate();
+	
+		return rows;
    }
 }
