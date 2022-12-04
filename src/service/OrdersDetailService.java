@@ -164,7 +164,19 @@ public class OrdersDetailService {
 		List<OrderDetailDto> list = null;
 		
 		try {
+			conn = ds.getConnection();
+			//트랜잭션를 위한 자동커밋 기능 OFF
+			conn.setAutoCommit(false);
+			
 			list = orderDetailDao.selectOrderDetails(conn, orderId);
+			
+			//만약 list에 내용이 담기면 커밋
+			if(list != null) {
+				conn.commit();
+			} else { //내용이 담기지 않으면 롤백
+				conn.rollback();
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
