@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class ReviewList {
    private int reviewId;
    private String reviewTitle;
-   private String reviewDate;
+   private Date reviewDate;
    private String userId;
    private int productId;
 }

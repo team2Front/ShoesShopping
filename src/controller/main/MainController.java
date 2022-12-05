@@ -32,12 +32,10 @@ public class MainController extends HttpServlet {
 		//페이징 대상이 되는 전체 행 수 얻기
 		
 		int countAllProducts =0;
-		System.out.println(productService);
-//		countAllProducts = productService.countAllProducts();
-		System.out.println(countAllProducts);
+		countAllProducts = productService.countAllProducts();
+		
 		//Pager 생성
 		PagingVo pager = new PagingVo(countAllProducts, pageNo, 15);
-		System.out.println(pager.toString());
 		
 		//해당 pageNo에 해당하는 게시물 가져오기
 		List<ProductList> pageList = null;
