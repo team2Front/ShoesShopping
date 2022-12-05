@@ -1,7 +1,6 @@
 package service;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,41 +9,28 @@ import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 import dao.OrderDetailDao;
-import domain.Cart;
 import domain.CartDetail;
 import domain.OrderDetailDto;
 import domain.Product;
 import dto.OrderDto;
-import util.ConnectionProvider;
 
 public class OrdersDetailService {
 	//field
-	private ServletContext application;
 	private DataSource ds;
 	private OrderDetailDao orderDetailDao;
 	private OrderService orderService;
+	private CartDetailService cartDetailService;
 	private ProductAndColorService productAndColorService;
 	private ProductAndSizeService productAndSizeService;
-	private CartDetailService cartDetailService;
 		
 	//constructor
 	public OrdersDetailService(ServletContext application) {
-		this.application = application;
+		this.ds = (DataSource) application.getAttribute("dataSource");
 		this.orderDetailDao = (OrderDetailDao) application.getAttribute("ordersDetailDao");
 		this.orderService = (OrderService) application.getAttribute("orderService");
+		this.cartDetailService = (CartDetailService) application.getAttribute("cartDetailService"); 
 		this.productAndColorService = (ProductAndColorService) application.getAttribute("productAndColorService");
 		this.productAndSizeService = (ProductAndSizeService) application.getAttribute("productAndSizeService");
-		this.cartDetailService = (CartDetailService) application.getAttribute("cartDetailService");
-		
-		try {
-			InitialContext ic = new InitialContext();
-			ds = (DataSource) ic.lookup("java:comp/env/jbc/java");
-			
-			//트랜잭션을 위한 커넥션
-			Connection conn = ds.getConnection();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
 	}
 	
 	
@@ -61,9 +47,9 @@ public class OrdersDetailService {
 			if(rows == 1) {
 				result = od.getProductId() + "번 상품 주문이 완료되었습니다.";
 			}
-			else result = od.getProductId() + "번 상품 주문에 실패되었습니다.";
 
 		} catch (Exception e) {
+			result = od.getProductId() + "번 상품 주문에 실패되었습니다.";
 			e.printStackTrace();
 		} finally {
 			try { conn.close();} catch (SQLException e) {}
@@ -79,7 +65,7 @@ public class OrdersDetailService {
 		String result = "";
 
 		try {
-			conn = ConnectionProvider.getConnection();
+			conn = ds.getConnection();
 			conn.setAutoCommit(false);
 			
 			int totalPrice = 0;
@@ -92,14 +78,9 @@ public class OrdersDetailService {
 	    		// 주문한 상품 삭제 여부 확인 필요
 				Product product = cartDetail.getProduct();
 				boolean productIsDeleted = product.isDeleted();
-//				boolean colorCheck = productAndColorService.checkColor(product.getProductId(), cartDetail.getColor().getColor_id());
-//				boolean sizeCheck = productAndSizeService.checkSize(product.getProductId(), cartDetail.getSize_id());
 				
-				// 삭제되지 않은 상품 구매 , 색상, 컬러 확인 후 장바구니에 담을 수 있다.
-				if(productIsDeleted) {
-				
-					return "주문에 실패했습니다. ";
-				}
+				// 삭제되지 않은 상품 구매시 에러소
+				if(productIsDeleted) { throw new RuntimeException();}
 				
 				// 총 금액과 수량을 계산하여 Orders 에 삽입해야 된다.
 				totalPrice += cartDetail.getProduct().getProductPrice() * cartDetail.getQuantity();

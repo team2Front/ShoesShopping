@@ -11,23 +11,21 @@ import javax.servlet.ServletContext;
 
 import domain.OrderDetailDto;
 import domain.Orders;
-import util.ConnectionProvider;
 import util.PagingVo;
 
 public class OrderDao {
 	//field
-	private static PreparedStatement pstmt;
-	private ServletContext application;
 	private OrderDetailDao orderDetailDao; 
 		
 	//constructor
 	public OrderDao(ServletContext application) {
-		this.application = application;
 		this.orderDetailDao = (OrderDetailDao) application.getAttribute("orderDetailDao");
 	}
 	
 	// order 테이블 전체 count
 	public int selectCount(Connection conn, String userId) throws Exception {
+		PreparedStatement pstmt = null;
+		
 		String sql = "select count(orders_id) from orders where user_id=?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, userId);
@@ -46,6 +44,8 @@ public class OrderDao {
 	
 	// 유저의 모든 주문들 조회 
 	public List<Orders> selectOrder(Connection conn, String userId, PagingVo pvo) throws Exception {
+		PreparedStatement pstmt = null;
+		
 		List<Orders> orderList = new ArrayList<>();
 		
 		int endRn = pvo.getEndRowNo(); //페이지의 끝행 번호 
@@ -89,7 +89,8 @@ public class OrderDao {
 	
 	
 	// 주문 등록하기 
-	public int insertOrder(Connection conn, String uId, int totalPrice, int quantity) throws SQLException {		
+	public int insertOrder(Connection conn, String uId, int totalPrice, int quantity) throws SQLException {	
+		PreparedStatement pstmt = null;
 		int oid = 0;
 		
 		String sql = "insert into orders (orders_id, orders_date, user_id, orders_is_deleted, total_price, quantity) values (order_seq.nextval,?,?,?,?,?)";
@@ -114,6 +115,8 @@ public class OrderDao {
 		
    //주문 취소
 	public int deleteOrders(Connection conn, int oId) throws Exception {
+		PreparedStatement pstmt = null;
+		
 		String sql = "update orders set orders_is_deleted=? where orders_id=?";
   
 		pstmt = conn.prepareStatement(sql);

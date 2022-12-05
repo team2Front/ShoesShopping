@@ -20,26 +20,17 @@ public class ProductAndColorDao {
 	// 상품 id ,그 상품의 사이즈들을 리스트로 받아와서 각각 Product_size 테이블에 삽입한다.
 	public int insertProductColors(Connection conn, int pid, List<Integer> colorList) throws Exception {
 		PreparedStatement pstmt = null;
-		int sum = 0;
-		int result = 0;
+		int row = 0;
 
 		for (int colorId : colorList) {
 			String sql = "insert into product_color (product_id, color_id) values (?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, pid);
 			pstmt.setInt(2, colorId);
-			int row= pstmt.executeUpdate();
-			System.out.println(row);
+			row= pstmt.executeUpdate();
 		}
-		System.out.println("sum"+sum);
-		if (colorList.size() == sum) {
-			result = 1;
-		}
-
 		pstmt.close();
-
-		return result;
-
+		return row;
 	}
 
 	// 해당상품의 전체 색상 리스트 리턴
@@ -59,6 +50,26 @@ public class ProductAndColorDao {
 		pstmt.close();
 		
 		return colors;
+
+	}
+	
+	// 해당 상품의 해당 색상 유효한지 체크
+	public boolean selectProductColor(Connection conn, int productId, int colorId) throws Exception {
+		String sql = "select color_id from product_color where product_id=? and color_id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, productId);
+		pstmt.setInt(1, colorId);
+		
+		boolean result = false;
+
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			result = true;
+		}
+		
+		else throw new RuntimeException();
+		
+		return result;
 
 	}
 

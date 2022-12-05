@@ -48,4 +48,24 @@ public class ProductAndSizeDao {
 		
 		return sizeList;
 	}
+	
+	// 해당 상품의 해당 사이즈 유효한지 체크
+	public boolean selectProductSize(Connection conn, int productId, int size) throws Exception {
+		String sql = "select size_id from product_size where product_id=? and size_id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, productId);
+		pstmt.setInt(1, size);
+		
+		boolean result = false;
+
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			result = true;
+		}
+		
+		else throw new RuntimeException();
+		
+		return result;
+
+	}
 }

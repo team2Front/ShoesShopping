@@ -1,36 +1,26 @@
 package service;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 import dao.CartDao;
+import dao.CartDetailDao;
 import domain.CartDetail;
 import dto.CartDetailDto;
 import dto.CartDto;
-import util.ConnectionProvider;
 
 public class CartService {
 	private DataSource ds;
 	private CartDao cartDao;
-    private CartDetailService cartDetailService;
+    private CartDetailDao cartDetailDao;
     
     public CartService(ServletContext application) {
-    	try {
-		      InitialContext ic = new InitialContext();
-		      ds = (DataSource) ic.lookup("java:comp/env/jdbc/java");
-		      Connection conn = ds.getConnection();
-		      conn.close();
-		      }catch(Exception e) {
-		         e.printStackTrace();
-		      }
-    	
+    	this.ds = (DataSource) application.getAttribute("dataSource");
     	this.cartDao = (CartDao) application.getAttribute("cartDao");
-    	this.cartDetailService = (CartDetailService) application.getAttribute("cartDetailService");
+    	this.cartDetailDao = (CartDetailDao) application.getAttribute("cartDetailDao");
     }
     
     // 회원가입시 유저 당 카트 생성 
@@ -54,7 +44,7 @@ public class CartService {
 			cartDto = cartDao.selectCart(conn, userId);
 			CartDetailDto cdto = new CartDetailDto();
 			//cart detail 정보 가져오기
-			List<CartDetail> cdList = cartDetailService.findByUserId(conn,userId);
+			List<CartDetail> cdList = cartDetailDao.selectCartDetails(conn,userId);
 			
 			List<CartDetailDto> list = cdto.toCartDetailDtoList(cdList);
 			cartDto.setCartDetailDtoList(list);

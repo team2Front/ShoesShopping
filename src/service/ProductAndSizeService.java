@@ -11,17 +11,15 @@ import javax.sql.DataSource;
 import dao.ProductAndSizeDao;
 
 public class ProductAndSizeService {
+	private ServletContext application;
 	private ProductAndSizeDao productAndSizeDao;
 	private DataSource ds;
 	
 	public ProductAndSizeService(ServletContext application) {
+		this.application = application;
 		this.productAndSizeDao = (ProductAndSizeDao) application.getAttribute("productAndSizeDao");
-		try {
-			InitialContext ic = new InitialContext();
-			ds = (DataSource) ic.lookup("java:comp/env/jdbc/java");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		ds = (DataSource) application.getAttribute("dataSource");
+		
 	}
 
 	

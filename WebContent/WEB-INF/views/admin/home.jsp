@@ -23,17 +23,6 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	
-	<script>
-		/* function requestAdminReview(){
-			$.ajax({
-				url: "admin_register_review.html",
-				type: "get",
-				success: function(data){
-					$(".shoesmain-2").html(data);
-				}
-			});
-		} */
-	</script>
 	
 	<body>
 		<!-- 배너창 -->

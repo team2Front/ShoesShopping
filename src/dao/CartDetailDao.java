@@ -35,12 +35,12 @@ public class CartDetailDao {
 		while (rs.next()) {
 			int cid = rs.getInt("cart_detail_id");
 			int pid = rs.getInt("product_id");
-			Product product = productDao.selectProductOne(pid);
+			Product product = productDao.selectProductOne(conn, pid);
 
 			int qt = rs.getInt("quantity");
 			int size = rs.getInt("size_id");
 			int colorId = rs.getInt("color_id");
-			Color color = colorDao.selectColor(colorId);
+			Color color = colorDao.selectColor(conn, colorId);
 
 			String uid = rs.getString("user_id");
 
@@ -61,12 +61,12 @@ public class CartDetailDao {
 		while (rs.next()) {
 			int cid = rs.getInt("cart_detail_id");
 			int pid = rs.getInt("product_id");
-			Product product = productDao.selectProductOne(pid);
+			Product product = productDao.selectProductOne(conn, pid);
 
 			int qt = rs.getInt("quantity");
 			int size = rs.getInt("size_id");
 			int colorId = rs.getInt("color_id");
-			Color color = colorDao.selectColor(colorId);
+			Color color = colorDao.selectColor(conn, colorId);
 
 			String uid = rs.getString("user_id");
 

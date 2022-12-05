@@ -11,10 +11,12 @@
 		
 	</head>
 
-	<%@ include file="/WEB-INF/views/fragment/nav.jsp" %>	
+	<%@ include file="/WEB-INF/views/fragment/nav.jsp" %>
+		
 		<div class="cartdetailmain container-fluid">
 			<div id="wrapper">
 			<!-- 여기서 우리의 코드 알아서 ` -->
 			</div>
 		</div>
+		
 <%@ include file="/WEB-INF/views/fragment/footer.jsp" %>	

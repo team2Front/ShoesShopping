@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
@@ -12,7 +11,6 @@ import dao.CartDetailDao;
 import domain.CartDetail;
 import domain.Product;
 import dto.OrderDto;
-import util.ConnectionProvider;
 
 public class CartDetailService {
 	private DataSource ds;
@@ -23,19 +21,11 @@ public class CartDetailService {
 	private CartService cartService;
 	
 	public CartDetailService(ServletContext application) {
-		try {
-		      InitialContext ic = new InitialContext();
-		      ds = (DataSource) ic.lookup("java:comp/env/jdbc/java");
-		      Connection conn = ds.getConnection();
-		      conn.close();
-		      }catch(Exception e) {
-		         e.printStackTrace();
-		      }
-		
-		this.cartDetailDao = (CartDetailDao) application.getAttribute("cartDetailDao");
+		this.ds = (DataSource) application.getAttribute("dataSource");
 		this.productService = (ProductService) application.getAttribute("productService");
 		this.productAndColorService = (ProductAndColorService) application.getAttribute("productAndColorService");
 		this.productAndSizeService = (ProductAndSizeService) application.getAttribute("productAndSizeService");
+		this.cartDetailDao = (CartDetailDao) application.getAttribute("cartDetailDao");
 		this.cartService = (CartService) application.getAttribute("cartService");
 	}
 	
@@ -141,12 +131,11 @@ public class CartDetailService {
     
     //cartDetail 객체 1개 반환
     public CartDetail getCartDetailOne(Connection conn, int cartDetailId) {
-    	CartDetail cd;
+    	CartDetail cd = null;
 		try {
 			cd = cartDetailDao.selectCartDetail(conn, cartDetailId);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
 		}
     	return cd;
     }
