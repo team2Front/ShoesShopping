@@ -21,6 +21,7 @@ public class ProductDao {
 	ProductAndColorService productAndColorService;
 	ProductAndSizeService productAndSizeService;
 	CategoryDao categoryDao;
+	
 
 	public ProductDao(ServletContext application) {
 		this.productAndSizeDao = (ProductAndSizeDao) application.getAttribute("productAndSizeDao");
@@ -30,6 +31,7 @@ public class ProductDao {
 
 	// 상품의 총수량
 	public int selectCountAll(Connection conn) throws Exception {
+		System.out.println("[DAO] 카운트 올");
 		String sql = "select count(product_id) from product where is_deleted = '0'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
@@ -39,13 +41,13 @@ public class ProductDao {
 			cnt = rs.getInt(1);
 		}
 		pstmt.close();
-		
+		System.out.println(cnt);
 		return cnt;
 	}
 
 	// 모든 상품 목록(간단히 보기)
 	public List<ProductList> selectProductList(Connection conn, PagingVo pvo) throws Exception {
-		ProductList pdl = null;
+		ProductList productList = null;
 
 		int endRn = pvo.getEndRowNo(); // 페이지의 끝행 번호
 		int startRn = pvo.getStartRowNo();// 페이지의 시작 행 번호
@@ -64,14 +66,17 @@ public class ProductDao {
 		List<ProductList> list = new ArrayList<>();
 
 		while (rs.next()) {
-
-			pdl = new ProductList(rs.getInt("product_id"), rs.getString("product_name"),
-					selectFindCompany(conn, rs.getInt("company_id")), selectFindCategory(conn, rs.getInt("category_id")),
-					rs.getString("product_sex"), rs.getInt("product_price"));
-			list.add(pdl);
+			productList = new ProductList();
+			productList.setProductId(rs.getInt("product_id"));
+			productList.setProductName(rs.getString("product_name"));
+			productList.setCompanyName(selectFindCompany(conn, rs.getInt("company_id")));
+			productList.setCategoryName(selectFindCategory(conn, rs.getInt("category_id")));
+			productList.setProductSex(rs.getString("product_sex"));
+			productList.setProductPrice(rs.getInt("product_price"));
+			list.add(productList);
 		}
 		pstmt.close();
-		
+		System.out.println(list);
 		return list;
 	}
 

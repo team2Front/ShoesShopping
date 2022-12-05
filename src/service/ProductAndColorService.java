@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
@@ -12,17 +11,14 @@ import dao.ProductAndColorDao;
 import domain.Color;
 
 public class ProductAndColorService {
+	private ServletContext application;
 	private DataSource ds;
 	private ProductAndColorDao productAndColorDao;
 	
 	public ProductAndColorService(ServletContext application) {
+		this.application = application;
 		this.productAndColorDao = (ProductAndColorDao) application.getAttribute("productAndColorDao");
-		try {
-			InitialContext ic = new InitialContext();
-			ds = (DataSource) ic.lookup("java:comp/env/jdbc/java");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		ds = (DataSource) application.getAttribute("dataSource");
 	}
 
 	public void addProductColors(int pid, List<Integer> colorList) {
