@@ -37,6 +37,9 @@ public class JoinFormController extends HttpServlet {
 		boolean phonenumbercheck = userService.pnCheck(user.getPhoneNumber());
 		System.out.println(phonenumbercheck);
 		
+		if(idcheck && passwordcheck) {
+			userService.registerUser(user);
+		}
 		
 		response.sendRedirect("/WEB-INF/views/user/JoinFormController");
 	}

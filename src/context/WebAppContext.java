@@ -50,7 +50,6 @@ public class WebAppContext implements ServletContextListener{
 		/*객체 순서: product -> cart -> user -> reply/review/qna -> order */
 		
 		//-------------------- Dao ------------------
-		System.out.println("WebApp DAO Set함");
 		application.setAttribute("companyDao", new CompanyDao());
 		application.setAttribute("categoryDao", new CategoryDao());
 		application.setAttribute("pfilteringDao", new PfilteringDao());
@@ -59,7 +58,6 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("productAndColorDao",  new ProductAndColorDao(application));
 		application.setAttribute("productAndSizeDao", new ProductAndSizeDao());
 		
-		System.out.println("~~~~ 1 ");
 		
 		application.setAttribute("cartDao", new CartDao());
 		application.setAttribute("cartDetailDao", new CartDetailDao(application));
@@ -73,17 +71,11 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("reviewDao", new ReviewDao(application));
 		application.setAttribute("replyDao", new ReplyDao());
 		
-		System.out.println("~~~~ 2 ");
-		System.out.println("WebApp DAO Set 완료");
 		
 		//-------------------- 서비스 ------------------
 		application.setAttribute("productAndColorService", new ProductAndColorService(application));
 		application.setAttribute("productAndSizeService", new ProductAndSizeService(application));
-		System.out.println("WebApp프로덕트 서비스 전");
 		application.setAttribute("productService", new ProductService(application));
-
-		System.out.println("~~~~ 3 ");
-		System.out.println("WebApp프로덕트 서비스 후");
 		
 		application.setAttribute("cartService", new CartService(application));
 		application.setAttribute("cartDetailService", new CartDetailService(application));

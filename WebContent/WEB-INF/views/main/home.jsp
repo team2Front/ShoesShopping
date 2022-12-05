@@ -219,163 +219,27 @@
 			<div id="products" class="p-2" style="width:1000px;"> 
 				   <div class="d-flex justify-content-between flex-wrap" style="width:1000px;" >
 				        <!-- 카드 임시로 가져와보기 -->
-				        <div class="card">
-				           <div class="card-head">
-							  <img class="card-img-top" src="../resources/images/반스_월버_노랑.jpg">
-							</div>
-							<div class="card-body">
-							    <p class="card-brand m-0">반스</p>
-							    <h5 class="card-title">윌버</h5>
-							    <p class="card-text">
-							    <span class="sale" style="color:red">50000원</span>
-							    </p>
-							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
-							    <a href="/shopping/product/ProductController" class="btn btn-primary">자세히보기</a>
-							 </div>
-						</div>
-						
-						<%-- <c:forEach var="productList" items="${pageList}">
-			               <tr>
-			                  <td>${productList.productId}</td>
-			                  <td><a href="DetailViewController?bno=${productList.productName}">${productList.productName}</a></td>
-			                  <td>${productList.companyName}</td>
-			                  <td>${productList.caegoryName}</td>
-			                  <td>${productList.productSex}</td>
-			                  <td>${productList.productPrice}</td>
-			               </tr>
-			            </c:forEach> --%>
-			            
-				        <div class="card">
-				           <div class="card-head">
-							  <img class="card-img-top" src="../resources/images/반스_월버_노랑.jpg">
-							</div>
-							<div class="card-body">
-							    <p class="card-brand m-0">반스</p>
-							    <h5 class="card-title">윌버</h5>
-							    <p class="card-text">
-							    <span class="sale" style="color:red">50000원</span>
-							    </p>
-							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
-							    <a href="/shopping/product/ProductController" class="btn btn-primary">자세히보기</a>
-							 </div>
-						</div>
-				        <div class="card">
-				           <div class="card-head">
-							  <img class="card-img-top" src="../resources/images/아디다스_가젤.jpg">
-							</div>
-						  	<div class="card-body">
-						  		<p class="card-brand m-0">아디다스</p>
-							    <h5 class="card-title">가젤</h5>
-							    <p class="card-text">
-							    <span class="sale" style="color:red">70000원</span>
-							    </p>
-	  							    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
-							    <a href="#" class="btn btn-primary">자세히보기</a>
-						  	</div>
-				        </div>
 				        
-				        <div class="card">
-				           <div class="card-head">
-							  <img class="card-img-top" src="../resources/images/아디다스_그랜드코트베이스_검정.jpg">
+						
+						<c:forEach var="productList" items="${pageList}">
+			               <div class="card">
+					           <div class="card-head">
+								  <img class="card-img-top" src="../resources/images/반스_월버_노랑.jpg">
+								</div>
+								<div class="card-body">
+								    <p class="card-brand m-0 text-muted small" >${productList.categoryName} > ${productList.productSex}</p>
+								    <p class="card-brand m-0">${productList.companyName}</p>
+								    <h5 class="card-title"><a href="ProductController?productId=${productList.productId}">${productList.productName}</a></h5>
+								    <p class="card-text">
+								    <span class="sale" style="color:red">${productList.productPrice}원</span>
+								    </p>
+								    <a href="#" class="btn btn-outline-info btn-sm"><img src="../resources/images/heart_empty.png" style="width:15px; height:15px;"> 찜하기</a>
+								    <a href="ProductController?productId=${productList.productId}" class="btn btn-primary btn-sm">자세히보기</a>
+								 </div>
 							</div>
-							<div class="card-body">
-								<p class="card-brand m-0">아디다스</p>
-							    <h5 class="card-title">그랜드코트베이스</h5>
-							    <p class="card-text">
-							    <span class="sale" style="color:red">64000원</span>
-							    </p>
-							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
-							    <a href="#" class="btn btn-primary">자세히보기</a>
-							 </div>
-						</div>
-				        <div class="card">
-				           <div class="card-head">
-							  <img class="card-img-top" src="../resources/images/아디다스_스탠스미스_하양.jpg">
-							</div>
-						  	<div class="card-body">
-						  		<p class="card-brand m-0">아디다스</p>
-							    <h5 class="card-title">스탠스미스 흰색</h5>
-							    <p class="card-text">
-							    <span class="sale" style="color:red">45000원</span>
-							    </p>
-	  							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
-							    <a href="#" class="btn btn-primary">자세히보기</a>
-						  	</div>
-				        </div>
-				       
-				        <div class="card">
-				           <div class="card-head">
-							  <img class="card-img-top" src="../resources/images/아디다스_퍼피렛_검정.jpg">
-							</div>
-						  <div class="card-body">
-						  	<p class="card-brand m-0">아디다스</p>
-							<h5 class="card-title">퍼피렛 검정</h5>
-						    <p class="card-text">
-						    <span class="sale" style="color:red">36400원</span>
-						    </p>
-						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
-						    <a href="#" class="btn btn-primary">자세히보기</a>
-						  </div>
-						</div>
-						<div class="card">
-				           <div class="card-head">
-							  <img class="card-img-top" src="../resources/images/아디다스_퍼피렛_하양.jpg">
-							</div>
-						  <div class="card-body">
-						  	<p class="card-brand m-0">아디다스</p>
-							<h5 class="card-title">퍼피렛 흰색</h5>
-						    <p class="card-text">
-						    <span class="sale" style="color:red">37400원</span>
-						    </p>
-						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
-						    <a href="#" class="btn btn-primary">자세히보기</a>
-						  </div>
-				        </div>
-				        <div class="card">
-				           <div class="card-head">
-							  <img class="card-img-top" src="../resources/images/컨버스_척테일러올스타70.jpg">
-							</div>
-						  <div class="card-body">
-						  	<p class="card-brand m-0">컨버스 </p>
-							<h5 class="card-title">척테일러올스타70</h5>
-						    <p class="card-text">
-						    <span class="sale" style="color:red">74400원</span>
-						    </p>
-						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
-						    <a href="#" class="btn btn-primary">자세히보기</a>
-						  </div>
-				        </div>
-				        <div class="card">
-				           <div class="card-head">
-							  <img class="card-img-top" src="../resources/images/컨버스_척테일러올스타코어_검정.jpg">
-							</div>
-						  <div class="card-body">
-						  	<p class="card-brand m-0">컨버스 </p>
-							<h5 class="card-title">척테일러올스타코어</h5>
-						    <p class="card-text">
-						    <span class="sale" style="color:red">74700원</span>
-						    </p>
-						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
-						    <a href="#" class="btn btn-primary">자세히보기</a>
-						  </div>
-				        </div>
-				       
-				         <div class="card">
-				           <div class="card-head">
-							  <img class="card-img-top" src="../resources/images/아디다스_슈퍼스타_82.jpg">
-							</div>
-						  <div class="card-body">
-						  	<p class="card-brand m-0">아디다스 </p>
-							<h5 class="card-title">슈퍼스타</h5>
-						    <p class="card-text">
-						    <span class="sale" style="color:red">65000원</span>
-						    </p>
-						    <a href="#"><img src="../resources/images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>							    
-						    <a href="#" class="btn btn-primary">자세히보기</a>
-						  </div>
-				        </div>
-				      </div>
-				      <%-- <div id="pager" class="text-center">
+			            </c:forEach>
+			            
+				      <div id="pager" class="text-center" style="width:1000px">
 				      		<div>
 		                     <a href="MainController?pageNo=1" class="btn btn-outline-primary btn-sm">처음</a>
 		                     
@@ -388,7 +252,7 @@
 		                           <a href="MainController?pageNo=${i}" class="btn btn-outline-success btn-sm">${i}</a>
 		                        </c:if>
 		                        <c:if test="${pager.pageNo == i}">
-		                           <a href="MainController?pageNo=${i}" class="btn btn-danger btn-sm">${i}</a>
+		                           <a href="MainController?pageNo=${i}" class="btn btn-info btn-sm">${i}</a>
 		                        </c:if>
 		                     </c:forEach>
 		                     
@@ -398,7 +262,7 @@
 		                     
 		                     <a href="MainController?pageNo=${pager.totalPageNo}" class="btn btn-outline-primary btn-sm">맨끝</a>
 		                  </div>
-				      </div> --%>
+				      </div>
 				  </div>
 			</div>
 

@@ -37,9 +37,8 @@ public class ProductService {
 	// 필터링 x
 	// 상품 총수량
 	public int countAllProducts() {
-		System.out.println("[서비스] 카운트 올");
 		Connection conn = null;
-		int total = 0;
+		int total = 1;
 		try {
 			conn = ds.getConnection();
 			total = productDao.selectCountAll(conn);
@@ -176,12 +175,12 @@ public class ProductService {
 
 	// **********************************************************
 	// 상품 상세보기
-	public Product showOneProduct(int pid){
+	public Product showOneProduct(int productId){
 		Connection conn = null;
 		Product product = null;
 		try {
 			conn = ds.getConnection();
-			product = productDao.selectProductOne(conn, pid);
+			product = productDao.selectProductOne(conn, productId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
