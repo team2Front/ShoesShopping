@@ -3,13 +3,11 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
 
 import domain.User;
 import dto.UserInfo;
-import util.ConnectionProvider;
 
 public class UserDao {
 	//field
@@ -21,8 +19,8 @@ public class UserDao {
 	}
 	
    //method: select문 - 아이디 중복 여부 판별
-   public boolean selectUserId(Connection conn, String id) throws Exception { 
-      String sql = "select user_id from users where user_id=?";
+   public boolean selectUserId(Connection conn, String id) throws Exception {
+      String sql = "select userid from users where userid=? ";
       boolean result = false;
       
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -36,7 +34,7 @@ public class UserDao {
    
    //method: select문 - 핸드폰 번호 중복 여부 확인
    public boolean selectPnCheck(Connection conn, String pn) throws Exception {
-      String sql = "select phone_number from users where phone_number=?";
+      String sql = "select phone_number from users where phonenumber=? ";
       boolean result = true;
  	  
       PreparedStatement pstmt = conn.prepareStatement(sql);
