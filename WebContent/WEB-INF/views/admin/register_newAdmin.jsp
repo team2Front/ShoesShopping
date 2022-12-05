@@ -39,7 +39,7 @@
 	    <div id="adminMain" class="card mx-auto">
 	      <div class="card-header">관리자 등록</div>
 	      <div class="card-body">
-	        <form id="pnameForm" name="pnameForm" action="#" onsubmit="handleCheckData()" novalidate>
+	        <form id="pnameForm" name="pnameForm" method="post" action="Resister_NewAdminController" enctype="multipart/form-data">
 	          	<div class="form-group">
 	            	<label for="adminId">아이디</label>
 	            	<input type="text" class="form-control" id="adminId" name="adminId" placeholder="아이디를 입력해주세요"/>
@@ -106,6 +106,7 @@
 	            <input type="submit" class="btn btn-secondary" value="등록" />
 	            <input type="reset" class="btn btn-light" value="초기화" />
 	          </div>
+	          
 	        </form>
 	      </div>
 	    </div>

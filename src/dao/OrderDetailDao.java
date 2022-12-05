@@ -207,8 +207,8 @@ public class OrderDetailDao {
 		}
 		
 		return rows;
-	}
-*/	
+	}*/
+
 	
 	// 장바구니에서 상품1개 구매하기
 	public int insertCartDetailToOrderDetail(Connection conn, String userId, int oId, CartDetail cd) throws Exception {

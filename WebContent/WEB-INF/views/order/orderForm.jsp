@@ -5,12 +5,19 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>	
+		<!-- 부트스트랩 -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">		
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
+		
+		<!-- 추가 CSS -->
+		<link rel="stylesheet" href="../resources/css/shoescolors.css">
+		<link rel="stylesheet" href="../resources/css/common.css">
+		<link rel="stylesheet" href="../resources/css/customCheckbox.css">
+		<link rel="stylesheet" href="../resources/css/customRadio.css">
+		
 		<script>
 			$(document).ready(function(){
 				  var currentPosition = parseInt($("#quickmenu").css("top"));
@@ -27,17 +34,6 @@
 				});
 		
 		</script>
-		<style>
-		 * { 
-/* 		 	border: 1px solid black;  */
-		 }
-		 
-		</style>
-		<link rel="stylesheet" href="../resources/css/shoescolors.css">
-		<link rel="stylesheet" href="../resources/css/common.css">
-		<link rel="stylesheet" href="../resources/css/customCheckbox.css">
-		<link rel="stylesheet" href="../resources/css/customRadio.css">
-		
 	</head>
 	<body>
 	  <div class="banner d-flex justify-content-between">  

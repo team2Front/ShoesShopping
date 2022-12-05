@@ -170,14 +170,10 @@ public class OrdersDetailService {
 			
 			list = orderDetailDao.selectOrderDetails(conn, orderId);
 			
-			//만약 list에 내용이 담기면 커밋
-			if(list != null) {
-				conn.commit();
-			} else { //내용이 담기지 않으면 롤백
-				conn.rollback();
-			}
+			conn.commit();
 			
 		} catch (Exception e) {
+			try { conn.rollback();} catch (SQLException e1) {}
 			e.printStackTrace();
 		} finally {
 			try { conn.close();} catch (SQLException e) {}

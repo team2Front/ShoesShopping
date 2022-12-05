@@ -28,7 +28,7 @@ public class OrderDao {
 	
 	// order 테이블 전체 count
 	public int selectCount(Connection conn, String userId) throws Exception {
-		String sql = "select  count(orders_id) from orders where user_id=?";
+		String sql = "select count(orders_id) from orders where user_id=?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, userId);
 
