@@ -207,7 +207,7 @@ public class UserDao {
    public boolean insertRegisterAdmin(Connection conn, User user) throws Exception {
 		String sql = "insert into users(user_id, user_name, user_password, phone_number, user_address, user_type) values (?,?,?,?,?,?)";
 		PreparedStatement pstmt;
-		boolean result =false;
+		boolean result = false;
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, user.getUserId());
 		pstmt.setString(2, user.getUserName());
