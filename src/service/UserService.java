@@ -23,7 +23,7 @@ public class UserService {
 		this.application = application;
 		this.userDao = (UserDao) application.getAttribute("userDao");
 		this.cartService = (CartService) application.getAttribute("cartService");
-	
+		
 		try {
 			InitialContext ic = new InitialContext();
 			ds = (DataSource) ic.lookup("java:comp/env/jbc/java");

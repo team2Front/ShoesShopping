@@ -7,16 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
 import dto.QReply;
 import dto.RReply;
-import util.ConnectionProvider;
 
 public class ReplyDao {
    
-   public int insertReviewReply(RReply rreply) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int insertReviewReply(Connection conn, RReply rreply) throws SQLException {
       String sql = "INSERT INTO reply (reply_id, reply_content, user_id, reply_date, review_id)"
             + "values(REPLY_SEQ.NEXTVAL,?,?,default,?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -30,8 +26,7 @@ public class ReplyDao {
 
    }
 
-   public int insertQnaReply(QReply qreply) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int insertQnaReply(Connection conn, QReply qreply) throws SQLException {
       String sql = "INSERT INTO reply (reply_id, reply_content, user_id, reply_date, qna_id)"
             + "values(REPLY_SEQ.NEXTVAL,?,?,default,?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -45,8 +40,7 @@ public class ReplyDao {
 
    }
 
-   public List<RReply> selectReviewReply(int reviewId) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public List<RReply> selectReviewReply(Connection conn, int reviewId) throws SQLException {
       String sql = "select reply_id, reply_content,reply_date, user_id, review_id from Reply where review_id = ?";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, reviewId);
@@ -65,8 +59,7 @@ public class ReplyDao {
       return list;
    }
 
-   public List<QReply> selectQnaReply(int qnaId) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public List<QReply> selectQnaReply(Connection conn, int qnaId) throws SQLException {
       String sql = "select reply_id, reply_content, reply_date, user_id, qna_id from Reply where qna_id = ?";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, qnaId);
@@ -85,8 +78,7 @@ public class ReplyDao {
       return list;
    }
 
-   public int deleteReviewReply(RReply rreply) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int deleteReviewReply(Connection conn, RReply rreply) throws SQLException {
       String sql = "delete from reply where review_id=? and reply_id=? and user_id=?";
       // 유저아이디도 검사할 것
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -100,8 +92,7 @@ public class ReplyDao {
 
    }
 
-   public int deleteQnaReply(QReply qreply) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int deleteQnaReply(Connection conn, QReply qreply) throws SQLException {
       String sql = "delete from reply where qna_id=? and reply_id=? and user_id=?";
       // 유저아이디도 검사할 것
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -117,8 +108,7 @@ public class ReplyDao {
    }
    
    //관리자가 모든 댓글을 지울 수 있는 메소드
-   public int adDeleteReviewReply(RReply rreply) throws SQLException {
-         Connection conn = ConnectionProvider.getConnection();
+   public int adDeleteReviewReply(Connection conn, RReply rreply) throws SQLException {
          String sql = "delete from reply where review_id=? and reply_id=? ";
          // 유저아이디도 검사할 것
          PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -132,8 +122,7 @@ public class ReplyDao {
 
       }
    
-   public int adDeleteQnaReply(QReply qreply) throws SQLException {
-         Connection conn = ConnectionProvider.getConnection();
+   public int adDeleteQnaReply(Connection conn, QReply qreply) throws SQLException {
          String sql = "delete from reply where review_id=? and reply_id=? ";
          // 유저아이디도 검사할 것
          PreparedStatement pstmt = conn.prepareStatement(sql);

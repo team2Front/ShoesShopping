@@ -25,8 +25,7 @@ public class ReviewDao {
 	   this.replyDao = (ReplyDao) application.getAttribute("replyDao");
 	   this.productDao = (ProductDao) application.getAttribute("productDao");
    }
-   public int selectCount(int productId) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int selectCount(Connection conn, int productId) throws SQLException {
       String sql = "select count(*) from review where product_id = ? ";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, productId);
@@ -42,8 +41,7 @@ public class ReviewDao {
    }
 
    // method: select문 - [마이페이지] 내가 작성한 리뷰 총개수
-   public int selectMyCount(String userId) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int selectMyCount(Connection conn,String userId) throws SQLException {
       String sql = "select count(*) from review where user_id = ? ";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       int cnt = 0;
@@ -59,14 +57,13 @@ public class ReviewDao {
       return cnt;
    }
 
-   public Review selectReview(int reviewId) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public Review selectReview(Connection conn, int reviewId) throws SQLException {
 
       String sql = "select review_id, review_title, review_content, review_date, user_id,star_score,heart_count, product_id from review where review_id = ?";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, reviewId);
       ResultSet rs = pstmt.executeQuery();
-      List<RReply> list = replyDao.selectReviewReply(reviewId);// 댓글 리스트임
+      List<RReply> list = replyDao.selectReviewReply(conn, reviewId);// 댓글 리스트임
       Review r1 = null;
 //      while (rs.next()) {
 //         int pid = rs.getInt("product_id");
@@ -84,8 +81,7 @@ public class ReviewDao {
    }
 
    // method: select문 - [마이페이지] 내가 쓴 리뷰 목록
-   public List<ReviewList> selectMyReviewList(String userId, PagingVo pvo) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public List<ReviewList> selectMyReviewList(Connection conn, String userId, PagingVo pvo) throws SQLException {
       int endRn = pvo.getEndRowNo();
       int startRn = pvo.getStartRowNo();
       List<ReviewList> list = new ArrayList<>();
@@ -111,8 +107,7 @@ public class ReviewDao {
       return list;
    }
 
-   public int insertReview(Review review) {
-	      Connection conn = ConnectionProvider.getConnection();
+   public int insertReview(Connection conn, Review review) {
 	      String sql = "INSERT INTO review (review_id, review_title, review_content, review_date, user_id, star_score, product_id)"
 	            + "values(Review_seq.NEXTVAL,?,?,default,?,?,?)";
 	      int r = 0;
@@ -132,8 +127,7 @@ public class ReviewDao {
 	      return r;
 	   }
 
-   public int deleteReview(Review review) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int deleteReview(Connection conn, Review review) throws SQLException {
       String sql = "delete from review where review_id=? and user_id=?";
       // 유저아이디도 검사할 것
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -149,8 +143,7 @@ public class ReviewDao {
 
    }
 
-   public int adDeleteReview(Review review) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int adDeleteReview(Connection conn, Review review) throws SQLException {
       String sql = "delete from review where review_id=? ";
       // 유저아이디도 검사할 것
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -165,8 +158,7 @@ public class ReviewDao {
 
    }
 
-   public List<ReviewList> selectReviewList(int productId, PagingVo pvo) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public List<ReviewList> selectReviewList(Connection conn, int productId, PagingVo pvo) throws SQLException {
       int endRn = pvo.getEndRowNo();
       int startRn = pvo.getStartRowNo();
       String sql = "select rm, review_id, review_title, review_date, user_id, product_id  " + "from ( "
@@ -192,8 +184,7 @@ public class ReviewDao {
       return list;
    }
 
-   public int updateReviewHeartCount(int reviewId) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int updateReviewHeartCount(Connection conn, int reviewId) throws SQLException {
       String sql = "select heart_count from review where review_id=?";
 
       PreparedStatement pstmt = conn.prepareStatement(sql);

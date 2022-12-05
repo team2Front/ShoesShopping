@@ -22,8 +22,7 @@ public class QnaDao {
 	   this.replyDao = (ReplyDao) application.getAttribute("replyDao");
    }
    
-   public int selectCount(int productId) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int selectCount(Connection conn, int productId) throws SQLException {
       String sql = "select count(*) from qna where product_id = ? ";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, productId);
@@ -38,14 +37,13 @@ public class QnaDao {
       return cnt;
    }
 
-   public Qna selectQna(int qnaId, int productId) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public Qna selectQna(Connection conn, int qnaId, int productId) throws SQLException {
 
       String sql = "select qna_id, qna_title, qna_content, qna_date, user_id from qna where qna_id = ?";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, qnaId);
       ResultSet rs = pstmt.executeQuery();
-      List<QReply> list = replyDao.selectQnaReply(qnaId);// 댓글 리스트임
+      List<QReply> list = replyDao.selectQnaReply(conn, qnaId);// 댓글 리스트임
       Qna q1 = null;
       while (rs.next()) {
          q1 = new Qna(rs.getInt("qna_id"), rs.getString("qna_title"), rs.getString("qna_content"),
@@ -59,8 +57,7 @@ public class QnaDao {
 
    }
 
-   public List<QnaList> selectQnaList(int productId, PagingVo pvo) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public List<QnaList> selectQnaList(Connection conn, int productId, PagingVo pvo) throws SQLException {
       int endRn = pvo.getEndRowNo();
       int startRn = pvo.getStartRowNo();
       String sql = "select rm, qna_id, qna_title, qna_date, user_id, product_id  "
@@ -92,8 +89,7 @@ public class QnaDao {
       return list;
    }
 
-   public int insertQna(Qna qna) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int insertQna(Connection conn, Qna qna) throws SQLException {
       String sql = "INSERT INTO qna (qna_id, qna_title ,qna_content, qna_date,product_id ,user_id)"
             + "values(QNA_SEQ.NEXTVAL,?,?,default,?,?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -108,8 +104,7 @@ public class QnaDao {
 
    }
 
-   public int deleteQna(Qna qna) throws SQLException {
-      Connection conn = ConnectionProvider.getConnection();
+   public int deleteQna(Connection conn, Qna qna) throws SQLException {
       String sql = "delete from qna where qna_id=? and user_id=?";
       // 유저아이디도 검사할 것
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -125,8 +120,7 @@ public class QnaDao {
 
    }
    
-   public int adDeleteQna(Qna qna) throws SQLException {
-         Connection conn = ConnectionProvider.getConnection();
+   public int adDeleteQna(Connection conn, Qna qna) throws SQLException {
          String sql = "delete from qna where qna_id=?";
          // 유저아이디도 검사할 것
          PreparedStatement pstmt = conn.prepareStatement(sql);
