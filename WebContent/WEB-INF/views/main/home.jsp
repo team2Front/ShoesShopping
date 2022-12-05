@@ -229,12 +229,12 @@
 								<div class="card-body">
 								    <p class="card-brand m-0 text-muted small" >${productList.categoryName} > ${productList.productSex}</p>
 								    <p class="card-brand m-0">${productList.companyName}</p>
-								    <h5 class="card-title"><a href="ProductController?productId=${productList.productId}">${productList.productName}</a></h5>
+								    <h5 class="card-title"><a href="../product/ProductController?productId=${productList.productId}">${productList.productName}</a></h5>
 								    <p class="card-text">
 								    <span class="sale" style="color:red">${productList.productPrice}원</span>
 								    </p>
 								    <a href="#" class="btn btn-outline-info btn-sm"><img src="../resources/images/heart_empty.png" style="width:15px; height:15px;"> 찜하기</a>
-								    <a href="ProductController?productId=${productList.productId}" class="btn btn-primary btn-sm">자세히보기</a>
+								    <a href="../product/ProductController?productId=${productList.productId}" class="btn btn-primary btn-sm">자세히보기</a>
 								 </div>
 							</div>
 			            </c:forEach>

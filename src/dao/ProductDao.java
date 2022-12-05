@@ -74,7 +74,6 @@ public class ProductDao {
 			list.add(productList);
 		}
 		pstmt.close();
-		System.out.println(list);
 		return list;
 	}
 
@@ -134,8 +133,8 @@ public class ProductDao {
 			product.setProductSex(rs.getString("product_sex"));
 			product.setCompany(selectFindCompany(conn, rs.getInt("company_id")));
 			product.setCategory(categoryDao.findCategoty(conn, rs.getInt("category_id")));
-			product.setColorList(productAndColorService.findProductColors(pid));
-			product.setSizeList(productAndSizeService.findProductSizeList(pid));
+			/*product.setColorList(productAndColorService.findProductColors(pid));
+			product.setSizeList(productAndSizeService.findProductSizeList(pid));*/
 			
 			/*product = new Product(pid, rs.getString("product_name"), rs.getBoolean("is_deleted"),
 					rs.getInt("product_price"), rs.getString("product_sex"),
