@@ -104,9 +104,8 @@ public class UserDao {
    }
    
    //method: insert문 - 사용자 정보를 DB에 등록
-   public boolean insertRegisterUser(Connection conn, User user) throws Exception {
+   public int insertRegisterUser(Connection conn, User user) throws Exception {
       String sql = "insert into users(user_id, user_name, user_password, phone_number, user_address) values (?,?,?,?,?)";
-      boolean result = true;
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, user.getUserId());
       pstmt.setString(2, user.getUserName());
@@ -115,15 +114,10 @@ public class UserDao {
       pstmt.setString(5, user.getUserAddress());
       
       int rows = pstmt.executeUpdate();
-    
-      if(rows == 1) {
-    	  result = true; //정보 등록 성공
-      }else {
-    	  result = false; //정보 등록 실패
-      }
+      
       pstmt.close();
       
-      return result;
+      return rows;
    }
    
    //method: update문 - 사용자 정보 DB에서 수정

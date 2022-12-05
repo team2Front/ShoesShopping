@@ -250,7 +250,7 @@
 					
 					<div class="text-center">
 						<input type="submit" class="btn btn-outline-success btn-lg" onclick="return handleCheckData()" value="join"/>
-						<a href="home.html" type="reset" class="btn btn-outline-warning btn-lg" >Reset</a>
+						<a href="${pageContext.request.contextPath}" type="reset" class="btn btn-outline-warning btn-lg" >Reset</a>
 					</div>
 				</form>
 			</div>
