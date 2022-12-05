@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -217,6 +218,33 @@
 			<!-- 상품리스트 -->
 			<div id="products" class="p-2" style="width:1000px;"> 
 				   <div class="d-flex justify-content-between flex-wrap" style="width:1000px;" >
+				        <!-- 카드 임시로 가져와보기 -->
+				        <div class="card">
+				           <div class="card-head">
+							  <img class="card-img-top" src="../resources/images/반스_월버_노랑.jpg">
+							</div>
+							<div class="card-body">
+							    <p class="card-brand m-0">반스</p>
+							    <h5 class="card-title">윌버</h5>
+							    <p class="card-text">
+							    <span class="sale" style="color:red">50000원</span>
+							    </p>
+							    <a href="#"><img src="../images/heart_empty.png" style="width:20px; height:20px">찜 하기</a>
+							    <a href="/shopping/product/ProductController" class="btn btn-primary">자세히보기</a>
+							 </div>
+						</div>
+						
+						<%-- <c:forEach var="productList" items="${pageList}">
+			               <tr>
+			                  <td>${productList.productId}</td>
+			                  <td><a href="DetailViewController?bno=${productList.productName}">${productList.productName}</a></td>
+			                  <td>${productList.companyName}</td>
+			                  <td>${productList.caegoryName}</td>
+			                  <td>${productList.productSex}</td>
+			                  <td>${productList.productPrice}</td>
+			               </tr>
+			            </c:forEach> --%>
+			            
 				        <div class="card">
 				           <div class="card-head">
 							  <img class="card-img-top" src="../resources/images/반스_월버_노랑.jpg">
@@ -347,6 +375,30 @@
 						  </div>
 				        </div>
 				      </div>
+				      <%-- <div id="pager" class="text-center">
+				      		<div>
+		                     <a href="MainController?pageNo=1" class="btn btn-outline-primary btn-sm">처음</a>
+		                     
+		                     <c:if test="${pager.groupNo > 1}">
+		                        <a href="MainController?pageNo=${pager.startPageNo-1}" class="btn btn-outline-info btn-sm">이전</a>
+		                     </c:if>
+		                     
+		                     <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+		                        <c:if test="${pager.pageNo != i}">
+		                           <a href="MainController?pageNo=${i}" class="btn btn-outline-success btn-sm">${i}</a>
+		                        </c:if>
+		                        <c:if test="${pager.pageNo == i}">
+		                           <a href="MainController?pageNo=${i}" class="btn btn-danger btn-sm">${i}</a>
+		                        </c:if>
+		                     </c:forEach>
+		                     
+		                     <c:if test="${pager.groupNo < pager.totalGroupNo}">
+		                        <a href="MainController?pageNo=${pager.endPageNo+1}" class="btn btn-outline-info btn-sm">다음</a>
+		                     </c:if>
+		                     
+		                     <a href="MainController?pageNo=${pager.totalPageNo}" class="btn btn-outline-primary btn-sm">맨끝</a>
+		                  </div>
+				      </div> --%>
 				  </div>
 			</div>
 

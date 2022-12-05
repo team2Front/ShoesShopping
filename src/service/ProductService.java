@@ -18,6 +18,7 @@ import dto.RegisterProduct;
 import util.PagingVo;
 
 public class ProductService {
+	private ServletContext application;
 	private DataSource ds;
 	private ProductDao productDao;
 	private PfilteringDao pfilteringDao;
@@ -25,6 +26,8 @@ public class ProductService {
 	private ProductAndSizeDao productAndSizeDao;
 	
 	public ProductService(ServletContext application) {
+		this.application = application;
+		ds = (DataSource) application.getAttribute("dataSource");
 		this.productDao = (ProductDao) application.getAttribute("productDao");
 		this.pfilteringDao = (PfilteringDao) application.getAttribute("pfilteringDao");
 		this.productAndColorDao = (ProductAndColorDao) application.getAttribute("productAndColorDao");
@@ -34,6 +37,7 @@ public class ProductService {
 	// 필터링 x
 	// 상품 총수량
 	public int countAllProducts() {
+		System.out.println("[서비스] 카운트 올");
 		Connection conn = null;
 		int total = 0;
 		try {
@@ -227,18 +231,17 @@ public class ProductService {
 				System.out.println(e.getMessage());
 				message = "상품 등록 실패되었습니다.";
 				conn.rollback();
-				conn.close();
 			} catch (SQLException e1) {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				conn.setAutoCommit(true);
 				conn.close();
 			} catch (Exception e) {
 			}
 		}
-
 		return message;
 
 	}
