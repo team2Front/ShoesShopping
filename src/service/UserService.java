@@ -13,23 +13,15 @@ import dto.UserInfo;
 
 public class UserService {
 	//field
-	private ServletContext application;
 	private DataSource ds;
 	private UserDao userDao; 
 	private CartService cartService;
 	
 	//constructor
 	public UserService(ServletContext application) {
-		this.application = application;
+		ds = (DataSource) application.getAttribute("dataSource");
 		this.userDao = (UserDao) application.getAttribute("userDao");
 		this.cartService = (CartService) application.getAttribute("cartService");
-		
-		try {
-			InitialContext ic = new InitialContext();
-			ds = (DataSource) ic.lookup("java:comp/env/jbc/java");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
 	}
 	
 	// method: 아이디 중복여부 확인 (회원 여부 확인)
