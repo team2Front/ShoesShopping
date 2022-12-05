@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dto.CartDto;
-import util.ConnectionProvider;
 
 
 public class CartDao {

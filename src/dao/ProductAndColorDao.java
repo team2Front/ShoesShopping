@@ -61,5 +61,25 @@ public class ProductAndColorDao {
 		return colors;
 
 	}
+	
+	// 해당 상품의 해당 색상 유효한지 체크
+	public boolean selectProductColor(Connection conn, int productId, int colorId) throws Exception {
+		String sql = "select color_id from product_color where product_id=? and color_id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, productId);
+		pstmt.setInt(1, colorId);
+		
+		boolean result = false;
+
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			result = true;
+		}
+		
+		else throw new RuntimeException();
+		
+		return result;
+
+	}
 
 }

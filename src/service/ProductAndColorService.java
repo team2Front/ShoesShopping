@@ -55,15 +55,16 @@ public class ProductAndColorService {
 	
 	// 유저가 선택한 색상이 상품에 있는지 확인
 	public boolean checkColor(int productId, int colorId) {
-
-		List<Color> list = findProductColors(productId);
-
+		Connection conn = null;
 		boolean result = false;
-		for (Color c : list) {
-			if (c.getColor_id() == colorId) {
-				result = true;
-				break;
-			}
+		
+		try {
+			conn = ds.getConnection();
+			result = productAndColorDao.selectProductColor(conn, productId, colorId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close(); } catch (Exception e) {}
 		}
 
 		return result;

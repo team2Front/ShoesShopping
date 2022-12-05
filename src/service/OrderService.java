@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
@@ -16,24 +15,13 @@ import util.PagingVo;
 @NoArgsConstructor
 public class OrderService {
 	//field
-	private ServletContext application;
 	private DataSource ds;
 	private OrderDao orderDao; 
 	
 	//constructor
 	public OrderService(ServletContext application) {
-		this.application = application;
-		this.orderDao = (OrderDao) application.getAttribute("orderDao");
-		
-		try {
-			InitialContext ic = new InitialContext();
-			ds = (DataSource) ic.lookup("java:comp/env/jbc/java");
-			
-			//트랜잭션을 위한 커넥션
-			Connection conn = ds.getConnection();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
+		this.ds = (DataSource) application.getAttribute("dataSource");
+		this.orderDao = (OrderDao) application.getAttribute("orderDao"); 
 	}
 	
 	// order 테이블 전체 count
