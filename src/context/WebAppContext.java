@@ -72,23 +72,18 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("qnaDao", new QnaDao(application));
 		application.setAttribute("reviewDao", new ReviewDao(application));
 		application.setAttribute("replyDao", new ReplyDao());
-<<<<<<< HEAD
+		
 		System.out.println("~~~~ 2 ");
-=======
 		System.out.println("WebApp DAO Set 완료");
 		
->>>>>>> branch 'master' of https://github.com/team2Front/ShoesShopping.git
 		//-------------------- 서비스 ------------------
 		application.setAttribute("productAndColorService", new ProductAndColorService(application));
 		application.setAttribute("productAndSizeService", new ProductAndSizeService(application));
 		System.out.println("WebApp프로덕트 서비스 전");
 		application.setAttribute("productService", new ProductService(application));
-<<<<<<< HEAD
-		System.out.println("~~~~ 3 ");
-=======
-		System.out.println("WebApp프로덕트 서비스 후");
 
->>>>>>> branch 'master' of https://github.com/team2Front/ShoesShopping.git
+		System.out.println("~~~~ 3 ");
+		System.out.println("WebApp프로덕트 서비스 후");
 		
 		application.setAttribute("cartService", new CartService(application));
 		application.setAttribute("cartDetailService", new CartDetailService(application));
