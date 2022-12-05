@@ -34,7 +34,7 @@ public class UserDao {
    
    //method: select문 - 핸드폰 번호 중복 여부 확인
    public boolean selectPnCheck(Connection conn, String pn) throws Exception {
-      String sql = "select phone_number from users where phonenumber=? ";
+      String sql = "select phonenumber from users where phonenumber=? ";
       boolean result = true;
  	  
       PreparedStatement pstmt = conn.prepareStatement(sql);

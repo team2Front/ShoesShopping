@@ -28,73 +28,87 @@
 	            
 	            //Password 유효성 검사 -------------------------------------------------------
 	               //패스워드 검사
-	               var password = document.querySelector("#userpassword");
-	            	var passwordValue = password.value;
-	               var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/; 
-	               var passwordPatternTest = passwordPattern.test(passwordValue);
-	               var passworddiv = document.getElementById("passworddiv");
-	               if(passwordPatternTest) {
-	            	   changeVaild(passworddiv);
-	               } else {
-	                  changeInvaild(passworddiv);
-	               result = false;
-	               }
-	            
-	            //전화번호 유효성 검사
-	            var phone = document.querySelector("#phone");
-	            var phoneValue = phone.value;
-	            var phonePattern = /^010-\d{3,4}-\d{4}$/;
-	            var phonePatternTest = phonePattern.test(phoneValue);
-	            var phonediv = document.getElementById("phonediv");
-	            if(phonePatternTest) {
-	            	changeVaild(phonediv);
-	            } else {
-	            	changeInvaild(phonediv);
+
+				var password = document.querySelector("#userpassword");
+				var passwordValue = password.value;
+				var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
+				var passwordPatternTest = passwordPattern.test(passwordValue);
+				var passworddiv = document.getElementById("passworddiv");
+				if (passwordPatternTest) {
+					changeVaild(passworddiv);
+				} else {
+					changeInvaild(passworddiv);
 					result = false;
-	            }
+				}
+
+				//전화번호 유효성 검사
+				var phone = document.querySelector("#phone");
+				var phoneValue = phone.value;
+				var phonePattern = /^010-\d{3,4}-\d{4}$/;
+				var phonePatternTest = phonePattern.test(phoneValue);
+				var phonediv = document.getElementById("phonediv");
+				if (phonePatternTest) {
+					changeVaild(phonediv);
+				} else {
+					changeInvaild(phonediv);
+					result = false;
+				}
+
+				var password2 = document.querySelector("#userpassword2");
+				var password2Value = password2.value;
+				if (passwordValue == password2Value) {
+					changeVaild(passworddiv2);
+				} else {
+					changeInvaild(passworddiv2);
+					result = false;
+				}
+
 				return result;
 			}
-			
-			
-			
+
 			$(document).ready(function() {
 				$("#cbx_chkAll").click(function() {
-					if($("#cbx_chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
-					else $("input[name=chk]").prop("checked", false);
+					if ($("#cbx_chkAll").is(":checked"))
+						$("input[name=chk]").prop("checked", true);
+					else
+						$("input[name=chk]").prop("checked", false);
 				});
-				
+
 				$("input[name=chk]").click(function() {
 					var total = $("input[name=chk]").length;
 					var checked = $("input[name=chk]:checked").length;
-					
-					if(total != checked) $("#cbx_chkAll").prop("checked", false);
-					else $("#cbx_chkAll").prop("checked", true); 
+
+					if (total != checked)
+						$("#cbx_chkAll").prop("checked", false);
+					else
+						$("#cbx_chkAll").prop("checked", true);
 				});
 			});
-			
-		    function execDaumPostcode() {
-		        new daum.Postcode({
-		        	oncomplete: function(data) {
-		                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-		                var addr = ''; // 주소 변수
 
-		                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-		                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-		                    addr = data.roadAddress;
-		                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-		                    addr = data.jibunAddress;
-		                }
-		                
-		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-		                document.getElementById('postcode').value = data.zonecode;
-		                document.getElementById("address").value = addr;
-		                // 커서를 상세주소 필드로 이동한다.
-		                document.getElementById("detailAddress").focus();
-		            }
-		        }).open();
-		    }
-			
+			function execDaumPostcode() {
+				new daum.Postcode(
+						{
+							oncomplete : function(data) {
+								// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+								// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+								var addr = ''; // 주소 변수
+
+								//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+								if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+									addr = data.roadAddress;
+								} else { // 사용자가 지번 주소를 선택했을 경우(J)
+									addr = data.jibunAddress;
+								}
+
+								// 우편번호와 주소 정보를 해당 필드에 넣는다.
+								document.getElementById('postcode').value = data.zonecode;
+								document.getElementById("address").value = addr;
+								// 커서를 상세주소 필드로 이동한다.
+								document.getElementById("detailAddress")
+										.focus();
+							}
+						}).open();
+			}
 		</script>
 		
 		<link rel="stylesheet" href="../resources/css/common.css">
@@ -224,6 +238,13 @@
 						<input type="password" class="form-control" placeholder="password" id="userpassword" name="userpassword"/>
 						<small id="passwordHelp" class="form-text text-muted">알파벳 대소문자, 숫자를 혼용해서 8자 이상 15장 이하</small>
 						<div id="passworddiv"></div>
+					</div>
+					
+					<div class="form-group form-floating" >
+						<label for="userpassword2">Password 2차</label>
+						<input type="password" class="form-control" placeholder="password" id="userpassword2" name="userpassword2"/>
+						<small id="passwordHelp" class="form-text text-muted">패스워드와 똑같은 값을 입력해 주세요</small>
+						<div id="passworddiv2"></div>
 					</div>
 	
 					<div class="form-group form-floating">
