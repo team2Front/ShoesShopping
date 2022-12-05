@@ -245,7 +245,7 @@
 						<input type="button" value="우편번호검색"  onclick="execDaumPostcode()"><br>
 						<input type="text" id="address" name="addr1" size="50" placeholder="주소" readonly><br>
 						<input type="text" id="detailAddress" name="addr2" size="50" placeholder="상세주소">
-						<small id="addressHelp" class="form-text text-muted">예) 서울특별시 마포구...</small>
+						<small id="addressHelp" class="form-text text-muted">예) 서울특별시 마포구....</small>
 					</div>
 					
 					<div class="text-center">
