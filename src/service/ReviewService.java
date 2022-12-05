@@ -23,21 +23,21 @@ public class ReviewService {
 	   ds = (DataSource) application.getAttribute("dataSource");
    }
    
-   //리뷰 간단히 보기
-   public List<ReviewList> showReviewList(int productId,PagingVo pvo) throws SQLException {
-      
+   //method: [상품 페이지] - 해당 상품의 리뷰 목록
+   public List<ReviewList> showReviewList(int productId, PagingVo pvo) {
 	   List<ReviewList> list = null;
 	   Connection conn = null;
-		try {
+	   
+	   try {
 			conn = ds.getConnection();
 			list = reviewDao.selectReviewList(conn, productId, pvo);
-			
-		}catch(Exception e) {
+	   }catch(Exception e) {
 			e.printStackTrace();
-		}finally {
+	   }finally {
 			try{conn.close();}catch(Exception e) {}
-		}
-      return list;
+	   }
+	   
+	   return list;
    }
    
    
@@ -58,7 +58,7 @@ public class ReviewService {
    }
 
    // 2. 리뷰 자세히 보기 showReviewOne(원하는 리뷰 번호)
-   public Review showReviewOne(int reviewId) throws SQLException {
+   public Review showReviewOne(int reviewId) {
       Review review = null;
 		Connection conn = null;
 		try {
@@ -68,14 +68,26 @@ public class ReviewService {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			try{conn.close();}catch(Exception e) {}
+			try{conn.close();} catch(Exception e) {}
 		}
       return review;
    }
    
-   public int countAllReviews(int productId) throws SQLException {
-	  Connection conn = ds.getConnection();
-      return reviewDao.selectCount(conn, productId);
+   //method: [상품 페이지] - 해당 상품 리뷰 총 개수
+   public int countAllReviews(int productId) {
+	  int result = 0;
+	  Connection conn = null;
+	  
+	  try {
+		  conn = ds.getConnection();
+		  result = reviewDao.selectCount(conn, productId);
+	  } catch (Exception e) {
+		  e.printStackTrace();
+	  } finally {
+			try{conn.close();} catch(Exception e) {}
+	  }
+	  
+      return result;
    }
    
  //method: [마이페이지] - 나의 리뷰 총 개수 (페이징 처리)

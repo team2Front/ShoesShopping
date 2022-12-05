@@ -97,7 +97,7 @@ public class ReviewDao {
       ResultSet rs = pstmt.executeQuery();
       while (rs.next()) {
          ReviewList rl = new ReviewList(rs.getInt("review_id"), rs.getString("review_title"),
-               rs.getDate("review_date").toString(), rs.getString("user_id"), rs.getInt("product_id"));
+               rs.getDate("review_date"), rs.getString("user_id"), rs.getInt("product_id"));
          list.add(rl);
       }
       pstmt.close();
@@ -174,7 +174,7 @@ public class ReviewDao {
 
       while (rs.next()) {
          ReviewList rl = new ReviewList(rs.getInt("review_id"), rs.getString("review_title"),
-               rs.getString("review_date"), rs.getString("user_id"), rs.getInt("product_id"));
+               rs.getDate("review_date"), rs.getString("user_id"), rs.getInt("product_id"));
          list.add(rl);
       }
       pstmt.close();
