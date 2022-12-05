@@ -365,6 +365,7 @@
 					<a class="nav-link active" data-toggle="tab" href="#shoes-detail" style="font-size:30px; text-align:center"> 상품 정보 </a>
 				</li>
 				<li class="col-4 p-3 nav-item">
+					<a href="../review/ReviewListController">쀼쀼</a>
 					<a class="nav-link" data-toggle="tab" href="#shoes-review" style="font-size:30px; text-align:center"> 리뷰 </a>
 				</li>
 				<li class="col-4 p-3 nav-item">
