@@ -1,6 +1,7 @@
 package dao;
 
-import java.sql.Connection; 
+import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -108,14 +109,15 @@ public class ReviewDao {
 
    public int insertReview(Connection conn, Review review) {
 	      String sql = "INSERT INTO review (review_id, review_title, review_content, review_date, user_id, star_score, product_id)"
-	            + "values(Review_seq.NEXTVAL,?,?,default,?,?,?)";
+	            + "values(Review_seq.NEXTVAL,?,?,sysdate,?,?, 100)";
 	      int r = 0;
 	      try {
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setString(1, review.getReviewTitle());
 	      pstmt.setString(2, review.getReviewContent());
-	      pstmt.setInt(3, review.getProduct().getProductId());
-	      pstmt.setString(4, review.getUserId());
+	      pstmt.setString(3, review.getUserId());
+	      pstmt.setInt(4, review.getStarScore());
+	      //pstmt.setInt(6, review.getProduct().getProductId());
 	      r = pstmt.executeUpdate();
 	      } catch (SQLException e) {
 	         throw new RuntimeException();
