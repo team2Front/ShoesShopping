@@ -19,17 +19,8 @@ public class QnAService {
 	private DataSource ds;
 	
 	public QnAService(ServletContext application) {
-		
 		this.qnaDao = (QnaDao) application.getAttribute("qnaDao");
-
-		try {
-			InitialContext ic = new InitialContext();
-			ds = (DataSource) ic.lookup("java:comp/env/jbc/java");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		
-		
+		ds = (DataSource) application.getAttribute("dataSource");
 	}
     
     //큐엔에이 전체 글 수 구하기

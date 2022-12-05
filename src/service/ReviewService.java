@@ -20,13 +20,7 @@ public class ReviewService {
    
    public ReviewService(ServletContext application) {
 	   this.reviewDao = (ReviewDao) application.getAttribute("reviewDao");
-	   try {
-			InitialContext ic = new InitialContext();
-			ds = (DataSource) ic.lookup("java:comp/env/jbc/java");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		
+	   ds = (DataSource) application.getAttribute("dataSource");
    }
    
    //리뷰 간단히 보기

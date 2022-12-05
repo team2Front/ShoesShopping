@@ -10,6 +10,11 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+    <!--Listener 설정  -->
+  <listener>
+     <listener-class>context.WebAppContext</listener-class>
+  </listener> 
+  
    <!--  Connection Pool 참조 -->
  <resource-ref>
      <res-ref-name>jdbc/java</res-ref-name>

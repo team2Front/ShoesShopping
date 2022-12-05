@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +14,6 @@ import domain.Review;
 import dto.RReply;
 import dto.ReviewList;
 import service.ProductService;
-import util.ConnectionProvider;
 import util.PagingVo;
 
 public class ReviewDao {

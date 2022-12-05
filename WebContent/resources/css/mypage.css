@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+#navbar {
+	margin: 0 auto;
+	height: 50px;
+	border-top: 1px groove gray;
+	border-bottom: 1px groove gray;
+	padding-left:100px;
+}
+
+.shoesmain{
+	width: 1400px;
+	margin:0 auto !important;
+}
+
+#mypage_sidebar {
+	background-color:#F5F5F5;
+	position: sticky; 
+	top: 250px; 
+	bottom: 150px;
+	right: 10px; 
+	width: 200px; 
+	height:1000px;
+	padding-top:30px; 
+	padding-bottom:30px;
+	font-size:13px;
+    align-self: flex-start;
+    top: 0;
+}
+
+#mainDiv{
+	width:95%;
+}
+
+#mypage_sidemenu>a{
+	border:none;
+	color:black;
+	background-color: #F5F5F5;
+}
+
+#mypage_sidemenu>a:hover{
+	background-color: #708090;
+	color:white;
+	text-decoration: none;
+}
+
+.ubtn {
+	width: 100px;
+	font-size: 11px;
+	text-align: center;
+}
+
+.image-block>img{
+	width:100px;
+}
+
+.buttons{
+	align-content: center;
+}
+
+li{
+text-align: left;
+list-style: none;
+}
+
+.n-row{
+	display: flex;
+	padding:10px;
+}
+
+.table td, th{
+	text-align: center;
+	vertical-align: middle;
+ }
+			 
+ /* ============== [리뷰 작성창] ============== */
+.mypost {
+     width: 95%;
+     max-width: 800px;
+     margin: 20px auto 20px auto;
+
+     box-shadow: 0px 0px 3px 0px black;
+     padding: 20px;
+  }
+  
+
+.mypost > button {
+    margin-top: 15px;
+}
+  
+#review-content{
+	height: 150px;
+}
+
+.mybtns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 20px;
+}
+
+.mybtns > button {
+    margin-right: 10px;
+}
