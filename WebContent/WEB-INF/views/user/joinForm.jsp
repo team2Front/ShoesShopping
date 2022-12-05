@@ -23,7 +23,9 @@
 				var result = true;
 				//id검사
 				var uid = document.querySelector("#uid");
+				console.log(uid);
 				var uidValue = uid.value;
+				console.log(uidValue);
 				var uidPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
 				var uidTest = uidPattern.test(uidValue);
 				var uiddiv = document.getElementById("uiddiv");
@@ -38,6 +40,7 @@
 				//Password 유효성 검사 -------------------------------------------------------
 	            //패스워드 검사
 	            var password = document.querySelector("#password");
+	            console.log(password);
 				var passwordValue = password.value;
 	            var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/; 
 	            var passwordPatternTest = passwordPattern.test(passwordValue);
@@ -131,7 +134,7 @@
 	      	</div>
 	      	<br>
 	      	
-	        <form id="joinForm" name="joinForm" action="home.html" novalidate>
+	        <form id="joinForm" name="joinForm" action="joinFormController" novalidate>
 	           <div class="form-group form-floating">
 	            <label for="uname">Name</label>
 	            <input type="text" class="form-control" placeholder="홍길동" id="uname" name="uname" />
@@ -175,7 +178,6 @@
 	          
 	            <input type="submit" class="btn btn-outline-success btn-lg" onclick="return handleCheckData()" value="Join"/>
 	          	 <a href="home.html" type="reset" class="btn btn-outline-warning btn-lg" >Reset</a>
-	          <!-- 	 <input type="reset"class="btn btn-outline-warning btn-lg" value="Reset" /> -->
 	          </div>
 	          
 	          
