@@ -10,14 +10,11 @@ import domain.User;
 import dto.UserInfo;
 
 public class UserDao {
-	//field
-	private ServletContext application;
-	
-	//constructor
-	public UserDao(ServletContext application) {
-		this.application = application;
-	}
-	
+   private ReplyDao replyDao;
+   
+   public UserDao(ServletContext application) {
+   }
+	   
    //method: select문 - 아이디 중복 여부 판별
    public boolean selectUserId(Connection conn, String id) throws Exception {
       String sql = "select userid from users where userid=? ";
@@ -63,20 +60,19 @@ public class UserDao {
    
    //method: select문 - 로그인
    public String selectLogin(Connection conn, User user) throws Exception {
-      String sql = "select user_id, user_type from users where user_id=? and user_password=?";
-      String type = "" ;
+      String sql = "select userid, usertype from users where userid=? and userpassword=?";
+      String type = "";
 
 	  PreparedStatement pstmt = conn.prepareStatement(sql);
 	  pstmt.setString(1, user.getUserId());
 	  pstmt.setString(2, user.getUserPassword());
 	  ResultSet rs = pstmt.executeQuery();
-	 
 	  //로그인 성공이면 user_type 리턴
 	  if (rs.next()) {
-	     type = rs.getString("user_type"); 
+	     type = rs.getString("usertype"); 
 	  } else { 
 	     //로그인 실패면 null 리턴
-	     type = null; //로그인 실패
+	     type = ""; //로그인 실패
 	  }
 	  pstmt.close();
 	  

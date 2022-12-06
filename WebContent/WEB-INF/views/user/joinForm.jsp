@@ -223,7 +223,7 @@
 	      			</div>
 	      		</div>
 	      	<br>
-	      		<form method="post" id="joinForm" name="joinForm" action="/shopping/user/JoinFormController" novalidate>
+	      		<form method="post" id="joinForm" name="joinForm" action="${pageContext.request.contextPath}/user/JoinFormController" novalidate>
 	      			<div class="form-group form-floating">
 	      				<label for="uname">Name</label>
 	      				<input type="text" class="form-control" placeholder="홍길동" id="uname" name="uname" value="${user.userName}"/>

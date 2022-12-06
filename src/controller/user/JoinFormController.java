@@ -33,12 +33,9 @@ public class JoinFormController extends HttpServlet {
 		user.setPhoneNumber(request.getParameter("phone"));
 		user.setUserEmail(request.getParameter("email"));
 		user.setUserAddress(request.getParameter("addr1") + " " + request.getParameter("addr2"));
-		System.out.println(user.getUserAddress());
 		
 		boolean idcheck = userService.idCheck(user.getUserId());
-		System.out.println(idcheck);
 		boolean phonenumbercheck = userService.pnCheck(user.getPhoneNumber());
-		System.out.println(phonenumbercheck);
 		
 		int createuser = 0;
 		String errorcode = "";
