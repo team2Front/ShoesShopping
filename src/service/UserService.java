@@ -85,7 +85,7 @@ public class UserService {
 		
 		try {
 			conn = ds.getConnection();
-			int result = userDao.insertRegisterUser(conn, user);
+			userDao.insertRegisterUser(conn, user);
 //			cartService.createCart(conn, user.getUserId());
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -95,25 +95,17 @@ public class UserService {
 	}
 
 	// method: 관리자 등록(추가)
-	public String registerAdmin(User user) {
+	public void registerAdmin(User user) {
 		Connection conn = null;
-		String result = null;
 		
 		try {
 			conn = ds.getConnection();
-			
-			if (userDao.insertRegisterAdmin(conn, user)) {
-				result = "회원가입이 완료되었습니다.";
-			} else {
-				result = "회원가입에 실패하였습니다.";
-			}
+			userDao.insertRegisterAdmin(conn, user);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			try { conn.close();} catch (SQLException e) {}
 		}
-		
-		return result;
 	}
 
 	// method: 로그인

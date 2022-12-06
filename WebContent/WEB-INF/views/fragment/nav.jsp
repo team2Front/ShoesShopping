@@ -25,6 +25,7 @@
 	    		<a href="${pageContext.request.contextPath}/admin/Register_ProductController" class="btn btn-warning btn-sm">상품 등록</a>
 	    		<a href="${pageContext.request.contextPath}/admin/Register_NewAdminController" class="btn btn-warning btn-sm">관리자 등록</a>
 	    		<a href="${pageContext.request.contextPath}/admin/Register_ReviewController" class="btn btn-warning btn-sm">리뷰</a>
+	    		<a href="${pageContext.request.contextPath}/admin/QnaBoardListController" class="btn btn-warning btn-sm">Q&A</a>
 	    		<a href="${pageContext.request.contextPath}/user/LogoutSessionController" class="btn btn-dark btn-sm">로그아웃</a>
 	    		</c:if>
 	    	</c:if>

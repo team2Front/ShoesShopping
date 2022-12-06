@@ -119,6 +119,28 @@ public class UserDao {
       return rows;
    }
    
+   // method: insert문 - 관리자 정보를 DB에 등록
+   public int insertRegisterAdmin(Connection conn, User user) throws Exception {
+	      String sql = "";
+	      sql += "insert into users(userid, username, userpassword, useremail, useraddress, phonenumber, usertype) ";
+	      sql += "values (?, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, user.getUserId());
+		pstmt.setString(2, user.getUserName());
+		pstmt.setString(3, user.getUserPassword());
+		pstmt.setString(4, user.getUserEmail());
+		pstmt.setString(5, user.getUserAddress());
+		pstmt.setString(6, user.getPhoneNumber());
+		pstmt.setString(7, user.getUserType());
+
+		int rows = pstmt.executeUpdate();
+			
+		pstmt.close();
+		
+		return rows;
+	}
+   
+   
    //method: update문 - 사용자 정보 DB에서 수정
    public boolean updateEditUser(Connection conn, User user, int num) throws Exception {
       boolean result = true;
@@ -196,31 +218,6 @@ public class UserDao {
       
       return result;
    }
-   
-   public boolean insertRegisterAdmin(Connection conn, User user) throws Exception {
-		String sql = "insert into users(user_id, user_name, user_password, phone_number, user_address, user_type) values (?,?,?,?,?,?)";
-		PreparedStatement pstmt;
-		boolean result = false;
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, user.getUserId());
-		pstmt.setString(2, user.getUserName());
-		pstmt.setString(3, user.getUserPassword());
-		pstmt.setString(4, user.getPhoneNumber());
-		pstmt.setString(5, user.getUserAddress());
-		pstmt.setString(6, user.getUserType());
-
-		int rows = pstmt.executeUpdate();
-			
-		if(rows == 1) {
-			result = true; //정보 등록 성공
-		}else {
-			result = false; //정보 등록 실패
-		}
-		pstmt.close();
-		
-		return result;
-	}
-   
 }
 
 
