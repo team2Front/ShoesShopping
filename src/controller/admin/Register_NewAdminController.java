@@ -27,11 +27,11 @@ public class Register_NewAdminController extends HttpServlet {
 		
 		User user = new User();
 		
-		user.setUserName(request.getParameter("uname"));
-		user.setUserId(request.getParameter("userid"));
-		user.setUserPassword(request.getParameter("userpassword"));
-		user.setPhoneNumber(request.getParameter("phone"));
-		user.setUserEmail(request.getParameter("email"));
+		user.setUserName(request.getParameter("adminName"));
+		user.setUserId(request.getParameter("adminId"));
+		user.setUserPassword(request.getParameter("adminPw"));
+		user.setPhoneNumber(request.getParameter("adminPhone"));
+		user.setUserEmail(request.getParameter("adminEmail"));
 		user.setUserAddress(request.getParameter("addr1") + " " + request.getParameter("addr2"));
 		user.setUserType("ADMIN");
 		
