@@ -61,6 +61,7 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("productDao", new ProductDao(application));
 		
 		
+		
 		application.setAttribute("cartDao", new CartDao());
 		application.setAttribute("cartDetailDao", new CartDetailDao(application));
 		
