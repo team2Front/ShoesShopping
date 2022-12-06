@@ -4,7 +4,7 @@
 	  <div class="banner d-flex justify-content-between" id="adminBanner">  
 	    <div class="p-2"><a href="${pageContext.request.contextPath}"><img src="../resources/images/sashoes_logo.png" style="width:150px; margin-top:20px;"/></a></div>
 		
-	    <div  style="text-align: center; padding-top: 35px;"><a href="${pageContext.request.contextPath}/user/joinFormController">회원가입</a></div>
+	    <div  style="text-align: center; padding-top: 35px;"><a href="${pageContext.request.contextPath}/user/JoinFormController">회원가입</a></div>
 	    <div  style="text-align: center; padding-top: 35px;"><a href="${pageContext.request.contextPath}/mypage/MainController">마이페이지</a></div>
 	    <div  style="text-align: center; padding-top: 35px;">
 	    <!--------------------------------------------------------- 로그인 창 --------------------------------------->
