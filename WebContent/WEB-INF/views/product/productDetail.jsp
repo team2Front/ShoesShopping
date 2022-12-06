@@ -199,7 +199,7 @@
 				<!-- 신발에 대한 상세 설명 -->
 				<div id="detail" class="col-md-6">
 					<div class="container-fluid">
-						<div class="row m-4" style="font-size:38px; padding:10px"> 브랜드 : ${product.companyName} </div>
+						<div class="row m-4" style="font-size:38px; padding:10px"> 브랜드 : ${product.company} </div>
 						<div class="row m-4">
 							<div class="col" style="font-size:32px; padding:10px">
 								<b>정글 사이드월 Authentic 어센틱 44 DX</b>
