@@ -3,7 +3,6 @@ package service;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
@@ -86,8 +85,8 @@ public class UserService {
 		
 		try {
 			conn = ds.getConnection();
-			userDao.insertRegisterUser(conn, user);
-			cartService.createCart(user.getUserId());
+			int result = userDao.insertRegisterUser(conn, user);
+//			cartService.createCart(conn, user.getUserId());
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -121,15 +120,9 @@ public class UserService {
 	public String login(User user) {
 		Connection conn = null;
 		String type = "";
-		
 		try {
 			conn = ds.getConnection();
-			
-			if (userDao.selectLogin(conn, user) != null) {
-				type = userDao.selectLogin(conn, user); // 로그인 성공
-			} else {
-				type = null; // 로그인 실패
-			}
+			type = userDao.selectLogin(conn, user);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -1,51 +1,33 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <body>
 	  <div class="banner d-flex justify-content-between" id="adminBanner">  
-	    <div class="p-2"><a href="home.html"><img src="../resources/images/sashoes_logo.png" style="width:150px; margin-top:20px;"/></a></div>
-		
-	    <div  style="text-align: center; padding-top: 35px;"><a href="joinForm.html">회원가입</a></div>
-	    <div  style="text-align: center; padding-top: 35px;"><a href="mypage_main.html">마이페이지</a></div>
+	    <div class="p-2"><a href="${pageContext.request.contextPath}"><img src="../resources/images/sashoes_logo.png" style="width:150px; margin-top:20px;"/></a></div>
+	    <c:if test = "${loginId == null}">
+	    	<div style="text-align:center; padding-top: 35px;"><h5>로그인한 아이디가 없습니다.</h5></div>
+	    </c:if>
+	    <c:if test = "${loginId != null}">
+	    	<div style="text-align:center; padding-top: 35px;"><h5>${loginId}(${loginType})</h5></div>
+	    </c:if>
 	    <div  style="text-align: center; padding-top: 35px;">
 	    <!--------------------------------------------------------- 로그인 창 --------------------------------------->
-	    	<a href="#" data-toggle="modal" data-target="#myLogin">로그인</a>
-	    	<div class="modal fade" id="myLogin">
-			    <div class="modal-dialog modal-sm modal-dialog-centered">
-			      <div class="modal-content">
-			      
-			        <!-- Modal Header -->
-			        <div class="modal-header">
-			          <h4 class="modal-title mx-auto">로그인</h4>
-			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			        </div>
-			        
-			        <!-- Modal body -->
-			        <div class="modal-body">
-			            <form id="loginForm" name="loginForm" action="#" onsubmit="return handleCheckData()" novalidate>
-					          <div class="form-group">
-					            <label for="uid">ID</label>
-					            <input type="text" class="form-control" id="uid" name="uid" value=""/>
-					            <small id="uidHelp" class="form-text text-muted">알파벳 대소문자, 숫자를 혼용해서 6자 이상 10장 이하를 입력해주세요</small>
-					          </div>
-					
-					          <div class="form-group">
-					            <label for="password">Password</label>
-					            <input type="password" class="form-control" id="password" name="password" value=""/>
-					            <small id="passwordHelp" class="form-text text-muted">알파벳 대소문자, 숫자를 혼용해서 8자 이상 15장 이하를 입력해주세요</small>
-					          </div>
-			          	</form>
-			        </div>
-			        
-			        <!-- Modal footer -->
-			        <div class="modal-footer">
-			        	<button type="submit" class="btn bg-warning" data-dismiss="modal">로그인</button>
-			          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			        </div>
-			        
-			      </div>
-			    </div>
-			</div>
-			
+	    	<c:if test="${loginId == null}">
+	    		<a href="${pageContext.request.contextPath}/user/JoinFormController" class="btn btn-success btn-sm">회원 가입</a>
+	    		<a href="${pageContext.request.contextPath}/user/LoginSessionController" class="btn btn-success btn-sm">로그인</a>
+	    	</c:if>
+	    	<c:if test="${loginId != null}">
+	    		<c:if test="${loginType =='USER'}">
+	    			<a href="${pageContext.request.contextPath}/mypage/MainController" class="btn btn-success btn-sm">마이 페이지</a>
+	    			<a href="${pageContext.request.contextPath}/user/LogoutSessionController" class="btn btn-success btn-sm">로그 아웃</a>
+	    		</c:if>
+	    		<c:if test="${loginType =='ADMIN'}">
+	    		<a href="${pageContext.request.contextPath}/admin/Register_ProductController" class="btn btn-warning btn-sm">상품 등록</a>
+	    		<a href="${pageContext.request.contextPath}/admin/Register_NewAdminController" class="btn btn-warning btn-sm">관리자 등록</a>
+	    		<a href="${pageContext.request.contextPath}/admin/Register_ReviewController" class="btn btn-warning btn-sm">리뷰</a>
+	    		<a href="${pageContext.request.contextPath}/user/LogoutSessionController" class="btn btn-dark btn-sm">로그아웃</a>
+	    		</c:if>
+	    	</c:if>
 	    </div>
 	  </div>
 		<div id="navbar" class="shadow-sm">

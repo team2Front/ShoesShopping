@@ -16,6 +16,7 @@ import dao.PfilteringDao;
 import dao.ProductAndColorDao;
 import dao.ProductAndSizeDao;
 import dao.ProductDao;
+import dao.ProductImageDao;
 import dao.QnaDao;
 import dao.ReplyDao;
 import dao.ReviewDao;
@@ -56,6 +57,7 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("colorDao", new ColorDao());
 		application.setAttribute("productAndColorDao",  new ProductAndColorDao(application));
 		application.setAttribute("productAndSizeDao", new ProductAndSizeDao());
+		application.setAttribute("productImageDao", new ProductImageDao());
 		application.setAttribute("productDao", new ProductDao(application));
 		
 		

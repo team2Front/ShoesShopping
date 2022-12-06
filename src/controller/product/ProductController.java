@@ -15,13 +15,11 @@ import service.ProductService;
 public class ProductController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println(request.getParameterNames());
-		String productId = (String) request.getAttribute("productId");
-		System.out.println(productId);
+		int productId = Integer.parseInt(request.getParameter("productId"));
 		ProductService productService = (ProductService) request.getServletContext().getAttribute("productService");
-		//Product product = productService.showOneProduct(productId);
+		Product product = productService.showOneProduct(productId);
 		
-		//request.setAttribute("product", product);
+		request.setAttribute("product", product);
 		
 		request.getRequestDispatcher("/WEB-INF/views/product/productDetail.jsp").forward(request, response);
 	}

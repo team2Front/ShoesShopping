@@ -28,73 +28,90 @@
 	            
 	            //Password 유효성 검사 -------------------------------------------------------
 	               //패스워드 검사
-	               var password = document.querySelector("#userpassword");
-	            	var passwordValue = password.value;
-	               var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/; 
-	               var passwordPatternTest = passwordPattern.test(passwordValue);
-	               var passworddiv = document.getElementById("passworddiv");
-	               if(passwordPatternTest) {
-	            	   changeVaild(passworddiv);
-	               } else {
-	                  changeInvaild(passworddiv);
-	               result = false;
-	               }
-	            
-	            //전화번호 유효성 검사
-	            var phone = document.querySelector("#phone");
-	            var phoneValue = phone.value;
-	            var phonePattern = /^010-\d{3,4}-\d{4}$/;
-	            var phonePatternTest = phonePattern.test(phoneValue);
-	            var phonediv = document.getElementById("phonediv");
-	            if(phonePatternTest) {
-	            	changeVaild(phonediv);
-	            } else {
-	            	changeInvaild(phonediv);
+
+				var password = document.querySelector("#userpassword");
+				var passwordValue = password.value;
+				var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
+				var passwordPatternTest = passwordPattern.test(passwordValue);
+				var passworddiv = document.getElementById("passworddiv");
+				if (passwordPatternTest) {
+					changeVaild(passworddiv);
+				} else {
+					changeInvaild(passworddiv);
 					result = false;
-	            }
+				}
+
+				//전화번호 유효성 검사
+				var phone = document.querySelector("#phone");
+				var phoneValue = phone.value;
+				var phonePattern = /^010-\d{3,4}-\d{4}$/;
+				var phonePatternTest = phonePattern.test(phoneValue);
+				var phonediv = document.getElementById("phonediv");
+				if (phonePatternTest) {
+					changeVaild(phonediv);
+				} else {
+					changeInvaild(phonediv);
+					result = false;
+				}
+
+				var password2 = document.querySelector("#userpassword2");
+				var password2Value = password2.value;
+				if (password2Value == "") {
+					changeInvaild(passworddiv2);
+					result = false;
+				} else if (passwordValue == password2Value) {
+					changeVaild(passworddiv2);
+				} else {
+					changeInvaild(passworddiv2);
+					result = false;
+				}
+
 				return result;
 			}
-			
-			
-			
+
 			$(document).ready(function() {
 				$("#cbx_chkAll").click(function() {
-					if($("#cbx_chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
-					else $("input[name=chk]").prop("checked", false);
+					if ($("#cbx_chkAll").is(":checked"))
+						$("input[name=chk]").prop("checked", true);
+					else
+						$("input[name=chk]").prop("checked", false);
 				});
-				
+
 				$("input[name=chk]").click(function() {
 					var total = $("input[name=chk]").length;
 					var checked = $("input[name=chk]:checked").length;
-					
-					if(total != checked) $("#cbx_chkAll").prop("checked", false);
-					else $("#cbx_chkAll").prop("checked", true); 
+
+					if (total != checked)
+						$("#cbx_chkAll").prop("checked", false);
+					else
+						$("#cbx_chkAll").prop("checked", true);
 				});
 			});
-			
-		    function execDaumPostcode() {
-		        new daum.Postcode({
-		        	oncomplete: function(data) {
-		                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-		                var addr = ''; // 주소 변수
 
-		                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-		                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-		                    addr = data.roadAddress;
-		                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-		                    addr = data.jibunAddress;
-		                }
-		                
-		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-		                document.getElementById('postcode').value = data.zonecode;
-		                document.getElementById("address").value = addr;
-		                // 커서를 상세주소 필드로 이동한다.
-		                document.getElementById("detailAddress").focus();
-		            }
-		        }).open();
-		    }
-			
+			function execDaumPostcode() {
+				new daum.Postcode(
+						{
+							oncomplete : function(data) {
+								// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+								// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+								var addr = ''; // 주소 변수
+
+								//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+								if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+									addr = data.roadAddress;
+								} else { // 사용자가 지번 주소를 선택했을 경우(J)
+									addr = data.jibunAddress;
+								}
+
+								// 우편번호와 주소 정보를 해당 필드에 넣는다.
+								document.getElementById('postcode').value = data.zonecode;
+								document.getElementById("address").value = addr;
+								// 커서를 상세주소 필드로 이동한다.
+								document.getElementById("detailAddress")
+										.focus();
+							}
+						}).open();
+			}
 		</script>
 		
 		<link rel="stylesheet" href="../resources/css/common.css">
@@ -206,15 +223,15 @@
 	      			</div>
 	      		</div>
 	      	<br>
-	      		<form method="post" id="joinForm" name="joinForm" action="/shopping/user/JoinFormController" novalidate>
+	      		<form method="post" id="joinForm" name="joinForm" action="${pageContext.request.contextPath}/user/JoinFormController" novalidate>
 	      			<div class="form-group form-floating">
 	      				<label for="uname">Name</label>
-	      				<input type="text" class="form-control" placeholder="홍길동" id="uname" name="uname"/>
+	      				<input type="text" class="form-control" placeholder="홍길동" id="uname" name="uname" value="${user.userName}"/>
 	      				<small id="unameHelp" class="form-text text-muted">이름을 입력하세요</small>
 					</div>
 					<div class="form-label form-floating">
 						<label for="userid">ID</label>
-						<input type="text" class="form-control" placeholder="Abc123" id="userid" name="userid"/>
+						<input type="text" class="form-control" placeholder="Abc123" id="userid" name="userid" value="${user.userId}"/>
 						<small id="uidHelp" class="form-text text-muted">알파벳 대소문자, 숫자를 혼용해서 6자 이상 10장 이하</small>
 						<div id="uiddiv"></div>
 					</div>
@@ -225,17 +242,24 @@
 						<small id="passwordHelp" class="form-text text-muted">알파벳 대소문자, 숫자를 혼용해서 8자 이상 15장 이하</small>
 						<div id="passworddiv"></div>
 					</div>
+					
+					<div class="form-group form-floating" >
+						<label for="userpassword2">Password 2차</label>
+						<input type="password" class="form-control" placeholder="password" id="userpassword2" name="userpassword2"/>
+						<small id="passwordHelp" class="form-text text-muted">패스워드와 똑같은 값을 입력해 주세요</small>
+						<div id="passworddiv2"></div>
+					</div>
 	
 					<div class="form-group form-floating">
 			            <label for="phone">Phone</label>
-			            <input type="text" class="form-control" placeholder="010-123-1234" id="phone" name="phone"/>
+			            <input type="text" class="form-control" placeholder="010-123-1234" id="phone" name="phone" value="${user.phoneNumber}"/>
 			            <small id="phoneHelp" class="form-text text-muted">예) 010-123-1234, 010-1234-1234</small>
 			            <div id="phonediv"></div>
 					</div>
 					
 					<div class="form-group form-floating">
 			            <label for="email">Email</label>
-			            <input type="text" class="form-control" placeholder="xxxx@naver.com" id="email" name="email"/>
+			            <input type="text" class="form-control" placeholder="xxxx@naver.com" id="email" name="email" value="${user.userEmail}"/>
 			            <small id="emailHelp" class="form-text text-muted">예) java@naver.com, java@daum.net</small>
 					</div>
 	          
@@ -246,6 +270,10 @@
 						<input type="text" id="address" name="addr1" size="50" placeholder="주소" readonly><br>
 						<input type="text" id="detailAddress" name="addr2" size="50" placeholder="상세주소">
 						<small id="addressHelp" class="form-text text-muted">예) 서울특별시 마포구....</small>
+					</div>
+					
+					<div style="text-align:center; color:red" class="m-5">
+						<h5>${errorcode}</h5>
 					</div>
 					
 					<div class="text-center">

@@ -24,7 +24,8 @@ public class Product {
 	private String category;
 	private List<Color> colorList;
 	private List<Integer> sizeList;
-	 
+	private List<String> imageList;
+	private String mainImage;
 	
 	
 	public JSONObject productToJson(Product p) {
@@ -74,4 +75,6 @@ public class Product {
 		p.setColorList(colorList);
 		return p;	
 	}
+
+	
 }

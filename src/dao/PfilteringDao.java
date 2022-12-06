@@ -29,7 +29,7 @@ public class PfilteringDao {
 	}
 
 	public List<ProductList> selectShowCategory(Connection conn, PagingVo pvo, int category) throws Exception {
-		ProductList pdl = null;
+		ProductList productList = null;
 
 		int endRn = pvo.getEndRowNo(); // 페이지의 끝행 번호
 		int startRn = pvo.getStartRowNo();// 페이지의 시작 행 번호
@@ -50,11 +50,14 @@ public class PfilteringDao {
 		List<ProductList> list = new ArrayList<>();
 
 		while (rs.next()) {
-			System.out.println("~~~~~~~");
-			pdl = new ProductList(rs.getInt("product_id"), rs.getString("product_name"),
-					selectFindCompany(conn, rs.getInt("company_id")), selectFindCategory(conn, rs.getInt("category_id")),
-					rs.getString("product_sex"), rs.getInt("product_price"));
-			list.add(pdl);
+			productList = new ProductList();
+			productList.setProductId(rs.getInt("product_id"));
+			productList.setProductName(rs.getString("product_name"));
+			productList.setCompanyName(selectFindCompany(conn, rs.getInt("company_id")));
+			productList.setCategoryName(selectFindCategory(conn, rs.getInt("category_id")));
+			productList.setProductSex(rs.getString("product_sex"));
+			productList.setProductPrice(rs.getInt("product_price"));
+			list.add(productList);
 		}
 		pstmt.close();
 		
@@ -78,7 +81,7 @@ public class PfilteringDao {
 	}
 
 	public List<ProductList> selectShowCompany(Connection conn, PagingVo pvo, int company) throws Exception {
-		ProductList pdl = null;
+		ProductList productList = null;
 
 		int endRn = pvo.getEndRowNo(); // 페이지의 끝행 번호
 		int startRn = pvo.getStartRowNo();// 페이지의 시작 행 번호
@@ -99,11 +102,14 @@ public class PfilteringDao {
 		List<ProductList> list = new ArrayList<>();
 
 		while (rs.next()) {
-			System.out.println("~~~~~~~");
-			pdl = new ProductList(rs.getInt("product_id"), rs.getString("product_name"),
-					selectFindCompany(conn, rs.getInt("company_id")), selectFindCategory(conn, rs.getInt("category_id")),
-					rs.getString("product_sex"), rs.getInt("product_price"));
-			list.add(pdl);
+			productList = new ProductList();
+			productList.setProductId(rs.getInt("product_id"));
+			productList.setProductName(rs.getString("product_name"));
+			productList.setCompanyName(selectFindCompany(conn, rs.getInt("company_id")));
+			productList.setCategoryName(selectFindCategory(conn, rs.getInt("category_id")));
+			productList.setProductSex(rs.getString("product_sex"));
+			productList.setProductPrice(rs.getInt("product_price"));
+			list.add(productList);
 		}
 		pstmt.close();
 		
@@ -127,7 +133,7 @@ public class PfilteringDao {
 	}
 
 	public List<ProductList> selectShowSex(Connection conn, PagingVo pvo, String sex) throws Exception {
-		ProductList pdl = null;
+		ProductList productList = null;
 
 		int endRn = pvo.getEndRowNo(); // 페이지의 끝행 번호
 		int startRn = pvo.getStartRowNo();// 페이지의 시작 행 번호
@@ -148,10 +154,14 @@ public class PfilteringDao {
 		List<ProductList> list = new ArrayList<>();
 
 		while (rs.next()) {
-			pdl = new ProductList(rs.getInt("product_id"), rs.getString("product_name"),
-					selectFindCompany(conn, rs.getInt("company_id")), selectFindCategory(conn, rs.getInt("category_id")),
-					rs.getString("product_sex"), rs.getInt("product_price"));
-			list.add(pdl);
+			productList = new ProductList();
+			productList.setProductId(rs.getInt("product_id"));
+			productList.setProductName(rs.getString("product_name"));
+			productList.setCompanyName(selectFindCompany(conn, rs.getInt("company_id")));
+			productList.setCategoryName(selectFindCategory(conn, rs.getInt("category_id")));
+			productList.setProductSex(rs.getString("product_sex"));
+			productList.setProductPrice(rs.getInt("product_price"));
+			list.add(productList);
 		}
 		pstmt.close();
 		
@@ -160,7 +170,7 @@ public class PfilteringDao {
 	// 4) 가격 기준
 
 	public List<ProductList> selectShowPrice(Connection conn, PagingVo pvo, String price) throws Exception {
-		ProductList pdl = null;
+		ProductList productList = null;
 
 		int endRn = pvo.getEndRowNo(); // 페이지의 끝행 번호
 		int startRn = pvo.getStartRowNo();// 페이지의 시작 행 번호
@@ -191,11 +201,14 @@ public class PfilteringDao {
 		List<ProductList> list = new ArrayList<>();
 
 		while (rs.next()) {
-			System.out.println("~~~~~~~");
-			pdl = new ProductList(rs.getInt("product_id"), rs.getString("product_name"),
-					selectFindCompany(conn, rs.getInt("company_id")), selectFindCategory(conn, rs.getInt("category_id")),
-					rs.getString("product_sex"), rs.getInt("product_price"));
-			list.add(pdl);
+			productList = new ProductList();
+			productList.setProductId(rs.getInt("product_id"));
+			productList.setProductName(rs.getString("product_name"));
+			productList.setCompanyName(selectFindCompany(conn, rs.getInt("company_id")));
+			productList.setCategoryName(selectFindCategory(conn, rs.getInt("category_id")));
+			productList.setProductSex(rs.getString("product_sex"));
+			productList.setProductPrice(rs.getInt("product_price"));
+			list.add(productList);
 		}
 		pstmt.close();
 		

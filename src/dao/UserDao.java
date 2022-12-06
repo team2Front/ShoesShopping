@@ -10,14 +10,11 @@ import domain.User;
 import dto.UserInfo;
 
 public class UserDao {
-	//field
-	private ServletContext application;
-	
-	//constructor
-	public UserDao(ServletContext application) {
-		this.application = application;
-	}
-	
+   private ReplyDao replyDao;
+   
+   public UserDao(ServletContext application) {
+   }
+	   
    //method: select문 - 아이디 중복 여부 판별
    public boolean selectUserId(Connection conn, String id) throws Exception {
       String sql = "select userid from users where userid=? ";
@@ -34,7 +31,7 @@ public class UserDao {
    
    //method: select문 - 핸드폰 번호 중복 여부 확인
    public boolean selectPnCheck(Connection conn, String pn) throws Exception {
-      String sql = "select phone_number from users where phonenumber=? ";
+      String sql = "select phonenumber from users where phonenumber=? ";
       boolean result = true;
  	  
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -63,20 +60,19 @@ public class UserDao {
    
    //method: select문 - 로그인
    public String selectLogin(Connection conn, User user) throws Exception {
-      String sql = "select user_id, user_type from users where user_id=? and user_password=?";
-      String type = "" ;
+      String sql = "select userid, usertype from users where userid=? and userpassword=?";
+      String type = "";
 
 	  PreparedStatement pstmt = conn.prepareStatement(sql);
 	  pstmt.setString(1, user.getUserId());
 	  pstmt.setString(2, user.getUserPassword());
 	  ResultSet rs = pstmt.executeQuery();
-	 
 	  //로그인 성공이면 user_type 리턴
 	  if (rs.next()) {
-	     type = rs.getString("user_type"); 
+	     type = rs.getString("usertype"); 
 	  } else { 
 	     //로그인 실패면 null 리턴
-	     type = null; //로그인 실패
+	     type = ""; //로그인 실패
 	  }
 	  pstmt.close();
 	  
@@ -105,13 +101,16 @@ public class UserDao {
    
    //method: insert문 - 사용자 정보를 DB에 등록
    public int insertRegisterUser(Connection conn, User user) throws Exception {
-      String sql = "insert into users(user_id, user_name, user_password, phone_number, user_address) values (?,?,?,?,?)";
+      String sql = "";
+      sql += "insert into users(userid, username, userpassword, useremail, useraddress, phonenumber) ";
+      sql += "values (?, ?, ?, ?, ?, ?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, user.getUserId());
       pstmt.setString(2, user.getUserName());
       pstmt.setString(3, user.getUserPassword());
-      pstmt.setString(4, user.getPhoneNumber());
+      pstmt.setString(4, user.getUserEmail());
       pstmt.setString(5, user.getUserAddress());
+      pstmt.setString(6, user.getPhoneNumber());
       
       int rows = pstmt.executeUpdate();
       
@@ -201,7 +200,7 @@ public class UserDao {
    public boolean insertRegisterAdmin(Connection conn, User user) throws Exception {
 		String sql = "insert into users(user_id, user_name, user_password, phone_number, user_address, user_type) values (?,?,?,?,?,?)";
 		PreparedStatement pstmt;
-		boolean result =false;
+		boolean result = false;
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, user.getUserId());
 		pstmt.setString(2, user.getUserName());
