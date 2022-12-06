@@ -25,7 +25,6 @@ public class ProductAndSizeDao {
 			if(sizeList.size() == sum) {
 				result = 1;
 			}
-			conn.close();
 			
 			return result;
 			
@@ -42,10 +41,8 @@ public class ProductAndSizeDao {
 		List<Integer> sizeList = new ArrayList<>();
 		while(rs.next()) {
 			sizeList.add(rs.getInt("size_id"));	
-			
         }
 		pstmt.close();
-		
 		return sizeList;
 	}
 	

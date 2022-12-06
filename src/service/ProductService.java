@@ -12,6 +12,7 @@ import dao.PfilteringDao;
 import dao.ProductAndColorDao;
 import dao.ProductAndSizeDao;
 import dao.ProductDao;
+import dao.ProductImageDao;
 import domain.Product;
 import dto.ProductList;
 import dto.RegisterProduct;
@@ -24,6 +25,7 @@ public class ProductService {
 	private PfilteringDao pfilteringDao;
 	private ProductAndColorDao productAndColorDao;
 	private ProductAndSizeDao productAndSizeDao;
+	private ProductImageDao productImageDao;
 	
 	public ProductService(ServletContext application) {
 		this.application = application;
@@ -32,6 +34,7 @@ public class ProductService {
 		this.pfilteringDao = (PfilteringDao) application.getAttribute("pfilteringDao");
 		this.productAndColorDao = (ProductAndColorDao) application.getAttribute("productAndColorDao");
 		this.productAndSizeDao = (ProductAndSizeDao) application.getAttribute("productAndSizeDao");
+		this.productImageDao = (ProductImageDao) application.getAttribute("productImageDao");
 	}
 
 	// 필터링 x
@@ -176,8 +179,10 @@ public class ProductService {
 	// **********************************************************
 	// 상품 상세보기
 	public Product showOneProduct(int productId){
+		System.out.println("productService 쇼원프로덕트메소드");
 		Connection conn = null;
 		Product product = null;
+		
 		try {
 			conn = ds.getConnection();
 			product = productDao.selectProductOne(conn, productId);

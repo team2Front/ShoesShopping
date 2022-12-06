@@ -17,7 +17,6 @@ public class CategoryDao {
 		
 		if (rs.next()) {
 			category = rs.getString("category_kind");
-			conn.close();
 		} else {
 			category = "없음";
 		}

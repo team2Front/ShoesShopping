@@ -16,6 +16,7 @@ import dao.PfilteringDao;
 import dao.ProductAndColorDao;
 import dao.ProductAndSizeDao;
 import dao.ProductDao;
+import dao.ProductImageDao;
 import dao.QnaDao;
 import dao.ReplyDao;
 import dao.ReviewDao;
@@ -54,10 +55,10 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("categoryDao", new CategoryDao());
 		application.setAttribute("pfilteringDao", new PfilteringDao());
 		application.setAttribute("colorDao", new ColorDao());
-		application.setAttribute("productDao", new ProductDao(application));
 		application.setAttribute("productAndColorDao",  new ProductAndColorDao(application));
 		application.setAttribute("productAndSizeDao", new ProductAndSizeDao());
-		
+		application.setAttribute("productImageDao", new ProductImageDao());
+		application.setAttribute("productDao", new ProductDao(application));
 		
 		application.setAttribute("cartDao", new CartDao());
 		application.setAttribute("cartDetailDao", new CartDetailDao(application));
@@ -76,7 +77,7 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("productAndColorService", new ProductAndColorService(application));
 		application.setAttribute("productAndSizeService", new ProductAndSizeService(application));
 		application.setAttribute("productService", new ProductService(application));
-		
+
 		application.setAttribute("cartService", new CartService(application));
 		application.setAttribute("cartDetailService", new CartDetailService(application));
 		
