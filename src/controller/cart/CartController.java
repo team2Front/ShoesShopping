@@ -21,8 +21,12 @@ public class CartController extends HttpServlet {
 		ServletContext appication = request.getServletContext();
 		CartService cartService = (CartService) appication.getAttribute("cartService");
 		CartDto cartDto = cartService.showCart("winter");
+		int rows = cartDto.getCartDetailDtoList().size();
+		
+		System.out.println("row ~~~   : " + rows);
 		
 		request.setAttribute("cart", cartDto);
+		request.setAttribute("rows", rows);
 		request.getRequestDispatcher("/WEB-INF/views/cart/cartDetail.jsp").forward(request, response);
 	}
 

@@ -58,9 +58,7 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("productDao", new ProductDao(application));
 		application.setAttribute("productAndColorDao",  new ProductAndColorDao(application));
 		application.setAttribute("productAndSizeDao", new ProductAndSizeDao());
-		
-		System.out.println("~~~~ 1 ");
-		
+			
 		application.setAttribute("cartDao", new CartDao());
 		application.setAttribute("cartDetailDao", new CartDetailDao(application));
 		
@@ -72,23 +70,12 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("qnaDao", new QnaDao(application));
 		application.setAttribute("reviewDao", new ReviewDao(application));
 		application.setAttribute("replyDao", new ReplyDao());
-<<<<<<< HEAD
-		System.out.println("~~~~ 2 ");
-=======
-		System.out.println("WebApp DAO Set 완료");
-		
->>>>>>> branch 'master' of https://github.com/team2Front/ShoesShopping.git
+
 		//-------------------- 서비스 ------------------
 		application.setAttribute("productAndColorService", new ProductAndColorService(application));
 		application.setAttribute("productAndSizeService", new ProductAndSizeService(application));
 		System.out.println("WebApp프로덕트 서비스 전");
 		application.setAttribute("productService", new ProductService(application));
-<<<<<<< HEAD
-		System.out.println("~~~~ 3 ");
-=======
-		System.out.println("WebApp프로덕트 서비스 후");
-
->>>>>>> branch 'master' of https://github.com/team2Front/ShoesShopping.git
 		
 		application.setAttribute("cartService", new CartService(application));
 		application.setAttribute("cartDetailService", new CartDetailService(application));

@@ -18,8 +18,6 @@ import util.PagingVo;
 public class ProductDao {
 	ProductAndSizeDao productAndSizeDao;
 	ProductAndColorDao productAndColorDao;
-	ProductAndColorService productAndColorService;
-	ProductAndSizeService productAndSizeService;
 	CategoryDao categoryDao;
 	
 
@@ -132,7 +130,7 @@ public class ProductDao {
 					rs.getInt("product_price"), rs.getString("product_sex"),
 					selectFindCompany(conn, rs.getInt("company_id")),
 					categoryDao.findCategoty(conn, rs.getInt("category_id")),
-					productAndColorService.findProductColors(pid), productAndSizeService.findProductSizeList(pid));
+					productAndColorDao.selectProductColors(conn,pid), productAndSizeDao.selectProductSizes(conn, pid));
 		}
 		
 		pstmt.close();
