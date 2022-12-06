@@ -10,27 +10,35 @@
       <table class="table table-hover">
          <thead class="table-dark">
 	         <tr>
-	            <th scope="col">NO</th>
-	            <th scope="col" style="width:330px">상품 정보</th>
-	            <th scope="col" colspan="3">작성내용</th>
-	            <th></th>
+	            <th scope="col" style="width:100px">NO</th>
+	            <th scope="col">리뷰내용</th>
+	            <th scope="col" colspan="3">날짜</th>
 	         <tr>
          </thead>
          <tbody>
          	<!-- 리뷰목록 -->
-         	<c:forEach var="review" items="${reviewList}">
+         	<c:forEach var="reviewList" items="${reviewList}">
 	         	<tr>
-         			<td>${review.reviewId}</td>
-         			<td>
-         				<b>상품명: </b> ${review.product.productName}
-         				<b>상품가격: </b> ${review.product.productPrice}
-         				<b>브랜드: </b> ${review.product.company}
-       				</td>
-         			<td>
-         				<b>리뷰제목: </b> ${review.reviewTitle} <br>
-         				<b>ID: </b> ${review.userId}
+         			<td>${reviewList.reviewId}</td>
+         			<td style="text-align: left; padding-left: 80px;">
+         				<span class="font-weight-bold" style="font-size: 20px;">
+         					별점:
+         					<c:choose>
+         						<c:when test="${reviewList.review.starScore == 5}">⭐⭐⭐⭐⭐</c:when>
+         						<c:when test="${reviewList.review.starScore == 4}">⭐⭐⭐⭐</c:when>
+         						<c:when test="${reviewList.review.starScore == 3}">⭐⭐⭐</c:when>
+         						<c:when test="${reviewList.review.starScore == 2}">⭐⭐</c:when>
+         						<c:when test="${reviewList.review.starScore == 1}">⭐</c:when>
+         					</c:choose>
+         				</span>
+         				<span class="pl-1">
+	         				[상품명] ${reviewList.product.productName} <br>
+         				</span>
+         				<b>브랜드: </b> ${reviewList.product.company}		  <br>
+         				<b>리뷰제목: </b> ${reviewList.reviewTitle} <br>
+         				<b>ID: </b> ${reviewList.userId}
          			</td>
-         			<td><fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd"/></td>
+         			<td><fmt:formatDate value="${reviewList.reviewDate}" pattern="yyyy.MM.dd"/></td>
 	         	</tr>
          	</c:forEach>
          	

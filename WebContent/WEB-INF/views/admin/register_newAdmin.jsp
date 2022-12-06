@@ -19,7 +19,6 @@
 				// id 검사
 				var adminid = document.querySelector("#adminId");
 				var adminidValue = adminid.value;
-				console.log(adminidValue);
 				var adminidPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
 				var adminidTest = adminidPattern.test(adminidValue);
 				var adminiddiv = document.getElementById("adminIddiv");
@@ -35,15 +34,15 @@
 				var adminpasswordValue = adminpassword.value;
 				var adminpasswordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
 				var adminpasswordPatternTest = adminpasswordPattern.test(adminpasswordValue);
-				var adminpassworddiv = document.getElementById("adminPwdiv");
+				var adminpassworddiv = document.getElementById("adminpassworddiv");
 				if (adminpasswordPatternTest) {
 					changeVaild(adminpassworddiv);
 				} else {
 					changeInvaild(adminpassworddiv);
 					result = false;
 				}
+				console.log(result);
 				
-				adminPhone
 				var adminphone = document.querySelector("#adminPhone");
 				var adminphoneValue = adminphone.value;
 				var adminphonePattern = /^010-\d{3,4}-\d{4}$/;
@@ -67,7 +66,6 @@
 					changeInvaild(adminpassworddiv2);
 					result = false;
 				}
-				console.log(result);
 				return result;
 			}
 			
@@ -106,7 +104,7 @@
 		<div id="adminMain" class="card mx-auto">
 		<div class="card-header">관리자 등록</div>
 		<div class="card-body">
-			<form id="pnameForm" name="pnameForm" method="post" action="${pageContext.request.contextPath}/admin/Register_NewAdminController" enctype="multipart/form-data">
+			<form  method="post" id="pnameForm" name="pnameForm" action="${pageContext.request.contextPath}/admin/Register_NewAdminController" novalidate>
 				<div class="form-group">
 					<label for="adminId">아이디</label>
 					<input type="text" class="form-control" id="adminId" name="adminId" placeholder="아이디를 입력해주세요" value="${user.userId}"/>
@@ -139,13 +137,19 @@
 	          		<small id="phoneHelp" class="form-text text-muted">예) 010-123-1234, 010-1234-1234</small>
 	          		<div id="adminphonediv"></div>
 	          	</div>
+	          	
+				<div class="form-group form-floating">
+		            <label for="email">Email</label>
+		            <input type="text" class="form-control" placeholder="xxxx@naver.com" id="adminEmail" name="adminEmail" value="${user.userEmail}"/>
+		            <small id="emailHelp" class="form-text text-muted">예) java@naver.com, java@daum.net</small>
+				</div>
 
 				<div class="form-group">
 					<label for="address">Address</label><br>
-					<input type="text" id="postcode" name="zipcode" size="5" readonly>
-					<input type="button" value="우편번호검색"  onclick="execDaumPostcode()"><br>
-					<input type="text" id="address" name="addr1" size="50" placeholder="주소" readonly><br>
-					<input type="text" id="detailAddress" name="addr2" size="50" placeholder="상세주소">
+					<input type="text" id="postcode" name="zipcode" size="5" readonly/>
+					<input type="button" value="우편번호검색"  onclick="execDaumPostcode()"/><br>
+					<input type="text" id="address" name="addr1" size="50" placeholder="주소" readonly/><br>
+					<input type="text" id="detailAddress" name="addr2" size="50" placeholder="상세주소"/>
 					<small id="addressHelp" class="form-text text-muted">예) 서울특별시 마포구....</small>
 				</div>
 	

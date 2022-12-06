@@ -41,6 +41,8 @@ public class ReviewService {
 				list.setProduct(product);
 			}
 			
+			System.out.println(lists);
+			
 	   }catch(Exception e) {
 			e.printStackTrace();
 	   }finally {

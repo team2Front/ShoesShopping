@@ -10,9 +10,9 @@ import domain.User;
 import dto.UserInfo;
 
 public class UserDao {
-   private ReplyDao replyDao;
    
    public UserDao(ServletContext application) {
+	   
    }
 	   
    //method: select문 - 아이디 중복 여부 판별

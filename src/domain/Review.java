@@ -25,6 +25,6 @@ public class Review {
    private String rfileName;
    private String rfileType;
    private String rsavedName;
-   private Product product;
+   //private Product product;
    private List<RReply> replyList;
 }
