@@ -105,13 +105,16 @@ public class UserDao {
    
    //method: insert문 - 사용자 정보를 DB에 등록
    public int insertRegisterUser(Connection conn, User user) throws Exception {
-      String sql = "insert into users(user_id, user_name, user_password, phone_number, user_address) values (?,?,?,?,?)";
+      String sql = "";
+      sql += "insert into users(userid, username, userpassword, useremail, useraddress, phonenumber) ";
+      sql += "values (?, ?, ?, ?, ?, ?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, user.getUserId());
       pstmt.setString(2, user.getUserName());
       pstmt.setString(3, user.getUserPassword());
-      pstmt.setString(4, user.getPhoneNumber());
+      pstmt.setString(4, user.getUserEmail());
       pstmt.setString(5, user.getUserAddress());
+      pstmt.setString(6, user.getPhoneNumber());
       
       int rows = pstmt.executeUpdate();
       

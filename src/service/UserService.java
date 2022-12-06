@@ -86,8 +86,9 @@ public class UserService {
 		
 		try {
 			conn = ds.getConnection();
-			userDao.insertRegisterUser(conn, user);
-			cartService.createCart(user.getUserId());
+			int result = userDao.insertRegisterUser(conn, user);
+//			cartService.createCart(conn, user.getUserId());
+			System.out.println(result);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

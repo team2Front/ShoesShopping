@@ -56,7 +56,10 @@
 
 				var password2 = document.querySelector("#userpassword2");
 				var password2Value = password2.value;
-				if (passwordValue == password2Value) {
+				if (password2Value == "") {
+					changeInvaild(passworddiv2);
+					result = false;
+				} else if (passwordValue == password2Value) {
 					changeVaild(passworddiv2);
 				} else {
 					changeInvaild(passworddiv2);
@@ -223,12 +226,12 @@
 	      		<form method="post" id="joinForm" name="joinForm" action="/shopping/user/JoinFormController" novalidate>
 	      			<div class="form-group form-floating">
 	      				<label for="uname">Name</label>
-	      				<input type="text" class="form-control" placeholder="홍길동" id="uname" name="uname"/>
+	      				<input type="text" class="form-control" placeholder="홍길동" id="uname" name="uname" value="${user.userName}"/>
 	      				<small id="unameHelp" class="form-text text-muted">이름을 입력하세요</small>
 					</div>
 					<div class="form-label form-floating">
 						<label for="userid">ID</label>
-						<input type="text" class="form-control" placeholder="Abc123" id="userid" name="userid"/>
+						<input type="text" class="form-control" placeholder="Abc123" id="userid" name="userid" value="${user.userId}"/>
 						<small id="uidHelp" class="form-text text-muted">알파벳 대소문자, 숫자를 혼용해서 6자 이상 10장 이하</small>
 						<div id="uiddiv"></div>
 					</div>
@@ -249,14 +252,14 @@
 	
 					<div class="form-group form-floating">
 			            <label for="phone">Phone</label>
-			            <input type="text" class="form-control" placeholder="010-123-1234" id="phone" name="phone"/>
+			            <input type="text" class="form-control" placeholder="010-123-1234" id="phone" name="phone" value="${user.phoneNumber}"/>
 			            <small id="phoneHelp" class="form-text text-muted">예) 010-123-1234, 010-1234-1234</small>
 			            <div id="phonediv"></div>
 					</div>
 					
 					<div class="form-group form-floating">
 			            <label for="email">Email</label>
-			            <input type="text" class="form-control" placeholder="xxxx@naver.com" id="email" name="email"/>
+			            <input type="text" class="form-control" placeholder="xxxx@naver.com" id="email" name="email" value="${user.userEmail}"/>
 			            <small id="emailHelp" class="form-text text-muted">예) java@naver.com, java@daum.net</small>
 					</div>
 	          
@@ -267,6 +270,10 @@
 						<input type="text" id="address" name="addr1" size="50" placeholder="주소" readonly><br>
 						<input type="text" id="detailAddress" name="addr2" size="50" placeholder="상세주소">
 						<small id="addressHelp" class="form-text text-muted">예) 서울특별시 마포구....</small>
+					</div>
+					
+					<div style="text-align:center; color:red" class="m-5">
+						<h5>${errorcode}</h5>
 					</div>
 					
 					<div class="text-center">
