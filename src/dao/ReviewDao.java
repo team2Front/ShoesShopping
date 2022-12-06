@@ -25,6 +25,7 @@ public class ReviewDao {
 	   this.replyDao = (ReplyDao) application.getAttribute("replyDao");
 	   this.productDao = (ProductDao) application.getAttribute("productDao");
    }
+   
    public int selectCount(Connection conn, int productId) throws SQLException {
       String sql = "select count(*) from review where product_id = ? ";
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -98,7 +99,7 @@ public class ReviewDao {
       ResultSet rs = pstmt.executeQuery();
       while (rs.next()) {
          ReviewList rl = new ReviewList(rs.getInt("review_id"), rs.getString("review_title"),
-               rs.getDate("review_date"), rs.getString("user_id"), rs.getInt("product_id"));
+               rs.getDate("review_date"), rs.getString("user_id"), new Product());
          list.add(rl);
       }
       pstmt.close();
@@ -159,28 +160,32 @@ public class ReviewDao {
 
    }
 
+   // method: [상품 상세보기] - 리뷰 목록 
    public List<ReviewList> selectReviewList(Connection conn, int productId, PagingVo pvo) throws SQLException {
       int endRn = pvo.getEndRowNo();
       int startRn = pvo.getStartRowNo();
+      List<ReviewList> list = new ArrayList<>();
+      
       String sql = "select rm, review_id, review_title, review_date, user_id, product_id  " + "from ( "
             + "select rownum as rm, review_id, review_title, review_date, user_id, product_id " + "from ("
             + "select  review_id, review_title, review_content, review_date, user_id, product_id  " + "from review "
             + "where product_id = ? " + "order by review_id" + ")" + " where rownum <= ? )" + "where rm >= ?";
+      
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, productId);
       pstmt.setInt(2, endRn);
       pstmt.setInt(3, startRn);
       ResultSet rs = pstmt.executeQuery();
 
-      List<ReviewList> list = new ArrayList<>();
 
       while (rs.next()) {
          ReviewList rl = new ReviewList(rs.getInt("review_id"), rs.getString("review_title"),
-               rs.getDate("review_date"), rs.getString("user_id"), rs.getInt("product_id"));
+        		 						rs.getDate("review_date"), rs.getString("user_id"), new Product());
          list.add(rl);
       }
+      
       pstmt.close();
-      conn.close();
+      //conn.close();
 
       return list;
    }

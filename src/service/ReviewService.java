@@ -3,41 +3,51 @@ package service;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 import dao.ReviewDao;
+import domain.Product;
 import domain.Review;
 import dto.ReviewList;
 import util.PagingVo;
 
 public class ReviewService {
    private ReviewDao reviewDao;
+   private ProductService productService;
    private DataSource ds;
    
    public ReviewService(ServletContext application) {
 	   this.reviewDao = (ReviewDao) application.getAttribute("reviewDao");
+	   this.productService = (ProductService) application.getAttribute("productService");
 	   ds = (DataSource) application.getAttribute("dataSource");
    }
    
    //method: [상품 페이지] - 해당 상품의 리뷰 목록
    public List<ReviewList> showReviewList(int productId, PagingVo pvo) {
-	   List<ReviewList> list = null;
+	   List<ReviewList> lists = new ArrayList<>();
 	   Connection conn = null;
 	   
 	   try {
 			conn = ds.getConnection();
-			list = reviewDao.selectReviewList(conn, productId, pvo);
+			lists = reviewDao.selectReviewList(conn, productId, pvo);
+			
+			Product product = productService.showOneProduct(productId);
+			
+			for(ReviewList list : lists) {
+				list.setProduct(product);
+			}
+			
 	   }catch(Exception e) {
 			e.printStackTrace();
 	   }finally {
 			try{conn.close();}catch(Exception e) {}
 	   }
 	   
-	   return list;
+	   return lists;
    }
    
    

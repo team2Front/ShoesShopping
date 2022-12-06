@@ -18,8 +18,6 @@ import util.PagingVo;
 public class ProductDao {
 	ProductAndSizeDao productAndSizeDao;
 	ProductAndColorDao productAndColorDao;
-	ProductAndColorService productAndColorService;
-	ProductAndSizeService productAndSizeService;
 	CategoryDao categoryDao;
 	
 
@@ -116,38 +114,32 @@ public class ProductDao {
 	
 	// 상품하나만 가져오기 정은
 	public Product selectProductOne(Connection conn, int productId) throws Exception {
-		PreparedStatement pstmt = null;
-		Product product = null;
-		
-		String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, productId);
-		ResultSet rs = pstmt.executeQuery();
-		
-		if (rs.next()) {
-			int pid = rs.getInt("product_id");
-			product = new Product();
-			product.setProductId(pid);
-			product.setProductName(rs.getString("product_name"));
-			product.setDeleted(rs.getBoolean("is_deleted"));
-			product.setProductPrice(rs.getInt("product_price"));
-			product.setProductSex(rs.getString("product_sex"));
-			product.setCompany(selectFindCompany(conn, rs.getInt("company_id")));
-			product.setCategory(categoryDao.findCategoty(conn, rs.getInt("category_id")));
-			product.setColorList(productAndColorService.findProductColors(pid));
-			product.setSizeList(productAndSizeService.findProductSizeList(pid));
-			
-			/*product = new Product(pid, rs.getString("product_name"), rs.getBoolean("is_deleted"),
-					rs.getInt("product_price"), rs.getString("product_sex"),
-					selectFindCompany(conn, rs.getInt("company_id")),
-					categoryDao.findCategoty(conn, rs.getInt("category_id")),
-					productAndColorService.findProductColors(pid), productAndSizeService.findProductSizeList(pid));*/
-		}
-		
-		pstmt.close();
-		
-		return product;
-	}
+	      PreparedStatement pstmt = null;
+	      Product product = null;
+	      
+	      String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setInt(1, productId);
+	      ResultSet rs = pstmt.executeQuery();
+	      
+	      if (rs.next()) {
+	         int pid = rs.getInt("product_id");
+	         product = new Product();
+	         product.setProductId(pid);
+	         product.setProductName(rs.getString("product_name"));
+	         product.setDeleted(rs.getBoolean("is_deleted"));
+	         product.setProductPrice(rs.getInt("product_price"));
+	         product.setProductSex(rs.getString("product_sex"));
+	         product.setCompany(selectFindCompany(conn, rs.getInt("company_id")));
+	         product.setCategory(categoryDao.findCategoty(conn, rs.getInt("category_id")));
+	         product.setColorList(productAndColorDao.selectProductColors(conn, pid));
+	         product.setSizeList(productAndSizeDao.selectProductSizes(conn, pid));
+	      }
+	      
+	      pstmt.close();
+	      
+	      return product;
+	   }
 
 	
 

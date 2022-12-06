@@ -1,4 +1,6 @@
 /*================================[ Review ]==================================*/
+
+/* [리뷰등록] */
 $(document).ready(function(){
   var fileTarget = $('.filebox .upload-hidden');
 

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script src="../resources/javascript/review_qna.js"></script>
 	
 		<script>
 			function change1() {
@@ -37,7 +40,35 @@
 				img.src = "../resources/images/bans/반스_월버_5.png";
 			}
 			
+			function productInfo() {
+				$("#tab-content").empty();
+			}
+			
+			//리뷰 목록
+			function productReview(i) {
+				$("#tab-content").empty();
+
+				$.ajax({
+					type : 'GET',  //get방식으로 통신
+					url : "/shopping/review/ReviewListController?pageNo=" + i, //탭의 data-tab속성의 값으로 된 html파일로 통신
+					error : function() { //통신 실패시
+						alert('통신실패!');
+					},
+					success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+						console.log(data);
+						$("#tab-content").html(data);
+					}
+				});
+			}
+
+			function productQna() {
+				$("#tab-content").empty();
+				
+				$("#tab-content").append("메롱");
+			}
+			
 		</script>
+		
 		<style>
 		 * { 
 /* 		 	border: 1px solid black;  */
@@ -62,10 +93,8 @@
          text-align: center;
           vertical-align: middle;
          }
-		 
-		 
-		 
 		</style>
+		
 		<link rel="stylesheet" href="../resources/css/shoescolors.css">
 		<link rel="stylesheet" href="../resources/css/common.css">
 		<link rel="stylesheet" href="../resources/css/customCheckbox.css">
@@ -360,22 +389,24 @@
 					</div>
 				</div>
 			</div>
+			
 			<ul class="row nav nav-tabs pl-100" role="tablist">
 				<li class="col-4 p-3 nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#shoes-detail" style="font-size:30px; text-align:center"> 상품 정보 </a>
+					<a class="nav-link" data-toggle="tab" onclick="productInfo()" style="font-size:30px; text-align:center"> 상품 정보 </a>
 				</li>
 				<li class="col-4 p-3 nav-item">
-					<a href="../review/ReviewListController">쀼쀼</a>
-					<a class="nav-link" data-toggle="tab" href="#shoes-review" style="font-size:30px; text-align:center"> 리뷰 </a>
+					<a class="nav-link" data-toggle="tab" onclick="productReview(1)" style="font-size:30px; text-align:center"> 리뷰 </a>
 				</li>
 				<li class="col-4 p-3 nav-item">
-					<a class="nav-link" data-toggle="tab" href="#shoes-q_a" style="font-size:30px; text-align:center"> Q & A </a>
+					<a class="nav-link" data-toggle="tab" onclick="productQna()" style="font-size:30px; text-align:center"> Q & A </a>
 				</li>
 			</ul>
 			
 			<!-- Tab Content -->
 			<div class="tab-content">
-				<div class="tab-pane active container-fluid" id="shoes-detail">
+				
+				<!-- 없애야할 부분 -->
+				<div class="tab-pane container-fluid" id="shoes-detail">
 					<div class="m-4" style="text-align:center">
 						<img src="../resources/images/bans/정보_1.png" style="width:900px; height:400px; margin:0 auto;"class="active m-1 ml-4"/>
 						<img src="../resources/images/bans/정보_2.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
@@ -384,12 +415,10 @@
 						<img src="../resources/images/bans/정보5.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
 					</div>
 				</div>
-				<div class="tab-pane container-fluid" id="shoes-review">
-					<%@ include file="/WEB-INF/views/review/reviewList.jsp" %>
-				</div>
-				<div class="tab-pane container-fluid" id="shoes-q_a">
-					<%@ include file="/WEB-INF/views/qna/qnaList.jsp" %>
-				</div>
+				
+				<!-- ajax 처리 - 유동적으로 바뀔 부분 -->
+				<div id="tab-content"></div>
+				
 			</div>
 		</div>
 		</div>
