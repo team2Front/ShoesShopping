@@ -1,9 +1,6 @@
 package controller.admin;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 
 import dto.ProductImage;
 import dto.RegisterProduct;
@@ -48,6 +43,7 @@ public class Register_ProductController extends HttpServlet {
 		System.out.println(request.getParameter("pcategory"));
 		System.out.println(request.getParameterValues("pcolor"));
 		
+		String productName = request.getParameter("pname");
 		product.setProductName(request.getParameter("pname"));
 		product.setProductPrice(Integer.parseInt(request.getParameter("pprice")));
 		String pbrand = request.getParameter("pbrand");
@@ -97,8 +93,20 @@ public class Register_ProductController extends HttpServlet {
         	   
         	   productImages.add(productImage);
         	   
-        	   /*String filePath = "shopping/resources/images/"+pbrand+"/"+savedName;*/
-        	   String filePath = "C:Temp/download/"+savedName;
+        	   String brandName="";
+        	   switch(pbrand) {
+	        	   case "1" : brandName = "아디다스"; break;
+	        	   case "2" : brandName = "반스"; break;
+	        	   case "3" : brandName = "컨버스"; break;
+	        	   case "4" : brandName = "뉴발란스"; break;
+	        	   case "5" : brandName = "나이키"; break;
+        	   }
+        	   
+        	   //프로젝트 경로 맞춰서 해봅시다~~~~
+        	   String path = "C:/OTI/WebProjects/project2/ShoesShopping/WebContent/resources/images/";
+        	   String filePath = path+brandName+"/"+fileName;
+        	 
+        	  /* String filePath = "C:/Temp/download/"+savedName;*/
         	   System.out.println(filePath);
         	   
         	   filePart.write(filePath);
@@ -110,7 +118,7 @@ public class Register_ProductController extends HttpServlet {
 		String message=productService.registerProduct(product);
 		System.out.println(message);
 		
-		response.sendRedirect("/WEB-INF/views/admin/register_product.jsp");
+		response.sendRedirect("HomeController");
 	}
 
 }
