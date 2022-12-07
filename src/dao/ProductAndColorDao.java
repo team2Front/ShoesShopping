@@ -19,6 +19,7 @@ public class ProductAndColorDao {
 
 	// 상품 id ,그 상품의 사이즈들을 리스트로 받아와서 각각 Product_size 테이블에 삽입한다.
 	public int insertProductColors(Connection conn, int pid, List<Integer> colorList) throws Exception {
+		System.out.println("[ProductAndColorDao > insert] 메소드 실행 colorList: "+ colorList);
 		PreparedStatement pstmt = null;
 		int row = 0;
 

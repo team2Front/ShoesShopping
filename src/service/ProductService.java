@@ -14,6 +14,7 @@ import dao.ProductAndSizeDao;
 import dao.ProductDao;
 import dao.ProductImageDao;
 import domain.Product;
+import dto.ProductImage;
 import dto.ProductList;
 import dto.RegisterProduct;
 import util.PagingVo;
@@ -198,6 +199,7 @@ public class ProductService {
 	// 상품 등록하기
 	//트랜잭션 처리
 	public String registerProduct(RegisterProduct ap) {
+		System.out.println("[ProductService > registerProduct] 메소드 실행");
 		Connection conn = null;
 		int pid;
 		String message = "";
@@ -207,21 +209,26 @@ public class ProductService {
 			conn.setAutoCommit(false);
 			// 1) 상품 테이블 먼저 채우고 -> pid 리턴하기
 			pid = productDao.insertProduct(conn, ap);
-			System.out.println("pid" + pid);
-			// 2) 객체에 담긴 컬러와 사이즈 리스트
+			System.out.println("[ProductService > registerProduct]pid: " + pid);
+			
+			
+			// 2) 객체에 담긴 컬러와 사이즈, 사진 리스트
 			List<Integer> colorList = ap.getColorList();
 			List<Integer> sizeList = ap.getSizeList();
-
+			List<ProductImage> productImages = ap.getProductImage();
+			
 			// 3)트랜잭션 검사
 			productDao.selectCheckColor(conn, colorList);
 			productDao.selectCheckSize(conn, sizeList);
 
 			conn.commit();
 
-			// 트랜잭션 통과되면 컬러 테이블 채우기 -> 사이즈 테이블 채우기
+			// 트랜잭션 통과되면 컬러 테이블 채우기 -> 사이즈 테이블 채우기, 이미지 테이블 채우기
 			int result1 = productAndColorDao.insertProductColors(conn, pid, colorList);
 
 			int result2 = productAndSizeDao.insertProductSizes(conn, pid, sizeList);
+			
+			productImageDao.insertProductImages(conn, pid, productImages);
 
 			if (result1 + result2 != 2) {
 				message = "상품 등록이 실패하였습니다";
@@ -266,4 +273,6 @@ public class ProductService {
 		
 		return result;
 	}
+
+	
 }

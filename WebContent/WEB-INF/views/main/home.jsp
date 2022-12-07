@@ -117,12 +117,12 @@
 				
 			<!-- 상품리스트 -->
 			<div id="products" class="p-2" style="width:1000px;"> 
-				   <div class="d-flex justify-content-between flex-wrap" style="width:1000px;" >
+				   <div class="d-flex flex-wrap" style="width:1000px;" >
 				        <!-- 카드 임시로 가져와보기 -->
 				        
 						
 						<c:forEach var="productList" items="${pageList}">
-			               <div class="card">
+			               <div class="card m-1">
 					           <div class="card-head">
 						           		<img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/${productList.fileName}"/>
 								</div>

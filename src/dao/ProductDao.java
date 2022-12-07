@@ -65,8 +65,6 @@ public class ProductDao {
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, endRn);
 		pstmt.setInt(2, startRn);
-		System.out.println(endRn);
-		System.out.println(startRn);
 
 		ResultSet rs = pstmt.executeQuery();
 		List<ProductList> list = new ArrayList<>();
@@ -187,19 +185,21 @@ public class ProductDao {
 		}
 	}
 
-	// 상품 등록하기
+	// Product테이상품 등록하기
 	public int insertProduct(Connection conn, RegisterProduct ap) throws Exception {
+		System.out.println("[ProductDao > insertProduct] 메소드 실행");
 		int pid = 0;
-		String sql = "insert into product" + "(product_id, product_name, product_price, category_id, company_id , "
-				+ "product_sex) values (product_seq.nextval,?,?,?,?,?)";
-		// pstmt = conn.prepareStatement(sql, new String[] { "product_id" });
+		
+		String sql = "insert into product" + "(product_id, product_name, product_price, category_id, company_id , product_sex) "
+				+ "values (product_seq.nextval,?,?,?,?,?)";
+		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 
 		pstmt.setString(1, ap.getProductName());
 		pstmt.setInt(2, ap.getProductPrice());
 		pstmt.setInt(3, ap.getCategory());
 		pstmt.setInt(4, ap.getCompany());
-		pstmt.setString(5, ap.getProductSex());
+		pstmt.setString(5, ap.getGender());
 		int r = pstmt.executeUpdate();
 
 		if (r == 1) {
