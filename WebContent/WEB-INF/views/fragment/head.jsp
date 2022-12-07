@@ -17,6 +17,9 @@
 		<link rel="stylesheet" href="../resources/css/common.css">
 		<link rel="stylesheet" href="../resources/css/productList.css">
 		<link rel="stylesheet" href="../resources/css/shoescolors.css">
+		<link rel="stylesheet" href="../resources/css/mypage.css">
+		<link rel="stylesheet" href="../resources/css/customCheckbox.css">
+		<link rel="stylesheet" href="../resources/css/customRadio.css">
 		
 		
 		<!-- font 링크 -->

@@ -81,26 +81,18 @@ public class UserService {
 	}
 
 	// method: 유저 등록(추가)`
-	public String registerUser(User user) {
+	public void registerUser(User user) {
 		Connection conn = null;
-		String result = null;
 		
 		try {
 			conn = ds.getConnection();
-			
-			if (userDao.insertRegisterUser(conn, user)) {
-				cartService.createCart(user.getUserId());
-				result = "회원가입이 완료되었습니다.";
-			} else {
-				result = "회원가입에 실패하였습니다.";
-			}
+			userDao.insertRegisterUser(conn, user);
+			cartService.createCart(user.getUserId());
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			try { conn.close();} catch (SQLException e) {}
 		}
-		
-		return result;
 	}
 
 	// method: 관리자 등록(추가)

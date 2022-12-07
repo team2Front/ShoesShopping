@@ -11,8 +11,6 @@ import javax.servlet.ServletContext;
 import domain.Product;
 import dto.ProductList;
 import dto.RegisterProduct;
-import service.ProductAndColorService;
-import service.ProductAndSizeService;
 import util.PagingVo;
 
 public class ProductDao {
@@ -29,17 +27,15 @@ public class ProductDao {
 
 	// 상품의 총수량
 	public int selectCountAll(Connection conn) throws Exception {
-		System.out.println("[DAO] 카운트 올");
 		String sql = "select count(product_id) from product where is_deleted = '0'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 
-		int cnt = 0;
+		int cnt = 1;
 		if (rs.next()) {
 			cnt = rs.getInt(1);
 		}
 		pstmt.close();
-		System.out.println(cnt);
 		return cnt;
 	}
 
@@ -74,7 +70,6 @@ public class ProductDao {
 			list.add(productList);
 		}
 		pstmt.close();
-		System.out.println(list);
 		return list;
 	}
 
@@ -117,7 +112,7 @@ public class ProductDao {
 	// 상품하나만 가져오기 정은
 	public Product selectProductOne(Connection conn, int productId) throws Exception {
 		PreparedStatement pstmt = null;
-		Product p = null;
+		Product product = null;
 		
 		String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
 		pstmt = conn.prepareStatement(sql);
@@ -126,16 +121,21 @@ public class ProductDao {
 		
 		if (rs.next()) {
 			int pid = rs.getInt("product_id");
-			p = new Product(pid, rs.getString("product_name"), rs.getBoolean("is_deleted"),
-					rs.getInt("product_price"), rs.getString("product_sex"),
-					selectFindCompany(conn, rs.getInt("company_id")),
-					categoryDao.findCategoty(conn, rs.getInt("category_id")),
-					productAndColorDao.selectProductColors(conn,pid), productAndSizeDao.selectProductSizes(conn, pid));
+			product = new Product();
+			product.setProductId(pid);
+			product.setProductName(rs.getString("product_name"));
+			product.setDeleted(rs.getBoolean("is_deleted"));
+			product.setProductPrice(rs.getInt("product_price"));
+			product.setProductSex(rs.getString("product_sex"));
+			product.setCompany(selectFindCompany(conn, rs.getInt("company_id")));
+			product.setCategory(categoryDao.findCategoty(conn, rs.getInt("category_id")));
+			product.setColorList(productAndColorDao.selectProductColors(conn, pid));
+			product.setSizeList(productAndSizeDao.selectProductSizes(conn, pid));
 		}
 		
 		pstmt.close();
 		
-		return p;
+		return product;
 	}
 
 	

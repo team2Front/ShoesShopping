@@ -10,6 +10,29 @@
 			$(".check").prop("checked", false);
 		}
 	}
+	
+	function orderSelected() {
+		var arr = [];
+		$("input[name=shoes]:checked").each(function() {
+			console.log($(this).val());
+			arr.push($(this).val());
+		})
+		
+   		$.ajax({
+        	type :'POST',
+            url : "/shopping/order/OrderController", 
+            data: {arrDid: JSON.stringify(arr)},
+            success : function(request){
+            	var test = <%= request.getAttribute("list")%>
+            	console.log(">>>>>  " + test);
+            	   location.href="/shopping/order/OrderController";             
+            },
+            error :  function(){
+                   console.log("AJAX_ERROR");
+            }
+        });               
+	}
+		
 </script>
 </head>
 
@@ -27,8 +50,8 @@
 			<div class="card-body">
 				<c:forEach var="cartDetail" items="${cart.cartDetailDtoList}">
 					<div class="row" style="border-bottom: 1px solid black">
-						<input type="checkbox" name="shoes" onclick="select1()"
-							style="zoom: 2.0; margin: 0px 0px 0px 10px" class="check" /> <img
+						<input type="checkbox" name="shoes" 
+							style="zoom: 2.0; margin: 0px 0px 0px 10px" class="check" value="${cartDetail.cart_detail_id}"/> <img
 							src="../resources/images/반스_월버_노랑.jpg"
 							style="width: 120px; height: 120px; margin: 10px" />
 						<div style="margin: auto 0px; width: 250px">
@@ -38,8 +61,11 @@
 						</div>
 						<div style="margin: auto 0px auto 100px">
 							<div style="margin: 2px 10px; font-size: 20px;">수량</div>
-							<input type="number" min="0" max="100" value="${cartDetail.quantity }"
-								style="width: 45px; margin: 2px 10px; font-size: 15px; text-align: center" />
+							<form method="post" id="quantityForm" action="updateQuantityController?cartDetailId=${cartDetail.cart_detail_id}">
+								<input type="number" min="0" max="100" value="${cartDetail.quantity }" name="quantity"
+								style="width: 45px; margin: 2px 10px; font-size: 15px; text-align: center"/>
+								<button class="btn btn-ingo btn-sm"> 변경</button>
+							</form>
 						</div>
 						<div style="margin: auto 0px auto 150px; width: 150px">
 							<div style="margin: 2px 10px; font-size: 20px; text-align: right">
@@ -69,14 +95,14 @@
 					</div>
 					<div class="col-6"
 						style="font-size: 30px; text-align: right; padding: 0px 80px 0px 0px">
-						${cart.totalQuantity}</div>
+						${cart.totalPrice} 원</div>
 				</div>
 			</div>
 			<div class="card-body" style="text-align: center">
-				<button type="button" class="btn-dark btn-lg">계속 쇼핑하기</button>
-				<a type="button" class="btn-dark btn-lg" href="orderForm.html">
-					선택 상품 주문하기 </a> <a type="button" class="btn-dark btn-lg"
-					href="orderForm.html"> 전체 상품 주문하기 </a>
+				<a  class="btn btn-dark btn-lg" href="${pageContext.request.contextPath}/main/MainController">계속 쇼핑하기</a>
+				<a type="button" class="btn-dark btn-lg" onclick="orderSelected()">
+					선택 상품 주문하기 </a> 
+				<a type="button" class="btn-dark btn-lg" href="orderForm.html"> 전체 상품 주문하기 </a>
 			</div>
 			<div class="card-footer">
 				<p>

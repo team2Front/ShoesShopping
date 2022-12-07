@@ -43,9 +43,7 @@ public class ProductAndColorDao {
 		List<Color> colors = new ArrayList<>();
 		while (rs.next()) {
 			int cid = rs.getInt("color_id");
-
 			colors.add(colorDao.selectColor(conn, cid));
-
 		}
 		pstmt.close();
 		

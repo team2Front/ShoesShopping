@@ -37,12 +37,8 @@ public class CartDetailService {
     	
     	try {
     		conn = ds.getConnection();
-			conn.setAutoCommit(false);
-			
-			
-			Product product = productService.showOneProduct(od.getProductId());
-
-    		
+			conn.setAutoCommit(false);			
+			Product product = productService.showOneProduct(od.getProductId());	
     		// 주문한 상품 색상, 사이즈  확인 필요
 			boolean colorCheck = productAndColorService.checkColor(product.getProductId(), od.getColor());
 			boolean sizeCheck = productAndSizeService.checkSize(product.getProductId(), od.getSize());
@@ -68,7 +64,9 @@ public class CartDetailService {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-    	}
+    	} finally {
+			if(conn!=null) try { conn.close();}catch(Exception e) { }
+		}
 		
     	return result;
 	}
@@ -84,6 +82,24 @@ public class CartDetailService {
 		}
 		return list;
     }
+    
+    //장바구니 항목 1삭제
+    public void removeCartDetailOneForOrder(Connection conn, String userId, int cdId){    						
+		try {
+			CartDetail cd = getCartDetailOne(conn, cdId);
+			int mp = cd.getProduct().getProductPrice() * cd.getQuantity();
+			int mq = cd.getQuantity();
+			cartDetailDao.removeCartDetailOne(conn, cdId);
+			cartService.refreshCart(conn, userId, -mp, -mq);
+			
+		} catch (Exception e) {
+			try {
+				throw new Exception();
+			} catch (Exception e1) {}
+		}
+    }
+    
+    
     
     
     //장바구니 항목 1삭제
@@ -139,6 +155,30 @@ public class CartDetailService {
 		}
     	return cd;
     }
+    
+    // 주문서 컨트롤러에서 직접 호출하는 메소드 
+    public CartDetail getCartDetail(int cartDetailId) {
+    	Connection conn = null;
+    	CartDetail cd = null;
+		try {
+			conn = ds.getConnection();
+			conn.setAutoCommit(false);
+			cd = cartDetailDao.selectCartDetail(conn, cartDetailId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			try {
+				conn.rollback();
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				e.printStackTrace();
+			}
+		} finally {
+			if(conn!=null) try { conn.close();}catch(Exception e) { }
+		}
+    	return cd;
+    }
 
     //—————————— 카트 디케일 서비스의 updateCartDetailQuantity 메소드 ㅡㅡㅡㅡ 
 
@@ -155,8 +195,7 @@ public class CartDetailService {
      		CartDetail cd = getCartDetailOne(conn, cartDetailId);
      		
      		// 삭제된 상품인 경우 수량 변경 막기
-     		if(cd.getProduct().isDeleted()) return "수량 변경에 실패했습니다. ";
-     		
+     		if(cd.getProduct().isDeleted()) throw new RuntimeException();
      		int xquantity = cd.getQuantity();
      		int xtotalPrice = cd.getProduct().getProductPrice() * xquantity;
      		
@@ -165,14 +204,12 @@ public class CartDetailService {
      		int p = cd.getProduct().getProductPrice() * q;
      		// 새로운 변경사항 반영하기 
      		cartDetailDao.updateQuantity(conn, cartDetailId, quantity);
-     		
      		// cart 의 총 수량, 금액 변경하기 
      		int rq = -xquantity + quantity;
      		int rp = -xtotalPrice + p;
      		cartService.refreshCart(conn, userId, rp, rq);
     
      		str = "수량 변경이 완료되었습니다. ";
-     		
      		conn.commit();
  			
  		} catch(Exception e) {
@@ -181,7 +218,7 @@ public class CartDetailService {
  			try {
  				conn.rollback();
  	    		str = "수량 변경에 실패했습니다. ";
- 				throw new RuntimeException(e);
+// 				throw new RuntimeException(e);
 
  			} catch (SQLException e1) {}
  		} finally {

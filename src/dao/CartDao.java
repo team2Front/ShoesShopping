@@ -48,7 +48,6 @@ public class CartDao {
 	// 장바구니 수정
 	public void updateCart(Connection conn, String userId, int price, int quantity) throws Exception {
     	//cart 에 정보 수하기
-		System.out.println("!!! " + conn);
 		System.out.println(userId);
 		System.out.println(price);
 		System.out.println(quantity);
@@ -60,7 +59,6 @@ public class CartDao {
 		    pstmt.setString(3, userId);
 		    
 		   int rows = pstmt.executeUpdate();
-		   System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~   " + rows);
 	}
 
 }

@@ -18,13 +18,7 @@ public class ReplyService {
    
    public ReplyService(ServletContext application) {
 	   this.replyDao = (ReplyDao) application.getAttribute("replyDao");
-   
-	   try {
-			InitialContext ic = new InitialContext();
-			ds = (DataSource) ic.lookup("java:comp/env/jbc/java");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
+	   ds = (DataSource) application.getAttribute("dataSource");
    }
    
    //리뷰 댓글달기

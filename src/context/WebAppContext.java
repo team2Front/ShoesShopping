@@ -50,15 +50,16 @@ public class WebAppContext implements ServletContextListener{
 		/*객체 순서: product -> cart -> user -> reply/review/qna -> order */
 		
 		//-------------------- Dao ------------------
-		System.out.println("WebApp DAO Set함");
 		application.setAttribute("companyDao", new CompanyDao());
 		application.setAttribute("categoryDao", new CategoryDao());
 		application.setAttribute("pfilteringDao", new PfilteringDao());
 		application.setAttribute("colorDao", new ColorDao());
-		application.setAttribute("productDao", new ProductDao(application));
 		application.setAttribute("productAndColorDao",  new ProductAndColorDao(application));
 		application.setAttribute("productAndSizeDao", new ProductAndSizeDao());
+		application.setAttribute("productDao", new ProductDao(application));
 			
+		
+		
 		application.setAttribute("cartDao", new CartDao());
 		application.setAttribute("cartDetailDao", new CartDetailDao(application));
 		
@@ -71,10 +72,13 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("reviewDao", new ReviewDao(application));
 		application.setAttribute("replyDao", new ReplyDao());
 
+		
+		
+		
+		
 		//-------------------- 서비스 ------------------
 		application.setAttribute("productAndColorService", new ProductAndColorService(application));
 		application.setAttribute("productAndSizeService", new ProductAndSizeService(application));
-		System.out.println("WebApp프로덕트 서비스 전");
 		application.setAttribute("productService", new ProductService(application));
 		
 		application.setAttribute("cartService", new CartService(application));
@@ -82,8 +86,8 @@ public class WebAppContext implements ServletContextListener{
 		
 		application.setAttribute("userDao", new UserService(application));
 
-		application.setAttribute("ordersDetailService", new OrdersDetailService(application));
 		application.setAttribute("orderService", new OrderService(application));
+		application.setAttribute("ordersDetailService", new OrdersDetailService(application));
 		
 		application.setAttribute("qnaService", new QnAService(application));
 		application.setAttribute("reviewService", new ReviewService(application));

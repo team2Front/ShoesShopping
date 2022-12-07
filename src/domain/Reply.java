@@ -11,10 +11,6 @@ public class Reply {
 	private String userId;
 	private int reviewId;
 	private int qnaId;
-	
-	
-	
-
 }
 
 

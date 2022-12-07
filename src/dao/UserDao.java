@@ -3,13 +3,11 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
 
 import domain.User;
 import dto.UserInfo;
-import util.ConnectionProvider;
 
 public class UserDao {
 	//field
@@ -21,8 +19,8 @@ public class UserDao {
 	}
 	
    //method: select문 - 아이디 중복 여부 판별
-   public boolean selectUserId(Connection conn, String id) throws Exception { 
-      String sql = "select user_id from users where user_id=?";
+   public boolean selectUserId(Connection conn, String id) throws Exception {
+      String sql = "select userid from users where userid=? ";
       boolean result = false;
       
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -36,7 +34,7 @@ public class UserDao {
    
    //method: select문 - 핸드폰 번호 중복 여부 확인
    public boolean selectPnCheck(Connection conn, String pn) throws Exception {
-      String sql = "select phone_number from users where phone_number=?";
+      String sql = "select phone_number from users where phonenumber=? ";
       boolean result = true;
  	  
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -106,9 +104,8 @@ public class UserDao {
    }
    
    //method: insert문 - 사용자 정보를 DB에 등록
-   public boolean insertRegisterUser(Connection conn, User user) throws Exception {
+   public int insertRegisterUser(Connection conn, User user) throws Exception {
       String sql = "insert into users(user_id, user_name, user_password, phone_number, user_address) values (?,?,?,?,?)";
-      boolean result = true;
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, user.getUserId());
       pstmt.setString(2, user.getUserName());
@@ -117,15 +114,10 @@ public class UserDao {
       pstmt.setString(5, user.getUserAddress());
       
       int rows = pstmt.executeUpdate();
-    
-      if(rows == 1) {
-    	  result = true; //정보 등록 성공
-      }else {
-    	  result = false; //정보 등록 실패
-      }
+      
       pstmt.close();
       
-      return result;
+      return rows;
    }
    
    //method: update문 - 사용자 정보 DB에서 수정

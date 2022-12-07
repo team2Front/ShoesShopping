@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -30,7 +31,11 @@ public class CartService {
     		conn = ds.getConnection();
     		cartDao.insertCart(conn, userId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+ 				conn.rollback();
+ 			} catch (SQLException e1) {}
+		} finally {
+			if(conn!=null) try { conn.close();}catch(Exception e) { }
 		}
     }
     
@@ -41,6 +46,7 @@ public class CartService {
     	
     	try {		
     		conn = ds.getConnection();
+    		conn.setAutoCommit(false);
 			cartDto = cartDao.selectCart(conn, userId);
 			CartDetailDto cdto = new CartDetailDto();
 			//cart detail 정보 가져오기
@@ -49,9 +55,13 @@ public class CartService {
 			List<CartDetailDto> list = cdto.toCartDetailDtoList(cdList);
 			cartDto.setCartDetailDtoList(list);
 			
-    	} catch(Exception e) {   		
-			e.printStackTrace();
-    	}
+    	}  catch (Exception e) {
+			try {
+ 				conn.rollback();
+ 			} catch (SQLException e1) {}
+		} finally {
+			if(conn!=null) try { conn.close();}catch(Exception e) { }
+		}
     		
 	   return cartDto;
     	
