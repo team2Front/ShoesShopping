@@ -24,7 +24,7 @@ public class JoinFormController extends HttpServlet {
       request.setCharacterEncoding("UTF-8");
       
       UserService userService = (UserService) request.getServletContext().getAttribute("userService");
-      
+      System.out.println(request.getParameter("userid"));
       User user = new User();
       
       user.setUserName(request.getParameter("uname"));

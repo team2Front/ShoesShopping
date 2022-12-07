@@ -19,8 +19,10 @@ public class CartController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ServletContext appication = request.getServletContext();
+		String loginId = (String) request.getSession().getAttribute("loginId");
+		
 		CartService cartService = (CartService) appication.getAttribute("cartService");
-		CartDto cartDto = cartService.showCart("winter");
+		CartDto cartDto = cartService.showCart(loginId);
 		int rows = cartDto.getCartDetailDtoList().size();
 				
 		request.setAttribute("cart", cartDto);

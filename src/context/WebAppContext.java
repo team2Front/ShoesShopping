@@ -83,7 +83,7 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("cartService", new CartService(application));
 		application.setAttribute("cartDetailService", new CartDetailService(application));
 		
-		application.setAttribute("userDao", new UserService(application));
+		application.setAttribute("userService", new UserService(application));
 
 		application.setAttribute("orderService", new OrderService(application));
 		application.setAttribute("ordersDetailService", new OrdersDetailService(application));

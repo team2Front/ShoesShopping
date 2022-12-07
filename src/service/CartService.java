@@ -63,20 +63,28 @@ public class CartService {
    public void refreshCart(Connection conn, String userId, int totalPrice, int quantity){
 	   // 기존의 수량, 가격 가져오기
 	   CartDto cd;
-		try {
-			cd = showCart(userId);
-			int p = cd.getTotalPrice();
-			int q = cd.getTotalQuantity();
-			
-			// 수량, 가격 변경싴키기
-			int np = p + totalPrice;
-			int nq = q + quantity;
-	
-			cartDao.updateCart(conn, userId, np, nq);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
+	try {
+		cd = showCart(userId);
+		
+		System.out.println("~~~~~~~~~~~~~~~~~  a");
+		
+		
+		int p = cd.getTotalPrice();
+		int q = cd.getTotalQuantity();
+		
+		// 수량, 가격 변경싴키기
+		int np = p + totalPrice;
+		int nq = q + quantity;
+		System.out.println("~~~~~~~~~~~~~~~~~  b");
+		
+		cartDao.updateCart(conn, userId, np, nq);
+		
+		System.out.println("~~~~~~~~~~~~~~~~~  c");
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+		throw new RuntimeException(e);
+	}
    }
 
 }

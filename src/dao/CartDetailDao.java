@@ -112,6 +112,7 @@ public class CartDetailDao {
 
 	// 장바구니 내역의 수량 변경
 	public int updateQuantity(Connection conn, int id, int quantity) throws Exception {
+		System.out.println("updat ~!!!!!!!!!!!!!!!!!! ");
 		String sql = "update cart_detail set quantity=? where cart_detail_id=?";
 		int rows = 0;
 

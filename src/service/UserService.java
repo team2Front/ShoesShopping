@@ -26,7 +26,7 @@ public class UserService {
 	public boolean idCheck(String id) {
 		Connection conn = null;
 		boolean result = false;
-		
+		System.out.println("Dfsfdffsdf");
 		try {
 			conn = ds.getConnection();
 			result = userDao.selectUserId(conn, id);
