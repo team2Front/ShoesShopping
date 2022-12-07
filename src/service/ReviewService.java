@@ -198,18 +198,33 @@ public class ReviewService {
       }
 
    // 5. 리뷰에 좋아요 누르기 heartCountUp (원하는 리뷰 번호)
-   public int heartCountUp(int reivewId) {
+   public int heartCountUp(int reviewId) {
 	   Connection conn=null;
 	   int result = 0;
 	   try {
 		   conn=  ds.getConnection();
-		   result = reviewDao.updateReviewHeartCount(conn, reivewId);
+		   result = reviewDao.updateReviewHeartCount(conn, reviewId);
 	   }catch(Exception e) {
 			e.printStackTrace();
 	   }finally {
 			try{conn.close();}catch(Exception e) {}
 	   }
       return result;
+   }
+
+   // 5. 리뷰에 좋아요 누르기 취소 CancelheartCountUp (원하는 리뷰 번호)
+   public int CancelheartCountUp(int reviewId) {
+	   Connection conn=null;
+	   int result = 0;
+	   try {
+		   conn=  ds.getConnection();
+		   result = reviewDao.updateCancelReviewHeartCount(conn, reviewId);
+	   }catch(Exception e) {
+		   e.printStackTrace();
+	   }finally {
+		   try{conn.close();}catch(Exception e) {}
+	   }
+	   return result;
    }
 
 }

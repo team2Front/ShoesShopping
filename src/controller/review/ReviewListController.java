@@ -18,6 +18,8 @@ import util.PagingVo;
 public class ReviewListController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int productId = Integer.parseInt(request.getParameter("productId")); //일단 producId를 받아오는 값이 없으므로..임의의값..!
+
 		//pageNo 얻기
 		String strPageNo = request.getParameter("pageNo");
 		if(strPageNo == null) {
@@ -30,7 +32,6 @@ public class ReviewListController extends HttpServlet {
 		ReviewService reviewService = (ReviewService) application.getAttribute("reviewService");
 		
 		//페이징 대상이 되는 전체 행의 수 얻기
-		int productId = 100; //일단 producId를 받아오는 값이 없으므로..임의의값..!
 		int totalRows = reviewService.countAllReviews(productId);
 		
 		//페이징 객체

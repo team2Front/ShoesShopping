@@ -109,8 +109,8 @@ public class ReviewDao {
    }
 
    public int insertReview(Connection conn, Review review) {
-	      String sql = "INSERT INTO review (review_id, review_title, review_content, review_date, user_id, star_score, product_id)"
-	            + "values(Review_seq.NEXTVAL,?,?,sysdate,?,?, 100)";
+	      String sql = "INSERT INTO review (review_id, review_title, review_content, review_date, user_id, star_score,heart_count, product_id)"
+	            + "values(Review_seq.NEXTVAL,?,?,sysdate,?,?, 0,98)";
 	      int r = 0;
 	      try {
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -220,7 +220,38 @@ public class ReviewDao {
       conn.close();
       
       return heartCount;
-
    }
+
+   public int updateCancelReviewHeartCount(Connection conn, int reviewId) throws SQLException {
+	   String sql = "select heart_count from review where review_id=?";
+		
+	   PreparedStatement pstmt = conn.prepareStatement(sql);
+	   pstmt.setInt(1, reviewId);
+	   ResultSet rs = pstmt.executeQuery();
+	   int r = 0;
+	   int heartCount = 0;
+	
+	   if (rs.next()) {
+		   heartCount = rs.getInt("heart_count");
+		   sql = "update review set heart_count=? where review_id=?";
+		   pstmt = conn.prepareStatement(sql);
+		   pstmt.setInt(1, heartCount - 1);
+		   pstmt.setInt(2, reviewId);
+		   r = pstmt.executeUpdate();
+		
+		   if(r==1) {
+			   sql = "select heart_count from review where review_id=?";
+			   pstmt = conn.prepareStatement(sql);
+			   pstmt.setInt(1, reviewId);
+			   rs = pstmt.executeQuery();
+			
+			   if(rs.next()) heartCount = rs.getInt("heart_count");
+		   }
+	   }
+	   pstmt.close();
+	   conn.close();
+	
+	   return heartCount;
+	}
 
 }
