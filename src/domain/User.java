@@ -11,4 +11,7 @@ public class User {
 	private String userAddress;
 	private String userType;
 	private String userEmail;
+	private String filename;
+	private String filetype;
+	private String savedname;
 }
