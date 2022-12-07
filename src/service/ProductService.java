@@ -252,16 +252,12 @@ public class ProductService {
 
 	// 상품 삭제(관리자)
 	// method: 상품 삭제(Only 관리자)
-	public String deleteProduct(int num) {
+	public int deleteProduct(int num) {
 		Connection conn = null;
-		String result = "";
+		int result = 0;
 		try {
 			conn = ds.getConnection();
-			if (productDao.deleteProduct(conn, num)) {
-				result = "상품이 삭제되었습니다.";
-			} else {
-				result = "상품 삭제에 실패했습니다.";
-			}
+			result = productDao.deleteProduct(conn, num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
