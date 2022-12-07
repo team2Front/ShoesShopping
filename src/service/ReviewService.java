@@ -178,7 +178,7 @@ public class ReviewService {
    }
    
    //관리자용 리뷰 게시글 삭제
-   public  String adDeleteReview(Review review) throws IOException, SQLException {
+   public String adDeleteReview(Review review) throws IOException, SQLException {
 	   Connection conn = ds.getConnection();  
 	   int r = 0;
 	   String result="";
@@ -198,22 +198,17 @@ public class ReviewService {
       }
 
    // 5. 리뷰에 좋아요 누르기 heartCountUp (원하는 리뷰 번호)
-   public String heartCountUp(int reivewId) throws SQLException {
+   public int heartCountUp(int reivewId) {
 	   Connection conn=null;
-	   int r = 0;
-	   String result="";
+	   int result = 0;
 	   try {
 		   conn=  ds.getConnection();
-		   r = reviewDao.updateReviewHeartCount(conn, reivewId);
-		   result = "좋아요를 누를 게시글이 없습니다";
-		   if (r == 1) {
-		     result = "좋아요를 눌렀습니다";
-		   }
-		   }catch(Exception e) {
-				e.printStackTrace();
-		   }finally {
-				try{conn.close();}catch(Exception e) {}
-		   }
+		   result = reviewDao.updateReviewHeartCount(conn, reivewId);
+	   }catch(Exception e) {
+			e.printStackTrace();
+	   }finally {
+			try{conn.close();}catch(Exception e) {}
+	   }
       return result;
    }
 

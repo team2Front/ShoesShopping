@@ -2,10 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script src="${pageContext.request.contextPath}/resources/javascript/review_qna.js"></script>
+
 <div id="mainDiv" class="content">
-   <div id="review-list">
+   <div id="reviewList">
       <div id="review-list-header">
-      
       </div>
       <table class="table table-hover">
          <thead class="table-dark">
@@ -16,12 +17,12 @@
 	         <tr>
          </thead>
          <tbody>
-         	<!-- 리뷰목록 -->
          	<c:forEach var="reviewList" items="${reviewList}">
+         		<!-- 리뷰목록 -->
 	         	<tr>
          			<td>${reviewList.reviewId}</td>
          			<td style="text-align: left; padding-left: 80px;">
-         				<span class="font-weight-bold" style="font-size: 20px;">
+         				<span class="font-weight-bold" style="font-size: 15px;">
          					별점:
          					<c:choose>
          						<c:when test="${reviewList.review.starScore == 5}">⭐⭐⭐⭐⭐</c:when>
@@ -31,15 +32,33 @@
          						<c:when test="${reviewList.review.starScore == 1}">⭐</c:when>
          					</c:choose>
          				</span>
-         				<span class="pl-1">
-	         				[상품명] ${reviewList.product.productName} <br>
+         				<span class="pl-1 small text-muted">
+	         				[상품] ${reviewList.product.productName} | ${reviewList.product.company} <br>
          				</span>
-         				<b>브랜드: </b> ${reviewList.product.company}		  <br>
-         				<b>리뷰제목: </b> ${reviewList.reviewTitle} <br>
-         				<b>ID: </b> ${reviewList.userId}
+         				<span class="pl-1 small text-muted">
+	         				[ID] ${reviewList.userId} <br>
+         				</span>
+         				<span class="font-weight-bold" style="font-size: 20px;">
+         					<b>[리뷰 제목] </b>
+         				</span>
+         				<span>
+	         				 ${reviewList.reviewTitle} <br>
+         				</span>
+
+			         	<!-- 리뷰 상세 -->
+		         		<div id="reviewDetail" class="n-row" style="display:none;">
+		         			<div>
+			                	<span><img src="${pageContext.request.contextPath}/resources/images/review/${reviewList.review.rsavedName}" width="200"></span>
+			                	<span class="ml-3">${reviewList.review.reviewContent}</span>
+		         			</div>
+		         			<div id="goodBtn">
+			         			<a class="btn btn-outline-danger btn-sm" onclick="good(${reviewList.reviewId})">좋아요 ${reviewList.review.heartCount}</a>
+		         			</div>
+		         		</div>
          			</td>
          			<td><fmt:formatDate value="${reviewList.reviewDate}" pattern="yyyy.MM.dd"/></td>
 	         	</tr>
+	         	
          	</c:forEach>
          	
          	<!-- 네비게이터 -->

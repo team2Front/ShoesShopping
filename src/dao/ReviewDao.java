@@ -197,18 +197,29 @@ public class ReviewDao {
       pstmt.setInt(1, reviewId);
       ResultSet rs = pstmt.executeQuery();
       int r = 0;
+      int heartCount = 0;
+      
       if (rs.next()) {
-         int heartCount = rs.getInt("heart_count");
-         System.out.println(heartCount);
+         heartCount = rs.getInt("heart_count");
          sql = "update review set heart_count=? where review_id=?";
          pstmt = conn.prepareStatement(sql);
          pstmt.setInt(1, heartCount + 1);
          pstmt.setInt(2, reviewId);
          r = pstmt.executeUpdate();
+         
+         if(r==1) {
+        	 sql = "select heart_count from review where review_id=?";
+        	 pstmt = conn.prepareStatement(sql);
+        	 pstmt.setInt(1, reviewId);
+        	 rs = pstmt.executeQuery();
+        	 
+        	 if(rs.next()) heartCount = rs.getInt("heart_count");
+         }
       }
       pstmt.close();
       conn.close();
-      return r;
+      
+      return heartCount;
 
    }
 

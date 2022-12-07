@@ -7,36 +7,13 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/customCheckbox.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/customRadio.css">
 	
-	<script src="../resources/javascript/review_qna.js"></script>
-
-	<script>
-		function productInfo() {
+	<script src="${pageContext.request.contextPath}/resources/javascript/review_qna.js"></script>
+	
+<!--   	<script>
+ 		function productInfo() {
 			$("#tab-content").empty();
-		}
-		
-		//리뷰 목록
-		function productReview(i) {
-			$("#tab-content").empty();
-
-			$.ajax({
-				type : 'GET',  //get방식으로 통신
-				url : "/shopping/review/ReviewListController?pageNo=" + i, //탭의 data-tab속성의 값으로 된 html파일로 통신
-				error : function() { //통신 실패시
-					alert('통신실패!');
-				},
-				success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
-					console.log(data);
-					$("#tab-content").html(data);
-				}
-			});
-		}
-
-		function productQna() {
-			$("#tab-content").empty();
-			
-			$("#tab-content").append("메롱");
-		}
-	</script>
+		} 
+	</script> -->
 	
 	<style>
 		 * { 
@@ -63,12 +40,6 @@
           vertical-align: middle;
          }
 		</style>
-	
-	<link rel="stylesheet" href="../resources/css/shoescolors.css">
-	<link rel="stylesheet" href="../resources/css/common.css">
-	<link rel="stylesheet" href="../resources/css/customCheckbox.css">
-	<link rel="stylesheet" href="../resources/css/customRadio.css">
-	
 	</head>
 	
 	<%@ include file="/WEB-INF/views/fragment/nav.jsp" %>
@@ -282,10 +253,10 @@
 			
 			<ul class="row nav nav-tabs pl-100" role="tablist">
 				<li class="col-4 p-3 nav-item">
-					<a class="nav-link" data-toggle="tab" onclick="productInfo()" style="font-size:30px; text-align:center"> 상품 정보 </a>
+					<a class="nav-link auto" data-toggle="tab" onclick="productInfo()" style="font-size:30px; text-align:center"> 상품 정보 </a>
 				</li>
 				<li class="col-4 p-3 nav-item">
-					<a class="nav-link" data-toggle="tab" onclick="productReview(1)" style="font-size:30px; text-align:center"> 리뷰 </a>
+					<a id="reviewLink" class="nav-link" data-toggle="tab" onclick="productReview(1)" style="font-size:30px; text-align:center"> 리뷰 </a>
 				</li>
 				<li class="col-4 p-3 nav-item">
 					<a class="nav-link" data-toggle="tab" onclick="productQna()" style="font-size:30px; text-align:center"> Q & A </a>
@@ -296,7 +267,7 @@
 			<div class="tab-content">
 				
 				<!-- 없애야할 부분 -->
-				<div class="tab-pane container-fluid" id="shoes-detail">
+				<div class="tab-pane auto container-fluid" id="shoes-detail">
 					<div class="m-4" style="text-align:center">
 						<img src="${pageContext.request.contextPath}/resources/images/반스/98/정보_1.png" style="width:900px; height:400px; margin:0 auto;"class="active m-1 ml-4"/>
 						<img src="${pageContext.request.contextPath}/resources/images/반스/98/정보_2.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
@@ -311,5 +282,5 @@
 				
 			</div>
 		</div>
-		</div>
+	</div>
 <%@ include file="/WEB-INF/views/fragment/footer.jsp" %>	
