@@ -15,8 +15,7 @@ import service.ProductService;
 public class ProductController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		int productId = Integer.parseInt(request.getParameter("productId"));
-		int productId = 98;
+		int productId = Integer.parseInt(request.getParameter("productId"));
 		ProductService productService = (ProductService) request.getServletContext().getAttribute("productService");
 		Product product = productService.showOneProduct(productId);
 		

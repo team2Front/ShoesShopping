@@ -21,11 +21,10 @@ public class WriteReviewController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*//review 100개 생성하기
-		ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
-		for(int i=0; i<100; i++) {
+		//review 100개 생성하기
+		/*ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
+		for(int i=0; i<20; i++) {
 			Review review = new Review();
-			Product product = new Product();
 			
 			review.setReviewTitle("리뷰제목" + i);
 			review.setReviewContent("리뷰내용" + i);

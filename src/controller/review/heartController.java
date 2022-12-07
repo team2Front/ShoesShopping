@@ -14,12 +14,29 @@ import service.ReviewService;
 @WebServlet(name = "review.heartController", urlPatterns="/review/heartController")
 public class heartController extends HttpServlet {
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
+		
+		ServletContext application = request.getServletContext();
+		ReviewService reviewService = (ReviewService) application.getAttribute("reviewService");
+		
+		int heartCount = reviewService.CancelheartCountUp(reviewId);
+		
+		//ajax로 요청한 값을 응답으로 돌려줌
+		response.getWriter().println(heartCount);
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
 		
 		ServletContext application = request.getServletContext();
 		ReviewService reviewService = (ReviewService) application.getAttribute("reviewService");
 		
-		reviewService.heartCountUp(reviewId);
+		int heartCount = reviewService.heartCountUp(reviewId);
+		
+		//ajax로 요청한 값을 응답으로 돌려줌
+		response.getWriter().println(heartCount);
 	}
+	
+	
 }

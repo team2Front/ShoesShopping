@@ -3,10 +3,14 @@
 /* 상품페이지 - [리뷰 목록] */
 function productReview(i) {
 	$("#tab-content").empty();
+	
+	var url = new URL(window.location.href);
+    var urlParam = url.searchParams;
+    var pId = urlParam.get("productId");
 
 	$.ajax({
 		type : 'GET',  //get방식으로 통신
-		url : "/shopping/review/ReviewListController?pageNo=" + i, //탭의 data-tab속성의 값으로 된 html파일로 통신
+		url : "/shopping/review/ReviewListController?pageNo=" + i + "&productId=" + pId, //탭의 data-tab속성의 값으로 된 html파일로 통신
 		error : function() { //통신 실패시
 			alert('통신실패!');
 		},
@@ -17,22 +21,6 @@ function productReview(i) {
 	});
 } 
 
-/* 마이페이지 - [리뷰 등록] */
-$(document).ready(function(){
-  var fileTarget = $('.filebox .upload-hidden');
-
-  fileTarget.on('change', function(){  // 값이 변경되면
-    if(window.FileReader){  // modern browser
-      var filename = $(this)[0].files[0].name;
-    } 
-    else {  // old IE
-      var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
-    }
-    
-    // 추출한 파일명 삽입
-    $(this).siblings('.upload-name').val(filename);
-  });
-}); 
 
 /* 상품페이지 - [리뷰 상세히 보기] */
 $(document).ready(function() {
@@ -56,16 +44,62 @@ function good(i) {
 		error : function() { //통신 실패시
 			alert('통신실패!');
 		},
-		success : function() {
-			$(document).ready(function() {
-				$("#reviewBtn").on("click", "tr", function(){
-				});
-			});
+		success : function(data) {
+			console.log(data);
+			$("#goodBtn").html('<a class="btn btn-danger btn-sm mt-3" onclick="cancelGood(' + i + ')">좋아요  <b>' + data + '</b> </a>');
+			$("#reviewDetail").css("display", "block");
 			
-			location.reload();
 		}
 	});
 }
+
+/* 상품페이지 - [리뷰 상세 - 좋아요 취소] */
+function cancelGood(i) {
+	$.ajax({
+		type : 'GET',  //get방식으로 통신
+		url : "/shopping/review/heartController?reviewId=" + i, //탭의 data-tab속성의 값으로 된 html파일로 통신
+		error : function() { //통신 실패시
+			alert('통신실패!');
+		},
+		success : function(data) {
+			console.log(data);
+			$("#goodBtn").html('<a class="btn btn-outline-danger btn-sm mt-3" onclick="good(' + i + ')">좋아요  <b>' + data + '</b> </a>');
+			$("#reviewDetail").css("display", "block");
+		}
+	});
+}
+
+/* 상품페이지 - [리뷰 상세 - 댓글보기] */
+$(document).ready(function() {
+	$("#replyBtn").on("click", function(){
+		let status = $("#replyList").css("display");
+
+		if(status =="none"){
+			$("#replyList").css("display", "block");
+			$("#reviewDetail").trigger("click");
+		} else {
+			$("#replyList").css("display", "none");
+			$("#reviewDetail").trigger("click");
+		}
+	});
+});
+
+/* 마이페이지 - [리뷰 등록] */
+$(document).ready(function(){
+	var fileTarget = $('.filebox .upload-hidden');
+	
+	fileTarget.on('change', function(){  // 값이 변경되면
+		if(window.FileReader){  // modern browser
+			var filename = $(this)[0].files[0].name;
+		} 
+		else {  // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+		}
+		
+		// 추출한 파일명 삽입
+		$(this).siblings('.upload-name').val(filename);
+	});
+}); 
 
 /*================================[ QNA ]==================================*/
 /* 상품페이지 - [QnA 목록] */
