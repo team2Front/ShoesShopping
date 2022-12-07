@@ -138,14 +138,13 @@ public class UserService {
 	public int editUserInfo(User user) {
 		Connection conn = null;
 		int result = 0;
-		
 		try {
 			conn = ds.getConnection();
 			result = userDao.updateEditUser(conn, user);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			try { conn.close();} catch (SQLException e) {}
+			try { conn.close(); } catch (SQLException e) {}
 		}
 		return result;
 	}
