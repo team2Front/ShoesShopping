@@ -153,6 +153,7 @@
 			.btn-light {
 				border: 1px solid gray;
 			}
+			
 		</style>
 	</head>
 	<%@ include file="/WEB-INF/views/fragment/nav.jsp" %>
@@ -174,17 +175,25 @@
 					</span>
 				</div>
 				<div class="card-body">
-					<form method="post" id="updateForm" name="updateForm" action="${pageContext.request.contextPath}/mypage/MainController">
+					<form method="post" id="updateForm" name="updateForm" action="${pageContext.request.contextPath}/mypage/MainController" enctype="multipart/form-data">
 						<table class="table table-striped">
 							<tbody>
 								<tr>
 									<td>사진</td>
 									<td id="userPhoto" class="py-0">
 										<div id="profile" class="d-flex align-items-center mb-3" style="height: 120px;">
-											<i class="bi bi-person-square" style="font-size: 6rem; margin: auto; color: Silver;"></i>
+											<c:if test="${user.filename == null}">
+												<i class="bi bi-person-square" style="font-size: 6rem; margin: auto; color: Silver;"></i>
+											</c:if>
+											<c:if test="${user.filename != null}">
+												<img src="${pageContext.request.contextPath}/mypage/ImageController?userId=${loginId}" style="width:100px; height:100px; margin: auto"/>
+											</c:if>
+											
 										</div>
 									</td>
-									<td></td>
+									<td>
+										<input type="file" class="form-control-file" id=userattach" name="userattach">
+									</td>
 								</tr>
 								<tr>
 									<td>아이디</td>

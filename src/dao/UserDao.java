@@ -155,18 +155,18 @@ public class UserDao {
 	public int updateEditUser(Connection conn, User user) throws Exception {
 		String sql = "";
 		sql += "update users ";
-		sql += "set username=?, userpassword=?, useremail=?, useraddress=?, phonenumber=?, filename=?, filetype=?, savedname=? ";
+		sql += "set username=?, userpassword=?, useraddress=?, phonenumber=?, filename=?, filetype=?, savedname=? ";
 		sql += "where userid=? ";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
 		pstmt.setString(1, user.getUserName());
 		pstmt.setString(2, user.getUserPassword());
-		pstmt.setString(3, user.getUserEmail());
-		pstmt.setString(4, user.getUserAddress());
-		pstmt.setString(5, user.getPhoneNumber());
-		pstmt.setString(6, user.getFilename());
-		pstmt.setString(7, user.getFiletype());
-		pstmt.setString(8, user.getSavedname());
-		pstmt.setString(9, user.getUserId());
+		pstmt.setString(3, user.getUserAddress());
+		pstmt.setString(4, user.getPhoneNumber());
+		pstmt.setString(5, user.getFilename());
+		pstmt.setString(6, user.getFiletype());
+		pstmt.setString(7, user.getSavedname());
+		pstmt.setString(8, user.getUserId());
 
 		int rows = pstmt.executeUpdate();
 
