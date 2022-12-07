@@ -3,10 +3,8 @@
 #navbar {
 	margin: 0 auto;
 	height: 50px;
-	border-top: 1px solid gray;
-	border-bottom: 1px solid gray;
 	margin-bottom: 10px;
-    background-color: #fff;
+    background-color: #343a40;
 	padding-left:100px;
 	position: sticky;
 	top: 100px;
@@ -59,7 +57,6 @@
 
 /* ***********************************    사이드 바    ************************************** */
 #sidebar {
-	border : 1px solid #d5d5d5;
 	position: sticky; 
 /* 	bottom: 150px; */
 	right: 10px; 
@@ -67,7 +64,7 @@
 	padding-top:30px; 
 	padding-bottom:30px;
 	font-size:13px;
-    background-color: black;
+  	background-color:#343a40;
     align-self: flex-start;
     top: 250px;
     border-radius:10px;
@@ -77,7 +74,7 @@
 .sidebar-button {
 	display: block !important;
 	margin-bottom:10px;
-    background-color: black;
+    background-color:#343a40;
     color: white;
     width: 100%;
     font-weight: bold;
@@ -172,3 +169,5 @@
 	width: 1000px;
 }
 
+
+/* ***********************************    리뷰    ************************************** */

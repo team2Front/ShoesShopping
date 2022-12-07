@@ -3,7 +3,6 @@ package service;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
@@ -87,7 +86,7 @@ public class UserService {
 		try {
 			conn = ds.getConnection();
 			userDao.insertRegisterUser(conn, user);
-			cartService.createCart(user.getUserId());
+			cartService.createCart(conn, user.getUserId());
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -96,40 +95,26 @@ public class UserService {
 	}
 
 	// method: 관리자 등록(추가)
-	public String registerAdmin(User user) {
+	public void registerAdmin(User user) {
 		Connection conn = null;
-		String result = null;
 		
 		try {
 			conn = ds.getConnection();
-			
-			if (userDao.insertRegisterAdmin(conn, user)) {
-				result = "회원가입이 완료되었습니다.";
-			} else {
-				result = "회원가입에 실패하였습니다.";
-			}
+			userDao.insertRegisterAdmin(conn, user);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			try { conn.close();} catch (SQLException e) {}
 		}
-		
-		return result;
 	}
 
 	// method: 로그인
 	public String login(User user) {
 		Connection conn = null;
 		String type = "";
-		
 		try {
 			conn = ds.getConnection();
-			
-			if (userDao.selectLogin(conn, user) != null) {
-				type = userDao.selectLogin(conn, user); // 로그인 성공
-			} else {
-				type = null; // 로그인 실패
-			}
+			type = userDao.selectLogin(conn, user);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -179,18 +164,13 @@ public class UserService {
 	}
 
 	// method: 회원탈퇴
-	public boolean removeUserInfo(String id) {
+	public int removeUserInfo(String id) {
 		Connection conn = null;
-		boolean result = true;
-		
+		int result = 0;
 		try {
 			conn = ds.getConnection();
 
-			if (userDao.deleteRemoveUser(conn, id)) {
-				result = true; // 회원탈퇴 성공
-			} else {
-				result = false; // 회원탈퇴 실패
-			}
+			result = userDao.deleteRemoveUser(conn, id);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

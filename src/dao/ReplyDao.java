@@ -41,9 +41,12 @@ public class ReplyDao {
    }
 
    public List<RReply> selectReviewReply(Connection conn, int reviewId) throws SQLException {
-      String sql = "select reply_id, reply_content,reply_date, user_id, review_id from Reply where review_id = ?";
+	   System.out.println("요기!");
+      String sql = "select * from Reply where review_id = ?";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, reviewId);
+      
+      
       // 데이터를 가져와 읽을 것이므로 executeQuery
       ResultSet rs = pstmt.executeQuery();
       List<RReply> list = new ArrayList<>();
@@ -54,7 +57,7 @@ public class ReplyDao {
          list.add(qr1);// 댓글 n행의 데이터를 1행씩 리스트에 담은거임
       }
       pstmt.close();
-      conn.close();
+      //conn.close();
 
       return list;
    }

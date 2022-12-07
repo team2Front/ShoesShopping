@@ -25,18 +25,10 @@ public class CartService {
     }
     
     // 회원가입시 유저 당 카트 생성 
-    public void createCart(String userId) {
-    	Connection conn = null;
-    	try {
-    		conn = ds.getConnection();
-    		cartDao.insertCart(conn, userId);
-		} catch (Exception e) {
-			try {
- 				conn.rollback();
- 			} catch (SQLException e1) {}
-		} finally {
-			if(conn!=null) try { conn.close();}catch(Exception e) { }
-		}
+    public void createCart(Connection conn, String userId) throws Exception {
+    
+	cartDao.insertCart(conn, userId);
+		
     }
     
 	//장바구니에 담긴 상품들 ,총 수량, 총 금액 보여준다.

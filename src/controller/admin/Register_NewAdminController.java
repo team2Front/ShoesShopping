@@ -21,25 +21,41 @@ public class Register_NewAdminController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//UserService 객체 생성
-		UserService boardService = (UserService) request.getServletContext().getAttribute("userService");
+		request.setCharacterEncoding("UTF-8");
 		
-		//UserDTO
+		UserService userService = (UserService) request.getServletContext().getAttribute("userService");
+		
 		User user = new User();
+		
+		user.setUserName(request.getParameter("adminName"));
 		user.setUserId(request.getParameter("adminId"));
 		user.setUserPassword(request.getParameter("adminPw"));
-		user.setUserName(request.getParameter("adminName"));
-		/*board.setBtitle(request.getParameter("btitle"));
-		board.setBcontent(request.getParameter("bcontent"));
-		board.setBwriter(request.getParameter("bwriter"));
+		user.setPhoneNumber(request.getParameter("adminPhone"));
+		user.setUserEmail(request.getParameter("adminEmail"));
+		user.setUserAddress(request.getParameter("addr1") + " " + request.getParameter("addr2"));
+		user.setUserType("ADMIN");
 		
+		boolean idcheck = userService.idCheck(user.getUserId());
+		boolean phonenumbercheck = userService.pnCheck(user.getPhoneNumber());
 		
-		boardService.write2(board);
+		int createuser = 0;
+		String errorcode = "";
+		if((!idcheck) && (!phonenumbercheck)) {
+			userService.registerAdmin(user);
+		} else if (idcheck) {
+			createuser = 1;
+			errorcode = "아이디가 중복되었습니다.";
+		} else if (phonenumbercheck) {
+			createuser = 1;
+			errorcode = "핸드폰 번호가 중복되었습니다.";
+		}
+		request.setAttribute("user", user);
 		
-		response.sendRedirect("ContentController");*/
-		
-		
-		request.getRequestDispatcher("/WEB-INF/views/admin/register_newAdmin.jsp").forward(request, response);
+		if(createuser == 0) {
+			response.sendRedirect("../main/MainController");
+		} else {
+			request.setAttribute("errorcode", errorcode);
+			request.getRequestDispatcher("/WEB-INF/views/admin/register_newAdmin.jsp").forward(request, response);
+		}
 	}
-
 }

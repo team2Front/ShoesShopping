@@ -3,41 +3,53 @@ package service;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 import dao.ReviewDao;
+import domain.Product;
 import domain.Review;
 import dto.ReviewList;
 import util.PagingVo;
 
 public class ReviewService {
    private ReviewDao reviewDao;
+   private ProductService productService;
    private DataSource ds;
    
    public ReviewService(ServletContext application) {
 	   this.reviewDao = (ReviewDao) application.getAttribute("reviewDao");
+	   this.productService = (ProductService) application.getAttribute("productService");
 	   ds = (DataSource) application.getAttribute("dataSource");
    }
    
    //method: [상품 페이지] - 해당 상품의 리뷰 목록
    public List<ReviewList> showReviewList(int productId, PagingVo pvo) {
-	   List<ReviewList> list = null;
+	   List<ReviewList> lists = new ArrayList<>();
 	   Connection conn = null;
 	   
 	   try {
 			conn = ds.getConnection();
-			list = reviewDao.selectReviewList(conn, productId, pvo);
+			lists = reviewDao.selectReviewList(conn, productId, pvo);
+			
+			Product product = productService.showOneProduct(productId);
+			
+			for(ReviewList list : lists) {
+				list.setProduct(product);
+			}
+			
+			System.out.println(lists);
+			
 	   }catch(Exception e) {
 			e.printStackTrace();
 	   }finally {
 			try{conn.close();}catch(Exception e) {}
 	   }
 	   
-	   return list;
+	   return lists;
    }
    
    
@@ -106,23 +118,44 @@ public class ReviewService {
    }
    
    //리뷰 작성
-   public String writeReview(Review review) throws SQLException {
+   public String writeReview(Review review){
 		Connection conn = null;
 	      int r = 0;
 	      String result = "";
+	      
 	      try {
 	    	 conn = ds.getConnection();
 	         r = reviewDao.insertReview(conn, review);
 	         if (r == 1) {
 	            result = "게시물이 등록되었습니다";
 	         }
-	      } catch (RuntimeException e) {
-	         throw new RuntimeException();
-	      }
-
+	      } catch (Exception e) {
+	    	  result = "게시물이 등록되지 않았습니다";
+	    	  e.printStackTrace();
+	      } finally {
+				try{conn.close();}catch(Exception e) {}
+	      }			
 	      return result;
+   	}
+   
+/*   //리뷰 작성
+   public String writeReview(Review review) throws SQLException {
+	   Connection conn = null;
+	   int r = 0;
+	   String result = "";
+	   try {
+		   conn = ds.getConnection();
+		   r = reviewDao.insertReview(conn, review);
+		   if (r == 1) {
+			   result = "게시물이 등록되었습니다";
+		   }
+	   } catch (RuntimeException e) {
+		   throw new RuntimeException();
 	   }
-
+	   
+	   return result;
+   }
+*/
    // 4. 리뷰 삭제하기 deleteReview(리뷰 번호, 글쓴이)
    public  String deleteReview(Review review) throws IOException, SQLException {
 	  Connection conn = null;

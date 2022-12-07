@@ -1,6 +1,7 @@
 package dao;
 
-import java.sql.Connection; 
+import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +25,7 @@ public class ReviewDao {
 	   this.replyDao = (ReplyDao) application.getAttribute("replyDao");
 	   this.productDao = (ProductDao) application.getAttribute("productDao");
    }
+   
    public int selectCount(Connection conn, int productId) throws SQLException {
       String sql = "select count(*) from review where product_id = ? ";
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -57,23 +59,23 @@ public class ReviewDao {
    }
 
    public Review selectReview(Connection conn, int reviewId) throws SQLException {
-
-      String sql = "select review_id, review_title, review_content, review_date, user_id,star_score,heart_count, product_id from review where review_id = ?";
+      String sql = "select * from review where review_id = ?";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, reviewId);
       ResultSet rs = pstmt.executeQuery();
+
       List<RReply> list = replyDao.selectReviewReply(conn, reviewId);// 댓글 리스트임
+      
       Review r1 = null;
-//      while (rs.next()) {
-//         int pid = rs.getInt("product_id");
-//         Product product = productService.showOneProduct(pid);
-//         r1 = new Review(rs.getInt("review_id"), rs.getString("review_title"), rs.getString("review_content"),
-//               rs.getString("review_date"), rs.getString("user_id"), rs.getInt("star_score"),
-//               rs.getInt("heart_count"), product, list);
-//
-//      }
+      while (rs.next()) {
+         //int pid = rs.getInt("product_id");
+         //Product product = productService.showOneProduct(pid);
+         r1 = new Review(rs.getInt("review_id"), rs.getString("review_title"), rs.getString("review_content"),
+               rs.getDate("review_date"), rs.getString("user_id"), rs.getInt("star_score"),
+               rs.getInt("heart_count"), rs.getString("filename"), rs.getString("filetype"), rs.getString("savedname"),
+                list);
+      }
       pstmt.close();
-      conn.close();
 
       return r1;
 
@@ -95,11 +97,11 @@ public class ReviewDao {
       pstmt.setInt(2, endRn);
       pstmt.setInt(3, startRn);
       ResultSet rs = pstmt.executeQuery();
-      while (rs.next()) {
-         ReviewList rl = new ReviewList(rs.getInt("review_id"), rs.getString("review_title"),
-               rs.getDate("review_date"), rs.getString("user_id"), rs.getInt("product_id"));
-         list.add(rl);
-      }
+//      while (rs.next()) {
+//         ReviewList rl = new ReviewList(rs.getInt("review_id"), rs.getString("review_title"),
+//               rs.getDate("review_date"), rs.getString("user_id"), new Product());
+//         list.add(rl);
+//      }
       pstmt.close();
       conn.close();
 
@@ -108,14 +110,15 @@ public class ReviewDao {
 
    public int insertReview(Connection conn, Review review) {
 	      String sql = "INSERT INTO review (review_id, review_title, review_content, review_date, user_id, star_score, product_id)"
-	            + "values(Review_seq.NEXTVAL,?,?,default,?,?,?)";
+	            + "values(Review_seq.NEXTVAL,?,?,sysdate,?,?, 100)";
 	      int r = 0;
 	      try {
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setString(1, review.getReviewTitle());
 	      pstmt.setString(2, review.getReviewContent());
-	      pstmt.setInt(3, review.getProduct().getProductId());
-	      pstmt.setString(4, review.getUserId());
+	      pstmt.setString(3, review.getUserId());
+	      pstmt.setInt(4, review.getStarScore());
+	      //pstmt.setInt(6, review.getProduct().getProductId());
 	      r = pstmt.executeUpdate();
 	      } catch (SQLException e) {
 	         throw new RuntimeException();
@@ -157,28 +160,32 @@ public class ReviewDao {
 
    }
 
+   // method: [상품 상세보기] - 리뷰 목록 
    public List<ReviewList> selectReviewList(Connection conn, int productId, PagingVo pvo) throws SQLException {
       int endRn = pvo.getEndRowNo();
       int startRn = pvo.getStartRowNo();
+      List<ReviewList> list = new ArrayList<>();
+      
       String sql = "select rm, review_id, review_title, review_date, user_id, product_id  " + "from ( "
             + "select rownum as rm, review_id, review_title, review_date, user_id, product_id " + "from ("
             + "select  review_id, review_title, review_content, review_date, user_id, product_id  " + "from review "
             + "where product_id = ? " + "order by review_id" + ")" + " where rownum <= ? )" + "where rm >= ?";
+      
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, productId);
       pstmt.setInt(2, endRn);
       pstmt.setInt(3, startRn);
       ResultSet rs = pstmt.executeQuery();
-
-      List<ReviewList> list = new ArrayList<>();
-
+      
       while (rs.next()) {
          ReviewList rl = new ReviewList(rs.getInt("review_id"), rs.getString("review_title"),
-               rs.getDate("review_date"), rs.getString("user_id"), rs.getInt("product_id"));
-         list.add(rl);
+        		 						rs.getDate("review_date"), rs.getString("user_id"), 
+        		 						new Product(), selectReview(conn, rs.getInt("review_id")));
+    	 list.add(rl);
       }
+      
       pstmt.close();
-      conn.close();
+      //conn.close();
 
       return list;
    }

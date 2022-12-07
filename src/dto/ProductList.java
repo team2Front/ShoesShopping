@@ -16,6 +16,7 @@ public class ProductList {
 	private String categoryName;
 	private String productSex;
 	private int productPrice;
+	private String fileName;
 
 	public JSONObject productListTOJson(ProductList productList) {
 		JSONObject json = new JSONObject();
@@ -39,4 +40,6 @@ public class ProductList {
 		return p;
 
 	}
+
+
 }

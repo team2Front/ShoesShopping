@@ -1,5 +1,5 @@
 package domain;
-import java.util.Date;
+import java.util.Date; 
 import java.util.List;
 
 import dto.RReply;
@@ -25,6 +25,6 @@ public class Review {
    private String rfileName;
    private String rfileType;
    private String rsavedName;
-   private Product product;
+   //private Product product;
    private List<RReply> replyList;
 }

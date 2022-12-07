@@ -23,8 +23,6 @@
             url : "/shopping/order/OrderController", 
             data: {arrDid: JSON.stringify(arr)},
             success : function(request){
-            	var test = <%= request.getAttribute("list")%>
-            	console.log(">>>>>  " + test);
             	   location.href="/shopping/order/OrderController";             
             },
             error :  function(){

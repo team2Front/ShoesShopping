@@ -56,7 +56,7 @@ public class ProductAndColorDao {
 		String sql = "select color_id from product_color where product_id=? and color_id=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, productId);
-		pstmt.setInt(1, colorId);
+		pstmt.setInt(2, colorId);
 		
 		boolean result = false;
 

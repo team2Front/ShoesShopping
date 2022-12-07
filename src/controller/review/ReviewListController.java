@@ -37,11 +37,11 @@ public class ReviewListController extends HttpServlet {
 		PagingVo pager = new PagingVo(totalRows, pageNo);
 		
 		//pageNo에 해당하는 게시물 가져오기
-		List<ReviewList> pageList = reviewService.showReviewList(productId, pager);
+		List<ReviewList> reviewList = reviewService.showReviewList(productId, pager);
 		
 		//JSP에서 사용할 수 있도록, Request 범위에 저장
 		request.setAttribute("pager", pager);
-		request.setAttribute("pageList", pageList);
+		request.setAttribute("reviewList", reviewList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp").forward(request, response);
 	}
