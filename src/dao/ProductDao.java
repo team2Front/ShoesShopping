@@ -11,15 +11,11 @@ import javax.servlet.ServletContext;
 import domain.Product;
 import dto.ProductList;
 import dto.RegisterProduct;
-import service.ProductAndColorService;
-import service.ProductAndSizeService;
 import util.PagingVo;
 
 public class ProductDao {
 	ProductAndSizeDao productAndSizeDao;
 	ProductAndColorDao productAndColorDao;
-	ProductAndColorService productAndColorService;
-	ProductAndSizeService productAndSizeService;
 	CategoryDao categoryDao;
 	ProductImageDao productImageDao;
 	
@@ -65,8 +61,6 @@ public class ProductDao {
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, endRn);
 		pstmt.setInt(2, startRn);
-		System.out.println(endRn);
-		System.out.println(startRn);
 
 		ResultSet rs = pstmt.executeQuery();
 		List<ProductList> list = new ArrayList<>();
@@ -124,33 +118,33 @@ public class ProductDao {
 	
 	// 상품하나만 가져오기 정은
 	public Product selectProductOne(Connection conn, int productId) throws Exception {
-	      PreparedStatement pstmt = null;
-	      Product product = null;
-	      
-	      String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
-	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setInt(1, productId);
-	      ResultSet rs = pstmt.executeQuery();
-	      
-	      if (rs.next()) {
-	         int pid = rs.getInt("product_id");
-	         product = new Product();
-	         product.setProductId(pid);
-	         product.setProductName(rs.getString("product_name"));
-	         product.setDeleted(rs.getBoolean("is_deleted"));
-	         product.setProductPrice(rs.getInt("product_price"));
-	         product.setProductSex(rs.getString("product_sex"));
-	         product.setCompany(selectFindCompany(conn, rs.getInt("company_id")));
-	         product.setCategory(categoryDao.findCategoty(conn, rs.getInt("category_id")));
-	         product.setColorList(productAndColorDao.selectProductColors(conn, pid));
-	         product.setSizeList(productAndSizeDao.selectProductSizes(conn, pid));
-	         product.setMainImage(productImageDao.selectMainImage(conn, pid));
-	         product.setImageList(productImageDao.selectSubImage(conn, pid));
-	      }
-	      pstmt.close();
-	      
-	      return product;
-	   }
+      PreparedStatement pstmt = null;
+      Product product = null;
+      
+      String sql = "select product_id, product_name, product_price, category_id, company_id, product_sex, is_deleted from product where product_id=?";
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, productId);
+      ResultSet rs = pstmt.executeQuery();
+      
+      if (rs.next()) {
+         int pid = rs.getInt("product_id");
+         product = new Product();
+         product.setProductId(pid);
+         product.setProductName(rs.getString("product_name"));
+         product.setDeleted(rs.getBoolean("is_deleted"));
+         product.setProductPrice(rs.getInt("product_price"));
+         product.setProductSex(rs.getString("product_sex"));
+         product.setCompany(selectFindCompany(conn, rs.getInt("company_id")));
+         product.setCategory(categoryDao.findCategoty(conn, rs.getInt("category_id")));
+         product.setColorList(productAndColorDao.selectProductColors(conn, pid));
+         product.setSizeList(productAndSizeDao.selectProductSizes(conn, pid));
+         product.setMainImage(productImageDao.selectMainImage(conn, pid));
+         product.setImageList(productImageDao.selectSubImage(conn, pid));
+      }
+      pstmt.close();
+      
+      return product;
+   }
 
 	
 	
@@ -187,19 +181,21 @@ public class ProductDao {
 		}
 	}
 
-	// 상품 등록하기
+	// Product테이상품 등록하기
 	public int insertProduct(Connection conn, RegisterProduct ap) throws Exception {
+		System.out.println("[ProductDao > insertProduct] 메소드 실행");
 		int pid = 0;
-		String sql = "insert into product" + "(product_id, product_name, product_price, category_id, company_id , "
-				+ "product_sex) values (product_seq.nextval,?,?,?,?,?)";
-		// pstmt = conn.prepareStatement(sql, new String[] { "product_id" });
+		
+		String sql = "insert into product" + "(product_id, product_name, product_price, category_id, company_id , product_sex) "
+				+ "values (product_seq.nextval,?,?,?,?,?)";
+		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 
 		pstmt.setString(1, ap.getProductName());
 		pstmt.setInt(2, ap.getProductPrice());
 		pstmt.setInt(3, ap.getCategory());
 		pstmt.setInt(4, ap.getCompany());
-		pstmt.setString(5, ap.getProductSex());
+		pstmt.setString(5, ap.getGender());
 		int r = pstmt.executeUpdate();
 
 		if (r == 1) {
@@ -220,22 +216,15 @@ public class ProductDao {
 	}
 
 	// 상품 삭제하기
-	public boolean deleteProduct(Connection conn, int pId) throws Exception {
+	public int deleteProduct(Connection conn, int pId) throws Exception {
 		String sql = "update product set is_deleted = '1' where product_id=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pId);
 		int rows = pstmt.executeUpdate();
-
-		boolean result;
-		if (rows == 1) {
-			result = true;
-		} else {
-			result = false;
-		}
 		
 		pstmt.close();
 		
-		return result;
+		return rows;
 	}
 
 }

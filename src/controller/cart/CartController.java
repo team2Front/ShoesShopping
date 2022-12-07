@@ -16,13 +16,17 @@ import service.CartService;
 @WebServlet(name = "cart.CartController", urlPatterns = "/cart/CartController")
 public class CartController extends HttpServlet {
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ServletContext appication = request.getServletContext();
-		CartService cartService = (CartService) appication.getAttribute("cartService");
-		CartDto cartDto = cartService.showCart("winter");
+		String loginId = (String) request.getSession().getAttribute("loginId");
 		
+		CartService cartService = (CartService) appication.getAttribute("cartService");
+		CartDto cartDto = cartService.showCart(loginId);
+		int rows = cartDto.getCartDetailDtoList().size();
+				
 		request.setAttribute("cart", cartDto);
+		request.setAttribute("rows", rows);
 		request.getRequestDispatcher("/WEB-INF/views/cart/cartDetail.jsp").forward(request, response);
 	}
 

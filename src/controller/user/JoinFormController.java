@@ -21,40 +21,40 @@ public class JoinFormController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		UserService userService = (UserService) request.getServletContext().getAttribute("userService");
-		
-		User user = new User();
-		
-		user.setUserName(request.getParameter("uname"));
-		user.setUserId(request.getParameter("userid"));
-		user.setUserPassword(request.getParameter("userpassword"));
-		user.setPhoneNumber(request.getParameter("phone"));
-		user.setUserEmail(request.getParameter("email"));
-		user.setUserAddress(request.getParameter("addr1") + " " + request.getParameter("addr2"));
-		
-		boolean idcheck = userService.idCheck(user.getUserId());
-		boolean phonenumbercheck = userService.pnCheck(user.getPhoneNumber());
-		
-		int createuser = 0;
-		String errorcode = "";
-		if((!idcheck) && (!phonenumbercheck)) {
-			userService.registerUser(user);
-		} else if (idcheck) {
-			createuser = 1;
-			errorcode = "아이디가 중복되었습니다.";
-		} else if (phonenumbercheck) {
-			createuser = 1;
-			errorcode = "핸드폰 번호가 중복되었습니다.";
-		}
-		request.setAttribute("user", user);
-		
-		if(createuser == 0) {
-			response.sendRedirect("../main/MainController");
-		} else {
-			request.setAttribute("errorcode", errorcode);
-			request.getRequestDispatcher("/WEB-INF/views/user/joinForm.jsp").forward(request, response);
-		}
-	}
+      request.setCharacterEncoding("UTF-8");
+      
+      UserService userService = (UserService) request.getServletContext().getAttribute("userService");
+      System.out.println(request.getParameter("userid"));
+      User user = new User();
+      
+      user.setUserName(request.getParameter("uname"));
+      user.setUserId(request.getParameter("userid"));
+      user.setUserPassword(request.getParameter("userpassword"));
+      user.setPhoneNumber(request.getParameter("phone"));
+      user.setUserEmail(request.getParameter("email"));
+      user.setUserAddress(request.getParameter("addr1") + " " + request.getParameter("addr2"));
+      
+      boolean idcheck = userService.idCheck(user.getUserId());
+      boolean phonenumbercheck = userService.pnCheck(user.getPhoneNumber());
+      
+      int createuser = 0;
+      String errorcode = "";
+      if((!idcheck) && (!phonenumbercheck)) {
+         userService.registerUser(user);
+      } else if (idcheck) {
+         createuser = 1;
+         errorcode = "아이디가 중복되었습니다.";
+      } else if (phonenumbercheck) {
+         createuser = 1;
+         errorcode = "핸드폰 번호가 중복되었습니다.";
+      }
+      request.setAttribute("user", user);
+      
+      if(createuser == 0) {
+         response.sendRedirect("../main/MainController");
+      } else {
+         request.setAttribute("errorcode", errorcode);
+         request.getRequestDispatcher("/WEB-INF/views/user/joinForm.jsp").forward(request, response);
+      }
+   }
 }

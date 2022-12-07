@@ -106,7 +106,7 @@
 				       			<label for="pcolor" class="m-2"><b>색상</b></label>
 				       			<div class="form-check">
 									<label class="cbtn btn red active" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption">
+										<input type="radio" name="colorOption" value="1">
 										<i class="fa fa-check"></i>
 									</label>
 									<label class="cbtn btn pink" style="width:40px; height:40px;">
@@ -114,11 +114,11 @@
 										<i class="fa fa-check"></i>
 									</label>			
 									<label class="cbtn btn orange" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption">
+										<input type="radio" name="colorOption"  value="2">
 										<i class="fa fa-check"></i>
 									</label>			
 									<label class="cbtn btn yellow" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption">
+										<input type="radio" name="colorOption"  value="3">
 										<i class="fa fa-check" style="color:black"></i>
 									</label>			
 									<label class="cbtn btn lime" style="width:40px; height:40px;">
@@ -134,7 +134,7 @@
 				       			<div class="form-radio">
 									<label class="cbtn btn" style="width:75px; height:40px; margin:3px auto;">
 										220
-										<input class="psize" type="radio" name="sizeOption">
+										<input class="psize" type="radio" name="sizeOption" value="220">
 										<i class="fa fa-check"></i>
 									</label>
 									<label class="cbtn btn" style="width:75px; height:40px;">
@@ -144,7 +144,7 @@
 									</label>			
 									<label class="cbtn btn" style="width:75px; height:40px;">
 										230
-										<input type="radio" name="sizeOption">
+										<input type="radio" name="sizeOption" value="230"> 
 										<i class="fa fa-check"></i>
 									</label>			
 									<label class="cbtn btn" style="width:75px; height:40px;">
@@ -154,7 +154,7 @@
 									</label>			
 									<label class="cbtn btn" style="width:75px; height:40px;">
 										240
-										<input type="radio" name="sizeOption">
+										<input type="radio" name="sizeOption" value="240">
 										<i class="fa fa-check"></i>
 									</label>			
 									<label class="cbtn btn" style="width:75px; height:40px;">
@@ -225,7 +225,7 @@
 							</div>
 															
 							<div class="col-2"></div>
-							<div class="col-5 btn-secondary" type="button" data-toggle="modal" data-target="#putCart" style="padding:10px; text-align:center;">
+							<div class="col-5 btn-secondary" onclick="addToCart()" data-toggle="modal" data-target="#putCart" style="padding:10px; text-align:center;">
 								<b>장바구니</b>
 							</div>
 							<div class="modal fade" id="putCart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

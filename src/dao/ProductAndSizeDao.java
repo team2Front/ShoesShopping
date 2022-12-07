@@ -9,6 +9,8 @@ import java.util.List;
 public class ProductAndSizeDao {
 
 	public int insertProductSizes(Connection conn, int pid, List<Integer> sizeList) throws Exception {
+		System.out.println("[ProductAndSizeDao > insert] 메소드 실행 sizeList: "+sizeList+"pid: "+pid);
+		
 		// 상품 id ,그 상품의 사이즈들을 리스트로 받아와서 각각 Product_size 테이블에 삽입한다.
 		PreparedStatement pstmt = null;
 		int sum = 0;
@@ -19,7 +21,7 @@ public class ProductAndSizeDao {
 				String sql = "insert into product_size(product_id, size_id) values (?,?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, pid);
-				pstmt.setInt(2, (psize));
+				pstmt.setInt(2, psize);
 				sum += pstmt.executeUpdate();
 			}
 			if(sizeList.size() == sum) {

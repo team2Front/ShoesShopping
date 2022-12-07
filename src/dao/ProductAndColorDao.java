@@ -19,6 +19,7 @@ public class ProductAndColorDao {
 
 	// 상품 id ,그 상품의 사이즈들을 리스트로 받아와서 각각 Product_size 테이블에 삽입한다.
 	public int insertProductColors(Connection conn, int pid, List<Integer> colorList) throws Exception {
+		System.out.println("[ProductAndColorDao > insert] 메소드 실행 colorList: "+ colorList);
 		PreparedStatement pstmt = null;
 		int row = 0;
 
@@ -43,9 +44,7 @@ public class ProductAndColorDao {
 		List<Color> colors = new ArrayList<>();
 		while (rs.next()) {
 			int cid = rs.getInt("color_id");
-
 			colors.add(colorDao.selectColor(conn, cid));
-
 		}
 		pstmt.close();
 		
@@ -58,7 +57,7 @@ public class ProductAndColorDao {
 		String sql = "select color_id from product_color where product_id=? and color_id=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, productId);
-		pstmt.setInt(1, colorId);
+		pstmt.setInt(2, colorId);
 		
 		boolean result = false;
 
