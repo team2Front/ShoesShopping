@@ -27,8 +27,8 @@
 	            }
 	            
 	            //Password 유효성 검사 -------------------------------------------------------
-	               //패스워드 검사
-
+	            
+	            //패스워드 검사
 				var password = document.querySelector("#userpassword");
 				var passwordValue = password.value;
 				var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;

@@ -198,21 +198,9 @@
 	<!-- 메인페이지 -->
 	<div class="shoesmain d-flex" >
 		<div class="shoesmain-1 col-xs-2"> 
-			<div id="mypage_sidebar" class="text-center">		
-				<div class="m-3">
-					<i class="bi bi-person-circle"></i><span>  환영합니다</span>
-				</div>
-				 <div class="" id="mypageDiv" style="height:45px; text-align:center; padding-top:10px; ">
-					 <a href="/shopping/mypage/MainController" class="h5" style="color: black; text-decoration: none;"><b>마이 페이지</b></a>
-				 </div>
-				<div id="mypage_sidemenu">
-					 <a href="/shopping/mypage/MainController" class="list-group-item text-center h7">나의 정보</a>
-					 <a href="/shopping/mypage/MyOrderController" role="button" class="list-group-item text-center h7">주문 내역</a>
-					 <a href="/shopping/mypage/MyReviewController" role="button"  class="list-group-item text-center h7">나의 리뷰</a>
-					 <a href="#" role="button"  class="list-group-item text-center h7">나의 QnA</a>
-					 <a href="/shopping/mypage/MyWithdrawController" class="list-group-item text-center h7">회원 탈퇴</a>
-				 </div>
-			</div>
+		
+		<%@ include file="/WEB-INF/views/fragment/mypage_sidebar.jsp" %>
+		
 		</div>
 		
 		<!-- main -->
