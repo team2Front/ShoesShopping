@@ -180,7 +180,7 @@ public class ProductService {
 	// **********************************************************
 	// 상품 상세보기
 	public Product showOneProduct(int productId){
-		System.out.println("productService 쇼원프로덕트메소드");
+		System.out.println("[productService] 쇼원프로덕트메소드 ProductId: " + productId);
 		Connection conn = null;
 		Product product = null;
 		
