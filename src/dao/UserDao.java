@@ -159,15 +159,6 @@ public class UserDao {
 		sql += "where userid=? ";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		
-		System.out.println(user.getUserName());
-		System.out.println(user.getUserPassword());
-		System.out.println(user.getUserAddress());
-		System.out.println(user.getPhoneNumber());
-		System.out.println(user.getFilename());
-		System.out.println(user.getFiletype());
-		System.out.println(user.getSavedname());
-		System.out.println(user.getUserId());
-		
 		pstmt.setString(1, user.getUserName());
 		pstmt.setString(2, user.getUserPassword());
 		pstmt.setString(3, user.getUserAddress());
