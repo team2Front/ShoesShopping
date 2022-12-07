@@ -19,7 +19,8 @@
 	    	</c:if>
 	    	<c:if test="${loginId != null}">
 	    		<c:if test="${loginType =='USER'}">
-	    			<a href="${pageContext.request.contextPath}/mypage/MainController" class="btn btn-success btn-sm">마이 페이지</a>
+	    			<span style="text-align:right; padding-top: 35px; margin-right: 10px;"><strong>${loginId}(${loginType})</strong></span>
+	    			<a href="${pageContext.request.contextPath}/mypage/MainController?userId=${loginId}" class="btn btn-success btn-sm">마이 페이지</a>
 	    			<a href="${pageContext.request.contextPath}/user/LogoutSessionController" class="btn btn-success btn-sm">로그 아웃</a>
 	    		</c:if>
 	    		<c:if test="${loginType =='ADMIN'}">

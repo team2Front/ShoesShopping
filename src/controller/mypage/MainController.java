@@ -8,12 +8,57 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.User;
+import service.UserService;
+
 
 @WebServlet(name = "mypage.MainController", urlPatterns ="/mypage/MainController")
 public class MainController extends HttpServlet {
 	
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String userId = request.getParameter("userId");
+		
+		UserService userService = (UserService) request.getServletContext().getAttribute("userService");
+		
+		User user = userService.userInfo(userId);
+		
+		request.setAttribute("user", user);
+		
 		request.getRequestDispatcher("/WEB-INF/views/mypage/mypage_main.jsp").forward(request,response);
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
+		UserService userService = (UserService) request.getServletContext().getAttribute("userService");
+		
+		User user = new User();
+		
+		// 문자 파트
+		user.setUserPassword(request.getParameter("userpassword"));
+		user.setUserName(request.getParameter("uname"));
+		user.setUserAddress(request.getParameter("addr1") + " " + request.getParameter("addr2"));
+		user.setPhoneNumber(request.getParameter("phone"));
+		
+		boolean phonenumbercheck = userService.pnCheck(user.getPhoneNumber());
+		
+		int updateuser = 0;
+		String errorcode = "";
+		if(!phonenumbercheck) {
+			userService.editUserInfo(user);
+		} else {
+			updateuser = 1;
+			errorcode = "핸드폰 번호가 중복되었습니다.";
+		}
+		request.setAttribute("user", user);
+		
+		if(updateuser == 0) {
+			response.sendRedirect("../mypage/MainController");
+		} else {
+			request.setAttribute("errorcode", errorcode);
+			request.getRequestDispatcher("/WEB-INF/views/mypage/mypage_main.jsp").forward(request, response);
+		}
 	}
 
 }

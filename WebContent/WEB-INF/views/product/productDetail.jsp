@@ -36,6 +36,42 @@
 			
 			$("#tab-content").append("메롱");
 		}
+		
+		// 사이즈, 선택 모두 선택시에만 장바구니에 담기기
+		function addToCart() {
+			var color = $("input[name=colorOption]:checked").val();
+			var size = $("input[name=sizeOption]:checked").val();
+			
+			var url = new URL(window.location.href);
+			var urlParam = url.searchParams;
+			var pId = urlParam.get("productId");
+			console.log(pId);	
+			
+			
+			if(color != null && size != null){
+				$.ajax({
+					type : 'POST',  //get방식으로 통신
+					url : "/shopping/cart/addCartController", //탭의 data-tab속성의 값으로 된 html파일로 통신
+					data: {color: color, size: size, productId: pId},
+					error : function() { //통신 실패시
+						console.log('통신실패!');
+					},
+					success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+						console.log("통신 성공 ~~~~~~~~~~~~~~~~");
+						$("#putCart").click(function() {
+							console.log("!!!!");
+						    $(".modals").fadeIn();
+						});	
+					
+					}
+				});
+			} else {
+				$("#putCart").click(function() {
+				    $(".modals").fadeOut();
+				});	          
+
+			}
+		}
 	</script>
 	
 	<style>
@@ -135,7 +171,7 @@
 				       			<label for="pcolor" class="m-2"><b>색상</b></label>
 				       			<div class="form-check">
 									<label class="cbtn btn red active" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption">
+										<input type="radio" name="colorOption" value="1">
 										<i class="fa fa-check"></i>
 									</label>
 									<label class="cbtn btn pink" style="width:40px; height:40px;">
@@ -143,11 +179,11 @@
 										<i class="fa fa-check"></i>
 									</label>			
 									<label class="cbtn btn orange" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption">
+										<input type="radio" name="colorOption"  value="2">
 										<i class="fa fa-check"></i>
 									</label>			
 									<label class="cbtn btn yellow" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption">
+										<input type="radio" name="colorOption"  value="3">
 										<i class="fa fa-check" style="color:black"></i>
 									</label>			
 									<label class="cbtn btn lime" style="width:40px; height:40px;">
@@ -163,7 +199,7 @@
 				       			<div class="form-radio">
 									<label class="cbtn btn" style="width:75px; height:40px; margin:3px auto;">
 										220
-										<input class="psize" type="radio" name="sizeOption">
+										<input class="psize" type="radio" name="sizeOption" value="220">
 										<i class="fa fa-check"></i>
 									</label>
 									<label class="cbtn btn" style="width:75px; height:40px;">
@@ -173,7 +209,7 @@
 									</label>			
 									<label class="cbtn btn" style="width:75px; height:40px;">
 										230
-										<input type="radio" name="sizeOption">
+										<input type="radio" name="sizeOption" value="230"> 
 										<i class="fa fa-check"></i>
 									</label>			
 									<label class="cbtn btn" style="width:75px; height:40px;">
@@ -183,7 +219,7 @@
 									</label>			
 									<label class="cbtn btn" style="width:75px; height:40px;">
 										240
-										<input type="radio" name="sizeOption">
+										<input type="radio" name="sizeOption" value="240">
 										<i class="fa fa-check"></i>
 									</label>			
 									<label class="cbtn btn" style="width:75px; height:40px;">
@@ -254,7 +290,7 @@
 							</div>
 															
 							<div class="col-2"></div>
-							<div class="col-5 btn-secondary" type="button" data-toggle="modal" data-target="#putCart" style="padding:10px; text-align:center;">
+							<div class="col-5 btn-secondary" onclick="addToCart()" data-toggle="modal" data-target="#putCart" style="padding:10px; text-align:center;">
 								<b>장바구니</b>
 							</div>
 							<div class="modal fade" id="putCart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

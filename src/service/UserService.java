@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 
 import dao.UserDao;
 import domain.User;
-import dto.UserInfo;
 
 public class UserService {
 	//field
@@ -18,16 +17,16 @@ public class UserService {
 	
 	//constructor
 	public UserService(ServletContext application) {
-		ds = (DataSource) application.getAttribute("dataSource");
 		this.userDao = (UserDao) application.getAttribute("userDao");
 		this.cartService = (CartService) application.getAttribute("cartService");
+		this.ds = (DataSource) application.getAttribute("dataSource");
 	}
 	
 	// method: 아이디 중복여부 확인 (회원 여부 확인)
 	public boolean idCheck(String id) {
 		Connection conn = null;
 		boolean result = false;
-		
+		System.out.println("Dfsfdffsdf");
 		try {
 			conn = ds.getConnection();
 			result = userDao.selectUserId(conn, id);
@@ -58,18 +57,12 @@ public class UserService {
 	}
 
 	// method: 비밀번호 확인
-	public int pwCheck(String loginId, String pw) {
+	public boolean pwCheck(String loginId, String pw) {
 		Connection conn = null;
-		int result = 0;
-
+		boolean result = false;
 		try {
 			conn = ds.getConnection();
-			
-			if (userDao.selectPwCheck(conn, loginId, pw)) {
-				result = 1; // 비밀번호 일치
-			} else {
-				result = 0; // 비밀번호 불일치
-			}
+			result = userDao.selectPwCheck(conn, loginId, pw);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -86,7 +79,7 @@ public class UserService {
 		try {
 			conn = ds.getConnection();
 			userDao.insertRegisterUser(conn, user);
-//			cartService.createCart(conn, user.getUserId());
+			cartService.createCart(conn, user.getUserId());
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -125,57 +118,45 @@ public class UserService {
 	}
 
 	// method: 비밀번호 맞음 -> 회원정보 목록
-	public UserInfo userInfo(String id) {
+	public User userInfo(String id) {
+		User user = null;
 		Connection conn = null;
-		UserInfo userInfo = new UserInfo();
 		
 		try {
 			conn = ds.getConnection();
-			userInfo = userDao.selectUserInfo(conn, id);
+			user = userDao.selectUserInfo(conn, id);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			try { conn.close();} catch (SQLException e) {}
 		}
 		
-		return userInfo;
+		return user;
 	}
 
 	//method: 회원정보 수정
-	public boolean editUserInfo(User user, int num) {
+	public int editUserInfo(User user) {
 		Connection conn = null;
-		boolean result = true;
+		int result = 0;
 		
 		try {
 			conn = ds.getConnection();
-		
-			if (userDao.updateEditUser(conn, user, num)) {
-				result = true; // 정보수정 완료
-			} else {
-				result = false; // 정보수정 실패
-			}
+			result = userDao.updateEditUser(conn, user);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			try { conn.close();} catch (SQLException e) {}
 		}
-		
 		return result;
 	}
 
 	// method: 회원탈퇴
-	public boolean removeUserInfo(String id) {
+	public int removeUserInfo(String id) {
 		Connection conn = null;
-		boolean result = true;
-		
+		int result = 0;
 		try {
 			conn = ds.getConnection();
-
-			if (userDao.deleteRemoveUser(conn, id)) {
-				result = true; // 회원탈퇴 성공
-			} else {
-				result = false; // 회원탈퇴 실패
-			}
+			result = userDao.deleteRemoveUser(conn, id);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
