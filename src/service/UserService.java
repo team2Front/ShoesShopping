@@ -17,16 +17,16 @@ public class UserService {
 	
 	//constructor
 	public UserService(ServletContext application) {
-		ds = (DataSource) application.getAttribute("dataSource");
 		this.userDao = (UserDao) application.getAttribute("userDao");
 		this.cartService = (CartService) application.getAttribute("cartService");
+		this.ds = (DataSource) application.getAttribute("dataSource");
 	}
 	
 	// method: 아이디 중복여부 확인 (회원 여부 확인)
 	public boolean idCheck(String id) {
 		Connection conn = null;
 		boolean result = false;
-		
+		System.out.println("Dfsfdffsdf");
 		try {
 			conn = ds.getConnection();
 			result = userDao.selectUserId(conn, id);
@@ -79,7 +79,7 @@ public class UserService {
 		try {
 			conn = ds.getConnection();
 			userDao.insertRegisterUser(conn, user);
-//			cartService.createCart(conn, user.getUserId());
+			cartService.createCart(conn, user.getUserId());
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -24,14 +25,10 @@ public class CartService {
     }
     
     // 회원가입시 유저 당 카트 생성 
-    public void createCart(String userId) {
-    	Connection conn = null;
-    	try {
-    		conn = ds.getConnection();
-    		cartDao.insertCart(conn, userId);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+    public void createCart(Connection conn, String userId) throws Exception {
+    
+	cartDao.insertCart(conn, userId);
+		
     }
     
 	//장바구니에 담긴 상품들 ,총 수량, 총 금액 보여준다.
@@ -41,6 +38,7 @@ public class CartService {
     	
     	try {		
     		conn = ds.getConnection();
+    		conn.setAutoCommit(false);
 			cartDto = cartDao.selectCart(conn, userId);
 			CartDetailDto cdto = new CartDetailDto();
 			//cart detail 정보 가져오기
@@ -49,9 +47,13 @@ public class CartService {
 			List<CartDetailDto> list = cdto.toCartDetailDtoList(cdList);
 			cartDto.setCartDetailDtoList(list);
 			
-    	} catch(Exception e) {   		
-			e.printStackTrace();
-    	}
+    	}  catch (Exception e) {
+			try {
+ 				conn.rollback();
+ 			} catch (SQLException e1) {}
+		} finally {
+			if(conn!=null) try { conn.close();}catch(Exception e) { }
+		}
     		
 	   return cartDto;
     	
@@ -61,20 +63,28 @@ public class CartService {
    public void refreshCart(Connection conn, String userId, int totalPrice, int quantity){
 	   // 기존의 수량, 가격 가져오기
 	   CartDto cd;
-		try {
-			cd = showCart(userId);
-			int p = cd.getTotalPrice();
-			int q = cd.getTotalQuantity();
-			
-			// 수량, 가격 변경싴키기
-			int np = p + totalPrice;
-			int nq = q + quantity;
-	
-			cartDao.updateCart(conn, userId, np, nq);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
+	try {
+		cd = showCart(userId);
+		
+		System.out.println("~~~~~~~~~~~~~~~~~  a");
+		
+		
+		int p = cd.getTotalPrice();
+		int q = cd.getTotalQuantity();
+		
+		// 수량, 가격 변경싴키기
+		int np = p + totalPrice;
+		int nq = q + quantity;
+		System.out.println("~~~~~~~~~~~~~~~~~  b");
+		
+		cartDao.updateCart(conn, userId, np, nq);
+		
+		System.out.println("~~~~~~~~~~~~~~~~~  c");
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+		throw new RuntimeException(e);
+	}
    }
 
 }

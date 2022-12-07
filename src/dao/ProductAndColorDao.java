@@ -43,9 +43,7 @@ public class ProductAndColorDao {
 		List<Color> colors = new ArrayList<>();
 		while (rs.next()) {
 			int cid = rs.getInt("color_id");
-
 			colors.add(colorDao.selectColor(conn, cid));
-
 		}
 		pstmt.close();
 		
@@ -58,7 +56,7 @@ public class ProductAndColorDao {
 		String sql = "select color_id from product_color where product_id=? and color_id=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, productId);
-		pstmt.setInt(1, colorId);
+		pstmt.setInt(2, colorId);
 		
 		boolean result = false;
 

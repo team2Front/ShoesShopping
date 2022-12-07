@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
@@ -20,17 +19,13 @@ public class OrdersDetailService {
 	private OrderDetailDao orderDetailDao;
 	private OrderService orderService;
 	private CartDetailService cartDetailService;
-	private ProductAndColorService productAndColorService;
-	private ProductAndSizeService productAndSizeService;
 		
 	//constructor
 	public OrdersDetailService(ServletContext application) {
 		this.ds = (DataSource) application.getAttribute("dataSource");
-		this.orderDetailDao = (OrderDetailDao) application.getAttribute("ordersDetailDao");
-		this.orderService = (OrderService) application.getAttribute("orderService");
-		this.cartDetailService = (CartDetailService) application.getAttribute("cartDetailService"); 
-		this.productAndColorService = (ProductAndColorService) application.getAttribute("productAndColorService");
-		this.productAndSizeService = (ProductAndSizeService) application.getAttribute("productAndSizeService");
+		this.orderDetailDao = (OrderDetailDao) application.getAttribute("orderDetailDao");
+ 		this.cartDetailService = (CartDetailService) application.getAttribute("cartDetailService"); 
+ 		this.orderService = (OrderService) application.getAttribute("orderService");
 	}
 	
 	
@@ -60,9 +55,8 @@ public class OrdersDetailService {
 	
 	// 장바구니에서 구매하는 경우 1~여러개 가능 
 	// 하나의 order id 를 가지는 orderDetails 들이 여러개 생긴다.
-	public String addCartDetailsToOrder(String userId, List<Object> cartDetailIdList) {		
+	public void addCartDetailsToOrder(String userId, List<Object> cartDetailIdList) {		
 		Connection conn = null;
-		String result = "";
 
 		try {
 			conn = ds.getConnection();
@@ -81,7 +75,6 @@ public class OrdersDetailService {
 				
 				// 삭제되지 않은 상품 구매시 에러소
 				if(productIsDeleted) { throw new RuntimeException();}
-				
 				// 총 금액과 수량을 계산하여 Orders 에 삽입해야 된다.
 				totalPrice += cartDetail.getProduct().getProductPrice() * cartDetail.getQuantity();
 				quantity += cartDetail.getQuantity();
@@ -89,18 +82,16 @@ public class OrdersDetailService {
 			
 			// Orders 에 삽입 후 orders_id 값을 받아와야 order_detail 에 데이터를 삽입할 수 있다.
 			int oId = orderService.addOrder(conn, userId, totalPrice, quantity);
-			
 			// 각 cartDetail 를 삽입하되, 같은 위의 oId 를 삽입한다 -> 장바구니에서 여러 상품을 동시에 주문한다.
 			for(Object cdId : cartDetailIdList) {
-				result += cartDetailToOrderDetail(conn, userId, oId, Integer.parseInt((String)cdId));
-				cartDetailService.removeCartDetailOne(userId, Integer.parseInt((String)cdId));
+				cartDetailToOrderDetail(conn, userId, oId, Integer.parseInt((String)cdId));
+				cartDetailService.removeCartDetailOneForOrder(conn, userId, Integer.parseInt((String)cdId));
 			}
 			
 			conn.commit();
 			
 		} catch(Exception e) {
 			try {
-				result = "주문에 실패했습니q다. ";
 				conn.rollback();
 		
 			} catch (SQLException e1) {
@@ -109,7 +100,6 @@ public class OrdersDetailService {
 		} finally {
 			try { conn.close();} catch (SQLException e) {}
 		}
-		return result;
 	}
 	
 	// 장바구니 상품 하나(씩) 주문하기
@@ -131,10 +121,7 @@ public class OrdersDetailService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try { conn.close();} catch (SQLException e) {}
-		}
-		
+		} 
 		return result;
 	}
 
