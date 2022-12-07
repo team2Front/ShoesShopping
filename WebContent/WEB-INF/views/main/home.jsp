@@ -126,8 +126,17 @@
 					           <div class="card-head">
 						           		<img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/${productList.fileName}"/>
 								</div>
-								<div class="card-body">
-								    <p class="card-brand m-0 text-muted small" >${productList.categoryName} > ${productList.productSex}</p>
+								<div class="card-body container-fluid">
+								    <div class="row card-brand m-0">
+								    	<div class="text-muted small">
+								    		${productList.categoryName} > ${productList.productSex}
+								    	</div>
+								    	<c:if test="${loginType == 'ADMIN'}">
+									    	<div style="margin-left:70px">
+									    		<a class="btn btn-dark btn-sm" href="${pageContext.request.contextPath}/admin/ProductDeleteController?productId=${productList.productId}">삭제</a>
+									    	</div>
+								    	</c:if>
+								    </div>
 								    <p class="card-brand m-0">${productList.companyName}</p>
 								    <h5 class="card-title"><a href="../product/ProductController?productId=${productList.productId}">${productList.productName}</a></h5>
 								    <p class="card-text">

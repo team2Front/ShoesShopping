@@ -220,22 +220,15 @@ public class ProductDao {
 	}
 
 	// 상품 삭제하기
-	public boolean deleteProduct(Connection conn, int pId) throws Exception {
+	public int deleteProduct(Connection conn, int pId) throws Exception {
 		String sql = "update product set is_deleted = '1' where product_id=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pId);
 		int rows = pstmt.executeUpdate();
-
-		boolean result;
-		if (rows == 1) {
-			result = true;
-		} else {
-			result = false;
-		}
 		
 		pstmt.close();
 		
-		return result;
+		return rows;
 	}
 
 }
