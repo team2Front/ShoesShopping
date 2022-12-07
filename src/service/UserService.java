@@ -164,18 +164,13 @@ public class UserService {
 	}
 
 	// method: 회원탈퇴
-	public boolean removeUserInfo(String id) {
+	public int removeUserInfo(String id) {
 		Connection conn = null;
-		boolean result = true;
-		
+		int result = 0;
 		try {
 			conn = ds.getConnection();
 
-			if (userDao.deleteRemoveUser(conn, id)) {
-				result = true; // 회원탈퇴 성공
-			} else {
-				result = false; // 회원탈퇴 실패
-			}
+			result = userDao.deleteRemoveUser(conn, id);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

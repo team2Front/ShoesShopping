@@ -200,23 +200,17 @@ public class UserDao {
    }
    
    //method: delete문 - 사용자정보 DB에서 삭제
-   public boolean deleteRemoveUser(Connection conn, String id) throws Exception {
-      String sql = "delete from users where user_id = ?";
-      boolean result = true;
+   public int deleteRemoveUser(Connection conn, String id) throws Exception {
+      String sql = "delete from users where userid = ?";
       
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, id);
       
       int rows = pstmt.executeUpdate();
       
-      if(rows == 1) {
-    	  result = true; //정보 삭제 성공
-      }else {
-    	  result = false; //정보 삭제 실패
-      }
       pstmt.close();
       
-      return result;
+      return rows;
    }
 }
 
