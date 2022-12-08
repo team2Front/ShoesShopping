@@ -49,12 +49,6 @@
 				text-decoration: none;
 			}
 			
-			/* 메인내용 */
-			/* .table-striped>tbody>tr:nth-child(odd)>td, 
-			.table-striped>tbody>tr:nth-child(odd)>th {
-   					background-color: LightGray; 
-			 } */
-			
 			.btn {
 				margin: 2px 2px;
 			}
@@ -140,81 +134,65 @@
 						<tr>
 						</thead>
 						<tbody class="table-group-divider">
-						<tr>
-							<th scope="row">1</th>
-							<td>
-								<div class="n-row">
-									<a href="#" class="image-block"><img src="../images/반스_월버_노랑.jpg"/></a>
-									<ul class="info">
-										<li class="brand">반스</li>
-										<li class="name">윌버 노랑</li>
-										<li class="option">옵션: 노랑, 사이즈: 240</li>
-									</ul>
-								</div>
-							</td>
-							<td>2022.11.10</td>
-							<td>202211100417370001</td>
-							<td>50000원<br>
-								<span class="txt-default">1개</span>
-							</td>
-							<td style="text-align:center; padding:20px;">배송 완료
-							<div id="buttons" class="d-flex flex-column">
-								<button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="claimHandler1()">환불 요청</button>
-								<a role="button" href="write_review.html" class="btn btn-secondary btn-sm" >후기 작성</a>
+							<c:forEach var="Orders" items="${orderList}" varStatus="status">
+								<tr>
+									<th scope="row">${status.count}</th>
+									<td>
+										<div class="n-row">
+											<ul class="info">
+												<c:forEach var="OrdeDetailDto" begin="0" end="0" items="${Orders.ordersDetailList}">
+													<li class="brand">${OrdeDetailDto.product.productName}</li>
+													<li class="name">${OrdeDetailDto.color}</li>
+													<li class="option">${OrdeDetailDto.size_id}</li>
+													<li>외 ${Orders.quantity-1}</li>
+												</c:forEach>
+											</ul>
+										</div>
+									</td>
+									<td>${Orders.ordersDate}</td>
+									<td>${Orders.ordersId}</td>
+									<td>${Orders.totalPrice}<br>
+										<span class="txt-default">${Orders.quantity}</span>
+									</td>
+									<td style="text-align: center; padding: 20px;"><c:if
+											test="${Orders.ordersIsDeleted == true}">
+									환불 완료
+								</c:if> <c:if test="${Orders.ordersIsDeleted == false}">
+									구매 완료
+								</c:if>
+										<div id="buttons" class="d-flex flex-column">
+											<a class="btn btn-secondary btn-sm mb-1 mt-1" type="button" href="${pageContext.request.contextPath}/mypage/PayBackController?ordersId=${Orders.ordersId}">환불 요청</a>
+											<a role="button" href="write_review.html" class="btn btn-secondary btn-sm">후기 작성</a>
+										</div></td>
+								</tr>
+							</c:forEach>
+							<tr>
+						<td colspan="6" class="text-center">
+							<div>
+								<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=1" class="btn btn-outline-primary btn-sm">처음</a>
+								
+								<c:if test="${pager.groupNo > 1}">
+									<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${pager.startPageNo-1}" class="btn btn-outline-info btn-sm">이전</a>
+								</c:if>
+								
+								<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+									<c:if test="${pager.pageNo != i}">
+										<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${i}" class="btn btn-outline-success btn-sm">${i}</a>
+									</c:if>
+									<c:if test="${pager.pageNo == i}">
+										<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${i}" class="btn btn-danger btn-sm">${i}</a>
+									</c:if>
+								</c:forEach>
+								
+								<c:if test="${pager.groupNo < pager.totalGroupNo}">
+									<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${pager.endPageNo+1}" class="btn btn-outline-info btn-sm">다음</a>
+								</c:if>
+								
+								<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${pager.totalPageNo}" class="btn btn-outline-primary btn-sm">맨끝</a>
 							</div>
 						</td>
 					</tr>
-						<!-- 주문 2 -->
-						<tr>
-							<th scope="row">2</th>
-							<td>
-								<div class="n-row">
-									<a href="#" class="image-block"><img src="../images/컨버스_척테일러올스타코어_검정.jpg"/></a>
-									<ul class="info">
-										<li class="brand">컨버스</li>
-										<li class="name">척테일러올스타코어</li>
-										<li class="option">옵션: 검정, 사이즈: 240</li>
-									</ul>
-								</div>
-							</td>
-							<td>2022.11.11</td>
-							<td>202211100417370002</td>
-							<td>74700원<br>
-								<span class="txt-default">1개</span>
-							</td>
-							<td style="text-align:center; padding:20px;">배송 완료
-								<div id="buttons" class="d-flex flex-column">
-									<button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="claimHandler1()">환불 요청</button>
-									<a role="button" href="write_review.html" class="btn btn-secondary btn-sm" >후기 작성</a>
-								</div>
-							</td>
-						</tr>
-						<!-- 주문3 -->
-						<tr>
-							<th scope="row">3</th>
-							<td>
-								<div class="n-row">
-									<a href="#" class="image-block"><img src="../images/아디다스_가젤.jpg"/></a>
-									<ul class="info">
-										<li class="brand">아디다스</li>
-										<li class="name">가젤</li>
-										<li class="option">옵션: 검정, 사이즈: 240</li>
-									</ul>
-								</div>
-							</td>
-							<td>2022.11.11</td>
-							<td>202211100417370003</td>
-							<td>70000원<br>
-								<span class="txt-default">1개</span>
-							</td>
-							<td style="text-align:center; padding:20px;">배송 완료
-								<div id="buttons" class="d-flex flex-column">
-									<button class="btn btn-secondary btn-sm mb-1 mt-1" type="button" onclick="claimHandler1()">환불 요청</button>
-									<a role="button" href="write_review.html" class="btn btn-secondary btn-sm" >후기 작성</a>
-								</div>
-							</td>
-						</tr>
-						</tbody>
+				</tbody>
 						
 					</table>
 				</div>
@@ -222,5 +200,5 @@
 			
 		</div>
 	</div>
-	</body>
-</html>
+	
+<%@ include file="/WEB-INF/views/fragment/footer.jsp" %>

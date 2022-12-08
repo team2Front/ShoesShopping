@@ -1,6 +1,9 @@
 package controller.mypage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -63,8 +66,22 @@ public class MainController extends HttpServlet {
 			user.setSavedname(savedName);
 			user.setFiletype(fileType);
 			
-			String filePath = "C:/Temp/download/" + savedName;
-			filePart.write(filePath);
+			String filePath = "C:/OTI/Project2_Images/user/" + userId + "/" + savedName;
+			File dir = new File(filePath);
+			
+			// 폴더가 없다면 생성
+			if(!dir.exists()) {
+				try {
+					Files.createDirectories(Paths.get(filePath));
+					System.out.println("성공적으로 실행");
+					filePart.write(filePath);
+				} catch (Exception e) {
+					System.out.println("생성 실패" + filePath);
+				}
+			} else {
+				filePart.write(filePath);
+				System.out.println(filePath+"에 이미지를 넣었습니다.");
+			}
 		}
 		
 		if(!phonenumbercheck) {

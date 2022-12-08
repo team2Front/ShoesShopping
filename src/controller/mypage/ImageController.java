@@ -33,7 +33,7 @@ public class ImageController extends HttpServlet {
 		request.setAttribute("user", user);
 		
 		String fileName = user.getFilename();
-		String filePath = "C:/Temp/download/" + user.getSavedname();
+		String filePath = "C:/OTI/Project2_Images/user/" + userId + "/" + user.getSavedname();
 		String contentType = user.getFiletype();
 		
 		// HTTP 응답에 Content-Type 헤더를 추가
