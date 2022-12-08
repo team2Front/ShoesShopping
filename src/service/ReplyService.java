@@ -119,12 +119,12 @@ public class ReplyService {
    }
    
    //댓글 담은거 list로 출력   
-   public List<RReply> showReviewReplys(int boardId) throws SQLException { //qna글에 해당하는 댓글 출력하기
+   public List<RReply> showReviewReplys(int reviewId) { //qna글에 해당하는 댓글 출력하기
 	   	List<RReply> result = null;
 		Connection conn = null;
 		try {
 			conn = ds.getConnection();
-			result = replyDao.selectReviewReply(conn, boardId);
+			result = replyDao.selectReviewReply(conn, reviewId);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

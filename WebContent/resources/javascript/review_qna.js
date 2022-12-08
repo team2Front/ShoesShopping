@@ -1,8 +1,14 @@
+/* 상품페이지 - [상품 설명] */
+function productInfo(){
+	$("#tab-content").empty();
+	$("#shoes-detail").show();
+}
+
 /*================================[ 상품페이지 - Review ]==================================*/
-/* 상품페이지 - [리뷰 목록] */
 /* 상품페이지 - [리뷰 목록] */
 function productReview(i) {
 	$("#tab-content").empty();
+	$("#shoes-detail").hide();
 	
 	var url = new URL(window.location.href);
     var urlParam = url.searchParams;
@@ -21,7 +27,6 @@ function productReview(i) {
 	});
 } 
 
-
 /* 상품페이지 - [리뷰 상세히 보기] */
 $(document).ready(function() {
 	$("#reviewList tbody").on("click", "tr", function(){
@@ -29,14 +34,18 @@ $(document).ready(function() {
 
 		if(status =="none"){
 			$( this ).find("#reviewDetail").css("display", "block");
+		} else {
+			$( this ).find("#reviewDetail").css("display", "none");
 		}
-		else $( this ).find("#reviewDetail").css("display", "none");
 
 	});
 });
 
 /* 상품페이지 - [리뷰 상세 - 좋아요] */
 function good(i) {
+	//console.log(i);
+	//var btnTag = event.target;
+	event.cancelBubble = true;
 	$.ajax({
 		type : 'POST',  //get방식으로 통신
 		url : "/shopping/review/heartController", //탭의 data-tab속성의 값으로 된 html파일로 통신
@@ -45,16 +54,15 @@ function good(i) {
 			alert('통신실패!');
 		},
 		success : function(data) {
-			console.log(data);
-			$("#goodBtn").html('<a class="btn btn-danger btn-sm mt-3" onclick="cancelGood(' + i + ')">좋아요  <b>' + data + '</b> </a>');
-			$("#reviewDetail").css("display", "block");
-			
+			//btnTag.innerHTML = "좋아요 (" + data + ")";
+			$("#goodBtn" + i ).html('<a class="btn btn-danger btn-sm mt-3" onclick="cancelGood(' + i + ')">좋아요  <b>' + data + '</b> </a>');
 		}
 	});
 }
 
 /* 상품페이지 - [리뷰 상세 - 좋아요 취소] */
 function cancelGood(i) {
+	event.cancelBubble = true;
 	$.ajax({
 		type : 'GET',  //get방식으로 통신
 		url : "/shopping/review/heartController?reviewId=" + i, //탭의 data-tab속성의 값으로 된 html파일로 통신
@@ -63,26 +71,46 @@ function cancelGood(i) {
 		},
 		success : function(data) {
 			console.log(data);
-			$("#goodBtn").html('<a class="btn btn-outline-danger btn-sm mt-3" onclick="good(' + i + ')">좋아요  <b>' + data + '</b> </a>');
-			$("#reviewDetail").css("display", "block");
+			$("#goodBtn" + i ).html('<a class="btn btn-outline-danger btn-sm mt-3" onclick="good(' + i + ')">좋아요  <b>' + data + '</b> </a>');
 		}
 	});
 }
 
-/* 상품페이지 - [리뷰 상세 - 댓글보기] */
-$(document).ready(function() {
-	$("#replyBtn").on("click", function(){
-		let status = $("#replyList").css("display");
+/* 댓글보기On */
+function replyList(i) {
+	event.cancelBubble = true;
+	$("#replyList" + i ).css("display", "block");
+	$("#replyBtn" + i ).html('<a class="btn btn-dark btn-sm mt-3" onclick="noReplyList(' + i + ')">댓글보기</a>');
+}
 
-		if(status =="none"){
-			$("#replyList").css("display", "block");
-			$("#reviewDetail").trigger("click");
-		} else {
-			$("#replyList").css("display", "none");
-			$("#reviewDetail").trigger("click");
-		}
+/* 댓글보기Off */
+function noReplyList(i) {
+	event.cancelBubble = true;
+	$("#replyList" + i ).css("display", "none");
+	$("#replyBtn" + i ).html('<a class="btn btn-outline-dark btn-sm mt-3" onclick="replyList(' + i + ')">댓글보기</a>');
+}
+
+/* 댓글작성창 클릭했을 때도 상세보기가 닫히지 않고 그대로 유지*/
+$(document).ready(function() {
+	$("#writeReplyForm input").on("click", function(){
+		event.cancelBubble = true;
 	});
 });
+
+/* 댓글작성 후, 전송*/
+function replyPost() {
+	event.cancelBubble = true;
+	$.ajax({
+		type : 'POST',
+		url : "/shopping/review/WriteReplyController", //탭의 data-tab속성의 값으로 된 html파일로 통신
+		error : function() {
+			alert('통신실패!');
+		},
+		success : function(data) {
+			console.log(data);
+		}
+	});
+}
 
 /* 마이페이지 - [리뷰 등록] */
 $(document).ready(function(){

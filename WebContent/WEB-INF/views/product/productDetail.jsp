@@ -253,13 +253,13 @@
 			
 			<ul class="row nav nav-tabs pl-100" role="tablist">
 				<li class="col-4 p-3 nav-item">
-					<a class="nav-link auto" data-toggle="tab" onclick="productInfo()" style="font-size:30px; text-align:center"> 상품 정보 </a>
+					<a class="nav-link active" data-toggle="tab" onclick="productInfo()" style="font-size:30px; text-align:center"> 상품 정보 </a>
 				</li>
 				<li class="col-4 p-3 nav-item">
-					<a id="reviewLink" class="nav-link" data-toggle="tab" onclick="productReview(1)" style="font-size:30px; text-align:center"> 리뷰 </a>
+					<a id="reviewLink" class="nav-link" data-toggle="tab" href="#tab-content" onclick="productReview(1)" style="font-size:30px; text-align:center"> 리뷰 </a>
 				</li>
 				<li class="col-4 p-3 nav-item">
-					<a class="nav-link" data-toggle="tab" onclick="productQna()" style="font-size:30px; text-align:center"> Q & A </a>
+					<a class="nav-link" data-toggle="tab" href="#tab-content" onclick="productQna()" style="font-size:30px; text-align:center"> Q & A </a>
 				</li>
 			</ul>
 			
@@ -267,7 +267,7 @@
 			<div class="tab-content">
 				
 				<!-- 없애야할 부분 -->
-				<div class="tab-pane auto container-fluid" id="shoes-detail">
+				<div class="tab-pane active container-fluid" id="shoes-detail">
 					<div class="m-4" style="text-align:center">
 						<img src="${pageContext.request.contextPath}/resources/images/반스/98/정보_1.png" style="width:900px; height:400px; margin:0 auto;"class="active m-1 ml-4"/>
 						<img src="${pageContext.request.contextPath}/resources/images/반스/98/정보_2.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
@@ -278,7 +278,7 @@
 				</div>
 				
 				<!-- ajax 처리 - 유동적으로 바뀔 부분 -->
-				<div id="tab-content"></div>
+				<div class="tab-pane" id="tab-content"></div>
 				
 			</div>
 		</div>

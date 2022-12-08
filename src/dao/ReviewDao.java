@@ -63,17 +63,14 @@ public class ReviewDao {
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, reviewId);
       ResultSet rs = pstmt.executeQuery();
-
-      List<RReply> list = replyDao.selectReviewReply(conn, reviewId);// 댓글 리스트임
       
+      List<RReply> replyList = replyDao.selectReviewReply(conn, reviewId);
+
       Review r1 = null;
       while (rs.next()) {
-         //int pid = rs.getInt("product_id");
-         //Product product = productService.showOneProduct(pid);
          r1 = new Review(rs.getInt("review_id"), rs.getString("review_title"), rs.getString("review_content"),
                rs.getDate("review_date"), rs.getString("user_id"), rs.getInt("star_score"),
-               rs.getInt("heart_count"), rs.getString("filename"), rs.getString("filetype"), rs.getString("savedname"),
-                list);
+               rs.getInt("heart_count"), rs.getString("filename"), rs.getString("filetype"), rs.getString("savedname"), replyList);
       }
       pstmt.close();
 
@@ -176,6 +173,7 @@ public class ReviewDao {
       pstmt.setInt(2, endRn);
       pstmt.setInt(3, startRn);
       ResultSet rs = pstmt.executeQuery();
+      
       
       while (rs.next()) {
          ReviewList rl = new ReviewList(rs.getInt("review_id"), rs.getString("review_title"),

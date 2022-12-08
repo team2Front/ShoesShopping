@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dto.ReviewList;
 import service.ReviewService;
@@ -39,6 +40,9 @@ public class ReviewListController extends HttpServlet {
 		
 		//pageNo에 해당하는 게시물 가져오기
 		List<ReviewList> reviewList = reviewService.showReviewList(productId, pager);
+		
+		//리뷰id를 세션에 저장
+		HttpSession session = request.getSession();
 		
 		//JSP에서 사용할 수 있도록, Request 범위에 저장
 		request.setAttribute("pager", pager);
