@@ -1,9 +1,8 @@
 package dao;
 
-import java.sql.Connection; 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,45 +10,52 @@ import dto.ProductImage;
 
 public class ProductImageDao {
 	
-	public String selectMainImage(Connection conn, int productId) throws Exception {
-		String sql = "select product_id, filename, filetype, savedname, mainimage from product_image where mainimage = '1' and product_id = ? ";
-		String mainImage = "";
+	public ProductImage selectMainImage(Connection conn, int productId) throws Exception {
+		System.out.println("[ProductImageDao>selectMainImage]메소드 실행, pid: "+productId);
+		String sql = " select p.product_id, filename, filetype, savedname, mainimage, company_name " 
+					+ " from product_image i, product p, company c"
+					+ " where p.product_id = i.product_id and c.company_id = p.company_id and mainimage = '1' and p.product_id = ? ";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, productId);
 
 		ResultSet rs = pstmt.executeQuery();
+		ProductImage productImage = new ProductImage();
 		if (rs.next()) {
-			mainImage = rs.getString("filename");
+			productImage.setFileName(rs.getString("filename"));
+			productImage.setFileType(rs.getString("filetype"));
+			productImage.setSavedName(rs.getString("savedname"));
+			productImage.setCompanyName(rs.getString("company_name"));
 		}
 		pstmt.close();
 		
-		return mainImage;
+		return productImage;
 	}
 	
 	public List<String> selectSubImage(Connection conn, int productId) throws Exception {
-		List<String> list = new ArrayList<>();
-		String sql = "select product_id, filename, filetype, savedname, mainimage from product_image where mainimage = '0' and product_id = ? ";
+		System.out.println("[ProductImageDao>selectSubImage]메소드 실행, pid: "+productId);
+		String sql = "select p.product_id, filename, filetype, savedname, mainimage  " + 
+				"                    from product_image i, product p " + 
+				"                    where p.product_id = i.product_id and  mainimage = '0' and p.product_id =  ? ";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, productId);
 
 		ResultSet rs = pstmt.executeQuery();
+		List<String> pImageList = new ArrayList<>();;
 		while (rs.next()) {
-			String subImage = rs.getString("filename");
-			list.add(subImage);
+			pImageList.add(rs.getString("filename"));
 		}
 		
-		if(list.size()<5) {
-			for(int i=list.size()+1; i<=5; i++) {
-				String p = "이미지준비중.jpg";
-				list.add(p);
+		if(pImageList.size()<5) {
+			for(int i=pImageList.size()+1; i<=5; i++) {
+				pImageList.add("이미지준비중.jpg");
 			}
 		}
 		
-		System.out.println("[productImageDao]"+list);
+		System.out.println("[ProductImageDao>selectSubImage] pImageList: "+pImageList);
 		pstmt.close();
 		
-		return list;
+		return pImageList;
 	}
 	
 	//

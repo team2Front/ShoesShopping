@@ -40,6 +40,13 @@
           vertical-align: middle;
          }
 		</style>
+		
+		<script>
+			$(document).ready(function(){
+			  //실행내용
+			})
+		</script>
+		
 	</head>
 	
 	<%@ include file="/WEB-INF/views/fragment/nav.jsp" %>
@@ -54,12 +61,12 @@
 							<c:choose>
 								<c:when test = "${status.first}">
 									<div class="carousel-item active">
-										<img id="img1" src="${pageContext.request.contextPath}/resources/images/${product.company}/${product.productId}/${image}" style="width:500px; height:500px;" class="m-4"/>
+										<img id="img1" src="/Project2_Images/${product.company}/${product.productId}/${image}" style="width:500px; height:500px;" class="m-4"/> 
 									</div>
 								</c:when>
 								<c:otherwise>
 									<div class="carousel-item">
-											<img id="img1" src="${pageContext.request.contextPath}/resources/images/${product.company}/${product.productId}/${image}" style="width:500px; height:500px;" class="m-4"/>
+											<img id="img1" src="/Project2_Images/${product.company}/${product.productId}/${image}" style="width:500px; height:500px;" class="m-4"/>
 									</div>
 								</c:otherwise>
 							</c:choose>
@@ -75,10 +82,10 @@
 						<c:forEach var="image" items="${product.imageList}" varStatus="status">
 							<c:choose>
 								<c:when test = "${status.first}">
-										<img data-target="#img1" data-slide-to="0" onclick="change1()" src="${pageContext.request.contextPath}/resources/images/${product.company}/${product.productId}/${image}" style="width:90px; height:90px;"class="active m-1 ml-4"/>
+										<img data-target="#img1" data-slide-to="0" onclick="change1()" src="/Project2_Images/${product.company}/${product.productId}/${image}" style="width:90px; height:90px;"class="active m-1 ml-4"/>
 								</c:when>
 								<c:otherwise>
-										<img data-target="#img1" data-slide-to="${status.index}" onclick="change${staus.count}()" src="${pageContext.request.contextPath}/resources/images/${product.company}/${product.productId}/${image}" style="width:90px; height:90px;"class="m-1"/>
+										<img data-target="#img1" data-slide-to="${status.index}" onclick="change${staus.count}()" src="/Project2_Images/${product.company}/${product.productId}/${image}" style="width:90px; height:90px;"class="m-1"/>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>

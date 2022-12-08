@@ -198,10 +198,10 @@ public class ProductService {
 	// 관리자 버전
 	// 상품 등록하기
 	//트랜잭션 처리
-	public String registerProduct(RegisterProduct ap) {
+	public int registerProduct(RegisterProduct ap) {
 		System.out.println("[ProductService > registerProduct] 메소드 실행");
 		Connection conn = null;
-		int pid;
+		int pid = 0;
 		String message = "";
 		try {
 			conn = ds.getConnection();
@@ -231,16 +231,16 @@ public class ProductService {
 			productImageDao.insertProductImages(conn, pid, productImages);
 
 			if (result1 + result2 != 2) {
-				message = "상품 등록이 실패하였습니다";
+				System.out.println("message = \"상품 등록이 실패하였습니다\"");
 			}
 
 			// conn.commit();
-			message = "상품 등록이 완료되었습니다.";
+			System.out.println("message = \"상품 등록이 완료되었습니다\"");
 
 		} catch (RuntimeException | SQLException e) {
 			try {
 				System.out.println(e.getMessage());
-				message = "상품 등록 실패되었습니다.";
+				System.out.println("message = \"상품 등록이 실패하였습니다\"");
 				conn.rollback();
 			} catch (SQLException e1) {
 			}
@@ -253,7 +253,7 @@ public class ProductService {
 			} catch (Exception e) {
 			}
 		}
-		return message;
+		return pid;
 
 	}
 
@@ -272,6 +272,39 @@ public class ProductService {
 		}
 		
 		return result;
+	}
+	
+	//메인이미지 가져오기
+	public ProductImage showMainImage(int pid) {
+		System.out.println("[ProductService>showMainImage] 메소드 실행 pid: "+ pid);
+		Connection conn = null;
+		ProductImage productImage = new ProductImage();
+		try {
+			conn = ds.getConnection();
+			productImage = productImageDao.selectMainImage(conn, pid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close(); } catch (Exception e) {}
+		}
+		
+		return productImage;
+	}
+
+	public List<String> showSubImage(int pid) {
+		System.out.println("[ProductService>showSubImage] 메소드 실행 pid: "+ pid);
+		Connection conn = null;
+		List<String> list = new ArrayList<>();
+		try {
+			conn = ds.getConnection();
+			list = productImageDao.selectSubImage(conn, pid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close(); } catch (Exception e) {}
+		}
+		
+		return list;
 	}
 
 	

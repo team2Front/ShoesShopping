@@ -124,7 +124,8 @@
 						<c:forEach var="productList" items="${pageList}">
 			               <div class="card m-1">
 					           <div class="card-head">
-						           		<img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/${productList.fileName}"/>
+										<img class="card-img-top" src="${pageContext.request.contextPath}/main/MainImageController?productId=${productList.productId}"/>
+						           		<%-- <img class="card-img-top" src="C:/OTI/Project2_Images/${productList.companyName}/${productList.productId}/${productList.fileName}"/> --%>
 								</div>
 								<div class="card-body container-fluid">
 								    <div class="row card-brand m-0">

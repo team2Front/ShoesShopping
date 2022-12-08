@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import domain.Product;
+import dto.ProductImage;
 import dto.ProductList;
 import dto.RegisterProduct;
 import util.PagingVo;
@@ -50,13 +51,13 @@ public class ProductDao {
 
 		String sql = ""+
 				" select rm, product_id, product_name, company_id, category_id, product_sex, product_price, filename " + 
-				"								           from( " + 
-				"												select rownum as rm, product_id, product_name, company_id, category_id, product_sex, product_price, filename   " + 
-				"												from (select  p.product_id, product_name, company_id, category_id, product_sex, product_price, filename " + 
-				"								                       from product p, product_image i where i.product_id= p.product_id and is_deleted = '0' and mainimage = '1' " + 
-				"								                    order by product_id) " + 
-				"								                 where rownum <= ? )  " + 
-				"								    where rm >= ?";
+				"	from( " + 
+				"	select rownum as rm, product_id, product_name, company_id, category_id, product_sex, product_price, filename   " + 
+				"			from (select  p.product_id, product_name, company_id, category_id, product_sex, product_price, filename " + 
+				"				 from product p, product_image i where i.product_id= p.product_id and is_deleted = '0' and mainimage = '1' " + 
+				"				order by product_id) " + 
+				"			 where rownum <= ? )  " + 
+				"	where rm >= ?";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, endRn);
@@ -138,8 +139,9 @@ public class ProductDao {
          product.setCategory(categoryDao.findCategoty(conn, rs.getInt("category_id")));
          product.setColorList(productAndColorDao.selectProductColors(conn, pid));
          product.setSizeList(productAndSizeDao.selectProductSizes(conn, pid));
-         product.setMainImage(productImageDao.selectMainImage(conn, pid));
-         product.setImageList(productImageDao.selectSubImage(conn, pid));
+         ProductImage productImage = productImageDao.selectMainImage(conn, pid);
+         product.setMainImage(productImage.getFileName());
+         product.setImageList(productImageDao.selectSubImage(conn,pid));
       }
       pstmt.close();
       
