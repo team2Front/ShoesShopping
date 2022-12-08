@@ -176,6 +176,20 @@ public class ProductService {
 		}
 		return list;
 	}
+	// 5)컬러, 사이즈, 가격 기준
+	public List<ProductList> showFiltered(PagingVo pvo, String color, String size, String price) {
+		Connection conn = null;
+		List<ProductList> list = new ArrayList<>();
+		try {
+			conn = ds.getConnection();
+			list = pfilteringDao.selectFiltered(conn, pvo, color,size, price);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close(); } catch (Exception e) {}
+		}
+		return list;
+	}
 
 	// **********************************************************
 	// 상품 상세보기
