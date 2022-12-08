@@ -79,9 +79,9 @@
 									삭제</button>
 							</div>
 							<form method="post" id="delete" action="DeleteController?cartDetailId=${cartDetail.cart_detail_id}">
-								<button class="btn btn-ingo btn-sm btn-dark"> 삭제</button>
+								<button class="btn btn-ingo btn-sm btn-dark" style="width: 100px"> 삭제</button>
 							</form>
-						</div>
+						</div> 
 					</div>
 				</c:forEach>
 			</div>

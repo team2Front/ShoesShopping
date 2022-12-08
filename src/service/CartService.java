@@ -26,9 +26,7 @@ public class CartService {
     
     // 회원가입시 유저 당 카트 생성 
     public void createCart(Connection conn, String userId) throws Exception {
-    
-	cartDao.insertCart(conn, userId);
-		
+    	cartDao.insertCart(conn, userId);		
     }
     
 	//장바구니에 담긴 상품들 ,총 수량, 총 금액 보여준다.
@@ -79,7 +77,7 @@ public class CartService {
 		
 		cartDao.updateCart(conn, userId, np, nq);
 		
-		System.out.println("~~~~~~~~~~~~~~~~~  c");
+		System.out.println("~~~~~~~~~~~~~~~~~  c :" + np);
 		
 	} catch (Exception e) {
 		e.printStackTrace();
