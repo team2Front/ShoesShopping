@@ -1,6 +1,9 @@
 package controller.admin;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -75,8 +78,8 @@ public class Register_ProductController extends HttpServlet {
 		//모든 파트를 가져온다
 		Collection<Part> parts =request.getParts();
 		
-		
-		
+		//이미지를 DTO에 SET하는 코드
+		int pid=0;
 		for (Part filePart : parts) {
 			//name이 attach인 경우에만 실행
            if(!filePart.getName().equals("attach")) continue;
@@ -92,32 +95,52 @@ public class Register_ProductController extends HttpServlet {
         	   productImage.setFileType(fileType);
         	   
         	   productImages.add(productImage);
-        	   
-        	   String brandName="";
-        	   switch(pbrand) {
-	        	   case "1" : brandName = "아디다스"; break;
-	        	   case "2" : brandName = "반스"; break;
-	        	   case "3" : brandName = "컨버스"; break;
-	        	   case "4" : brandName = "뉴발란스"; break;
-	        	   case "5" : brandName = "나이키"; break;
-        	   }
-        	   
-        	   //프로젝트 경로 맞춰서 해봅시다~~~~
-        	   String path = "C:/OTI/WebProjects/project2/ShoesShopping/WebContent/resources/images/";
-        	   String filePath = path+brandName+"/"+fileName;
-        	 
-        	  /* String filePath = "C:/Temp/download/"+savedName;*/
-        	   System.out.println(filePath);
-        	   
-        	   filePart.write(filePath);
-        	   
    			}
            product.setProductImage(productImages);
 		}
-
-		String message=productService.registerProduct(product);
-		System.out.println(message);
 		
+		//**********상품등록하고 pid받는 코드***********
+		pid = productService.registerProduct(product);
+		System.out.println("[상품 등록 완료] pid: "+ pid);
+		
+		//이미지를 로컬에 저장하는 코드
+		 for (Part filePart : parts) {
+			 if(!filePart.getName().equals("attach")) continue;
+			 if(!filePart.getSubmittedFileName().equals("")) {
+				 String fileName = filePart.getSubmittedFileName();
+				 String brandName="";
+	        	   switch(pbrand) {
+		        	   case "1" : brandName = "adidas"; break;
+		        	   case "2" : brandName = "vans"; break;
+		        	   case "3" : brandName = "converse"; break;
+		        	   case "4" : brandName = "newbalance"; break;
+		        	   case "5" : brandName = "nike"; break;
+	        	   }
+	        	   
+	        	   //프로젝트 경로 맞춰서 해봅시다~~~~
+	        	   String path = "C:/OTI/Project2_Images/";
+	        	   String filePath = path+brandName+"/"+pid+"/"+fileName;
+	        	   File dir = new File(filePath);
+	        	 
+	        	   //폴더가 없다면 생성한다
+	        	   if(!dir.exists()) {
+	        		   try {
+	  	        		 Files.createDirectories(Paths.get(filePath));
+	  	        	  	System.out.println("성공적으로 생성됨");
+	  	        	  	filePart.write(filePath);
+	  	        	 }catch(Exception e) {
+	  	        		 System.out.println("생성 실패 "+filePath);
+	  	        	 }
+	        	   //아니라면
+	        	   }else {
+	        		   filePart.write(filePath);
+	        		   System.out.println(filePath+"에 이미지를 넣었습니다.");
+	        	   }
+	        	   
+			 }
+         }
+		 
+		 
 		response.sendRedirect("HomeController");
 	}
 

@@ -7,33 +7,32 @@
 		<div class="shoesmain d-flex" >
 		<!-- 사이드 바  -->
 			<div class="col-md-2"> 
-				<div id="sidebar" >		
-					 <button class="btn sidebar-button" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+				<form id="sidebar" method="get" action="${pageContext.request.contextPath}/main/MainFilterController">		
+					 <div class="btn sidebar-button" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 					   Color
-					 </button>
-					<div class="collapse mb-2" id="collapseExample">
+					 </div>
+					<div class="collapse mb-2 form-group" id="collapseExample">
 					  <div class="card card-body shoesColors">
 						  <div class = "row">
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="red"></div>
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="orange"></div>
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="yellow"></div>
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="green"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="red" value="1" name="fcolor"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="orange" value="2" name="fcolor"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="yellow" value="3" name="fcolor"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="green" value="4" name="fcolor"></div>
 				  		</div>
 				  		
 				  		<div class = "row">
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="blue"></div>
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="lime"></div>
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="navy"></div>
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="purple"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="blue" value="5" name="fcolor"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="brown" value="11" name="fcolor"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="navy" value="6" name="fcolor"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="purple" value="7" name="fcolor"></div>
 				  		</div>
 				  		
 				  		<div class = "row">
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="pink"></div>
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="brown"></div>
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="black"></div>
-						  	<div class="col-2 m-1 color-box"><input type="checkbox" class="gray"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="pink" value="8" name="fcolor"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="lime" value="13" name="fcolor"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="black" value="10" name="fcolor"></div>
+						  	<div class="col-2 m-1 color-box"><input type="radio" class="gray" value="12" name="fcolor"></div>
 				  		</div>
-				  
 					  </div>
 					</div>
 					
@@ -42,29 +41,37 @@
 					 </button>
 					<div class="collapse mb-2" id="collapseExample2">
 					  <div class="card card-body">
-						  <div class = "row">
-							  	<div class="btn size-btn col m-1 border border-6">215</div>
-							  	<div class="btn col m-1 border border-6">220</div>
-							  	<div class="btn col m-1 border border-6">225</div>
+					  	<div class="shoesSize">
+						  <div class = "row justify-content-around">
+						  	 	<input type="radio" class="btn-check" id="220"  value="220" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="220"><span>220</span></label>
+						  		<input type="radio" class="btn-check" id="225"  value="225" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="225"><span>225</span></label>
+							   	<input type="radio" class="btn-check" id="230"  value="230" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="230"><span>230</span></label>
+						  		
+						  		<input type="radio" class="btn-check" id="235"  value="235" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="235"><span>235</span></label>
+						  		<input type="radio" class="btn-check" id="240"  value="240" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="240"><span>240</span></label>
+						  		<input type="radio" class="btn-check" id="245"  value="245" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="245"><span>245</span></label>
+						  		
+						  		<input type="radio" class="btn-check" id="250"  value="250" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="250"><span>250</span></label>
+						  		<input type="radio" class="btn-check" id="255"  value="255" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="255"><span>255</span></label>
+						  		<input type="radio" class="btn-check" id="260"  value="260" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="260"><span>260</span></label>
+						  		
+						  		<input type="radio" class="btn-check" id="265"  value="265" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="265"><span>265</span></label>
+						  		<input type="radio" class="btn-check" id="270"  value="270" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="270"><span>270</span></label>
+						  		<input type="radio" class="btn-check" id="280"  value="280" name="fsize" >
+						  		<label class="btn btn-outline-dark m-1" for="280"><span>280</span></label>
 					  		</div>
-					  		
-					  		<div class = "row">
-							  	<div class="btn col m-1 border border-6">230</div>
-							  	<div class="btn col m-1 border border-6">235</div>
-							  	<div class="btn col m-1 border border-6">240</div>
-					  		</div>
-					  		
-					  		<div class = "row">
-							  	<div class="btn col m-1 border border-6">245</div>
-							  	<div class="btn col m-1 border border-6">250</div>
-							  	<div class="btn col m-1 border border-6">255</div>
-					  		</div>
-					  		
-					  		<div class = "row">
-							  	<div class="btn col m-1 border border-6">260</div>
-							  	<div class="btn col m-1 border border-6">270</div>
-							  	<div class="btn col m-1 border border-6">280</div>
-					  		</div>
+					  	</div>
 					  </div>
 					</div>
 					
@@ -73,38 +80,38 @@
 					 </button>
 					<div class="collapse mb-2" id="collapseExample3">
 					  <div class="card card-body">
-					  	<div class = "container-fluid">
+					  	<div class = "shoesPrice container-fluid">
 					  		<div class="row pl-4">
-					  			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-								  <label class="form-check-label" for="flexRadioDefault1">
+					  			<input class="form-check-input" type="radio" name="fprice" id="fprice1">
+								  <label class="form-check-label" for="fprice1">
 								    0 ~ 50,000 원
 								  </label>
 					  		</div>
 					  		
 					  		<div class="row pl-4">
-					  			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-								  <label class="form-check-label" for="flexRadioDefault1">
+					  			<input class="form-check-input" type="radio" name="fprice" id="fprice2">
+								  <label class="form-check-label" for="fprice2">
 								    50,000 ~ 80,000 원
 								  </label>
 					  		</div>
 					  		
 					  		<div class="row pl-4">
-					  			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-								  <label class="form-check-label" for="flexRadioDefault1">
+					  			<input class="form-check-input" type="radio" name="fprice" id="fprice3">
+								  <label class="form-check-label" for="fprice3">
 								    80,000 ~ 100,000 원
 								  </label>
 					  		</div>
 					  		
 					  		<div class="row pl-4">
-					  			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-								  <label class="form-check-label" for="flexRadioDefault1">
+					  			<input class="form-check-input" type="radio" name="fprice" id="fprice4">
+								  <label class="form-check-label" for="fprice4">
 								    100,000 ~ 150,000 원
 								  </label>
 					  		</div>
 					  		
 					  		<div class="row pl-4">
-					  			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-								  <label class="form-check-label" for="flexRadioDefault1">
+					  			<input class="form-check-input" type="radio" name="fprice" id="fprice5">
+								  <label class="form-check-label" for="fprice5">
 								    150,000 ~ 300,000 원
 								  </label>
 					  		</div>
@@ -112,7 +119,11 @@
 					  </div>
 					</div>
 					
-				</div>
+					<!-- request 버튼 -->
+					<div class="text-center">
+						<input type="submit" class="btn btn-dark btn-sm" value="검색" /> 
+					</div>
+				</form>
 			</div>
 				
 			<!-- 상품리스트 -->
@@ -124,7 +135,8 @@
 						<c:forEach var="productList" items="${pageList}">
 			               <div class="card m-1">
 					           <div class="card-head">
-						           		<img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/${productList.fileName}"/>
+										<img class="card-img-top" src="${pageContext.request.contextPath}/main/MainImageController?productId=${productList.productId}"/>
+						           		<%-- <img class="card-img-top" src="C:/OTI/Project2_Images/${productList.companyName}/${productList.productId}/${productList.fileName}"/> --%>
 								</div>
 								<div class="card-body container-fluid">
 								    <div class="row card-brand m-0">

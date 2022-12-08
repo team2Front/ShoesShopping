@@ -20,7 +20,7 @@
 		<div class="card-header">상품등록</div>
 		<div class="card-body">
 
-			<form id="pnameForm" method="post" class="was-validated" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/admin/Register_ProductController" novalidate>
+			<form id="pnameForm" method="post" class="was-validated" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/main/MainFilterController" novalidate>
 			
 				<div class="form-group">
 					<label for="pname"  >상품명</label> 

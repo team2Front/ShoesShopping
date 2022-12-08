@@ -91,7 +91,7 @@
 	height:30px;
 }
 
-.shoesColors input[type="checkbox"] {
+.shoesColors input[type="radio"] {
 
 /*    margin-right: 7px; */
    width: 30px;
@@ -105,22 +105,37 @@
 
 }
 
-.shoesColors input[type="checkbox"]:hover {
+.shoesColors input[type="radio"]:hover {
 	border: 2px solid;
 	border-color: rgba(255, 255, 255, 0.3);
 }
 
-.shoesColors input[type="checkbox"]:checked  {
+.shoesColors input[type="radio"]:checked  {
 	border: 3px solid ;
 	border-color: rgba(255, 255, 255, 0.7);
 } 
 
-.size-btn:focus {
-	outline: 1px !important;
-	outline-color: red !important;
+
+/***********라디오*******************/
+
+
+.shoesSize input[type="radio"] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 
+.shoesSize [type="radio"]:checked + label {
+  	
+	background-color: #343a40;
+	color:white;
+}
+
+.shoesPrice [type="radio"] + label{
+  cursor: pointer;
+}
 /* ***********************************    관리자    ************************************** */
 #adminBanner {
 	background-image: url("../images/banner.png");

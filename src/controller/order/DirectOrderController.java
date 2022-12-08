@@ -1,4 +1,4 @@
-package controller.cart;
+package controller.order;
 
 import java.io.IOException;
 
@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import dto.OrderDto;
 import service.CartDetailService;
+import service.OrdersDetailService;
 
-
-@WebServlet(name = "cart.addCartController", urlPatterns = "/cart/addCartController")
-public class addCartController extends HttpServlet {
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+// 장바구니 -> 주문할 때
+@WebServlet(name = "order.DirectOrderController", urlPatterns = "/order/DirectOrderController")
+public class DirectOrderController extends HttpServlet {
+       
+	// 상품상세->주문으로 넘어가는 컨트롤러
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		System.out.println("add cart ~");
 		System.out.println(request.getParameter("color"));
 		System.out.println(request.getParameter("size"));
@@ -27,25 +29,18 @@ public class addCartController extends HttpServlet {
 		int size = Integer.parseInt((String)request.getParameter("size"));
 		int productId = Integer.parseInt((String)request.getParameter("productId"));
 		int quantity = Integer.parseInt((String)request.getParameter("quantity"));
-		
 		HttpSession session = request.getSession();
-		
-		// 세션에 데이터(객체)를 저장
 		String loginId = (String) session.getAttribute("loginId");
+
+		
+		OrdersDetailService ordersDetailService = (OrdersDetailService) request.getServletContext().getAttribute("ordersDetailService");
 		
 		OrderDto orderDto = new OrderDto(loginId,productId, color, size, quantity); 
-		CartDetailService cartDetailService = (CartDetailService) request.getServletContext().getAttribute("cartDetailService");
-		String s = cartDetailService.addCartDetail(orderDto);
-		System.out.println(s);
-		//		String userId = (String) request.getAttribute("loginId");
-//		String userId = "winter";
-//		int cartDetailId = Integer.parseInt(request.getParameter("cartDetailId"));
-//		int quantity = Integer.parseInt(request.getParameter("quantity"));
-//				
-//		CartDetailService cartDetailService = (CartDetailService) request.getServletContext().getAttribute("cartDetailService");
-//		String test = cartDetailService.updateCartDetailQuantity(userId, cartDetailId, quantity);
-//		System.out.println(test);
-//		response.sendRedirect("CartController");
+		
+		ordersDetailService.addProductToOrder(orderDto);
+		
 	}
+	
 
+	
 }

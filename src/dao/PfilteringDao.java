@@ -251,4 +251,9 @@ public class PfilteringDao {
 		return cname;
 	}
 
+	public List<ProductList> selectFiltered(Connection conn, PagingVo pvo, String color, String size, String price) {
+		System.out.println("[PfilteringDao>selectFiltered] 메소드 실행, "+color+"/ "+size+"/ "+price);
+		return null;
+	}
+
 }

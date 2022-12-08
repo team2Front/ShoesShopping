@@ -26,7 +26,7 @@
 					<button type="submit" class="btn btn-warning" style="width: 100%">로그인</button>
 				</form>
 				<div class="form-group">
-					<button type="submit" class="btn btn-dark mt-3" style="width: 49%">
+					<button type="submit" class="btn btn-dark mt-3" style="width: 49%" onclick="location.href='${pageContext.request.contextPath}/user/JoinFormController'">
 						회원 가입
 					</button>
 					<button type="submit" class="btn btn-dark mt-3" style="width: 49%" onclick="location.href='${pageContext.request.contextPath}'">

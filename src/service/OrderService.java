@@ -49,7 +49,7 @@ public class OrderService {
 		
 		try {
 			conn = ds.getConnection();
-			orderDao.selectOrder(conn, userId, pvo);
+			list = orderDao.selectOrder(conn, userId, pvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -60,35 +60,26 @@ public class OrderService {
 	}		
 	
 	// 주문을 등록하고 등록된 id 값을 받아와서 리턴한다.
-	public int addOrder(Connection conn, String uId, int totalPrice, int quantity) throws SQLException {
+	public int addOrder(Connection conn, String uId, int totalPrice, int quantity) throws Exception {
 		int oId =  orderDao.insertOrder(conn, uId, totalPrice, quantity);
 		return oId;
 	}
 
 	
 	// 주문 취소
-    public String cancelOrders(List<Integer> list) {
-    	Connection conn = null;
-    	String result = null;
-    	int row = 0;
-       
-    	try {
-	        for(int oId : list) {
-	        	conn = ds.getConnection();
-        		row = orderDao.deleteOrders(conn, oId);
-        		if(row==1) {
-        			result += oId + "번 주문 취소를 성공하였습니다. \n";
-        		} else {
-        			result += oId + "번 주문 취소를 실패하였습니다. \n";
-        		}
-	        }
-    	} catch(Exception e) {
-    		e.printStackTrace();
-    	} finally {
-			try { conn.close();} catch (SQLException e) {}
+	public int cancelOrders(int ordersId) {
+		Connection conn = null;
+		int row = 0;
+		try {
+			conn = ds.getConnection();
+			row = orderDao.deleteOrders(conn, ordersId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close(); } catch (SQLException e) {}
 		}
 
-    	return result;
-    }
+		return row;
+	}
 	
 }

@@ -89,7 +89,8 @@ public class OrderDao {
 	
 	
 	// 주문 등록하기 
-	public int insertOrder(Connection conn, String uId, int totalPrice, int quantity) throws SQLException {	
+	public int insertOrder(Connection conn, String uId, int totalPrice, int quantity) throws Exception {	
+		System.out.println("OrderDao-insertOrder 들어옴 !!");
 		PreparedStatement pstmt = null;
 		int oid = 0;
 		
