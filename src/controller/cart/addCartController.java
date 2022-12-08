@@ -21,17 +21,19 @@ public class addCartController extends HttpServlet {
 		System.out.println(request.getParameter("color"));
 		System.out.println(request.getParameter("size"));
 		System.out.println(request.getParameter("productId"));
+		System.out.println(request.getParameter("quantity"));
 		
 		int color = Integer.parseInt((String)request.getParameter("color"));
 		int size = Integer.parseInt((String)request.getParameter("size"));
 		int productId = Integer.parseInt((String)request.getParameter("productId"));
+		int quantity = Integer.parseInt((String)request.getParameter("quantity"));
 		
 		HttpSession session = request.getSession();
 		
 		// 세션에 데이터(객체)를 저장
 		String loginId = (String) session.getAttribute("loginId");
 		
-		OrderDto orderDto = new OrderDto(loginId,productId, color, size, 1); 
+		OrderDto orderDto = new OrderDto(loginId,productId, color, size, quantity); 
 		CartDetailService cartDetailService = (CartDetailService) request.getServletContext().getAttribute("cartDetailService");
 		String s = cartDetailService.addCartDetail(orderDto);
 		System.out.println(s);

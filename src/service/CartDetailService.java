@@ -91,20 +91,13 @@ public class CartDetailService {
 	}
 
 	// 장바구니 항목 1삭제
-	public void removeCartDetailOneForOrder(Connection conn, String userId, int cdId) {
-		try {
-			CartDetail cd = getCartDetailOne(conn, cdId);
-			int mp = cd.getProduct().getProductPrice() * cd.getQuantity();
-			int mq = cd.getQuantity();
-			cartDetailDao.removeCartDetailOne(conn, cdId);
-			cartService.refreshCart(conn, userId, -mp, -mq);
+	public void removeCartDetailOneForOrder(Connection conn, String userId, int cdId) throws Exception {
 
-		} catch (Exception e) {
-			try {
-				throw new Exception();
-			} catch (Exception e1) {
-			}
-		}
+		CartDetail cd = getCartDetailOne(conn, cdId);
+		int mp = cd.getProduct().getProductPrice() * cd.getQuantity();
+		int mq = cd.getQuantity();
+		cartDetailDao.removeCartDetailOne(conn, cdId);
+		cartService.refreshCart(conn, userId, -mp, -mq);
 	}
 
 	// 장바구니 항목 1삭제

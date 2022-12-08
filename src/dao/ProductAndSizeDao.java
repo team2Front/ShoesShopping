@@ -53,7 +53,7 @@ public class ProductAndSizeDao {
 		String sql = "select size_id from product_size where product_id=? and size_id=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, productId);
-		pstmt.setInt(1, size);
+		pstmt.setInt(2, size);
 		
 		boolean result = false;
 

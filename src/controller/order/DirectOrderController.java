@@ -1,8 +1,6 @@
 package controller.order;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
-
-import domain.CartDetail;
+import dto.OrderDto;
 import service.CartDetailService;
 import service.OrdersDetailService;
 
@@ -23,48 +19,28 @@ public class DirectOrderController extends HttpServlet {
        
 	// 상품상세->주문으로 넘어가는 컨트롤러
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		String arrDid = request.getParameter("arrDid");
-		//선택된 cartDetail ID가 담긴 배열
-		JSONArray cartDetailIdArr = new JSONArray(arrDid);			
-		List<Object> orderDetailList = new ArrayList<>();
+		System.out.println("add cart ~");
+		System.out.println(request.getParameter("color"));
+		System.out.println(request.getParameter("size"));
+		System.out.println(request.getParameter("productId"));
+		System.out.println(request.getParameter("quantity"));
 		
-		for(Object cdId : cartDetailIdArr) { 
-			orderDetailList.add(cdId);
-		}
-		
+		int color = Integer.parseInt((String)request.getParameter("color"));
+		int size = Integer.parseInt((String)request.getParameter("size"));
+		int productId = Integer.parseInt((String)request.getParameter("productId"));
+		int quantity = Integer.parseInt((String)request.getParameter("quantity"));
 		HttpSession session = request.getSession();
-		session.setAttribute("orderDetailList", orderDetailList);
-		request.getRequestDispatcher("/WEB-INF/views/order/orderForm.jsp").forward(request, response);
+		String loginId = (String) session.getAttribute("loginId");
+
+		
+		OrdersDetailService ordersDetailService = (OrdersDetailService) request.getServletContext().getAttribute("ordersDetailService");
+		
+		OrderDto orderDto = new OrderDto(loginId,productId, color, size, quantity); 
+		
+		ordersDetailService.addProductToOrder(orderDto);
 		
 	}
 	
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-//		HttpSession session = request.getSession();
-//		List<Object> orderDetailList = (List<Object>) session.getAttribute("orderDetailList");		
-//		
-//		CartDetailService cartDetailService = (CartDetailService) request.getServletContext().getAttribute("cartDetailService");
-//		
-//		List<CartDetail> list = new ArrayList<>();
-//		
-//		int totalPrice = 0;
-//		int totalQuantity = 0;
-//		for(Object cdId : orderDetailList) { 
-//			totalQuantity++;
-//			CartDetail cd = cartDetailService.getCartDetail(Integer.parseInt((String) cdId));
-//			totalPrice += cd.getQuantity() * cd.getProduct().getProductPrice();
-//			
-//			list.add(cd);
-//		}
-//		
-//		request.setAttribute("list", list);
-//		request.setAttribute("totalQuantity", totalQuantity);
-//		request.setAttribute("totalPrice", totalPrice);
-////		OrdersDetailService ordersDetailService = (OrdersDetailService) request.getServletContext().getAttribute("ordersDetailService");
-////		ordersDetailService.addCartDetailsToOrder((String) session.getAttribute("loginId"), orderDetailList);
-//		
-//		
-//		request.getRequestDispatcher("/WEB-INF/views/order/orderForm.jsp").forward(request, response);
-//		
-//	}
+
 	
 }

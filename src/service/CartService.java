@@ -56,17 +56,31 @@ public class CartService {
 	   return cartDto;
     	
     }
+    
+  //장바구니에 담긴 상품들 ,총 수량, 총 금액 보여준다.
+    public CartDto showCart2(Connection conn, String userId) throws Exception {
+    	CartDto cartDto = null;
+   			
+		cartDto = cartDao.selectCart(conn, userId);
+		CartDetailDto cdto = new CartDetailDto();
+		//cart detail 정보 가져오기
+		List<CartDetail> cdList = cartDetailDao.selectCartDetails(conn,userId);
+		
+		List<CartDetailDto> list = cdto.toCartDetailDtoList(cdList);
+		cartDto.setCartDetailDtoList(list);
+    		
+	   return cartDto;
+    	
+    }
 		
 	//장바구니의 총 수량, 금액  수정
-   public void refreshCart(Connection conn, String userId, int totalPrice, int quantity){
+   public void refreshCart(Connection conn, String userId, int totalPrice, int quantity) throws Exception{
 	   // 기존의 수량, 가격 가져오기
 	   CartDto cd;
-	try {
-		cd = showCart(userId);
+		cd = showCart2(conn, userId);
 		
 		System.out.println("~~~~~~~~~~~~~~~~~  a");
-		
-		
+			
 		int p = cd.getTotalPrice();
 		int q = cd.getTotalQuantity();
 		
@@ -78,11 +92,6 @@ public class CartService {
 		cartDao.updateCart(conn, userId, np, nq);
 		
 		System.out.println("~~~~~~~~~~~~~~~~~  c :" + np);
-		
-	} catch (Exception e) {
-		e.printStackTrace();
-		throw new RuntimeException(e);
-	}
    }
 
 }

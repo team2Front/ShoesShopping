@@ -83,6 +83,7 @@ public class OrderDetailDao {
 			
 			// order 테이블에 정보 삽입  orders_id 값 받아오기
 			int oId = orderDao.insertOrder(conn, userId, totalPrice, quantity);
+			System.out.println("~~~~~~~~~~~~  oid: " + oId);
 			
 			//oder details 테이블에 데이터 삽입하기 
 			String sql ="insert into orders_detail (orders_detail_id, product_id, orders_id, quantity, size_id, color_id) values(ordersDetail_seq.nextval, ?, ?, ?, ?, ?)";
