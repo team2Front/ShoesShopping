@@ -1,53 +1,112 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-	<%@ include file="/WEB-INF/views/fragment/head.jsp" %>	
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/shoescolors.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/customCheckbox.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/customRadio.css">
-	
-	<script src="${pageContext.request.contextPath}/resources/javascript/review_qna.js"></script>
-	
-<!--   	<script>
- 		function productInfo() {
-			$("#tab-content").empty();
-		} 
-	</script> -->
-	
+<%@ include file="/WEB-INF/views/fragment/head.jsp"%>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/shoescolors.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/customCheckbox.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/customRadio.css">
+
+<script src="${pageContext.request.contextPath}/resources/javascript/review_qna.js"></script>
+
 	<style>
-		 * { 
-/* 		 	border: 1px solid black;  */
-		 }
-		 
-		 .shoes-images-review {
-		 	width:100px;
-		 	height:100px;
-		 }
-		 
-		 li{
-         text-align: left;
-         list-style: none;
-         }
-         
-         .n-row{
-            display: flex;
-            padding:10px;
-         }
-         
-         .table td, th{
-         text-align: center;
-          vertical-align: middle;
-         }
-		</style>
+	* {
+		/* 		 	border: 1px solid black;  */
 		
-		<script>
-			$(document).ready(function(){
-			  //실행내용
-			})
-		</script>
-		
-	</head>
+	}
+	
+	.shoes-images-review {
+		width: 100px;
+		height: 100px;
+	}
+	
+	li {
+		text-align: left;
+		list-style: none;
+	}
+	
+	.n-row {
+		display: flex;
+		padding: 10px;
+	}
+	
+	.table td, th {
+		text-align: center;
+		vertical-align: middle;
+	}
+	</style>
+	<script>
+	// 사이즈, 선택 모두 선택시에만 장바구니에 담기기
+		function addToCart() {
+			var color = $("input[name=colorOption]:checked").val();
+			var size = $("input[name=sizeOption]:checked").val();
+			var quantity =  $("input[name=quantity]").val();
+			console.log("quantity  : " + quantity);
+			
+			var url = new URL(window.location.href);
+			var urlParam = url.searchParams;
+			var pId = urlParam.get("productId");
+			console.log(pId);	
+			
+			
+			if(color != null && size != null){
+				$.ajax({
+					type : 'POST',  //get방식으로 통신
+					url : "/shopping/cart/addCartController", //탭의 data-tab속성의 값으로 된 html파일로 통신
+					data: {color: color, size: size, productId: pId, quantity: quantity},
+					error : function() { //통신 실패시
+						console.log('통신실패!');
+					},
+					success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+						console.log("통신 성공 ~~~~~~~~~~~~~~~~");
+						$("#putCart").click(function() {
+							console.log("!!!!");
+						    $(".modals").fadeIn();
+						});	
+					
+					}
+				});
+			} else {
+				$("#putCart").click(function() {
+				    $(".modals").fadeOut();
+				});	          
+	
+			}
+		}
+			
+		function goOrder(pId) {
+			var color = $("input[name=colorOption]:checked").val();
+			var size = $("input[name=sizeOption]:checked").val();
+			var quantity =  $("input[name=quantity]").val();
+			console.log("quantity  : " + quantity);
+			console.log(pId);	
+			
+			
+			if(color != null && size != null){
+				$.ajax({
+					type : 'POST',  //get방식으로 통신
+					url : "/shopping/order/DirectOrderController", //탭의 data-tab속성의 값으로 된 html파일로 통신
+					data: {color: color, size: size, productId: pId, quantity: quantity},
+					error : function() { //통신 실패시
+						console.log('통신실패!');
+					},
+					success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+						console.log("통신 성공 ~~~~~~~~~~~~~~~~");
+						location.href="/shopping/mypage/MyOrderController";  
+					}
+				});
+			} else {
+				console("사이즈, 색상 선택 확인 !!");         
+	
+			}
+		}
+	</script>
+</head>
 	
 	<%@ include file="/WEB-INF/views/fragment/nav.jsp" %>
 	

@@ -30,7 +30,7 @@ public class OrdersDetailService {
 	
 	
 	// 하나의 상품 구매하기 (하나의 orders_detail 생성하는 로직)
-	public String addProductToOrder(OrderDto od) throws SQLException {
+	public String addProductToOrder(OrderDto od){
 		Connection conn = null;
 		int rows = 0;
 		String result = "";
@@ -104,24 +104,20 @@ public class OrdersDetailService {
 	
 	// 장바구니 상품 하나(씩) 주문하기
 	// 주문되면 장바구니에서 제거해야 된다.
-	public String cartDetailToOrderDetail(Connection conn, String userId, int oId, int cartDetailId) {		
+	public String cartDetailToOrderDetail(Connection conn, String userId, int oId, int cartDetailId) throws Exception {		
 		int rows = 0;
 		String result = "";
 		CartDetail cartDetail = cartDetailService.getCartDetailOne(conn, cartDetailId);
 		
 		// 장바구니 상품1을 주문한다. -> orders_detail 테이블에 삽입된다.
-		try {
-			rows = orderDetailDao.insertCartDetailToOrderDetail(conn, userId, oId, cartDetail);
+		rows = orderDetailDao.insertCartDetailToOrderDetail(conn, userId, oId, cartDetail);
 
-			// 주문이 되면 장바구니에서 제거해야 된다.
-			if(rows == 1) {
-				result =  cartDetailId + "번 장바구니 상품이 주문완료되었습니다. \n";
-			}
-			else  result =  cartDetailId + "번 장바구니 상품 주문에 실패되었습니다. \n"; 		
+		// 주문이 되면 장바구니에서 제거해야 된다.
+		if(rows == 1) {
+			result =  cartDetailId + "번 장바구니 상품이 주문완료되었습니다. \n";
+		}
+		else  result =  cartDetailId + "번 장바구니 상품 주문에 실패되었습니다. \n"; 		
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
 		return result;
 	}
 

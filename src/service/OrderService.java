@@ -60,7 +60,7 @@ public class OrderService {
 	}		
 	
 	// 주문을 등록하고 등록된 id 값을 받아와서 리턴한다.
-	public int addOrder(Connection conn, String uId, int totalPrice, int quantity) throws SQLException {
+	public int addOrder(Connection conn, String uId, int totalPrice, int quantity) throws Exception {
 		int oId =  orderDao.insertOrder(conn, uId, totalPrice, quantity);
 		return oId;
 	}

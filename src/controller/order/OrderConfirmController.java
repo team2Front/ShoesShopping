@@ -29,10 +29,9 @@ public class OrderConfirmController extends HttpServlet {
 		System.out.println(orderDetailList);
 		
 		OrdersDetailService ordersDetailService = (OrdersDetailService) request.getServletContext().getAttribute("ordersDetailService");
-//		ordersDetailService.addCartDetailsToOrder((String) session.getAttribute("loginId"), orderDetailList);
-		ordersDetailService.addCartDetailsToOrder("winter", orderDetailList);
+		ordersDetailService.addCartDetailsToOrder((String) session.getAttribute("loginId"), orderDetailList);
 		
-//		response.sendRedirect("/mypage/MyOrderController");
+		response.sendRedirect("/mypage/MyOrderController");
 		
 		
 		

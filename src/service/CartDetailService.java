@@ -66,8 +66,13 @@ public class CartDetailService {
 				result = od.getProductId() + "번 상품을 장바구니에 담는데 실패했습니다.";
 				e.printStackTrace();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			}finally {
+				if (conn != null)
+					try {
+						conn.close();
+					} catch (Exception e2) {
+					}
 			}
 		}
 
@@ -86,20 +91,13 @@ public class CartDetailService {
 	}
 
 	// 장바구니 항목 1삭제
-	public void removeCartDetailOneForOrder(Connection conn, String userId, int cdId) {
-		try {
-			CartDetail cd = getCartDetailOne(conn, cdId);
-			int mp = cd.getProduct().getProductPrice() * cd.getQuantity();
-			int mq = cd.getQuantity();
-			cartDetailDao.removeCartDetailOne(conn, cdId);
-			cartService.refreshCart(conn, userId, -mp, -mq);
+	public void removeCartDetailOneForOrder(Connection conn, String userId, int cdId) throws Exception {
 
-		} catch (Exception e) {
-			try {
-				throw new Exception();
-			} catch (Exception e1) {
-			}
-		}
+		CartDetail cd = getCartDetailOne(conn, cdId);
+		int mp = cd.getProduct().getProductPrice() * cd.getQuantity();
+		int mq = cd.getQuantity();
+		cartDetailDao.removeCartDetailOne(conn, cdId);
+		cartService.refreshCart(conn, userId, -mp, -mq);
 	}
 
 	// 장바구니 항목 1삭제
@@ -211,9 +209,7 @@ public class CartDetailService {
 			int p = cd.getProduct().getProductPrice() * q;
 			// 새로운 변경사항 반영하기
 			cartDetailDao.updateQuantity(conn, cartDetailId, quantity);
-			
-//			System.out.println("~~~~~~~~~~  row : " + row);
-			
+						
 			System.out.println("~~~~~~~~~~~~~~~~~  2");
 			// cart 의 총 수량, 금액 변경하기
 			int rq = -xquantity + quantity;

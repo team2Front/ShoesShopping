@@ -75,13 +75,11 @@
 									바로 구매</button>
 							</div>
 							<div style="margin: 10px 0px 10px 30px">
-								<button type="button" class="btn-dark" style="width: 100px">
-									삭제</button>
+								<form method="post" id="delete" action="DeleteController?cartDetailId=${cartDetail.cart_detail_id}">
+									<button class="btn btn-ingo btn-sm btn-dark" style="width: 100px"> 삭제</button>
+								</form>
 							</div>
-							<form method="post" id="delete" action="DeleteController?cartDetailId=${cartDetail.cart_detail_id}">
-								<button class="btn btn-ingo btn-sm btn-dark"> 삭제</button>
-							</form>
-						</div>
+						</div> 
 					</div>
 				</c:forEach>
 			</div>
