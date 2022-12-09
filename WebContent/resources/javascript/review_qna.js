@@ -97,17 +97,28 @@ $(document).ready(function() {
 	});
 });
 
-/* 댓글작성 후, 전송*/
-function replyPost() {
+/* 댓글작성한 내용 컨트롤러로 보내기 전에, 로그인여부 확인*/
+function writeReplyFun() {
+	let rId = $("#reviewId").val()
+	let rContent = $("#writeReply").val()
+	console.log(rId);
+	console.log(rContent);
+	
 	event.cancelBubble = true;
+	
 	$.ajax({
 		type : 'POST',
-		url : "/shopping/review/WriteReplyController", //탭의 data-tab속성의 값으로 된 html파일로 통신
+		url : "/shopping/review/WriteReplyController",
+		data : {reviewId: rId, writeReply: rContent},
 		error : function() {
 			alert('통신실패!');
 		},
 		success : function(data) {
-			console.log(data);
+			if(data==0) {
+				$('#checkModal').modal("show");
+			} else if(data==1) {
+				$("#addReply" + rId).html('<a class="btn btn-outline-danger btn-sm mt-3" onclick="good()">좋아요  <b>' + data + '</b> </a>');
+			}
 		}
 	});
 }

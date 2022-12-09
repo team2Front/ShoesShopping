@@ -14,7 +14,7 @@ public class ReplyDao {
    
    public int insertReviewReply(Connection conn, RReply rreply) throws SQLException {
       String sql = "INSERT INTO reply (reply_id, reply_content, user_id, reply_date, review_id)"
-            + "values(REPLY_SEQ.NEXTVAL,?,?,default,?)";
+            + "values(REPLY_SEQ.NEXTVAL,?,?,sysdate,?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, rreply.getReplyContent());
       pstmt.setString(2, rreply.getUserId());

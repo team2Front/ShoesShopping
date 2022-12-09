@@ -22,11 +22,12 @@ public class ReplyService {
    }
    
    //리뷰 댓글달기
-   public String writeReviewReply(RReply rreply) throws SQLException {
+   public String writeReviewReply(RReply rreply) {
 	  String result = "";
 	  Connection conn = null;
 	  try {
 			conn = ds.getConnection();
+			System.out.println("dafsdfadf");
 			int r = replyDao.insertReviewReply(conn, rreply);
 	        if(r==1) {
 	           result = "댓글이 등록되었습니다";           
