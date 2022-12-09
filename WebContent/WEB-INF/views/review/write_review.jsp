@@ -44,8 +44,7 @@
 							      		<!-- 이부분은 product 객체를 받아올 수 있도록 해야함! -->
 								      	<ul class="info" style="margin-left: 0px; padding-left: 0px;">
 											<li class="name"> <strong>상품명: </strong>${product.productName}</li>
-											<li class="option"> <strong>색상: </strong> 검정</li>
-											<li class="option"> <strong>사이즈: </strong> 250</li>
+											<li class="option"> <strong>회사: </strong>${product.company}</li>
 										</ul>
 									</td>
 							      </tr>
