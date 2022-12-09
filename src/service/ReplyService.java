@@ -27,7 +27,6 @@ public class ReplyService {
 	  Connection conn = null;
 	  try {
 			conn = ds.getConnection();
-			System.out.println("dafsdfadf");
 			int r = replyDao.insertReviewReply(conn, rreply);
 	        if(r==1) {
 	           result = "댓글이 등록되었습니다";           

@@ -4,6 +4,26 @@ function productInfo(){
 	$("#shoes-detail").show();
 }
 
+/* 상품페이지 - [로그인_모달창] */
+function loginComplete() {
+	let userId = $("#uid").val();
+	let userPw = $("#upassword").val();
+	
+	$.ajax({
+		type : 'POST',
+		url : "/shopping/user/LoginSessionController", 
+		data : {uid: userId, upassword: userPw},		
+		error : function() { //통신 실패시
+			alert('통신실패!');
+		},
+		success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+			location.reload();
+		}
+	});
+}
+
+
+
 /*================================[ 상품페이지 - Review ]==================================*/
 /* 상품페이지 - [리뷰 목록] */
 function productReview(i) {
@@ -98,10 +118,9 @@ $(document).ready(function() {
 });
 
 /* 댓글작성한 내용 컨트롤러로 보내기 전에, 로그인여부 확인*/
-function writeReplyFun() {
-	let rId = $("#reviewId").val()
-	let rContent = $("#writeReply").val()
-	console.log(rId);
+function writeReplyFun(i) {
+	let rContent = $("#writeReply"+i).val()
+	console.log(i);
 	console.log(rContent);
 	
 	event.cancelBubble = true;
@@ -109,15 +128,30 @@ function writeReplyFun() {
 	$.ajax({
 		type : 'POST',
 		url : "/shopping/review/WriteReplyController",
-		data : {reviewId: rId, writeReply: rContent},
+		data : {reviewId: i, writeReply: rContent},
 		error : function() {
 			alert('통신실패!');
 		},
 		success : function(data) {
 			if(data==0) {
 				$('#checkModal').modal("show");
-			} else if(data==1) {
-				$("#addReply" + rId).html('<a class="btn btn-outline-danger btn-sm mt-3" onclick="good()">좋아요  <b>' + data + '</b> </a>');
+			} else {
+				//json 데이터 파싱
+				const json = JSON.parse(data);
+				
+				let replyC = json.replyContent;
+				let uId = json.userId;
+				
+				let replyD = json.replyDate;
+				let today = new Date();
+				let dateFormat = today.getFullYear() + "." + (today.getMonth()+1) + "." + today.getDate();
+				
+				$("#noReplyDiv" + i ).css("display", "none");
+				
+				$("#addReply"+i).append('<div class="mb-3">'
+											+ '<div>'+ replyC + '</div>'
+											+ '<span class="small text-success font-weight-bold">' + uId + '&nbsp;&nbsp;</span>'
+											+ '<span class="small text-muted">'+ dateFormat +'</span></div>');
 			}
 		}
 	});

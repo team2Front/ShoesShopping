@@ -22,7 +22,7 @@
 	#writeReplyDiv i {
 		position : absolute;
   		width: 17px;
-  		top: 25px;
+  		top: 28px;
   		right: 12px;
   		margin: 0;
 	}
@@ -92,14 +92,13 @@
 	         					<hr class="mt-3 mb-2">
 								
 								<!-- 댓글작성 -->
-								<form id="writeReplyForm" name="writeReplyForm" method="post" novalidate>
+								<form id="writeReplyForm" name="writeReplyForm" method="post" class="d-flex">
 					      			<div id="writeReplyDiv" class="form-group form-floating">
-					      				<label class="font-weight-bold" for="writeReply"></label>
-					      				<input type="text" class="form-control" placeholder="댓글을 입력해주세요" id="writeReply" name="writeReply"/>
-										<input type="text" name="reviewId" id="reviewId" value="${item.reviewId}" style="display:none"/>
+					      				<label class="font-weight-bold" for="writeReply${item.reviewId}"></label>
+					      				<input type="text" class="form-control" placeholder="댓글을 입력해주세요" id="writeReply${item.reviewId}" name="writeReply"/>
 										<i class="bi bi-pencil-fill"></i>
 									</div>
-									<button type="button" onclick="writeReplyFun()" class="btn btn-secondary btn-sm">작성</button>
+									<button type="button" onclick="writeReplyFun(${item.reviewId})" class="btn btn-warning btn-sm ml-1 mt-4" style="height:35px;"><b>작성</b></button>
 								</form>
 								
 								<!-- 댓글목록 -->
@@ -111,12 +110,15 @@
 											<span class="small text-muted"><fmt:formatDate value="${reply.replyDate}" pattern="yyyy.MM.dd"/></span> 
 										</div>
 									</c:forEach>
-									<!-- 새로 작성한 댓글 -->
-									<div id="addReply${item.reviewId}" class="mb-3"></div>
 								</c:if>
 								<c:if test="${empty item.review.replyList}">
-									작성된 댓글이 없습니다!
+									<div id="noReplyDiv${item.reviewId}" style="display:block;  ">작성된 댓글이 없습니다!</div>
 								</c:if>
+								
+								<!-- 새로 작성한 댓글 -->
+								<div id="addReply${item.reviewId}" class="mb-3">
+									<!-- 여기에 추가될거지롱~ -->
+								</div>
          					</div>
 		         		</div>
          			</td>
@@ -154,20 +156,49 @@
          </tbody>
       </table>
       
-      <!-- 로그인되어있지 않고 댓글을 작성하려는 경우 뜨는 모달창  -->
+      <!-- 로그인되어있지 않고 댓글을 작성하려는 경우 뜨는 모달창(로그인폼)  -->
 	  <div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	     <div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">로그인이 안되어있어요😅</h5>
-					<!-- <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">X</span>
-					</button> -->
+					</button>
 				</div>
-				<div class="modal-body">로그인 후 댓글작성이 가능합니다.</div>
+				<div class="modal-body">
+					<!-- 로그인 폼 -->
+					<div style="width: 400px; margin: auto; margin-top: 30px">
+						<img src="../resources/images/sashoes_logo.png" style="width: 100%" />
+					</div>
+					<div class="card mt-2" style="width: 400px; margin: auto;">
+						<div class="card-header" style="text-align:center"><h4 style="margin:auto"></h4></div>
+						<div class="card-body">
+							<form method="post">
+								<div class="form-group">
+									<label for="uid">아이디</label> <input type="text" class="form-control"
+										id="uid" name="uid">
+								</div>
+								<div class="form-group">
+									<label for="upassword">Password</label> 
+									<input type="password" class="form-control" id="upassword" name="upassword">
+								</div>
+								<button type="button" onclick="loginComplete()" class="btn btn-warning" style="width: 100%">로그인</button>
+							</form>
+							<div class="form-group">
+								<button type="submit" class="btn btn-dark mt-3" style="width: 49%" onclick="location.href='${pageContext.request.contextPath}/user/JoinFormController'">
+									회원 가입
+								</button>
+								<button type="submit" class="btn btn-dark mt-3" style="width: 49%" onclick="location.href='${pageContext.request.contextPath}'">
+									홈으로
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="modal-footer">
-					<a class="btn btn-warning" id="modalY" href="${pageContext.request.contextPath}/user/LoginSessionController">로그인</a>
-					<button class="btn btn-outline-dark" type="button" data-dismiss="modal">아니요</button>
+					<%-- <a class="btn btn-warning" id="modalY" href="${pageContext.request.contextPath}/user/LoginSessionController">로그인</a> --%>
+					<!-- <button class="btn btn-outline-dark" type="button" data-dismiss="modal">아니요</button> -->
 				</div>
 			</div>
 		  </div>
