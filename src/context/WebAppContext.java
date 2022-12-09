@@ -92,7 +92,10 @@ public class WebAppContext implements ServletContextListener{
 		application.setAttribute("qnaService", new QnAService(application));
 		application.setAttribute("replyService", new ReplyService(application));
 		application.setAttribute("reviewService", new ReviewService(application));
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/team2Front/ShoesShopping.git
 	
 	}
 }

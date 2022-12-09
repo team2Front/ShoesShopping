@@ -2,7 +2,6 @@
 
 <%@ include file="/WEB-INF/views/fragment/head.jsp" %>
 	<script src="../resources/javascript/review_qna.js"></script>
-		
 	</head>
 
 	<%@ include file="/WEB-INF/views/fragment/nav.jsp" %>	
@@ -29,7 +28,7 @@
 							<li> - 개인정보 및 광고, 비속어가 포함된 내용의 후기 (비노출 대상)</li>
 						</ul>
 						
-						<form method="post" action="WriteReviewController" enctype="multipart/form-data">
+						<form method="post" action="WriteReviewController?productId=${product.productId}" enctype="multipart/form-data">
 							<table class="table">
 							    <thead class="table-dark">
 							      <tr>
@@ -44,8 +43,7 @@
 							      		<!-- 이부분은 product 객체를 받아올 수 있도록 해야함! -->
 								      	<ul class="info" style="margin-left: 0px; padding-left: 0px;">
 											<li class="name"> <strong>상품명: </strong>${product.productName}</li>
-											<li class="option"> <strong>색상: </strong> 검정</li>
-											<li class="option"> <strong>사이즈: </strong> 250</li>
+											<li class="option"> <strong>회사: </strong>${product.company}</li>
 										</ul>
 									</td>
 							      </tr>
@@ -54,10 +52,7 @@
 							      	<td>사진</td>
 							        <td colspan="2" >
 								       <div align="left" class="form-group filebox">
-											<input class="upload-name" value="파일선택" disabled="disabled">
-											
-							        		<label class="btn btn-outline-secondary btn-sm" for="rattach">사진 첨부</label>
-											<input type="file" id="rattach" name="rattach" class="upload-hidden" style="display: none;"/>
+											<input type="file" id="reviewattach" name="reviewattach" class="from-control-file"/>
 										</div>
 						        	</td>
 							      </tr>
@@ -67,7 +62,7 @@
 							        <td id="review-point" colspan="2">
 								        <div class="star-block d-flex justify-content-left" style="width:800px; margin: 20px auto 20px auto;">
 								        	<div class="input-group">
-										        <select class="form-select" id="star">
+										        <select class="form-select" id="star" name="star" onchange="starFn()">
 										            <option selected>-- 선택하기 --</option>
 										            <option value="1">⭐</option>
 										            <option value="2">⭐⭐</option>
@@ -90,13 +85,14 @@
 									        </div>
 									        <div class="form-floating mb-5">
 										        <label for="floatingTextarea2">내용</label>
-										        <textarea id="review-content" class="form-control" placeholder="Leave a comment here"></textarea>
+										        <textarea id="reviewContent" class="form-control" placeholder="Leave a comment here" name="reviewContent"></textarea>
 										    </div>
 									    </div>
 							        </td>
 							      </tr>
 							    </tbody>
 						  	</table>
+						  	
 						  	<button type="submit" class="btn btn-warning">게시물쓰기</button>
 					  	</form>
 				  	</div>

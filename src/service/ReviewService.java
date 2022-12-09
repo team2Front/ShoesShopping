@@ -118,25 +118,23 @@ public class ReviewService {
    }
    
    //리뷰 작성
-   public String writeReview(Review review){
+   public int writeReview(Review review, int productId){
 		Connection conn = null;
-	      int r = 0;
-	      String result = "";
-	      
-	      try {
-	    	 conn = ds.getConnection();
-	         r = reviewDao.insertReview(conn, review);
-	         if (r == 1) {
-	            result = "게시물이 등록되었습니다";
-	         }
-	      } catch (Exception e) {
-	    	  result = "게시물이 등록되지 않았습니다";
-	    	  e.printStackTrace();
-	      } finally {
-				try{conn.close();}catch(Exception e) {}
-	      }			
-	      return result;
-   	}
+		int result = 0;
+		try {
+			System.out.println("writeReviewService입니다.");
+			conn = ds.getConnection();
+			result = reviewDao.insertReview(conn, review, productId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return result;
+	}
    
 /*   //리뷰 작성
    public String writeReview(Review review) throws SQLException {

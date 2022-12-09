@@ -188,7 +188,6 @@
 											<c:if test="${user.filename != null}">
 												<img src="${pageContext.request.contextPath}/mypage/ImageController?userId=${loginId}" style="width:100px; height:100px; margin: auto"/>
 											</c:if>
-											
 										</div>
 									</td>
 									<td>
