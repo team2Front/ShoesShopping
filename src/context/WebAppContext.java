@@ -66,8 +66,9 @@ public class WebAppContext implements ServletContextListener{
 		
 		application.setAttribute("userDao", new UserDao(application));
 		
-		application.setAttribute("orderDetailDao", new OrderDetailDao(application));
 		application.setAttribute("orderDao", new OrderDao(application));
+		application.setAttribute("orderDetailDao", new OrderDetailDao(application));
+		application.setAttribute("myOrderDao", new OrderDao(application));
 		
 		application.setAttribute("qnaDao", new QnaDao(application));
 		application.setAttribute("replyDao", new ReplyDao());
@@ -85,8 +86,8 @@ public class WebAppContext implements ServletContextListener{
 		
 		application.setAttribute("userService", new UserService(application));
 
-		application.setAttribute("ordersDetailService", new OrdersDetailService(application));
 		application.setAttribute("orderService", new OrderService(application));
+		application.setAttribute("ordersDetailService", new OrdersDetailService(application));
 		
 		application.setAttribute("qnaService", new QnAService(application));
 		application.setAttribute("replyService", new ReplyService(application));

@@ -13,6 +13,7 @@ import javax.servlet.http.Part;
 
 import domain.Product;
 import domain.Review;
+import service.ProductService;
 import service.ReviewService;
 
 @WebServlet(name = "review.WriteReviewController", urlPatterns="/review/WriteReviewController")
@@ -21,19 +22,13 @@ public class WriteReviewController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//review 100개 생성하기
-		/*ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
-		for(int i=0; i<20; i++) {
-			Review review = new Review();
-			
-			review.setReviewTitle("리뷰제목" + i);
-			review.setReviewContent("리뷰내용" + i);
-			review.setReviewDate(new Date());
-			review.setUserId("song");
-			review.setStarScore(5);
-			reviewService.writeReview(review);
-			//boardService.write2(board);
-		}*/
+		int productId = Integer.parseInt(request.getParameter("productId"));
+		
+		ProductService productService = (ProductService) request.getServletContext().getAttribute("productService");
+		
+		Product product = productService.showOneProduct(productId);
+		
+		request.setAttribute("product", product);
 		
 		request.getRequestDispatcher("/WEB-INF/views/review/write_review.jsp").forward(request, response);
 	}
