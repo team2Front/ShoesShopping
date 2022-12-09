@@ -162,7 +162,7 @@
 								</c:if>
 										<div id="buttons" class="d-flex flex-column">
 											<a class="btn btn-secondary btn-sm mb-1 mt-1" type="button" href="${pageContext.request.contextPath}/mypage/PayBackController?ordersId=${Orders.ordersId}">환불 요청</a>
-											<a class="btn btn-secondary btn-sm" type="button" href="${pageContext.request.contextPath}/mypage/MyOrderDetailController?orderId=${Orders.ordersId}">후기 작성</a>
+											<a class="btn btn-secondary btn-sm" type="button" href="${pageContext.request.contextPath}/mypage/MyOrderDetailController?orderId=${Orders.ordersId}">상세 보기</a>
 										</div></td>
 								</tr>
 							</c:forEach>
