@@ -46,10 +46,6 @@ public class MyOrderController extends HttpServlet {
 		// 해당 PageNo에 해당하는 게시물 가져오기
 		List<Orders> orderList = orderService.myshowOrders(loginId, pagingVo);
 		
-		
-		
-		System.out.println(orderList);
-		
 		request.setAttribute("pager", pagingVo);
 		request.setAttribute("orderList", orderList);
 		

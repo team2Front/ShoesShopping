@@ -127,77 +127,65 @@
 						<tr>
 							<th scope="col">NO</th>
 							<th scope="col">상품정보</th>
-							<th scope="col">주문일자</th>
 							<th scope="col">주문번호</th>
 							<th scope="col">주문금액(수량)</th>
 							<th scope="col" colspan="2">주문상태</th>
 						<tr>
 						</thead>
 						<tbody class="table-group-divider">
-							<c:forEach var="Orders" items="${orderList}" varStatus="status">
+							<c:forEach var="OrdersDetail" items="${orderDetailList}" varStatus="status">
 								<tr>
 									<th scope="row">${status.count}</th>
 									<td>
 										<div class="n-row">
 											<ul class="info">
-												<c:forEach var="OrdeDetailDto" begin="0" end="0" items="${Orders.ordersDetailList}">
-													<li class="brand">${OrdeDetailDto.product.productName}</li>
-													<li class="name">${OrdeDetailDto.color}</li>
-													<li class="option">${OrdeDetailDto.size_id}</li>
-													<li>외 ${Orders.quantity-1}</li>
-												</c:forEach>
+												<li class="brand">${OrdersDetail.product.productName}</li>
+												<li class="name">${OrdersDetail.color}</li>
+												<li class="option">${OrdersDetail.size_id}</li>
 											</ul>
 										</div>
 									</td>
-									<td>${Orders.ordersDate}</td>
-									<td>${Orders.ordersId}</td>
-									<td>${Orders.totalPrice}<br>
-										<span class="txt-default">${Orders.quantity}</span>
+									<td>${OrdersDetail.ordersDetailId}</td>
+									<td>${OrdersDetail.quantity}<br>
+										<span class="txt-default">${OrdersDetail.product.productPrice * OrdersDetail.quantity}</span>
 									</td>
-									<td style="text-align: center; padding: 20px;"><c:if
-											test="${Orders.ordersIsDeleted == true}">
-									환불 완료
-								</c:if> <c:if test="${Orders.ordersIsDeleted == false}">
-									구매 완료
-								</c:if>
+									<td style="text-align: center; padding: 20px;">
 										<div id="buttons" class="d-flex flex-column">
-											<a class="btn btn-secondary btn-sm mb-1 mt-1" type="button" href="${pageContext.request.contextPath}/mypage/PayBackController?ordersId=${Orders.ordersId}">환불 요청</a>
-											<a class="btn btn-secondary btn-sm" type="button" href="${pageContext.request.contextPath}/mypage/MyOrderDetailController?orderId=${Orders.ordersId}">후기 작성</a>
-										</div></td>
+											<a class="btn btn-secondary btn-sm" type="button" href="${pageContext.request.contextPath}/review/WriteReviewController?productId=${OrdersDetail.product.productId}">리뷰 작성</a>
+										</div>
+									</td>
 								</tr>
 							</c:forEach>
 							<tr>
-						<td colspan="6" class="text-center">
-							<div>
-								<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=1" class="btn btn-outline-primary btn-sm">처음</a>
+								<td colspan="6" class="text-center">
+									<div>
+										<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=1" class="btn btn-outline-primary btn-sm">처음</a>
 								
-								<c:if test="${pager.groupNo > 1}">
-									<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${pager.startPageNo-1}" class="btn btn-outline-info btn-sm">이전</a>
-								</c:if>
+										<c:if test="${pager.groupNo > 1}">
+											<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${pager.startPageNo-1}" class="btn btn-outline-info btn-sm">이전</a>
+										</c:if>
 								
-								<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-									<c:if test="${pager.pageNo != i}">
-										<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${i}" class="btn btn-outline-success btn-sm">${i}</a>
-									</c:if>
-									<c:if test="${pager.pageNo == i}">
-										<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${i}" class="btn btn-danger btn-sm">${i}</a>
-									</c:if>
-								</c:forEach>
+										<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+											<c:if test="${pager.pageNo != i}">
+												<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${i}" class="btn btn-outline-success btn-sm">${i}</a>
+											</c:if>
+											<c:if test="${pager.pageNo == i}">
+												<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${i}" class="btn btn-danger btn-sm">${i}</a>
+											</c:if>
+										</c:forEach>
 								
-								<c:if test="${pager.groupNo < pager.totalGroupNo}">
-									<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${pager.endPageNo+1}" class="btn btn-outline-info btn-sm">다음</a>
-								</c:if>
+										<c:if test="${pager.groupNo < pager.totalGroupNo}">
+											<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${pager.endPageNo+1}" class="btn btn-outline-info btn-sm">다음</a>
+										</c:if>
 								
-								<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${pager.totalPageNo}" class="btn btn-outline-primary btn-sm">맨끝</a>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-						
+										<a href="${pageContext.request.contextPath}/mypage/MyOrderController?pageNo=${pager.totalPageNo}" class="btn btn-outline-primary btn-sm">맨끝</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 	

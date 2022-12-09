@@ -7,23 +7,8 @@
 
 	<%@ include file="/WEB-INF/views/fragment/nav.jsp" %>	
 		<div class="container-fluid row">
-			<!-- 사이드바  -->
-			<div class="shoesmain-1 col-sm-2"> 
-				<div id="mypage_sidebar"  class="text-center">		
-					<div class="m-3">
-						<i class="bi bi-person-circle"></i><span>  환영합니다</span>
-					</div>
-					 <div class="" id="mypageDiv" style="height:45px; text-align:center; padding-top:10px; ">
-						 <a href="mypage_main.html" class="h5" style="color: black; text-decoration: none;"><b>마이 페이지</b></a>
-					 </div>
-					<div id="mypage_sidemenu">
-						 <a href="mypage_main.html" class="list-group-item text-center h7">나의 정보</a>
-						<a role="button" onclick="requestMyOrder()" class="list-group-item text-center h7">주문 내역</a>
-						 <a role="button" onclick="requestMyReview()" class="list-group-item text-center h7">나의 리뷰</a>
-						 <a href="#" class="list-group-item text-center h7">회원 탈퇴</a>
-					 </div>
-				</div>
-			</div>
+			
+			<%@ include file="/WEB-INF/views/fragment/mypage_sidebar.jsp"%>
 			
 			<!-- main -->
 			<div class="shoesmain-2 col-sm-10">
@@ -58,8 +43,7 @@
 							      	<td>
 							      		<!-- 이부분은 product 객체를 받아올 수 있도록 해야함! -->
 								      	<ul class="info" style="margin-left: 0px; padding-left: 0px;">
-											<li class="brand"> <strong>브랜드: </strong> 아디다스</li>
-											<li class="name"> <strong>상품명: </strong> 가젤</li>
+											<li class="name"> <strong>상품명: </strong>${product.productName}</li>
 											<li class="option"> <strong>색상: </strong> 검정</li>
 											<li class="option"> <strong>사이즈: </strong> 250</li>
 										</ul>

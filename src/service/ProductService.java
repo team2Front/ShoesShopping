@@ -55,7 +55,7 @@ public class ProductService {
 	}
 
 	// 상품 간단히 보기
-	public List<ProductList> showProducts(PagingVo pvo) { 
+	public List<ProductList> showProducts(PagingVo pvo) {
 		// List<ProductList>
 		Connection conn = null;
 		List<ProductList> list = new ArrayList<>();
