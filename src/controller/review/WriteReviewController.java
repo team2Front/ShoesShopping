@@ -1,7 +1,6 @@
 package controller.review;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -35,30 +34,36 @@ public class WriteReviewController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//ReviewService 객체 가져오기
-		ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("ReviewService");
+		ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
 		
-		//문자파트
+		int productId = Integer.parseInt(request.getParameter("productId"));
+		String user_id = (String) request.getSession().getAttribute("loginId");
+		
+		// 문자파트
 		Review review = new Review();
 		review.setReviewTitle(request.getParameter("reviewTitle"));
+		review.setReviewContent(request.getParameter("reviewContent"));
+		review.setUserId(user_id);
+		review.setStarScore(Integer.parseInt(request.getParameter("star")));
 		
-		//파일 파트
-		Part filePart = request.getPart("rattach");
+		// 파일 파트
+		Part filePart = request.getPart("reviewattach");
 		if(!filePart.getSubmittedFileName().equals("")) {
 			String fileName = filePart.getSubmittedFileName();
-			String savedName = new Date().getTime() + "-" + fileName;
+			String savedName = fileName;
 			String fileType = filePart.getContentType();
 			
-			review.setRfileName(fileName); //첨부된 파일이름을 저장
+			review.setRfileName(fileName);
 			review.setRsavedName(savedName);
 			review.setRfileType(fileType);
 			
-			String filePath = "C:/Temp/download/" + savedName;
+			String filePath = "C:/OTI/Project2_Images/review/" + savedName;
+			
 			filePart.write(filePath);
+			
+			reviewService.writeReview(review, productId);
 		}
 		
-		reviewService.writeReview(review);
-		
-		response.sendRedirect("ContentController");
-	
+		response.sendRedirect("../mypage/MyReviewController");
 	}
 }

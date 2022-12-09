@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +13,6 @@ import domain.Product;
 import domain.Review;
 import dto.RReply;
 import dto.ReviewList;
-import service.ProductService;
 import util.PagingVo;
 
 public class ReviewDao {
@@ -106,28 +104,24 @@ public class ReviewDao {
 		return list;
 	}
 
-	public int insertReview(Connection conn, Review review) {
+	public int insertReview(Connection conn, Review review, int productId) throws Exception {
 		String sql = "";
-			sql += "insert into review (review_id, review_title, review_content, review_date, user_id, star_score, heart_count, product_id, filename, filetype, savedname ";
+			sql += "insert into review (review_id, review_title, review_content, review_date, user_id, star_score, heart_count, product_id, filename, filetype, savedname) ";
 			sql += "VALUES(Review_seq.NEXTVAL, ?, ?, sysdate, ?, ?, 0, ?, ?, ?, ?) ";
 
-		int r = 0;
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, review.getReviewTitle());
-			pstmt.setString(2, review.getReviewContent());
-			pstmt.setString(3, review.getUserId());
-			pstmt.setInt(4, review.getStarScore());
-			// pstmt.setInt(6, review.getProduct().getProductId());
-			r = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException();
-		}
-		try {
-			conn.close();
-		} catch (SQLException e) {
-		}
-		return r;
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, review.getReviewTitle());
+		pstmt.setString(2, review.getReviewContent());
+		pstmt.setString(3, review.getUserId());
+		pstmt.setInt(4, review.getStarScore());
+		pstmt.setInt(5, productId);
+		pstmt.setString(6, review.getRfileName());
+		pstmt.setString(7, review.getRfileType());
+		pstmt.setString(8, review.getRsavedName());
+
+		int result = pstmt.executeUpdate();
+
+		return result;
 	}
 
    public int deleteReview(Connection conn, Review review) throws SQLException {
