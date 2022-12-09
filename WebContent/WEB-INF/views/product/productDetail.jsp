@@ -72,9 +72,7 @@
 					}
 				});
 			} else {
-				$("#putCart").click(function() {
-				    $(".modals").fadeOut();
-				});	          
+				alert("색상과 사이즈를 선택해주세요");           
 	
 			}
 		}
@@ -101,7 +99,7 @@
 					}
 				});
 			} else {
-				console("사이즈, 색상 선택 확인 !!");         
+				alert("색상과 사이즈를 선택해주세요");      
 	
 			}
 		}
@@ -171,26 +169,12 @@
 							<div class="btn-group btn-group" style="width:620px;">
 				       			<label for="pcolor" class="m-2"><b>색상</b></label>
 				       			<div class="form-check">
-									<label class="cbtn btn red active" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption" value="1">
-										<i class="fa fa-check"></i>
-									</label>
-									<label class="cbtn btn pink" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn orange" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption"  value="2">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn yellow" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption"  value="3">
-										<i class="fa fa-check" style="color:black"></i>
-									</label>			
-									<label class="cbtn btn lime" style="width:40px; height:40px;">
-										<input type="radio" name="colorOption">
-										<i class="fa fa-check"></i>
-									</label>
+				       				<c:forEach var="color" items="${product.colorList}">
+										<label class="cbtn btn active ${color.color_name}" style="width:40px; height:40px;">
+											<input type="radio" name="colorOption" value="${color.color_id}">
+											<i class="fa fa-check"></i>
+										</label>
+									</c:forEach>
 								</div>		
 							</div>
 						</div>
@@ -198,76 +182,18 @@
 							<div class="cbtn-group btn-group p-auto" data-toggle="buttons" style="width:600px;">
 				       			<label for="psize" class="mx-2 my-2"><b>사이즈</b></label>
 				       			<div class="form-radio">
-									<label class="cbtn btn" style="width:75px; height:40px; margin:3px auto;">
-										220
-										<input class="psize" type="radio" name="sizeOption" value="220">
-										<i class="fa fa-check"></i>
-									</label>
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										225
-										<input class="psize" type="radio" name="sizeOption">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										230
-										<input type="radio" name="sizeOption" value="230"> 
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										235
-										<input type="radio" name="sizeOption">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										240
-										<input type="radio" name="sizeOption" value="240">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										245
-										<input type="radio" name="sizeOption">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										250
-										<input type="radio" name="sizeOption">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										255
-										<input type="radio" name="sizeOption">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										260
-										<input type="radio" name="sizeOption">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										265
-										<input type="radio" name="sizeOption">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										270
-										<input type="radio" name="sizeOption">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										275
-										<input type="radio" name="sizeOption">
-										<i class="fa fa-check"></i>
-									</label>			
-									<label class="cbtn btn" style="width:75px; height:40px;">
-										280
-										<input type="radio" name="sizeOption">
-										<i class="fa fa-check"></i>
-									</label>																		
+				       				<c:forEach var="size" items="${product.sizeList}">
+										<label class="cbtn btn" style="width:75px; height:40px; margin:3px auto;">
+											${size}
+											<input class="psize" type="radio" name="sizeOption" value="${size}">
+											<i class="fa fa-check"></i>
+										</label>
+									</c:forEach>																		
 								</div>
 							</div>
 						</div>
 						<div class="row m-4 sizeList">
-						<label for="psize" class="mx-2 my-2"><b>수량</b>
+						<label for="quantity" class="mx-2 my-2"><b>수량</b>
 							<input type="number" min="1" max="100" name="quantity" value="1"
 							style="width: 45px; margin: 2px 10px; font-size: 15px; text-align: center"/>
 						</label>
