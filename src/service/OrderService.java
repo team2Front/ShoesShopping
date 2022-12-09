@@ -17,11 +17,13 @@ public class OrderService {
 	//field
 	private DataSource ds;
 	private OrderDao orderDao; 
+	private OrderDao myorderDao;
 	
 	//constructor
 	public OrderService(ServletContext application) {
 		this.ds = (DataSource) application.getAttribute("dataSource");
-		this.orderDao = (OrderDao) application.getAttribute("orderDao"); 
+		this.orderDao = (OrderDao) application.getAttribute("orderDao");
+		this.myorderDao = (OrderDao) application.getAttribute("myOrderDao");
 	}
 	
 	// order 테이블 전체 count
@@ -50,6 +52,23 @@ public class OrderService {
 		try {
 			conn = ds.getConnection();
 			list = orderDao.selectOrder(conn, userId, pvo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close();} catch (SQLException e) {}
+		}
+		
+		return list;
+	}		
+	
+	public List<Orders> myshowOrders(String userId, PagingVo pvo) {
+		Connection conn = null;
+		//int all = countAll(userId); //얘를 쓰는 이유를 모르겠음..ㅜ
+		List<Orders> list = null;
+		
+		try {
+			conn = ds.getConnection();
+			list = myorderDao.selectOrder(conn, userId, pvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -44,7 +44,7 @@ public class MyOrderController extends HttpServlet {
 		PagingVo pagingVo = new PagingVo(totalOrderNum, pageNo);
 		
 		// 해당 PageNo에 해당하는 게시물 가져오기
-		List<Orders> orderList = orderService.showOrders(loginId, pagingVo);
+		List<Orders> orderList = orderService.myshowOrders(loginId, pagingVo);
 		
 		
 		
