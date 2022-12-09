@@ -266,6 +266,12 @@
 								</div>
 							</div>
 						</div>
+						<div class="row m-4 sizeList">
+						<label for="psize" class="mx-2 my-2"><b>수량</b>
+							<input type="number" min="1" max="100" name="quantity" value="1"
+							style="width: 45px; margin: 2px 10px; font-size: 15px; text-align: center"/>
+						</label>
+					</div>
 						<div class="row m-4">
 							<div class="col-5 btn-dark" type="button" data-toggle="modal" data-target="#buyNow" style="padding:10px; text-align:center; justify-content: center;">  <!--  font-size:30px; -->
 								<b>바로 구매</b>
@@ -283,9 +289,11 @@
 									    <p>정말 구매하시겠습니까?</p>
 									  </div>
 									  <div class="modal-footer">
-									    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-									    <a type="button" class="btn btn-primary"  href="/shopping/order/OrderController">구매하기</a>
-									  </div>
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">취소</button>
+										<a type="button" class="btn btn-primary"
+											onclick="goOrder(${product.productId})">구매하기</a>
+									</div>
 									</div>
 								</div>
 							</div>
