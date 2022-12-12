@@ -189,18 +189,21 @@
 								    		${productList.categoryName} > ${productList.productSex}
 								    	</div>
 								    	<c:if test="${loginType == 'ADMIN'}">
-									    	<div style="margin-left:70px">
+									    	<div style="margin-left:90px">
 									    		<a class="btn btn-dark btn-sm" href="${pageContext.request.contextPath}/admin/ProductDeleteController?productId=${productList.productId}">삭제</a>
 									    	</div>
 								    	</c:if>
 								    </div>
-								    <p class="card-brand m-0">${productList.companyName}</p>
+								    <p class="card-brand m-0"> ${productList.companyName}</p>
 								    <h5 class="card-title"><a href="../product/ProductController?productId=${productList.productId}">${productList.productName}</a></h5>
 								    <p class="card-text">
 								    <span class="sale" style="color:red">${productList.productPrice}원</span>
 								    </p>
-								    <a href="#" class="btn btn-outline-info btn-sm"><img src="${pageContext.request.contextPath}/resources/images/heart_empty.png" style="width:15px; height:15px;"> 찜하기</a>
-								    <a href="../product/ProductController?productId=${productList.productId}" class="btn btn-primary btn-sm">자세히보기</a>
+								    <div class="text-center">
+									    <a href="#" class="btn btn-outline-info mr-1"><img src="${pageContext.request.contextPath}/resources/images/heart_empty.png" style="width:15px; height:15px;"> 찜하기</a>
+									    <a href="../product/ProductController?productId=${productList.productId}" class="btn btn-primary">자세히보기</a>
+								    </div>
+								    
 								 </div>
 							</div>
 			            </c:forEach>
