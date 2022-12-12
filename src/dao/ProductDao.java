@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class ProductDao {
 		pstmt.close();
 		return cnt;
 	}
-
+	
 	// 모든 상품 목록(간단히 보기)
 	public List<ProductList> selectProductList(Connection conn, PagingVo pvo) throws Exception {
 		ProductList productList = null;
@@ -228,5 +229,9 @@ public class ProductDao {
 		
 		return rows;
 	}
+
+	
+
+	
 
 }

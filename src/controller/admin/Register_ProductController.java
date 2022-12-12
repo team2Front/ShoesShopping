@@ -141,7 +141,7 @@ public class Register_ProductController extends HttpServlet {
          }
 		 
 		 
-		response.sendRedirect("HomeController");
+		response.sendRedirect("/shopping/main/MainController");
 	}
 
 }

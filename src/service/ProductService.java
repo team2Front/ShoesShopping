@@ -36,6 +36,7 @@ public class ProductService {
 		this.productAndColorDao = (ProductAndColorDao) application.getAttribute("productAndColorDao");
 		this.productAndSizeDao = (ProductAndSizeDao) application.getAttribute("productAndSizeDao");
 		this.productImageDao = (ProductImageDao) application.getAttribute("productImageDao");
+		this.pfilteringDao = (PfilteringDao) application.getAttribute("pfilteringDao");
 	}
 
 	// 필터링 x
@@ -46,6 +47,22 @@ public class ProductService {
 		try {
 			conn = ds.getConnection();
 			total = productDao.selectCountAll(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close(); } catch (Exception e) {}
+		}
+		return total;
+	}
+	// 필터링O
+	// 색깔, 사이즈, 가격
+	public int countFilteredProducts(int fcolor, int fsize, String fprice) {
+		System.out.println("[ProductService > countFilteredProducts] 메소드 실행");
+		Connection conn = null;
+		int total = 1;
+		try {
+			conn = ds.getConnection();
+			total = pfilteringDao.selectCountFiltered(conn,fcolor, fsize, fprice);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -69,6 +86,7 @@ public class ProductService {
 		}
 		return list;
 	}
+	
 
 	// 필터링 o
 	// 1) 카테고리 기준
@@ -132,6 +150,22 @@ public class ProductService {
 		}
 		return list;
 	}
+	
+	// 2) 회사 기준+카테고리
+		// 고른 회사 총 수량
+		public int countCompanyCatogory(int company, String product_sex) {
+			Connection conn = null;
+			int total = 0;
+			try {
+				conn = ds.getConnection();
+				total = pfilteringDao.selectCountCompanyCatogory(conn, company, product_sex);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try { conn.close(); } catch (Exception e) {}
+			}
+			return total;
+		}
 
 	// 3) 성별 기준
 	public int countSex(String sex) {
@@ -177,7 +211,8 @@ public class ProductService {
 		return list;
 	}
 	// 5)컬러, 사이즈, 가격 기준
-	public List<ProductList> showFiltered(PagingVo pvo, String color, String size, String price) {
+	public List<ProductList> showFiltered(PagingVo pvo, int color, int size, String price) {
+		System.out.println("[ProductService > showFiltered]");
 		Connection conn = null;
 		List<ProductList> list = new ArrayList<>();
 		try {
@@ -194,7 +229,6 @@ public class ProductService {
 	// **********************************************************
 	// 상품 상세보기
 	public Product showOneProduct(int productId){
-		System.out.println("[productService] 쇼원프로덕트메소드 ProductId: " + productId);
 		Connection conn = null;
 		Product product = null;
 		
@@ -213,7 +247,6 @@ public class ProductService {
 	// 상품 등록하기
 	//트랜잭션 처리
 	public int registerProduct(RegisterProduct ap) {
-		System.out.println("[ProductService > registerProduct] 메소드 실행");
 		Connection conn = null;
 		int pid = 0;
 		String message = "";
@@ -223,7 +256,6 @@ public class ProductService {
 			conn.setAutoCommit(false);
 			// 1) 상품 테이블 먼저 채우고 -> pid 리턴하기
 			pid = productDao.insertProduct(conn, ap);
-			System.out.println("[ProductService > registerProduct]pid: " + pid);
 			
 			
 			// 2) 객체에 담긴 컬러와 사이즈, 사진 리스트
@@ -290,7 +322,6 @@ public class ProductService {
 	
 	//메인이미지 가져오기
 	public ProductImage showMainImage(int pid) {
-		System.out.println("[ProductService>showMainImage] 메소드 실행 pid: "+ pid);
 		Connection conn = null;
 		ProductImage productImage = new ProductImage();
 		try {
@@ -306,7 +337,6 @@ public class ProductService {
 	}
 
 	public List<String> showSubImage(int pid) {
-		System.out.println("[ProductService>showSubImage] 메소드 실행 pid: "+ pid);
 		Connection conn = null;
 		List<String> list = new ArrayList<>();
 		try {
@@ -320,6 +350,23 @@ public class ProductService {
 		
 		return list;
 	}
+
+	public List<ProductList> showCompanyCategory(PagingVo pager, int company_id, String product_sex) {
+		Connection conn = null;
+		List<ProductList> list = new ArrayList<>();
+		try {
+			conn = ds.getConnection();
+			list = pfilteringDao.selectShowCompanyCategory(conn, pager, company_id, product_sex);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { conn.close(); } catch (Exception e) {}
+		}
+		return list;
+	}
+
+	
+	
 
 	
 }

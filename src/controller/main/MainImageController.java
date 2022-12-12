@@ -23,7 +23,6 @@ public class MainImageController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int productId = Integer.parseInt(request.getParameter("productId"));
-		System.out.println("[MainImageController > doGet] productId: "+productId);
 		
 		ProductService productService = (ProductService) request.getServletContext().getAttribute("productService");
 		ProductImage productImage = productService.showMainImage(productId);
@@ -32,7 +31,6 @@ public class MainImageController extends HttpServlet {
 		String companyName = productImage.getCompanyName();
 		String filePath = "C:/OTI/Project2_Images/" + companyName+"/"+productId+"/"+fileName;
 		String contentType = productImage.getFileType();
-		System.out.println("[MainImageController]filePath: "+filePath);
 		// HTTP 응답에 Content-Type 헤더를 추가
 		response.setContentType(contentType);
 		

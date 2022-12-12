@@ -39,6 +39,8 @@
 		text-align: center;
 		vertical-align: middle;
 	}
+
+
 	</style>
 	<script>
 	// 사이즈, 선택 모두 선택시에만 장바구니에 담기기
