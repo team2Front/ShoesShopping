@@ -261,7 +261,7 @@
 					<a id="reviewLink" class="nav-link" data-toggle="tab" href="#tab-content" onclick="productReview(1)" style="font-size:30px; text-align:center"> 리뷰 </a>
 				</li>
 				<li class="col-4 p-3 nav-item">
-					<a class="nav-link" data-toggle="tab" href="#tab-content" onclick="productQna()" style="font-size:30px; text-align:center"> Q & A </a>
+					<a class="nav-link" data-toggle="tab" href="#tab-content" onclick="productQna(1)" style="font-size:30px; text-align:center"> Q & A </a>
 				</li>
 			</ul>
 			

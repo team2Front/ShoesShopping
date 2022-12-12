@@ -77,11 +77,11 @@ public class QnaDao {
        pstmt.setInt(3, startRn);
       ResultSet rs = pstmt.executeQuery();
       List<QnaList> list = new ArrayList<>();
-      while (rs.next()) {
+      /*while (rs.next()) {
          QnaList ql = new QnaList(rs.getInt("qna_id"), rs.getString("qna_title"), rs.getDate("qna_date").toString(),
                rs.getString("user_id"), rs.getInt("product_id"));
          list.add(ql);
-      }
+      }*/
       pstmt.close();
       conn.close();
 

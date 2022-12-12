@@ -6,46 +6,32 @@
 
 <script src="${pageContext.request.contextPath}/resources/javascript/review_qna.js"></script>
 
-<!-- QnA 작성 -->
-<div style="float:right">
-	<button class="btn btn-lg btn-dark m-3" data-toggle="modal" data-target="#qna_creative"> Q & A 작성 </button>
-	<div class="modal fade" id="qna_creative">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4> Q & A </h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				
-				<!-- Modal body -->
-				<div class="modal-body">
-					<div>
-						<label> Q & A 제목 </label>
-						<input type="text"/>
-					</div>
-					<div>
-						<label> Q & A 내용 </label>
-						<div style="text-align:center">
-							<textarea placeholder="Q & A 내용을 입력해주세요." style="width:400px; height:300px"></textarea>
-						</div>
-					</div>
-				</div>
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="submit" class="btn bg-warning" data-dismiss="modal">작성</button>
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<style>
+	#writeReplyDiv {
+		position: relative;
+		width: 400px;
+	}
+	
+	#writeReplyDiv input {
+		width: 100%;
+	  	border: 1px solid #bbb;
+	  	border-radius: 8px;
+	  	font-size: 14px;
+	}
+	
+	#writeReplyDiv i {
+		position : absolute;
+  		width: 17px;
+  		top: 28px;
+  		right: 12px;
+  		margin: 0;
+	}
+	
+</style>
 
-<!-- QnA 목록  -->
 <div id="mainDiv" class="content">
+   <h1 class="title m-5">나의 리뷰 목록</h1>
    <div id="reviewList">
-      <div id="review-list-header">
-      </div>
       <table class="table table-hover">
          <thead class="table-dark">
 	         <tr>
@@ -71,7 +57,7 @@
          					</c:choose>
          				</span>
          				<span class="pl-1 small text-muted">
-	         				[상품] ${item.product.productName} | ${item.product.company} <br>
+	         				[상품] ${item.product.productName} | ${item.product.company} | ${item.product.productPrice}원 <br>
          				</span>
          				<span class="pl-1 small text-warning font-weight-bold">
 	         				[ID:${item.userId}] <br>
@@ -85,10 +71,59 @@
 		         			<hr class="mt-3 mb-3">
 		         			<!-- 리뷰내용 -->
 		         			<div>
-			                	<div style="float: left;"><img src="${pageContext.request.contextPath}/resources/images/review/${item.review.rsavedName}" width="150">&nbsp;&nbsp;</div>
-			                	<div>${item.review.reviewContent}</div>
+		         				<c:if test="${item.review.rsavedName != null}">
+			 	               		<div style="float: left;"><img src="${pageContext.request.contextPath}/resources/images/review/${item.review.rsavedName}" width="150">&nbsp;&nbsp;</div>
+				                	<div>${item.review.reviewContent}</div>
+		         				</c:if>
+		         				<c:if test="${item.review.rsavedName == null}">
+				                	<div>${item.review.reviewContent}</div>
+		         				</c:if>
 		         			</div>
 		         			<div style="clear: both;"></div>
+		         			<!-- 좋아요버튼 -->
+		         			<span id="goodBtn${item.reviewId}">
+			         			<button class="btn btn-outline-danger btn-sm mt-3" onclick="good(${item.reviewId})">
+			         				좋아요 <b>${item.review.heartCount}</b>
+			         			</button>
+		         			</span>
+		         			<span id ="replyBtn${item.reviewId}">
+			         			<a class="btn btn-outline-dark btn-sm mt-3" onclick="replyList(${item.reviewId})">
+			         				댓글보기
+			         			</a> 
+		         			</span>
+		         			<!-- 댓글  -->
+		         			<div id="replyList${item.reviewId}" style="display:none;">
+	         					<hr class="mt-3 mb-2">
+								
+								<!-- 댓글작성 -->
+								<form id="writeReplyForm" name="writeReplyForm" method="post" class="d-flex">
+					      			<div id="writeReplyDiv" class="form-group form-floating">
+					      				<label class="font-weight-bold" for="writeReply${item.reviewId}"></label>
+					      				<input type="text" class="form-control" placeholder="댓글을 입력해주세요" id="writeReply${item.reviewId}" name="writeReply"/>
+										<i class="bi bi-pencil-fill"></i>
+									</div>
+									<button type="button" onclick="writeReplyFun(${item.reviewId})" class="btn btn-warning btn-sm ml-1 mt-4" style="height:35px;"><b>작성</b></button>
+								</form>
+								
+								<!-- 댓글목록 -->
+								<c:if test="${!empty item.review.replyList}">
+									<c:forEach var="reply" items="${item.review.replyList}">
+										<div class="mb-3">
+											<div>${reply.replyContent}</div>
+											<span class="small text-success font-weight-bold">${reply.userId}&nbsp;&nbsp;</span>
+											<span class="small text-muted"><fmt:formatDate value="${reply.replyDate}" pattern="yyyy.MM.dd"/></span> 
+										</div>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty item.review.replyList}">
+									<div id="noReplyDiv${item.reviewId}" style="display:block;  ">작성된 댓글이 없습니다!</div>
+								</c:if>
+								
+								<!-- 새로 작성한 댓글 -->
+								<div id="addReply${item.reviewId}" class="mb-3">
+									<!-- 여기에 추가될거지롱~ -->
+								</div>
+         					</div>
 		         		</div>
          			</td>
          			<td style="vertical-align: text-top;"><fmt:formatDate value="${item.reviewDate}" pattern="yyyy.MM.dd"/></td>
@@ -99,26 +134,26 @@
          	<tr>
          		<td colspan="6" class="text-center">
          			<div>
-						<a onclick="productReview(1)" class="btn btn-warning btn-sm">처음</a>		         			
+						<a href="${pageContext.request.contextPath}/mypage/MyReviewController?pageNo=1" class="btn btn-warning btn-sm">처음</a>		         			
 						
 						<c:if test="${pager.groupNo > 1}">
-							<a onclick="productReview(${pager.startPageNo-1})" class="btn btn-outline-warning btn-sm">이전</a>		         			
+							<a href="${pageContext.request.contextPath}/mypage/MyReviewController?pageNo=${pager.startPageNo-1}" class="btn btn-outline-warning btn-sm">이전</a>		         			
 						</c:if>
 						
 						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}" step="1">
 							<c:if test="${pager.pageNo != i}">
-								<a onclick="productReview(${i})" class="btn btn-outline-secondary btn-sm">${i}</a>		         			
+								<a href="${pageContext.request.contextPath}/mypage/MyReviewController?pageNo=${i}" class="btn btn-outline-secondary btn-sm">${i}</a>		         			
 							</c:if>
 							<c:if test="${pager.pageNo == i}">
-								<a onclick="productReview(${i})" class="btn btn-secondary btn-sm">${i}</a>		         			
+								<a href="${pageContext.request.contextPath}/mypage/MyReviewController?pageNo=${i}" class="btn btn-secondary btn-sm">${i}</a>		         			
 							</c:if>
 						</c:forEach>
 						
 						<c:if test="${pager.groupNo < pager.totalGroupNo}">
-							<a onclick="productReview(${pager.endPageNo+1})" class="btn btn-outline-warning btn-sm">다음</a>		         			
+							<a href="${pageContext.request.contextPath}/mypage/MyReviewController?pageNo=${pager.endPageNo+1}" class="btn btn-outline-warning btn-sm">다음</a>		         			
 						</c:if>
 						
-						<a onclick="productReview(${pager.totalPageNo})" class="btn btn-warning btn-sm">맨끝</a>		         			
+						<a href="${pageContext.request.contextPath}/mypage/MyReviewController?pageNo=${pager.totalPageNo}" class="btn btn-warning btn-sm">맨끝</a>		         			
          			</div>
          		</td>
          	</tr>

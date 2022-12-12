@@ -1,3 +1,4 @@
+/*================================[ 상품페이지 - 기타 ]==================================*/
 /* 상품페이지 - [상품 설명] */
 function productInfo(){
 	$("#tab-content").empty();
@@ -21,8 +22,6 @@ function loginComplete() {
 		}
 	});
 }
-
-
 
 /*================================[ 상품페이지 - Review ]==================================*/
 /* 상품페이지 - [리뷰 목록] */
@@ -174,14 +173,19 @@ $(document).ready(function(){
 	});
 }); 
 
+
 /*================================[ QNA ]==================================*/
 /* 상품페이지 - [QnA 목록] */
-function productQna() {
+function productQna(i) {
 	$("#tab-content").empty();
+	
+	var url = new URL(window.location.href);
+    var urlParam = url.searchParams;
+    var pId = urlParam.get("productId");
 	
 	$.ajax({
 		type : 'GET',  //get방식으로 통신
-		url : "/shopping/qna/QnaListController", //탭의 data-tab속성의 값으로 된 html파일로 통신
+		url : "/shopping/qna/QnaListController?pageNo=" + i + "&productId=" + pId, //탭의 data-tab속성의 값으로 된 html파일로 통신
 		error : function() { //통신 실패시
 			alert('통신실패!');
 		},

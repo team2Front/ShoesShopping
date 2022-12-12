@@ -98,5 +98,10 @@
 		<div class="shoesmain-1 col-xs-2"> 
 			<%@ include file="/WEB-INF/views/fragment/mypage_sidebar.jsp"%>
 		</div>
+		
+		<!-- 내가 작성한 리뷰목록 -->
+		<div class="shoesmain-1 col-xs-10"> 
+			<%@ include file="/WEB-INF/views/mypage/mypage_reviewList.jsp"%>
+		</div>
 	</div>
 <%@ include file="/WEB-INF/views/fragment/footer.jsp" %>
