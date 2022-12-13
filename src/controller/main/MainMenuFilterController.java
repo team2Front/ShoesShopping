@@ -15,8 +15,8 @@ import service.ProductService;
 import util.PagingVo;
 
 
-@WebServlet(name = "main.MainFilterController", urlPatterns = "/main/MainFilterController")
-public class MainFilterController extends HttpServlet {
+@WebServlet(name = "main.MainMenuFilterController", urlPatterns = "/main/MainMenuFilterController")
+public class MainMenuFilterController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,33 +25,32 @@ public class MainFilterController extends HttpServlet {
 		if(strPageNo == null) {
 			strPageNo="1";
 		}
-		int fcolor = Integer.parseInt(request.getParameter("fcolor"));
-		int fsize = Integer.parseInt(request.getParameter("fsize"));
-		String fprice = request.getParameter("fprice");
-		System.out.print("[MainFilterController] fcolor: "+ fcolor);
-		System.out.print(", fsize: "+request.getParameter("fsize"));
-		System.out.print(", fprice: "+request.getParameter("fprice"));
-		System.out.print(", strPageNo: "+strPageNo);
-		
+		int company_id = Integer.parseInt(request.getParameter("company_id"));
+		String product_sex = request.getParameter("product_sex");
+			
+		int countCompany =0;
+		PagingVo pager = null;
 		int pageNo = Integer.parseInt(strPageNo);
+		List<ProductList> pageList = null;
+		
 		//Productservice 객체 얻기
 		ServletContext application = request.getServletContext();
 		ProductService productService = (ProductService) application.getAttribute("productService");
 		//페이징 대상이 되는 전체 행 수 얻기
 		
-		int countFilteredProducts =0;
-		countFilteredProducts = productService.countFilteredProducts(fcolor, fsize, fprice);
+		countCompany = productService.countCompanyCatogory(company_id,product_sex);
 		
 		//Pager 생성
-		PagingVo pager = new PagingVo(countFilteredProducts, pageNo, 15);
+		pager = new PagingVo(countCompany, pageNo, 15);
 		
 		//해당 pageNo에 해당하는 게시물 가져오기
-		List<ProductList> pageList = null;
 		try {
-		 pageList = productService.showFiltered(pager,fcolor,fsize,fprice );
+		 pageList = productService.showCompanyCategory(pager, company_id,product_sex);
 		}catch(Exception e) {
 			
 		}
+		
+		
 		//jsp에서 사용할 수 있도록 request 범위에 저장
 		request.setAttribute("pager", pager);
 		request.setAttribute("pageList", pageList);

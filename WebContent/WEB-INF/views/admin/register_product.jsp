@@ -20,7 +20,7 @@
 		<div class="card-header">상품등록</div>
 		<div class="card-body">
 
-			<form id="pnameForm" method="post" class="was-validated" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/main/MainFilterController" novalidate>
+			<form id="pnameForm" method="post" class="was-validated" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/admin/Register_ProductController" novalidate>
 			
 				<div class="form-group">
 					<label for="pname"  >상품명</label> 
@@ -216,8 +216,8 @@
 					<select
 						id="gender" name="pgender" class="form-control">
 						<option selected>--선택--</option>
-						<option value="MAN">남자</option>
-						<option value="WOMAN">여자</option>
+						<option value="MEN">남자</option>
+						<option value="WOMEN">여자</option>
 						<option value="KIDS">키즈</option>
 						<option value="ALL">전체</option>
 					</select>

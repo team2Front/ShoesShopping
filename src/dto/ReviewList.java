@@ -16,6 +16,7 @@ public class ReviewList {
    private String reviewTitle;
    private Date reviewDate;
    private String userId;
+   private int productId;
    private Product product;
    private Review review;
 }

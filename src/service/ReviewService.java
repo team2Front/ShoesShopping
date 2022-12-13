@@ -41,7 +41,7 @@ public class ReviewService {
 				list.setProduct(product);
 			}
 			
-			System.out.println(lists);
+			//System.out.println(lists);
 			
 	   }catch(Exception e) {
 			e.printStackTrace();
@@ -54,19 +54,28 @@ public class ReviewService {
    
    
    //method: [마이페이지] - 나의 리뷰 목록 (간단히 보기)
-   public List<ReviewList> showMyReviews(String userId, PagingVo pvo) throws SQLException {
-      List<ReviewList> list = null;
+   public List<ReviewList> showMyReviews(String userId, PagingVo pvo) {
+      List<ReviewList> myLists = null;
+      ReviewList list = new ReviewList();
       Connection conn = null;
-		try {
-			conn = ds.getConnection();
-			list = reviewDao.selectMyReviewList(conn, userId, pvo);
+      
+      try {
+    	  conn = ds.getConnection();
+    	  myLists = reviewDao.selectMyReviewList(conn, userId, pvo);
 			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try{conn.close();}catch(Exception e) {}
-		}
-      return list;
+    	  for(int i=0; i<myLists.size(); i++) {
+    		  int productId = myLists.get(i).getProductId();
+    		  Product product = productService.showOneProduct(productId);
+    		  myLists.get(i).setProduct(product);
+    	  }
+			
+      }catch(Exception e) {
+    	  e.printStackTrace();
+      }finally {
+    	  try{conn.close();}catch(Exception e) {}
+      }
+      
+      return myLists;
    }
 
    // 2. 리뷰 자세히 보기 showReviewOne(원하는 리뷰 번호)
@@ -103,7 +112,7 @@ public class ReviewService {
    }
    
  //method: [마이페이지] - 나의 리뷰 총 개수 (페이징 처리)
-   public int countAllMyReviews(String userId) throws SQLException {
+   public int countAllMyReviews(String userId) {
 	   int result = 0;
 	   Connection conn = null;
 	   try {

@@ -57,16 +57,17 @@
 
 /* ***********************************    사이드 바    ************************************** */
 #sidebar {
-	position: sticky; 
+/* 	position: sticky;  */
+	display: block;
 /* 	bottom: 150px; */
 	right: 10px; 
 	width: 200px; 
-	padding-top:30px; 
+	padding-top:10px;
 	padding-bottom:30px;
 	font-size:13px;
   	background-color:#343a40;
     align-self: flex-start;
-    top: 250px;
+    top: 150px;
     border-radius:10px;
 
 }

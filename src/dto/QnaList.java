@@ -1,6 +1,7 @@
 package dto;
 
 
+import domain.Qna;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +15,5 @@ public class QnaList {
 	 private String qnaDate;
 	 private String userId;
 	 private int productId;
-	 
+	 private Qna qna;
 }

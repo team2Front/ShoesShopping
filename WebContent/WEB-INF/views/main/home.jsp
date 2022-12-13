@@ -1,13 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/fragment/head.jsp" %>
+<style>
+.carousel-control-prev-icon {
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+</style>
 </head>
 <%@ include file="/WEB-INF/views/fragment/nav.jsp" %>
+
+</div>
+
+<!-- Carousel 부분 -->
+<div id="img" class="carousel carousel-dark slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+  	<li type="button" data-bs-target="#item1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></li>
+    <li type="button" data-bs-target="#item2" data-bs-slide-to="1" aria-label="Slide 2"></li>
+    <li type="button" data-bs-target="#item3" data-bs-slide-to="2" aria-label="Slide 3"></li>
+    <li type="button" data-bs-target="#item4" data-bs-slide-to="3" aria-label="Slide 4"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active" >
+      <img id="item1" src="/Project2_Images/carousel/pro_no1.jpg" class="d-block w-75 mx-auto" alt="..." >
+    </div>
+    <div class="carousel-item">
+      <img id="item2" src="/Project2_Images/carousel/pro_no3.jpg" class="d-block w-75 mx-auto" alt="..."  >
+    </div>
+    <div class="carousel-item">
+      <img id="item3" src="/Project2_Images/carousel/pro_no4.jpg" class="d-block w-75 mx-auto" alt="..."  >
+    </div>
+    <div class="carousel-item">
+      <img id="item4" src="/Project2_Images/carousel/pro_no5.jpg" class="d-block w-75 mx-auto" alt="..."  >
+    </div>
+  </div>
+  <button class="carousel-control-prev " type="button" data-target="#img" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-target="#img" data-slide="next" >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </button>
+</div>
+
+
 
 		<div class="shoesmain d-flex" >
 		<!-- 사이드 바  -->
 			<div class="col-md-2"> 
-				<form id="sidebar" method="get" action="${pageContext.request.contextPath}/main/MainFilterController">		
+				<form id="sidebar" method="get" action="${pageContext.request.contextPath}/main/MainFilterController" class="mt-2">		
 					 <div class="btn sidebar-button" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 					   Color
 					 </div>
@@ -82,35 +127,35 @@
 					  <div class="card card-body">
 					  	<div class = "shoesPrice container-fluid">
 					  		<div class="row pl-4">
-					  			<input class="form-check-input" type="radio" name="fprice" id="fprice1">
+					  			<input class="form-check-input" type="radio" name="fprice" value="fprice1">
 								  <label class="form-check-label" for="fprice1">
 								    0 ~ 50,000 원
 								  </label>
 					  		</div>
 					  		
 					  		<div class="row pl-4">
-					  			<input class="form-check-input" type="radio" name="fprice" id="fprice2">
+					  			<input class="form-check-input" type="radio" name="fprice" value="fprice2">
 								  <label class="form-check-label" for="fprice2">
 								    50,000 ~ 80,000 원
 								  </label>
 					  		</div>
 					  		
 					  		<div class="row pl-4">
-					  			<input class="form-check-input" type="radio" name="fprice" id="fprice3">
+					  			<input class="form-check-input" type="radio" name="fprice" value="fprice3">
 								  <label class="form-check-label" for="fprice3">
 								    80,000 ~ 100,000 원
 								  </label>
 					  		</div>
 					  		
 					  		<div class="row pl-4">
-					  			<input class="form-check-input" type="radio" name="fprice" id="fprice4">
+					  			<input class="form-check-input" type="radio" name="fprice" value="fprice4">
 								  <label class="form-check-label" for="fprice4">
 								    100,000 ~ 150,000 원
 								  </label>
 					  		</div>
 					  		
 					  		<div class="row pl-4">
-					  			<input class="form-check-input" type="radio" name="fprice" id="fprice5">
+					  			<input class="form-check-input" type="radio" name="fprice" value="fprice5">
 								  <label class="form-check-label" for="fprice5">
 								    150,000 ~ 300,000 원
 								  </label>
@@ -127,8 +172,8 @@
 			</div>
 				
 			<!-- 상품리스트 -->
-			<div id="products" class="p-2" style="width:1000px;"> 
-				   <div class="d-flex flex-wrap" style="width:1000px;" >
+			<div id="products" class="p-2" style="width:1100px;"> 
+				   <div class="d-flex flex-wrap" style="width:1100px;" >
 				        <!-- 카드 임시로 가져와보기 -->
 				        
 						
@@ -144,23 +189,26 @@
 								    		${productList.categoryName} > ${productList.productSex}
 								    	</div>
 								    	<c:if test="${loginType == 'ADMIN'}">
-									    	<div style="margin-left:70px">
+									    	<div style="margin-left:90px">
 									    		<a class="btn btn-dark btn-sm" href="${pageContext.request.contextPath}/admin/ProductDeleteController?productId=${productList.productId}">삭제</a>
 									    	</div>
 								    	</c:if>
 								    </div>
-								    <p class="card-brand m-0">${productList.companyName}</p>
+								    <p class="card-brand m-0"> ${productList.companyName}</p>
 								    <h5 class="card-title"><a href="../product/ProductController?productId=${productList.productId}">${productList.productName}</a></h5>
 								    <p class="card-text">
 								    <span class="sale" style="color:red">${productList.productPrice}원</span>
 								    </p>
-								    <a href="#" class="btn btn-outline-info btn-sm"><img src="${pageContext.request.contextPath}/resources/images/heart_empty.png" style="width:15px; height:15px;"> 찜하기</a>
-								    <a href="../product/ProductController?productId=${productList.productId}" class="btn btn-primary btn-sm">자세히보기</a>
+								    <div class="text-center">
+									    <a href="#" class="btn btn-outline-info mr-1"><img src="${pageContext.request.contextPath}/resources/images/heart_empty.png" style="width:15px; height:15px;"> 찜하기</a>
+									    <a href="../product/ProductController?productId=${productList.productId}" class="btn btn-primary">자세히보기</a>
+								    </div>
+								    
 								 </div>
 							</div>
 			            </c:forEach>
 			            
-				      <div id="pager" class="text-center" style="width:1000px">
+				      <div id="pager" class="text-center" style="width:1100px">
 				      		<div>
 		                     <a href="MainController?pageNo=1" class="btn btn-outline-primary btn-sm">처음</a>
 		                     

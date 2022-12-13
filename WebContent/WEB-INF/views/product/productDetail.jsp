@@ -39,6 +39,8 @@
 		text-align: center;
 		vertical-align: middle;
 	}
+
+
 	</style>
 	<script>
 	// 사이즈, 선택 모두 선택시에만 장바구니에 담기기
@@ -259,7 +261,7 @@
 					<a id="reviewLink" class="nav-link" data-toggle="tab" href="#tab-content" onclick="productReview(1)" style="font-size:30px; text-align:center"> 리뷰 </a>
 				</li>
 				<li class="col-4 p-3 nav-item">
-					<a class="nav-link" data-toggle="tab" href="#tab-content" onclick="productQna()" style="font-size:30px; text-align:center"> Q & A </a>
+					<a class="nav-link" data-toggle="tab" href="#tab-content" onclick="productQna(1)" style="font-size:30px; text-align:center"> Q & A </a>
 				</li>
 			</ul>
 			

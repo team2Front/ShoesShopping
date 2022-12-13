@@ -38,32 +38,57 @@
 		<div id="navbar" class="shadow-sm">
 			<div class="btn-group">
 				<button type="button" class="btn dropdown-toggle m-2 text-white" data-toggle="dropdown">
-					MEN
+					ADIDAS
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">남성 운동화</a>
-					<a class="dropdown-item" href="#">남성 스니커즈</a>
-					<a class="dropdown-item" href="#">남성 샌들</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=ALL">ALL</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=MEN">MEN</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=WOMEN">WOMEN</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=KIDS">KIDS</a>
 				</div>
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn dropdown-toggle m-2 text-white" data-toggle="dropdown">
-					WOMEN
+					VANS
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">여성 운동화</a>
-					<a class="dropdown-item" href="#">여성 스니커즈</a>
-					<a class="dropdown-item" href="#">여성 샌들</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=2&product_sex=ALL">ALL</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=2&product_sex=MEN">MEN</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=2&product_sex=WOMEN">WOMEN</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=2&product_sex=KIDS">KIDS</a>
 				</div>
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn dropdown-toggle m-2 text-white" data-toggle="dropdown">
-					KIDS
+					CONVERSE
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">아이 운동화</a>
-					<a class="dropdown-item" href="#">아이 스니커즈</a>
-					<a class="dropdown-item" href="#">아이 샌들</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=3&product_sex=ALL">ALL</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=3&product_sex=MEN">MEN</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=3&product_sex=WOMEN">WOMEN</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=3&product_sex=KIDS">KIDS</a>
+				</div>
+			</div>	
+			<div class="btn-group">
+				<button type="button" class="btn dropdown-toggle m-2 text-white" data-toggle="dropdown">
+					NIKE
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=4&product_sex=ALL">ALL</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=4&product_sex=MEN">MEN</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=4&product_sex=WOMEN">WOMEN</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=4&product_sex=KIDS">KIDS</a>
+				</div>
+			</div>	
+			<div class="btn-group">
+				<button type="button" class="btn dropdown-toggle m-2 text-white" data-toggle="dropdown">
+					NEWBALANCE
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=5&product_sex=ALL">ALL</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=5&product_sex=MEN">MEN</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=5&product_sex=WOMEN">WOMEN</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=5&product_sex=KIDS">KIDS</a>
 				</div>
 			</div>	
 		</div>
