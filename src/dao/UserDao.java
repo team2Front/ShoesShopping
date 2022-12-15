@@ -17,7 +17,7 @@ public class UserDao {
 
 	// method: select문 - 아이디 중복 여부 판별
 	public boolean selectUserId(Connection conn, String id) throws Exception {
-		String sql = "select userid from users where userid=? ";
+		String sql = "select user_id from users where user_id=? ";
 		boolean result = false;
 		System.out.println("~~~~~~~~~ sa   " + result);
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -31,7 +31,7 @@ public class UserDao {
 
 	// method: select문 - 핸드폰 번호 중복 여부 확인
 	public boolean selectPnCheck(Connection conn, String pn) throws Exception {
-		String sql = "select phonenumber from users where phonenumber=? ";
+		String sql = "select phone_number from users where phone_number=? ";
 		boolean result = false;
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class UserDao {
 
 	// method: select문 - 비밀번호 확인
 	public boolean selectPwCheck(Connection conn, String loginId, String pw) throws Exception {
-		String sql = "select userid, userpassword from users where userid = ? and userpassword=?";
+		String sql = "select user_id, user_password from users where user_id = ? and user_password=?";
 		boolean result = false;
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class UserDao {
 
 	// method: select문 - 로그인
 	public String selectLogin(Connection conn, User user) throws Exception {
-		String sql = "select userid, usertype from users where userid=? and userpassword=?";
+		String sql = "select user_id, user_type from users where user_id=? and user_password=?";
 		String type = "";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -69,7 +69,7 @@ public class UserDao {
 		ResultSet rs = pstmt.executeQuery();
 		// 로그인 성공이면 user_type 리턴
 		if (rs.next()) {
-			type = rs.getString("usertype");
+			type = rs.getString("user_type");
 		} else {
 			// 로그인 실패면 null 리턴
 			type = ""; // 로그인 실패
@@ -82,9 +82,9 @@ public class UserDao {
 	// method: select문 - 사용자 정보 목록
 	public User selectUserInfo(Connection conn, String id) throws Exception {
 		String sql = "";
-		sql += "select userid, userpassword, username, useraddress, phonenumber, filename, filetype, savedname ";
+		sql += "select user_id, user_password, user_name, user_address, phone_number, filename, filetype, savedname ";
 		sql += "from users ";
-		sql += "where userid=? ";
+		sql += "where user_id=? ";
 
 		User user = null;
 
@@ -94,11 +94,11 @@ public class UserDao {
 
 		if (rs.next()) {
 			user = new User();
-			user.setUserId(rs.getString("userid"));
-			user.setUserPassword(rs.getString("userpassword"));
-			user.setUserName(rs.getString("username"));
-			user.setUserAddress(rs.getString("useraddress"));
-			user.setPhoneNumber(rs.getString("phonenumber"));
+			user.setUserId(rs.getString("user_id"));
+			user.setUserPassword(rs.getString("user_password"));
+			user.setUserName(rs.getString("user_name"));
+			user.setUserAddress(rs.getString("user_address"));
+			user.setPhoneNumber(rs.getString("phone_number"));
 			user.setFilename(rs.getString("filename"));
 			user.setFiletype(rs.getString("filetype"));
 			user.setSavedname(rs.getString("savedname"));
@@ -113,7 +113,7 @@ public class UserDao {
 	// method: insert문 - 사용자 정보를 DB에 등록
 	public int insertRegisterUser(Connection conn, User user) throws Exception {
 		String sql = "";
-		sql += "insert into users(userid, username, userpassword, useremail, useraddress, phonenumber) ";
+		sql += "insert into users(user_id, user_name, user_password, user_email, user_address, phone_number) ";
 		sql += "values (?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, user.getUserId());
@@ -133,7 +133,7 @@ public class UserDao {
 	// method: insert문 - 관리자 정보를 DB에 등록
 	public int insertRegisterAdmin(Connection conn, User user) throws Exception {
 		String sql = "";
-		sql += "insert into users(userid, username, userpassword, useremail, useraddress, phonenumber, usertype) ";
+		sql += "insert into users(user_id, user_name, user_password, user_email, user_address, phone_number, user_type) ";
 		sql += "values (?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, user.getUserId());
@@ -155,8 +155,8 @@ public class UserDao {
 	public int updateEditUser(Connection conn, User user) throws Exception {
 		String sql = "";
 		sql += "update users ";
-		sql += "set username=?, userpassword=?, useraddress=?, phonenumber=?, filename=?, filetype=?, savedname=? ";
-		sql += "where userid=? ";
+		sql += "set user_name=?, user_password=?, user_address=?, phone_number=?, filename=?, filetype=?, savedname=? ";
+		sql += "where user_id=? ";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		
 		pstmt.setString(1, user.getUserName());
@@ -177,7 +177,7 @@ public class UserDao {
 
 	// method: delete문 - 사용자정보 DB에서 삭제
 	public int deleteRemoveUser(Connection conn, String id) throws Exception {
-		String sql = "delete from users where userid = ?";
+		String sql = "delete from users where user_id = ?";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);

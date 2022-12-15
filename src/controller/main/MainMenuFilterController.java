@@ -49,8 +49,7 @@ public class MainMenuFilterController extends HttpServlet {
 		}catch(Exception e) {
 			
 		}
-		
-		
+		System.out.println(pageList);
 		//jsp에서 사용할 수 있도록 request 범위에 저장
 		request.setAttribute("pager", pager);
 		request.setAttribute("pageList", pageList);
