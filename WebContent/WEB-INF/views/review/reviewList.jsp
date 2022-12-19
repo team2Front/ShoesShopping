@@ -72,7 +72,7 @@
 		         			<hr class="mt-3 mb-3">
 		         			<!-- 리뷰내용 -->
 		         			<div>
-			                	<div style="float: left;"><img src="${pageContext.request.contextPath}/resources/images/review/${item.review.rsavedName}" width="150">&nbsp;&nbsp;</div>
+			                	<div style="float: left;"><img src="/Project2_Images/review/${item.review.rsavedName}" width="150">&nbsp;&nbsp;</div>
 			                	<div>${item.review.reviewContent}</div>
 		         			</div>
 		         			<div style="clear: both;"></div>
