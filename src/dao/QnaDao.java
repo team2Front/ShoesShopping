@@ -37,20 +37,18 @@ public class QnaDao {
    }
 
    public Qna selectQna(Connection conn, int qnaId, int productId) throws SQLException {
-
+	   System.out.println(qnaId);
       String sql = "select qna_id, qna_title, qna_content, qna_date, user_id from qna where qna_id = ?";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, qnaId);
       ResultSet rs = pstmt.executeQuery();
-      List<QReply> list = replyDao.selectQnaReply(conn, qnaId);// 댓글 리스트임
+//      List<QReply> list = replyDao.selectQnaReply(conn, qnaId);// 댓글 리스트임
       Qna q1 = null;
       while (rs.next()) {
          q1 = new Qna(rs.getInt("qna_id"), rs.getString("qna_title"), rs.getString("qna_content"),
-               rs.getString("qna_date"), rs.getString("user_id"), productId, list);
-
+               rs.getDate("qna_date"), rs.getString("user_id"), productId);
       }
       pstmt.close();
-      conn.close();
 
       return q1;
 
@@ -77,13 +75,12 @@ public class QnaDao {
        pstmt.setInt(3, startRn);
       ResultSet rs = pstmt.executeQuery();
       List<QnaList> list = new ArrayList<>();
-      /*while (rs.next()) {
-         QnaList ql = new QnaList(rs.getInt("qna_id"), rs.getString("qna_title"), rs.getDate("qna_date").toString(),
-               rs.getString("user_id"), rs.getInt("product_id"));
+      while (rs.next()) {
+         QnaList ql = new QnaList(rs.getInt("qna_id"), rs.getString("qna_title"), rs.getDate("qna_date"),
+               rs.getString("user_id"), rs.getInt("product_id"), selectQna(conn, rs.getInt("qna_id"), productId));
          list.add(ql);
-      }*/
+      }
       pstmt.close();
-      conn.close();
 
       return list;
    }

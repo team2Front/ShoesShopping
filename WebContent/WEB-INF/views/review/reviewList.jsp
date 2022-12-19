@@ -122,7 +122,13 @@
          					</div>
 		         		</div>
          			</td>
-         			<td style="vertical-align: text-top;"><fmt:formatDate value="${item.reviewDate}" pattern="yyyy.MM.dd"/></td>
+         			<td style="vertical-align: text-top;">
+         				<div><fmt:formatDate value="${item.reviewDate}" pattern="yyyy.MM.dd"/></div>
+         				<div class="mt-2"></div>
+       					<a class="btn" onclick="deleteReviewList(${item.reviewId})" >
+							<i class="btn bi bi-x-square-fill"></i>         					
+       					</a>
+         			</td>
 	         	</tr>
          	</c:forEach>
          	

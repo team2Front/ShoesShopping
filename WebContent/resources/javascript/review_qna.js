@@ -156,6 +156,29 @@ function writeReplyFun(i) {
 	});
 }
 
+/* 상품 상세 페이지 - [리뷰 삭제] */
+function deleteReviewList(i) {
+	console.log(i);
+	event.cancelBubble = true;
+	$.ajax({
+		type : 'GET',  //get방식으로 통신
+		url : "/shopping/review/DeleteReviewController?reviewId=" + i, //탭의 data-tab속성의 값으로 된 html파일로 통신
+		error : function() { //통신 실패시
+			alert('통신실패!');
+		},
+		success : function(data) {
+			if(data==1){
+				alert("게시글이 삭제되었습니다.");
+				location.reload();
+			} else if(data==0){
+				alert("해당 게시글은 삭제할 수 없습니다.");
+			}
+//			$("#goodBtn" + i ).html('<a class="btn btn-outline-danger btn-sm mt-3" onclick="good(' + i + ')">좋아요  <b>' + data + '</b> </a>');
+		}
+	});
+}
+
+
 /* 마이페이지 - [리뷰 등록] */
 $(document).ready(function(){
 	var fileTarget = $('.filebox .upload-hidden');
@@ -172,7 +195,6 @@ $(document).ready(function(){
 		$(this).siblings('.upload-name').val(filename);
 	});
 }); 
-
 
 /*================================[ QNA ]==================================*/
 /* 상품페이지 - [QnA 목록] */

@@ -1,7 +1,6 @@
 package domain;
-import java.util.List;
+import java.util.Date;
 
-import dto.QReply;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +13,8 @@ public class Qna {
    private int qnaId;
    private String qnaTitle;
    private String qnaContent;
-   private String qnaDate;
+   private Date qnaDate;
    private String userId;
    private int productId;
-   private List<QReply> replyList;
+//   private List<QReply> replyList;
 }

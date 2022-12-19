@@ -69,7 +69,7 @@ public class UserDao {
 		ResultSet rs = pstmt.executeQuery();
 		// 로그인 성공이면 user_type 리턴
 		if (rs.next()) {
-			type = rs.getString("USER_TYPE");
+			type = rs.getString("user_type");
 		} else {
 			// 로그인 실패면 null 리턴
 			type = ""; // 로그인 실패
