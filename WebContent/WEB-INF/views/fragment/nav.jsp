@@ -1,6 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<!-- <script>
+function categoryfun(id, s){
+	console.log(id);
+	$.ajax({
+		type : 'GET',
+		url : "/shopping/main/MainMenuFilterController", 
+		data : {company_id: id, product_sex: s},	
+		error : function() { //통신 실패시
+			alert('통신실패!');
+		},
+		success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+			
+			location.reload();
+			/* location.href='/shopping/main/MainMenuFilterController'; */
+		}
+	});
+}
+</script> -->
 <body>
 	  <div class="banner d-flex justify-content-between" id="adminBanner">  
 	    <div class="p-2"><a href="${pageContext.request.contextPath}"><img src="../resources/images/sashoes_logo.png" style="width:150px; margin-top:20px;"/></a></div>
@@ -41,10 +58,11 @@
 					ADIDAS
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=ALL">ALL</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=MEN">MEN</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=WOMEN">WOMEN</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=KIDS">KIDS</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=ALL">ALL</a> 
+ 					<!-- <a class="dropdown-item" onclick="categoryfun(1, 'ALL')">ALL</a>  -->
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=MEN">MEN</a> 
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=WOMEN">WOMEN</a> 
+ 					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=KIDS">KIDS</a> 
 				</div>
 			</div>
 			<div class="btn-group">

@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import javax.servlet.ServletContext;
 
 import domain.User;
-import dto.UserInfo;
 
 public class UserDao {
 
@@ -45,7 +44,7 @@ public class UserDao {
 
 	// method: select문 - 비밀번호 확인
 	public boolean selectPwCheck(Connection conn, String loginId, String pw) throws Exception {
-		String sql = "select user_id, user_password from users where user_id = ? and userpassword=?";
+		String sql = "select user_id, user_password from users where user_id = ? and user_password=?";
 		boolean result = false;
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -84,7 +83,7 @@ public class UserDao {
 		String sql = "";
 		sql += "select user_id, user_password, user_name, user_address, phone_number, filename, filetype, savedname ";
 		sql += "from users ";
-		sql += "where userid=? ";
+		sql += "where user_id=? ";
 
 		User user = null;
 
