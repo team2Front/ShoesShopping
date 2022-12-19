@@ -60,7 +60,7 @@
 				<tbody>
 					<c:forEach var="cartDetail" items="${list}">
 						<tr>
-							<th><img src="../resources/images/shoes1.png"
+							<th><img src="/Project2_Images/${cartDetail.product.company}/${cartDetail.product.productId}/${cartDetail.product.mainImage}"
 								style="width: 100px; height: 100px;"></th>
 							<th>${cartDetail.product.productName}</th>
 							<td>수량: ${cartDetail.quantity}</td>

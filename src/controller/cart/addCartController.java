@@ -30,7 +30,6 @@ public class addCartController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		// 세션에 데이터(객체)를 저장
 		String loginId = (String) session.getAttribute("loginId");
 		
 		OrderDto orderDto = new OrderDto(loginId,productId, color, size, quantity); 

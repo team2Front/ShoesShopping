@@ -40,16 +40,10 @@ public class CartDetailService {
 			conn.setAutoCommit(false);
 
 			Product product = productService.showOneProduct(od.getProductId());
-
-			// 주문한 상품 색상, 사이즈 확인 필요
-			boolean colorCheck = productAndColorService.checkColor(product.getProductId(), od.getColor());
-			boolean sizeCheck = productAndSizeService.checkSize(product.getProductId(), od.getSize());
-
+			
 			// 삭제되지 않은 상품 구매 , 색상, 컬러 확인 후 장바구니에 담을 수 있다.
-			if (product.isDeleted() || !colorCheck || !sizeCheck) {
-
-				return od.getProductId() + "번 상품을 장바구니에 담는데 실패했습니다.";
-
+			if (product.isDeleted()) {
+				throw new RuntimeException();
 			}
 
 			cartDetailDao.insertCartDetail(conn, od);

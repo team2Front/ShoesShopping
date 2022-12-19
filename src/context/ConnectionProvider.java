@@ -16,7 +16,7 @@ public class ConnectionProvider {
 		dataSource.setUrl("jdbc:oracle:thin:@kosa402.iptime.org:50021/orcl");
 		dataSource.setUsername("java");
 		dataSource.setPassword("oracle");
-		dataSource.setMaxTotal(2); // 최대 커넥션 갯수 
+		dataSource.setMaxTotal(5); // 최대 커넥션 갯수 
 		dataSource.setInitialSize(0); //처음 커넥션 갯수 
 		dataSource.setMaxIdle(0); // 몇개까지 남기고 줄일 것 인가 (사용되지 않을때 남길 커넥션) 
 	}

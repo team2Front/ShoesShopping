@@ -50,10 +50,10 @@
 					<div class="row" style="border-bottom: 1px solid black">
 						<input type="checkbox" name="shoes" 
 							style="zoom: 2.0; margin: 0px 0px 0px 10px" class="check" value="${cartDetail.cart_detail_id}"/> <img
-							src="../resources/images/반스_월버_노랑.jpg"
+							src="/Project2_Images/${cartDetail.product.company}/${cartDetail.product.productId}/${cartDetail.product.mainImage}"
 							style="width: 120px; height: 120px; margin: 10px" />
 						<div style="margin: auto 0px; width: 250px">
-							<div style="margin: 2px 10px; font-size: 20px;">${cartDetail.product_name }</div>
+							<div style="margin: 2px 10px; font-size: 20px;">${cartDetail.product.productName }</div>
 							<div style="margin: 2px 10px; font-size: 20px;">${cartDetail.color_name }</div>
 							<div style="margin: 2px 10px; font-size: 20px;">${cartDetail.size_id }</div>
 						</div>

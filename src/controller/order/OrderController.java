@@ -58,11 +58,7 @@ public class OrderController extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		request.setAttribute("totalQuantity", totalQuantity);
-		request.setAttribute("totalPrice", totalPrice);
-//		OrdersDetailService ordersDetailService = (OrdersDetailService) request.getServletContext().getAttribute("ordersDetailService");
-//		ordersDetailService.addCartDetailsToOrder((String) session.getAttribute("loginId"), orderDetailList);
-		
-		
+		request.setAttribute("totalPrice", totalPrice);		
 		request.getRequestDispatcher("/WEB-INF/views/order/orderForm.jsp").forward(request, response);
 		
 	}

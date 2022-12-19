@@ -26,32 +26,4 @@ public class CartDto {
 	}
 
 	
-	public CartDto jsonToCartDto(JSONObject json) {
-		JSONArray ctoArray = json.getJSONArray("cartDetailDtoList");
-		List<CartDetailDto> list = new ArrayList<>();
-		CartDetailDto cd = new CartDetailDto();
-		for(int i = 0;i < ctoArray.length(); i++) {
-			//jsonObject -> cartDetailDto
-			CartDetailDto cdto = cd.jsonToCartDetailDto(ctoArray.getJSONObject(i));
-			list.add(cdto);
-		}
-		
-		return new CartDto(json.getInt("totalPrice"), json.getInt("totalQuantity"), list);
-	}
-	
-	public JSONObject cartDtoToJson(CartDto cdto) {
-		JSONObject jo = new JSONObject();
-		CartDetailDto cd = new CartDetailDto();
-		
-		JSONArray jsonArr = new JSONArray();
-		for(CartDetailDto c : cdto.getCartDetailDtoList()) {  
-			jsonArr.put(cd.cartDetailDtoToJson(c));
-		}
-		
-		jo.put("totalPrice", cdto.getTotalPrice());
-		jo.put("totalQuantity", cdto.getTotalQuantity());
-		jo.put("cartDetailDtoList", jsonArr);
-		
-		return jo;
-	}
 }
