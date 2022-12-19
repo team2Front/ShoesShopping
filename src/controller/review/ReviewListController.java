@@ -19,7 +19,7 @@ import util.PagingVo;
 public class ReviewListController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int productId = Integer.parseInt(request.getParameter("productId")); //일단 producId를 받아오는 값이 없으므로..임의의값..!
+		int productId = Integer.parseInt(request.getParameter("productId"));
 
 		//pageNo 얻기
 		String strPageNo = request.getParameter("pageNo");

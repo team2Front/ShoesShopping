@@ -17,23 +17,23 @@
 					<h4> Q & A </h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-				
 				<!-- Modal body -->
 				<div class="modal-body">
-					<div>
-						<label> Q & A 제목 </label>
-						<input type="text"/>
-					</div>
-					<div>
-						<label> Q & A 내용 </label>
-						<div style="text-align:center">
-							<textarea placeholder="Q & A 내용을 입력해주세요." style="width:400px; height:300px"></textarea>
+					<form id="writeQnAForm" name="writeQnAForm" method="post">
+						<div style="width:400px;">
+	      					<label class="font-weight-bold" for="writeQnATitle">제목</label>
+	      					<input type="text" class="form-control" placeholder="제목을 입력해주세요" id="writeQnATitle" name="writeQnATitle"/>
+	      				</div>
+	      				<div class="mt-3" style="width:400px;">
+	      					<label class="font-weight-bold" for="writeQnAContent">내용</label>
+	      					<input type="text" class="form-control" placeholder="내용을 입력해주세요" id="writeQnAContent" name="writeQnAContent" style="height:300px;"/>
+<%-- 						<button type="button" onclick="writeReplyFun(${item.reviewId})" class="btn btn-warning btn-sm ml-1 mt-4" style="height:35px;"><b>작성</b></button> --%>
 						</div>
-					</div>
+					</form>
 				</div>
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="submit" class="btn bg-warning" data-dismiss="modal">작성</button>
+					<button type="button" onclick="writeQnAFun()" class="btn bg-warning" data-dismiss="modal">작성</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
          <thead class="table-dark">
 	         <tr>
 	            <th scope="col" style="width:100px">NO</th>
-	            <th scope="col">리뷰내용</th>
+	            <th scope="col">QnA 내용</th>
 	            <th scope="col" colspan="3">날짜</th>
 	         <tr>
          </thead>
@@ -60,16 +60,6 @@
 	         	<tr>
          			<td style="vertical-align: text-top;">${item.qnaId}</td>
          			<td style="text-align: left; padding-left: 80px; width:813.31px;">
-         				<span class="font-weight-bold" style="font-size: 15px;">
-         					별점:
-         					<c:choose>
-         						<c:when test="${item.review.starScore == 5}">⭐⭐⭐⭐⭐</c:when>
-         						<c:when test="${item.review.starScore == 4}">⭐⭐⭐⭐</c:when>
-         						<c:when test="${item.review.starScore == 3}">⭐⭐⭐</c:when>
-         						<c:when test="${item.review.starScore == 2}">⭐⭐</c:when>
-         						<c:when test="${item.review.starScore == 1}">⭐</c:when>
-         					</c:choose>
-         				</span>
          				<span class="pl-1 small text-muted">
 	         				[상품] ${item.product.productName} | ${item.product.company} <br>
          				</span>
@@ -77,7 +67,7 @@
 	         				[ID:${item.userId}] <br>
          				</span>
          				<span class="font-weight-bold" style="font-size: 20px;">
-	         				 ${item.reviewTitle} <br>
+	         				 ${item.qnaTitle} <br>
          				</span>
 
 			         	<!-- 리뷰 상세 -->
@@ -85,13 +75,28 @@
 		         			<hr class="mt-3 mb-3">
 		         			<!-- 리뷰내용 -->
 		         			<div>
-			                	<div style="float: left;"><img src="${pageContext.request.contextPath}/resources/images/review/${item.review.rsavedName}" width="150">&nbsp;&nbsp;</div>
-			                	<div>${item.review.reviewContent}</div>
+			                	<div>${item.qna.qnaContent}</div>
 		         			</div>
 		         			<div style="clear: both;"></div>
+		         			
+		         			<!-- 답변내역 -->
+		         			<div>
+		         				<c:forEach var="reply" items="${item.qna.replyList}">
+		         					<div class="mb-3">
+		         						<hr>
+		         						<div class="text-white bg-dark"><c:if test="${reply != null}">${reply.replyContent}</c:if></div>
+	         						</div>
+	         					</c:forEach>
+	         				</div>
 		         		</div>
          			</td>
-         			<td style="vertical-align: text-top;"><fmt:formatDate value="${item.reviewDate}" pattern="yyyy.MM.dd"/></td>
+         			<td style="vertical-align: text-top;">
+         				<div><fmt:formatDate value="${item.qnaDate}" pattern="yyyy.MM.dd"/></div>
+       					<div>
+	       					<c:if test="${empty item.qna.replyList}"><b class="text-danger">[답변 대기중]</b></c:if>
+    	   					<c:if test="${!empty item.qna.replyList}"><b class="text-success">[답변 완료]</b></c:if>
+       					</div>
+       				</td>
 	         	</tr>
          	</c:forEach>
          	

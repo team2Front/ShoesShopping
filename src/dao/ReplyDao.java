@@ -70,12 +70,11 @@ public class ReplyDao {
       List<QReply> list = new ArrayList<>();
       // list 에 reply 객체를 담아야됨
       while (rs.next()) {
-         QReply qr1 = new QReply(rs.getInt("reply_id"), rs.getString("reply_content"), rs.getString("reply_date"),
+         QReply qr1 = new QReply(rs.getInt("reply_id"), rs.getString("reply_content"), rs.getDate("reply_date"),
                rs.getString("user_id"), rs.getInt("qna_id"));
          list.add(qr1);// 댓글 n행의 데이터를 1행씩 리스트에 담은거임
       }
       pstmt.close();
-      conn.close();
 
       return list;
    }

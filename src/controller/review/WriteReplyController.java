@@ -23,9 +23,6 @@ public class WriteReplyController extends HttpServlet {
 		ServletContext application = request.getServletContext();
 		ReplyService replyService = (ReplyService) application.getAttribute("replyService");
 		
-		//한글복원
-//		request.setCharacterEncoding("UTF-8");
-		
 		// 세션 객체 가져온 후, 로그인ID 가져오기
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("loginId");

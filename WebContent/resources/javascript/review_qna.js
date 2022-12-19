@@ -18,7 +18,11 @@ function loginComplete() {
 			alert('통신실패!');
 		},
 		success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
-			location.reload();
+			if(data==0){
+				alert("로그인을 해주세요!");
+			} else if(data==1){
+				location.reload();
+			}
 		}
 	});
 }
@@ -200,6 +204,7 @@ $(document).ready(function(){
 /* 상품페이지 - [QnA 목록] */
 function productQna(i) {
 	$("#tab-content").empty();
+	$("#shoes-detail").hide();
 	
 	var url = new URL(window.location.href);
     var urlParam = url.searchParams;
@@ -231,3 +236,20 @@ $(document).ready(function() {
 	});
 });
 
+/* 상품페이지 - [QnA 등록] */
+function writeQnAFun() {
+	let qnaT = $("#writeQnATitle").val()
+	let qnaC = $("#writeQnAContent").val()
+	
+	$.ajax({
+		type : 'POST',
+		url : "/shopping/qna/WriteQnAController",
+		data : {qnaTitle: qnaT , qnaContent: qnaC},
+		error : function() {
+			alert('통신실패!');
+		},
+		success : function(data) {
+			location.reload();
+		}
+	});
+}

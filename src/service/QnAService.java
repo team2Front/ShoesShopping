@@ -75,7 +75,7 @@ public class QnAService {
     }
     
     //3. 큐엔에이 작성하기 writeQna(큐엔에이 번호, 큐엔에이 제목, 큐엔에이 내용, 글쓴이, 상품 번호)
-    public String writeQna(Qna qna) throws SQLException {
+    public String writeQna(Qna qna) {
     	Connection conn = null;
     	String result = "";
 		try {

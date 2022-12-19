@@ -20,6 +20,8 @@ import util.PagingVo;
 public class QnaListController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int productId = Integer.parseInt(request.getParameter("productId"));
+		
 		//pageNo 얻기
 		String strPageNo = request.getParameter("pageNo");
 		if(strPageNo == null) {
@@ -32,7 +34,7 @@ public class QnaListController extends HttpServlet {
 		QnAService qnaService = (QnAService) application.getAttribute("qnaService");
 		
 		//페이징 대상이 되는 전체 행의 수 얻기
-		int productId = 98;
+		
 		int totalRows = qnaService.countAllQnas(productId);
 		
 		//페이징 객체

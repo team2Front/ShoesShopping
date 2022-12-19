@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import domain.Product;
 import domain.Qna;
 import dto.QReply;
 import dto.QnaList;
@@ -16,9 +17,11 @@ import util.PagingVo;
 
 public class QnaDao {
    private ReplyDao replyDao;
+   private ProductDao productDao;
    
    public QnaDao(ServletContext application) {
 	   this.replyDao = (ReplyDao) application.getAttribute("replyDao");
+	   this.productDao = (ProductDao) application.getAttribute("productDao");
    }
    
    public int selectCount(Connection conn, int productId) throws SQLException {
@@ -42,11 +45,11 @@ public class QnaDao {
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, qnaId);
       ResultSet rs = pstmt.executeQuery();
-//      List<QReply> list = replyDao.selectQnaReply(conn, qnaId);// 댓글 리스트임
+      List<QReply> list = replyDao.selectQnaReply(conn, qnaId);// 댓글 리스트임
       Qna q1 = null;
       while (rs.next()) {
          q1 = new Qna(rs.getInt("qna_id"), rs.getString("qna_title"), rs.getString("qna_content"),
-               rs.getDate("qna_date"), rs.getString("user_id"), productId);
+               rs.getDate("qna_date"), rs.getString("user_id"), productId, list);
       }
       pstmt.close();
 
@@ -54,7 +57,7 @@ public class QnaDao {
 
    }
 
-   public List<QnaList> selectQnaList(Connection conn, int productId, PagingVo pvo) throws SQLException {
+   public List<QnaList> selectQnaList(Connection conn, int productId, PagingVo pvo) throws Exception {
       int endRn = pvo.getEndRowNo();
       int startRn = pvo.getStartRowNo();
       String sql = "select rm, qna_id, qna_title, qna_date, user_id, product_id  "
@@ -77,7 +80,7 @@ public class QnaDao {
       List<QnaList> list = new ArrayList<>();
       while (rs.next()) {
          QnaList ql = new QnaList(rs.getInt("qna_id"), rs.getString("qna_title"), rs.getDate("qna_date"),
-               rs.getString("user_id"), rs.getInt("product_id"), selectQna(conn, rs.getInt("qna_id"), productId));
+               rs.getString("user_id"), productDao.selectProductOne(conn, productId), selectQna(conn, rs.getInt("qna_id"), productId));
          list.add(ql);
       }
       pstmt.close();

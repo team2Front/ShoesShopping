@@ -3,6 +3,7 @@ package dto;
 
 import java.util.Date;
 
+import domain.Product;
 import domain.Qna;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,6 @@ public class QnaList {
 	 private String qnaTitle;
 	 private Date qnaDate;
 	 private String userId;
-	 private int productId;
+	 private Product product;
 	 private Qna qna;
 }
