@@ -24,7 +24,7 @@ public class QnAService {
 	}
     
     //큐엔에이 전체 글 수 구하기
-   public int countAllQnas(int productId) throws SQLException {
+   public int countAllQnas(int productId) {
 	   int result = 0;
 	   Connection conn = null;
 	   try {
@@ -41,7 +41,7 @@ public class QnAService {
 
     
     //1. 큐엔에이 간단히 보기
-    public List<QnaList> showQnaList(int productId, PagingVo pvo) throws SQLException {//qna 간단히 보기
+    public List<QnaList> showQnaList(int productId, PagingVo pvo)  {//qna 간단히 보기
     	List<QnaList> result = null;
 		Connection conn = null;
 		try {

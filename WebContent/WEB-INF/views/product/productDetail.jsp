@@ -268,14 +268,12 @@
 			<!-- Tab Content -->
 			<div class="tab-content">
 				
-				<!-- 없애야할 부분 -->
+				<!-- 상품정보 -->
 				<div class="tab-pane active container-fluid" id="shoes-detail">
 					<div class="m-4" style="text-align:center">
-						<img src="${pageContext.request.contextPath}/resources/images/반스/98/정보_1.png" style="width:900px; height:400px; margin:0 auto;"class="active m-1 ml-4"/>
-						<img src="${pageContext.request.contextPath}/resources/images/반스/98/정보_2.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
-						<img src="${pageContext.request.contextPath}/resources/images/반스/98/정보3.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
-						<img src="${pageContext.request.contextPath}/resources/images/반스/98/정보4.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
-						<img src="${pageContext.request.contextPath}/resources/images/반스/98/정보5.png" style="width:900px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
+						<c:forEach var="image" items="${product.imageList}" varStatus="status">
+							<img src="/Project2_Images/${product.company}/${product.productId}/${image}" style="width:700px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
+						</c:forEach>
 					</div>
 				</div>
 				

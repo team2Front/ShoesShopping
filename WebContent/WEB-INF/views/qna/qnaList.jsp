@@ -55,10 +55,10 @@
 	         <tr>
          </thead>
          <tbody>
-         	<c:forEach var="item" items="${reviewList}">
-         		<!-- 리뷰목록 -->
+         	<c:forEach var="item" items="${qnaList}">
+         		<!-- QnA 목록 -->
 	         	<tr>
-         			<td style="vertical-align: text-top;">${item.reviewId}</td>
+         			<td style="vertical-align: text-top;">${item.qnaId}</td>
          			<td style="text-align: left; padding-left: 80px; width:813.31px;">
          				<span class="font-weight-bold" style="font-size: 15px;">
          					별점:
