@@ -43,7 +43,7 @@ public class MainFilterController extends HttpServlet {
 		countFilteredProducts = productService.countFilteredProducts(fcolor, fsize, fprice);
 		
 		//Pager 생성
-		PagingVo pager = new PagingVo(countFilteredProducts, pageNo, 15);
+		PagingVo pager = new PagingVo(countFilteredProducts, pageNo, 8);
 		
 		//해당 pageNo에 해당하는 게시물 가져오기
 		List<ProductList> pageList = null;

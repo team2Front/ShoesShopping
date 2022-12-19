@@ -41,7 +41,7 @@ public class MainMenuFilterController extends HttpServlet {
 		countCompany = productService.countCompanyCatogory(company_id,product_sex);
 		
 		//Pager 생성
-		pager = new PagingVo(countCompany, pageNo, 15);
+		pager = new PagingVo(countCompany, pageNo, 8);
 		
 		//해당 pageNo에 해당하는 게시물 가져오기
 		try {
@@ -49,8 +49,7 @@ public class MainMenuFilterController extends HttpServlet {
 		}catch(Exception e) {
 			
 		}
-		
-		
+		System.out.println(pageList);
 		//jsp에서 사용할 수 있도록 request 범위에 저장
 		request.setAttribute("pager", pager);
 		request.setAttribute("pageList", pageList);

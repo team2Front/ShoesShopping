@@ -124,12 +124,12 @@ public class ReviewDao {
 		return result;
 	}
 
-   public int deleteReview(Connection conn, Review review) throws SQLException {
+   public int deleteReview(Connection conn, int reviewId, String userId) throws SQLException {
       String sql = "delete from review where review_id=? and user_id=?";
       // 유저아이디도 검사할 것
       PreparedStatement pstmt = conn.prepareStatement(sql);
-      pstmt.setInt(1, review.getReviewId());
-      pstmt.setString(2, review.getUserId());
+      pstmt.setInt(1, reviewId);
+      pstmt.setString(2, userId);
 
       int r = pstmt.executeUpdate();
 

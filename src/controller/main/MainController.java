@@ -35,7 +35,7 @@ public class MainController extends HttpServlet {
 		countAllProducts = productService.countAllProducts();
 		
 		//Pager 생성
-		PagingVo pager = new PagingVo(countAllProducts, pageNo, 15);
+		PagingVo pager = new PagingVo(countAllProducts, pageNo, 8);
 		
 		//해당 pageNo에 해당하는 게시물 가져오기
 		List<ProductList> pageList = null;

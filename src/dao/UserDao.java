@@ -60,7 +60,7 @@ public class UserDao {
 
 	// method: select문 - 로그인
 	public String selectLogin(Connection conn, User user) throws Exception {
-		String sql = "select user_id, user_type from users where user_id=? and user_password=?";
+		String sql = "select user_id, USER_TYPE from users where user_id=? and user_password=?";
 		String type = "";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);

@@ -265,17 +265,14 @@
 				</li>
 			</ul>
 			
-			<!-- Tab Content -->
-			<div class="tab-content">
-				
-				<!-- 상품정보 -->
-	            <div class="tab-pane active container-fluid" id="shoes-detail">
-	               <div class="m-4" style="text-align:center">
-	                  <c:forEach var="image" items="${product.imageList}" varStatus="status">
-	                     <img src="/Project2_Images/${product.company}/${product.productId}/${image}" style="width:700px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
-	                  </c:forEach>
-	               </div>
-	            </div>
+			<!-- 상품정보 -->
+			<div class="tab-pane active container-fluid" id="shoes-detail">
+				<div class="m-4" style="text-align:center">
+					<c:forEach var="image" items="${product.imageList}" varStatus="status">
+						<img src="/Project2_Images/${product.company}/${product.productId}/${image}" style="width:700px; height:600px; margin:0 auto;"class="active m-1 ml-4"/>
+					</c:forEach>
+				</div>
+			</div>
 				
 				<!-- ajax 처리 - 유동적으로 바뀔 부분 -->
 				<div class="tab-pane" id="tab-content"></div>

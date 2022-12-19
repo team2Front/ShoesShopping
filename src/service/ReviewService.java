@@ -164,13 +164,13 @@ public class ReviewService {
    }
 */
    // 4. 리뷰 삭제하기 deleteReview(리뷰 번호, 글쓴이)
-   public  String deleteReview(Review review) throws IOException, SQLException {
+   public int deleteReview(int reviewId, String userId) {
 	  Connection conn = null;
 	  int r =0;
 	  String result ="";
 	  try {
 		   conn=  ds.getConnection();
-		   r =  reviewDao.deleteReview(conn, review);
+		   r =  reviewDao.deleteReview(conn, reviewId, userId);
 		   result = "해당 ID가 작성한 리뷰가 아닙니다";
 		   if (r == 1) {
 		      result = "게시물이 삭제되었습니다";
@@ -181,7 +181,7 @@ public class ReviewService {
 			try{conn.close();}catch(Exception e) {}
 	   }
       
-      return result;
+      return r;
    }
    
    //관리자용 리뷰 게시글 삭제
