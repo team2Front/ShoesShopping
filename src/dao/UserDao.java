@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import javax.servlet.ServletContext;
 
 import domain.User;
-import dto.UserInfo;
 
 public class UserDao {
 
