@@ -101,7 +101,6 @@
 				<a  class="btn btn-dark btn-lg" href="${pageContext.request.contextPath}/main/MainController">계속 쇼핑하기</a>
 				<a type="button" class="btn-dark btn-lg" onclick="orderSelected()">
 					선택 상품 주문하기 </a> 
-				<a type="button" class="btn-dark btn-lg" href="orderForm.html"> 전체 상품 주문하기 </a>
 			</div>
 			<div class="card-footer">
 				<p>
