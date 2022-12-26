@@ -174,9 +174,7 @@
 			<!-- 상품리스트 -->
 			<div id="products" class="p-2" style="width:1100px;"> 
 				   <div class="d-flex flex-wrap" style="width:1100px;" >
-				        <!-- 카드 임시로 가져와보기 -->
-				        
-						
+				        <!-- 상품 리스트 카드 여러개 가져오기 -->
 						<c:forEach var="productList" items="${pageList}">
 			               <div class="card m-1">
 					           <div class="card-head">

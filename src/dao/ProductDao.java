@@ -189,8 +189,8 @@ public class ProductDao {
 		System.out.println("[ProductDao > insertProduct] 메소드 실행");
 		int pid = 0;
 		
-		String sql = "insert into product" + "(product_id, product_name, product_price, category_id, company_id , product_sex) "
-				+ "values (product_seq.nextval,?,?,?,?,?)";
+		String sql = "insert into product" + "(product_id, product_name, product_price, category_id, company_id , product_sex, is_deleted ) "
+				+ "values (product_seq.nextval,?,?,?,?,?,?)";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -199,6 +199,7 @@ public class ProductDao {
 		pstmt.setInt(3, ap.getCategory());
 		pstmt.setInt(4, ap.getCompany());
 		pstmt.setString(5, ap.getGender());
+		pstmt.setInt(6, 0);
 		int r = pstmt.executeUpdate();
 
 		if (r == 1) {

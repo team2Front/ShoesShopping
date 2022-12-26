@@ -59,7 +59,6 @@ function categoryfun(id, s){
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=ALL">ALL</a> 
- 					<!-- <a class="dropdown-item" onclick="categoryfun(1, 'ALL')">ALL</a>  -->
 					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=MEN">MEN</a> 
 					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=WOMEN">WOMEN</a> 
  					<a class="dropdown-item" href="${pageContext.request.contextPath}/main/MainMenuFilterController?company_id=1&product_sex=KIDS">KIDS</a> 

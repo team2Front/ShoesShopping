@@ -248,8 +248,6 @@
 			        <input type="file" class="form-control-file" id="attach" name="attach" multiple>
 			    </div>
 			     
-				
-
 				<!-- request 버튼 -->
 				<div class="text-center">
 					<input type="submit" class="btn btn-outline-primary btn-sm" value="등록" /> 

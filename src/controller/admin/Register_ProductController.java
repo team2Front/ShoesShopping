@@ -37,7 +37,7 @@ public class Register_ProductController extends HttpServlet {
 		//ProductService
 		ProductService productService = (ProductService) request.getServletContext().getAttribute("productService");
 		
-		//문자 파트~
+		//문자 파트
 		RegisterProduct product = new RegisterProduct();
 		System.out.println(request.getParameter("pgender"));
 		System.out.println(request.getParameter("pname"));
@@ -54,7 +54,7 @@ public class Register_ProductController extends HttpServlet {
 		product.setCategory(Integer.parseInt(request.getParameter("pcategory")));
 		product.setGender(request.getParameter("pgender"));
 		
-		//리스트 파트~
+		//리스트 파트
 		String[] sizeList = request.getParameterValues("psize");
 		List<String> sizeArr = Arrays.asList(sizeList);
 		List<Integer> sizeIntArr = new ArrayList<>();
@@ -73,7 +73,7 @@ public class Register_ProductController extends HttpServlet {
 		});
 		product.setColorList(colorIntArr);
 		
-		//파일 파트~
+		//파일 파트
 		List<ProductImage> productImages = new ArrayList<>();
 		//모든 파트를 가져온다
 		Collection<Part> parts =request.getParts();

@@ -17,7 +17,6 @@ import util.PagingVo;
 
 @WebServlet(name = "main.MainMenuFilterController", urlPatterns = "/main/MainMenuFilterController")
 public class MainMenuFilterController extends HttpServlet {
-	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//pageNo 얻기

@@ -42,7 +42,7 @@ public class MainController extends HttpServlet {
 		try {
 		 pageList = productService.showProducts(pager);
 		}catch(Exception e) {
-			
+			System.out.println(e.getMessage());
 		}
 		//jsp에서 사용할 수 있도록 request 범위에 저장
 		request.setAttribute("pager", pager);
